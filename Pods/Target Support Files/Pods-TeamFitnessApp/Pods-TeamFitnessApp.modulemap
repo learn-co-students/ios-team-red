@@ -1,0 +1,6 @@
+framework module Pods_TeamFitnessApp {
+  umbrella header "Pods-TeamFitnessApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,1464 +1,725 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>089558D519A9A4A80E4717E6</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessAppUITests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>0A65970C9F8F80C221F2F35B</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>0E29E1F24550661DB0F2A05D</key>
-		<dict>
-			<key>fileRef</key>
-			<string>400E5015EFC2F2D0786F05DE</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>11E4C3F86B33FDA8EC68C009</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_TeamFitnessAppTests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>12640670CEAE8AE21C0B30FB</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessAppTests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>1AFFD9E8D7960E6ED65315B8</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_TeamFitnessAppUITests.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>221FF2463D54139D51842E21</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessApp.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>33533B74E3413B25BF5E93C5</key>
-		<dict>
-			<key>fileRef</key>
-			<string>1AFFD9E8D7960E6ED65315B8</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>3ED34FC4E4DCD15AAF62EF47</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>400E5015EFC2F2D0786F05DE</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.framework</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>Pods_TeamFitnessApp.framework</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>5164041FA4CB0DABE91A9DFE</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>5FF4BDC1FD1A9DB91C61EF84</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>6AAC8699E3FC030B9FBE87D8</key>
-		<dict>
-			<key>fileRef</key>
-			<string>11E4C3F86B33FDA8EC68C009</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>726C4661EE8B5B3F9E2254D6</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>7B2D5318F33B4B43C01826E5</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessAppTests.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>84C7E99DE9344028D1A9EBBC</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>221FF2463D54139D51842E21</string>
-				<string>D446E68A6D57055C70C0BC66</string>
-				<string>12640670CEAE8AE21C0B30FB</string>
-				<string>7B2D5318F33B4B43C01826E5</string>
-				<string>88ADC239E33D8EFDE8ADF02D</string>
-				<string>089558D519A9A4A80E4717E6</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Pods</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>8722ECE884EB28F5B5FB848F</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>88ADC239E33D8EFDE8ADF02D</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessAppUITests.debug.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.debug.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>9A5BD55C110118878F1C2531</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>AA2097371E92F02900C1684A</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>GoogleService-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>AA2097381E92F02900C1684A</key>
-		<dict>
-			<key>fileRef</key>
-			<string>AA2097371E92F02900C1684A</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>BCE6416B89075216C87BDACE</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>400E5015EFC2F2D0786F05DE</string>
-				<string>11E4C3F86B33FDA8EC68C009</string>
-				<string>1AFFD9E8D7960E6ED65315B8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D446E68A6D57055C70C0BC66</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods-TeamFitnessApp.release.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.release.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>E27C079452E6872CDC1BCF53</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>[CP] Embed Pods Frameworks</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-frameworks.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D241E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D2F1E92EDC800F5E717</string>
-				<string>EC6A3D441E92EDC800F5E717</string>
-				<string>EC6A3D4F1E92EDC800F5E717</string>
-				<string>EC6A3D2E1E92EDC800F5E717</string>
-				<string>84C7E99DE9344028D1A9EBBC</string>
-				<string>BCE6416B89075216C87BDACE</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D251E92EDC800F5E717</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastSwiftUpdateCheck</key>
-				<string>0820</string>
-				<key>LastUpgradeCheck</key>
-				<string>0820</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Patrick O'Leary</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>EC6A3D2C1E92EDC800F5E717</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.2.1</string>
-						<key>DevelopmentTeam</key>
-						<string>7994H36MAA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-					</dict>
-					<key>EC6A3D401E92EDC800F5E717</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.2.1</string>
-						<key>DevelopmentTeam</key>
-						<string>7994H36MAA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>EC6A3D2C1E92EDC800F5E717</string>
-					</dict>
-					<key>EC6A3D4B1E92EDC800F5E717</key>
-					<dict>
-						<key>CreatedOnToolsVersion</key>
-						<string>8.2.1</string>
-						<key>DevelopmentTeam</key>
-						<string>7994H36MAA</string>
-						<key>ProvisioningStyle</key>
-						<string>Automatic</string>
-						<key>TestTargetID</key>
-						<string>EC6A3D2C1E92EDC800F5E717</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>EC6A3D281E92EDC800F5E717</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-				<string>Base</string>
-			</array>
-			<key>mainGroup</key>
-			<string>EC6A3D241E92EDC800F5E717</string>
-			<key>productRefGroup</key>
-			<string>EC6A3D2E1E92EDC800F5E717</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>EC6A3D2C1E92EDC800F5E717</string>
-				<string>EC6A3D401E92EDC800F5E717</string>
-				<string>EC6A3D4B1E92EDC800F5E717</string>
-			</array>
-		</dict>
-		<key>EC6A3D281E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EC6A3D531E92EDC800F5E717</string>
-				<string>EC6A3D541E92EDC800F5E717</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EC6A3D291E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EC6A3D331E92EDC800F5E717</string>
-				<string>EC6A3D311E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D2A1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>0E29E1F24550661DB0F2A05D</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D2B1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EC6A3D3B1E92EDC800F5E717</string>
-				<string>EC6A3D381E92EDC800F5E717</string>
-				<string>EC6A3D361E92EDC800F5E717</string>
-				<string>AA2097381E92F02900C1684A</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D2C1E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>EC6A3D551E92EDC800F5E717</string>
-			<key>buildPhases</key>
-			<array>
-				<string>9A5BD55C110118878F1C2531</string>
-				<string>EC6A3D291E92EDC800F5E717</string>
-				<string>EC6A3D2A1E92EDC800F5E717</string>
-				<string>EC6A3D2B1E92EDC800F5E717</string>
-				<string>5FF4BDC1FD1A9DB91C61EF84</string>
-				<string>726C4661EE8B5B3F9E2254D6</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>TeamFitnessApp</string>
-			<key>productName</key>
-			<string>TeamFitnessApp</string>
-			<key>productReference</key>
-			<string>EC6A3D2D1E92EDC800F5E717</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>EC6A3D2D1E92EDC800F5E717</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>TeamFitnessApp.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EC6A3D2E1E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D2D1E92EDC800F5E717</string>
-				<string>EC6A3D411E92EDC800F5E717</string>
-				<string>EC6A3D4C1E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D2F1E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D301E92EDC800F5E717</string>
-				<string>EC6A3D321E92EDC800F5E717</string>
-				<string>EC6A3D341E92EDC800F5E717</string>
-				<string>EC6A3D371E92EDC800F5E717</string>
-				<string>EC6A3D391E92EDC800F5E717</string>
-				<string>AA2097371E92F02900C1684A</string>
-				<string>EC6A3D3C1E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>TeamFitnessApp</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D301E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>AppDelegate.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D311E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D301E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D321E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>ViewController.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D331E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D321E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D341E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D351E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D351E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/Main.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D361E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D341E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D371E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Assets.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D381E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D371E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D391E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D3A1E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D3A1E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>file.storyboard</string>
-			<key>name</key>
-			<string>Base</string>
-			<key>path</key>
-			<string>Base.lproj/LaunchScreen.storyboard</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D3B1E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D391E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D3C1E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D3D1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EC6A3D461E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D3E1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>6AAC8699E3FC030B9FBE87D8</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D3F1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D401E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>EC6A3D581E92EDC800F5E717</string>
-			<key>buildPhases</key>
-			<array>
-				<string>0A65970C9F8F80C221F2F35B</string>
-				<string>EC6A3D3D1E92EDC800F5E717</string>
-				<string>EC6A3D3E1E92EDC800F5E717</string>
-				<string>EC6A3D3F1E92EDC800F5E717</string>
-				<string>E27C079452E6872CDC1BCF53</string>
-				<string>5164041FA4CB0DABE91A9DFE</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>EC6A3D431E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>TeamFitnessAppTests</string>
-			<key>productName</key>
-			<string>TeamFitnessAppTests</string>
-			<key>productReference</key>
-			<string>EC6A3D411E92EDC800F5E717</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>EC6A3D411E92EDC800F5E717</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>TeamFitnessAppTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EC6A3D421E92EDC800F5E717</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>EC6A3D251E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>EC6A3D2C1E92EDC800F5E717</string>
-			<key>remoteInfo</key>
-			<string>TeamFitnessApp</string>
-		</dict>
-		<key>EC6A3D431E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>EC6A3D2C1E92EDC800F5E717</string>
-			<key>targetProxy</key>
-			<string>EC6A3D421E92EDC800F5E717</string>
-		</dict>
-		<key>EC6A3D441E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D451E92EDC800F5E717</string>
-				<string>EC6A3D471E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>TeamFitnessAppTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D451E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TeamFitnessAppTests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D461E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D451E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D471E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D481E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>EC6A3D511E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D491E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>33533B74E3413B25BF5E93C5</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D4A1E92EDC800F5E717</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>EC6A3D4B1E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>EC6A3D5B1E92EDC800F5E717</string>
-			<key>buildPhases</key>
-			<array>
-				<string>3ED34FC4E4DCD15AAF62EF47</string>
-				<string>EC6A3D481E92EDC800F5E717</string>
-				<string>EC6A3D491E92EDC800F5E717</string>
-				<string>EC6A3D4A1E92EDC800F5E717</string>
-				<string>8722ECE884EB28F5B5FB848F</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>EC6A3D4E1E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>TeamFitnessAppUITests</string>
-			<key>productName</key>
-			<string>TeamFitnessAppUITests</string>
-			<key>productReference</key>
-			<string>EC6A3D4C1E92EDC800F5E717</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.ui-testing</string>
-		</dict>
-		<key>EC6A3D4C1E92EDC800F5E717</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>TeamFitnessAppUITests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>EC6A3D4D1E92EDC800F5E717</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>EC6A3D251E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>EC6A3D2C1E92EDC800F5E717</string>
-			<key>remoteInfo</key>
-			<string>TeamFitnessApp</string>
-		</dict>
-		<key>EC6A3D4E1E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>EC6A3D2C1E92EDC800F5E717</string>
-			<key>targetProxy</key>
-			<string>EC6A3D4D1E92EDC800F5E717</string>
-		</dict>
-		<key>EC6A3D4F1E92EDC800F5E717</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>EC6A3D501E92EDC800F5E717</string>
-				<string>EC6A3D521E92EDC800F5E717</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>TeamFitnessAppUITests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D501E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.swift</string>
-			<key>path</key>
-			<string>TeamFitnessAppUITests.swift</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D511E92EDC800F5E717</key>
-		<dict>
-			<key>fileRef</key>
-			<string>EC6A3D501E92EDC800F5E717</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>EC6A3D521E92EDC800F5E717</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>EC6A3D531E92EDC800F5E717</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>ENABLE_TESTABILITY</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.2</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>YES</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_ACTIVE_COMPILATION_CONDITIONS</key>
-				<string>DEBUG</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Onone</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EC6A3D541E92EDC800F5E717</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_ANALYZER_NONNULL</key>
-				<string>YES</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_DOCUMENTATION_COMMENTS</key>
-				<string>YES</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INFINITE_RECURSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_SUSPICIOUS_MOVE</key>
-				<string>YES</string>
-				<key>CLANG_WARN_UNREACHABLE_CODE</key>
-				<string>YES</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>DEBUG_INFORMATION_FORMAT</key>
-				<string>dwarf-with-dsym</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
-				<string>YES</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_NO_COMMON_BLOCKS</key>
-				<string>YES</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>10.2</string>
-				<key>MTL_ENABLE_DEBUG_INFO</key>
-				<string>NO</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>SWIFT_OPTIMIZATION_LEVEL</key>
-				<string>-Owholemodule</string>
-				<key>TARGETED_DEVICE_FAMILY</key>
-				<string>1,2</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EC6A3D551E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EC6A3D561E92EDC800F5E717</string>
-				<string>EC6A3D571E92EDC800F5E717</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EC6A3D561E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>221FF2463D54139D51842E21</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessApp/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessApp</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EC6A3D571E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>D446E68A6D57055C70C0BC66</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessApp/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessApp</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EC6A3D581E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EC6A3D591E92EDC800F5E717</string>
-				<string>EC6A3D5A1E92EDC800F5E717</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EC6A3D591E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>12640670CEAE8AE21C0B30FB</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessAppTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessAppTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/TeamFitnessApp.app/TeamFitnessApp</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EC6A3D5A1E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>7B2D5318F33B4B43C01826E5</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>BUNDLE_LOADER</key>
-				<string>$(TEST_HOST)</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessAppTests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessAppTests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_HOST</key>
-				<string>$(BUILT_PRODUCTS_DIR)/TeamFitnessApp.app/TeamFitnessApp</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>EC6A3D5B1E92EDC800F5E717</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>EC6A3D5C1E92EDC800F5E717</string>
-				<string>EC6A3D5D1E92EDC800F5E717</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>EC6A3D5C1E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>88ADC239E33D8EFDE8ADF02D</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessAppUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessAppUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>TeamFitnessApp</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>EC6A3D5D1E92EDC800F5E717</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>089558D519A9A4A80E4717E6</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES</key>
-				<string>YES</string>
-				<key>DEVELOPMENT_TEAM</key>
-				<string>7994H36MAA</string>
-				<key>INFOPLIST_FILE</key>
-				<string>TeamFitnessAppUITests/Info.plist</string>
-				<key>LD_RUNPATH_SEARCH_PATHS</key>
-				<string>$(inherited) @executable_path/Frameworks @loader_path/Frameworks</string>
-				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>SweetPea.TeamFitnessAppUITests</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>SWIFT_VERSION</key>
-				<string>3.0</string>
-				<key>TEST_TARGET_NAME</key>
-				<string>TeamFitnessApp</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>EC6A3D251E92EDC800F5E717</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0E29E1F24550661DB0F2A05D /* Pods_TeamFitnessApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */; };
+		33533B74E3413B25BF5E93C5 /* Pods_TeamFitnessAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFFD9E8D7960E6ED65315B8 /* Pods_TeamFitnessAppUITests.framework */; };
+		6AAC8699E3FC030B9FBE87D8 /* Pods_TeamFitnessAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */; };
+		AA2097381E92F02900C1684A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA2097371E92F02900C1684A /* GoogleService-Info.plist */; };
+		EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */; };
+		EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D321E92EDC800F5E717 /* ViewController.swift */; };
+		EC6A3D361E92EDC800F5E717 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D341E92EDC800F5E717 /* Main.storyboard */; };
+		EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D371E92EDC800F5E717 /* Assets.xcassets */; };
+		EC6A3D3B1E92EDC800F5E717 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D391E92EDC800F5E717 /* LaunchScreen.storyboard */; };
+		EC6A3D461E92EDC800F5E717 /* TeamFitnessAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D451E92EDC800F5E717 /* TeamFitnessAppTests.swift */; };
+		EC6A3D511E92EDC800F5E717 /* TeamFitnessAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */; };
+		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EC6A3D421E92EDC800F5E717 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC6A3D251E92EDC800F5E717 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC6A3D2C1E92EDC800F5E717;
+			remoteInfo = TeamFitnessApp;
+		};
+		EC6A3D4D1E92EDC800F5E717 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC6A3D251E92EDC800F5E717 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC6A3D2C1E92EDC800F5E717;
+			remoteInfo = TeamFitnessApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		089558D519A9A4A80E4717E6 /* Pods-TeamFitnessAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.release.xcconfig"; sourceTree = "<group>"; };
+		11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamFitnessAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		12640670CEAE8AE21C0B30FB /* Pods-TeamFitnessAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		1AFFD9E8D7960E6ED65315B8 /* Pods_TeamFitnessAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamFitnessAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		221FF2463D54139D51842E21 /* Pods-TeamFitnessApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.debug.xcconfig"; sourceTree = "<group>"; };
+		400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamFitnessApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B2D5318F33B4B43C01826E5 /* Pods-TeamFitnessAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		88ADC239E33D8EFDE8ADF02D /* Pods-TeamFitnessAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA2097371E92F02900C1684A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.release.xcconfig"; sourceTree = "<group>"; };
+		EC6A3D2D1E92EDC800F5E717 /* TeamFitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamFitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EC6A3D321E92EDC800F5E717 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EC6A3D351E92EDC800F5E717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EC6A3D371E92EDC800F5E717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC6A3D3A1E92EDC800F5E717 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EC6A3D3C1E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC6A3D411E92EDC800F5E717 /* TeamFitnessAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamFitnessAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6A3D451E92EDC800F5E717 /* TeamFitnessAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFitnessAppTests.swift; sourceTree = "<group>"; };
+		EC6A3D471E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC6A3D4C1E92EDC800F5E717 /* TeamFitnessAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamFitnessAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFitnessAppUITests.swift; sourceTree = "<group>"; };
+		EC6A3D521E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EC6A3D2A1E92EDC800F5E717 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E29E1F24550661DB0F2A05D /* Pods_TeamFitnessApp.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D3E1E92EDC800F5E717 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6AAC8699E3FC030B9FBE87D8 /* Pods_TeamFitnessAppTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D491E92EDC800F5E717 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33533B74E3413B25BF5E93C5 /* Pods_TeamFitnessAppUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84C7E99DE9344028D1A9EBBC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				221FF2463D54139D51842E21 /* Pods-TeamFitnessApp.debug.xcconfig */,
+				D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */,
+				12640670CEAE8AE21C0B30FB /* Pods-TeamFitnessAppTests.debug.xcconfig */,
+				7B2D5318F33B4B43C01826E5 /* Pods-TeamFitnessAppTests.release.xcconfig */,
+				88ADC239E33D8EFDE8ADF02D /* Pods-TeamFitnessAppUITests.debug.xcconfig */,
+				089558D519A9A4A80E4717E6 /* Pods-TeamFitnessAppUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BCE6416B89075216C87BDACE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */,
+				11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */,
+				1AFFD9E8D7960E6ED65315B8 /* Pods_TeamFitnessAppUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EC6A3D241E92EDC800F5E717 = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */,
+				EC6A3D441E92EDC800F5E717 /* TeamFitnessAppTests */,
+				EC6A3D4F1E92EDC800F5E717 /* TeamFitnessAppUITests */,
+				EC6A3D2E1E92EDC800F5E717 /* Products */,
+				84C7E99DE9344028D1A9EBBC /* Pods */,
+				BCE6416B89075216C87BDACE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EC6A3D2E1E92EDC800F5E717 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D2D1E92EDC800F5E717 /* TeamFitnessApp.app */,
+				EC6A3D411E92EDC800F5E717 /* TeamFitnessAppTests.xctest */,
+				EC6A3D4C1E92EDC800F5E717 /* TeamFitnessAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */,
+				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
+				EC6A3D321E92EDC800F5E717 /* ViewController.swift */,
+				EC6A3D341E92EDC800F5E717 /* Main.storyboard */,
+				EC6A3D371E92EDC800F5E717 /* Assets.xcassets */,
+				EC6A3D391E92EDC800F5E717 /* LaunchScreen.storyboard */,
+				AA2097371E92F02900C1684A /* GoogleService-Info.plist */,
+				EC6A3D3C1E92EDC800F5E717 /* Info.plist */,
+			);
+			path = TeamFitnessApp;
+			sourceTree = "<group>";
+		};
+		EC6A3D441E92EDC800F5E717 /* TeamFitnessAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D451E92EDC800F5E717 /* TeamFitnessAppTests.swift */,
+				EC6A3D471E92EDC800F5E717 /* Info.plist */,
+			);
+			path = TeamFitnessAppTests;
+			sourceTree = "<group>";
+		};
+		EC6A3D4F1E92EDC800F5E717 /* TeamFitnessAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */,
+				EC6A3D521E92EDC800F5E717 /* Info.plist */,
+			);
+			path = TeamFitnessAppUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EC6A3D2C1E92EDC800F5E717 /* TeamFitnessApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC6A3D551E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessApp" */;
+			buildPhases = (
+				9A5BD55C110118878F1C2531 /* [CP] Check Pods Manifest.lock */,
+				EC6A3D291E92EDC800F5E717 /* Sources */,
+				EC6A3D2A1E92EDC800F5E717 /* Frameworks */,
+				EC6A3D2B1E92EDC800F5E717 /* Resources */,
+				5FF4BDC1FD1A9DB91C61EF84 /* [CP] Embed Pods Frameworks */,
+				726C4661EE8B5B3F9E2254D6 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TeamFitnessApp;
+			productName = TeamFitnessApp;
+			productReference = EC6A3D2D1E92EDC800F5E717 /* TeamFitnessApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EC6A3D401E92EDC800F5E717 /* TeamFitnessAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC6A3D581E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessAppTests" */;
+			buildPhases = (
+				0A65970C9F8F80C221F2F35B /* [CP] Check Pods Manifest.lock */,
+				EC6A3D3D1E92EDC800F5E717 /* Sources */,
+				EC6A3D3E1E92EDC800F5E717 /* Frameworks */,
+				EC6A3D3F1E92EDC800F5E717 /* Resources */,
+				E27C079452E6872CDC1BCF53 /* [CP] Embed Pods Frameworks */,
+				5164041FA4CB0DABE91A9DFE /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC6A3D431E92EDC800F5E717 /* PBXTargetDependency */,
+			);
+			name = TeamFitnessAppTests;
+			productName = TeamFitnessAppTests;
+			productReference = EC6A3D411E92EDC800F5E717 /* TeamFitnessAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EC6A3D4B1E92EDC800F5E717 /* TeamFitnessAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC6A3D5B1E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessAppUITests" */;
+			buildPhases = (
+				3ED34FC4E4DCD15AAF62EF47 /* [CP] Check Pods Manifest.lock */,
+				EC6A3D481E92EDC800F5E717 /* Sources */,
+				EC6A3D491E92EDC800F5E717 /* Frameworks */,
+				EC6A3D4A1E92EDC800F5E717 /* Resources */,
+				8722ECE884EB28F5B5FB848F /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC6A3D4E1E92EDC800F5E717 /* PBXTargetDependency */,
+			);
+			name = TeamFitnessAppUITests;
+			productName = TeamFitnessAppUITests;
+			productReference = EC6A3D4C1E92EDC800F5E717 /* TeamFitnessAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC6A3D251E92EDC800F5E717 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Patrick O'Leary";
+				TargetAttributes = {
+					EC6A3D2C1E92EDC800F5E717 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7994H36MAA;
+						ProvisioningStyle = Automatic;
+					};
+					EC6A3D401E92EDC800F5E717 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7994H36MAA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EC6A3D2C1E92EDC800F5E717;
+					};
+					EC6A3D4B1E92EDC800F5E717 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 7994H36MAA;
+						ProvisioningStyle = Automatic;
+						TestTargetID = EC6A3D2C1E92EDC800F5E717;
+					};
+				};
+			};
+			buildConfigurationList = EC6A3D281E92EDC800F5E717 /* Build configuration list for PBXProject "TeamFitnessApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EC6A3D241E92EDC800F5E717;
+			productRefGroup = EC6A3D2E1E92EDC800F5E717 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EC6A3D2C1E92EDC800F5E717 /* TeamFitnessApp */,
+				EC6A3D401E92EDC800F5E717 /* TeamFitnessAppTests */,
+				EC6A3D4B1E92EDC800F5E717 /* TeamFitnessAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EC6A3D2B1E92EDC800F5E717 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6A3D3B1E92EDC800F5E717 /* LaunchScreen.storyboard in Resources */,
+				EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */,
+				EC6A3D361E92EDC800F5E717 /* Main.storyboard in Resources */,
+				AA2097381E92F02900C1684A /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D3F1E92EDC800F5E717 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D4A1E92EDC800F5E717 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A65970C9F8F80C221F2F35B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3ED34FC4E4DCD15AAF62EF47 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5164041FA4CB0DABE91A9DFE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5FF4BDC1FD1A9DB91C61EF84 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		726C4661EE8B5B3F9E2254D6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8722ECE884EB28F5B5FB848F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A5BD55C110118878F1C2531 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E27C079452E6872CDC1BCF53 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EC6A3D291E92EDC800F5E717 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
+				EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */,
+				EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D3D1E92EDC800F5E717 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6A3D461E92EDC800F5E717 /* TeamFitnessAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC6A3D481E92EDC800F5E717 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC6A3D511E92EDC800F5E717 /* TeamFitnessAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EC6A3D431E92EDC800F5E717 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC6A3D2C1E92EDC800F5E717 /* TeamFitnessApp */;
+			targetProxy = EC6A3D421E92EDC800F5E717 /* PBXContainerItemProxy */;
+		};
+		EC6A3D4E1E92EDC800F5E717 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC6A3D2C1E92EDC800F5E717 /* TeamFitnessApp */;
+			targetProxy = EC6A3D4D1E92EDC800F5E717 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EC6A3D341E92EDC800F5E717 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC6A3D351E92EDC800F5E717 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EC6A3D391E92EDC800F5E717 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC6A3D3A1E92EDC800F5E717 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EC6A3D531E92EDC800F5E717 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC6A3D541E92EDC800F5E717 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EC6A3D561E92EDC800F5E717 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 221FF2463D54139D51842E21 /* Pods-TeamFitnessApp.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		EC6A3D571E92EDC800F5E717 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		EC6A3D591E92EDC800F5E717 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12640670CEAE8AE21C0B30FB /* Pods-TeamFitnessAppTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamFitnessApp.app/TeamFitnessApp";
+			};
+			name = Debug;
+		};
+		EC6A3D5A1E92EDC800F5E717 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B2D5318F33B4B43C01826E5 /* Pods-TeamFitnessAppTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamFitnessApp.app/TeamFitnessApp";
+			};
+			name = Release;
+		};
+		EC6A3D5C1E92EDC800F5E717 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88ADC239E33D8EFDE8ADF02D /* Pods-TeamFitnessAppUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TeamFitnessApp;
+			};
+			name = Debug;
+		};
+		EC6A3D5D1E92EDC800F5E717 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 089558D519A9A4A80E4717E6 /* Pods-TeamFitnessAppUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = 7994H36MAA;
+				INFOPLIST_FILE = TeamFitnessAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = TeamFitnessApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EC6A3D281E92EDC800F5E717 /* Build configuration list for PBXProject "TeamFitnessApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6A3D531E92EDC800F5E717 /* Debug */,
+				EC6A3D541E92EDC800F5E717 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC6A3D551E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6A3D561E92EDC800F5E717 /* Debug */,
+				EC6A3D571E92EDC800F5E717 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC6A3D581E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6A3D591E92EDC800F5E717 /* Debug */,
+				EC6A3D5A1E92EDC800F5E717 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EC6A3D5B1E92EDC800F5E717 /* Build configuration list for PBXNativeTarget "TeamFitnessAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC6A3D5C1E92EDC800F5E717 /* Debug */,
+				EC6A3D5D1E92EDC800F5E717 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC6A3D251E92EDC800F5E717 /* Project object */;
+}

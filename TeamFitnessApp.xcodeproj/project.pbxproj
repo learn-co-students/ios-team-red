@@ -141,8 +141,8 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				EC6A3D631E92F4F000F5E717 /* Utility */,
 				EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */,
-				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
 				EC6A3D321E92EDC800F5E717 /* ViewController.swift */,
 				EC6A3D341E92EDC800F5E717 /* Main.storyboard */,
 				EC6A3D371E92EDC800F5E717 /* Assets.xcassets */,
@@ -169,6 +169,14 @@
 				EC6A3D521E92EDC800F5E717 /* Info.plist */,
 			);
 			path = TeamFitnessAppUITests;
+			sourceTree = "<group>";
+		};
+		EC6A3D631E92F4F000F5E717 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

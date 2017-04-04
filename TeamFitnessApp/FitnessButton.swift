@@ -31,4 +31,8 @@ class FitnessButton: UIButton {
         self.setTitleColor(UIColor.foregroundOrange, for: .normal)
         self.backgroundColor = UIColor.clear
     }
+    
+    func changeFontSize(to newFontSize: CGFloat) {
+        self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: newFontSize)
+    }
 }

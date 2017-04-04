@@ -32,5 +32,9 @@ class FitnessLabel: UILabel {
         self.textColor = UIColor.foregroundOrange
         self.backgroundColor = UIColor.clear
     }
+    
+    func changeFontSize(to newFontSize: CGFloat) {
+        self.font = UIFont(name: "Gurmukhi MN", size: newFontSize)
+    }
 
 }

@@ -21,6 +21,9 @@
 		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5AB1E93EC59001230CC /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
+		FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC839A31E93FA0F0014B6FA /* Challenge.swift */; };
+		FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC839A51E93FA3D0014B6FA /* Team.swift */; };
+		FEC839A81E93FA4E0014B6FA /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC839A71E93FA4E0014B6FA /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
+		FEC839A31E93FA0F0014B6FA /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
+		FEC839A51E93FA3D0014B6FA /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		FEC839A71E93FA4E0014B6FA /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,7 @@
 		EC6A3D241E92EDC800F5E717 = {
 			isa = PBXGroup;
 			children = (
+				FEC839A21E93F9FB0014B6FA /* Models */,
 				EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */,
 				EC6A3D441E92EDC800F5E717 /* TeamFitnessAppTests */,
 				EC6A3D4F1E92EDC800F5E717 /* TeamFitnessAppUITests */,
@@ -191,6 +198,17 @@
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		FEC839A21E93F9FB0014B6FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FEC839A31E93FA0F0014B6FA /* Challenge.swift */,
+				FEC839A51E93FA3D0014B6FA /* Team.swift */,
+				FEC839A71E93FA4E0014B6FA /* User.swift */,
+			);
+			name = Models;
+			path = TeamFitnessAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,7 +287,7 @@
 				TargetAttributes = {
 					EC6A3D2C1E92EDC800F5E717 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7994H36MAA;
+						DevelopmentTeam = GB3732J7W2;
 						ProvisioningStyle = Automatic;
 					};
 					EC6A3D401E92EDC800F5E717 = {
@@ -463,7 +481,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
+				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
+				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				ECE3F5AB1E93EC59001230CC /* FitnessLabel.swift in Sources */,
+				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
 				EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */,
@@ -619,7 +640,7 @@
 			baseConfigurationReference = 221FF2463D54139D51842E21 /* Pods-TeamFitnessApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7994H36MAA;
+				DEVELOPMENT_TEAM = GB3732J7W2;
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessApp;
@@ -633,7 +654,7 @@
 			baseConfigurationReference = D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7994H36MAA;
+				DEVELOPMENT_TEAM = GB3732J7W2;
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SweetPea.TeamFitnessApp;

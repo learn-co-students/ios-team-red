@@ -13,6 +13,7 @@ struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
     
+    //create a new user with a given email in Firebase, and add that user's UID and email to the database
     static func createNewUser(withEmail email: String, andPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
             if let user = user {
@@ -24,6 +25,7 @@ struct FirebaseManager {
         })
     }
     
+    //login a user with a given email. Returns a FirebaseResponse upon completion
     static func loginUser(withEmail email: String, andPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
         FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
             if let user = user {
@@ -33,7 +35,7 @@ struct FirebaseManager {
             }
         })
     }
-    
+    //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
         do {
             try FIRAuth.auth()?.signOut()
@@ -43,7 +45,7 @@ struct FirebaseManager {
         }
     }
     
-    static func addNew(user: FIRUser) {
+    static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
     

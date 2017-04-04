@@ -19,6 +19,7 @@
 		EC6A3D461E92EDC800F5E717 /* TeamFitnessAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D451E92EDC800F5E717 /* TeamFitnessAppTests.swift */; };
 		EC6A3D511E92EDC800F5E717 /* TeamFitnessAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */; };
 		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
+		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFitnessAppUITests.swift; sourceTree = "<group>"; };
 		EC6A3D521E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				ECE3F5A91E93E8AD001230CC /* Controllers */,
 				EC6A3D631E92F4F000F5E717 /* Utility */,
 				EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */,
 				EC6A3D321E92EDC800F5E717 /* ViewController.swift */,
@@ -177,6 +180,14 @@
 				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		ECE3F5A91E93E8AD001230CC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -450,6 +461,7 @@
 			files = (
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */,
+				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,12 +10,25 @@ import UIKit
 
 class FitnessButton: UIButton {
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commoInit()
     }
-    */
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commoInit()
+    }
 
+    func commoInit() {
+        self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: 17.0)
+        self.setTitleColor(UIColor.backgroundImageBlue, for: .normal)
+        self.backgroundColor = UIColor.foregroundOrange
+        self.layer.cornerRadius = 5
+    }
+    
+    func reverseColors() {
+        self.setTitleColor(UIColor.foregroundOrange, for: .normal)
+        self.backgroundColor = UIColor.clear
+    }
 }

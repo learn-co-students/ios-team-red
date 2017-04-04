@@ -14,4 +14,7 @@ enum FirebaseResponse {
     case failedLogin(String)
     case successfulNewUser(FIRUser)
     case failedNewUser(String)
+    case successfulLogout(String)
+    case failedLogout(String)
+    
 }

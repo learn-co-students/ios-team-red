@@ -10,12 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let store = HealthKidManager.sharedInstance
+
+
     override func viewDidLoad() {
+
+
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resorces that can be recreated.
     }
+
+  override func viewWillAppear(_ animated: Bool) {
+    if store.requestHealthKitAuth() {
+      print("good")
+    } else {
+      print("bad")
+    }
+  }
 }
 

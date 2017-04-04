@@ -1,5 +1,5 @@
 //
-//  FitnessButton.swift
+//  FitnessLabel.swift
 //  TeamFitnessApp
 //
 //  Created by Patrick O'Leary on 4/4/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FitnessButton: UIButton {
+class FitnessLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,16 +19,18 @@ class FitnessButton: UIButton {
         super.init(coder: aDecoder)
         commoInit()
     }
-
+    
     func commoInit() {
-        self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: 17.0)
-        self.setTitleColor(UIColor.backgroundBlack, for: .normal)
+        self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
+        self.textColor = UIColor.backgroundBlack
         self.backgroundColor = UIColor.foregroundOrange
+        self.layer.masksToBounds = true
         self.layer.cornerRadius = 5
     }
     
     func reverseColors() {
-        self.setTitleColor(UIColor.foregroundOrange, for: .normal)
+        self.textColor = UIColor.foregroundOrange
         self.backgroundColor = UIColor.clear
     }
+
 }

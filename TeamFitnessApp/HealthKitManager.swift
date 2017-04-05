@@ -86,7 +86,7 @@ final class HealthKidManager {
     }
     healthStore.execute(stepsQuery)
   }
-  
+
 
   func getDistance(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
     let now: Date!
@@ -103,9 +103,9 @@ final class HealthKidManager {
 
     let sampleType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)
 
-    let stepsQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
+    let distanceQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
-    stepsQuery.initialResultsHandler = { query, results, error in
+    distanceQuery.initialResultsHandler = { query, results, error in
       DispatchQueue.main.async {
         if error != nil {
           print(error!.localizedDescription)
@@ -126,7 +126,7 @@ final class HealthKidManager {
         }
       }
     }
-    healthStore.execute(stepsQuery)
+    healthStore.execute(distanceQuery)
   }
 
 

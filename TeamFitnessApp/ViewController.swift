@@ -14,14 +14,10 @@ class ViewController: UIViewController {
 
 
     override func viewDidLoad() {
-
+       FirebaseManager.generateTestData()
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resorces that can be recreated.
-    }
 
   override func viewWillAppear(_ animated: Bool) {
     if store.requestHealthKitAuth() {
@@ -30,5 +26,7 @@ class ViewController: UIViewController {
       print("bad")
     }
   }
+
 }
+
 

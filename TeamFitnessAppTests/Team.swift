@@ -12,14 +12,17 @@ import Foundation
 struct Team {
     
     var users: [User]
-    var captain: String
+    var captain: User
     var challenges: [Challenge]
     var teamImage: String
     
     init(dict: [String: Any]) {
         self.users = dict["users"] as! [User]
-        self.captain = dict["captain"] as! String
+        self.captain = dict["captain"] as! User
         self.challenges = dict["challenges"] as! [Challenge]
-        self.teamImage = dict["teamImage"] as! String
+        self.teamImage = dict["teamImage"] as? String ?? ""
     }
+
 }
+
+

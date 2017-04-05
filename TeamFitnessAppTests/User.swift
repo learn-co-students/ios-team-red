@@ -20,9 +20,9 @@ struct User {
     var userImage: String
     
     init(dict: [String: Any]) {
-        self.name = dict["name"] as! String
-        self.sex = dict["Sex"] as! String
-        self.height = dict["height"] as! Float
+        self.name = dict["name"] as? String ?? ""
+        self.sex = dict["Sex"] as? String ??
+        self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as! Int
         self.teams = dict["teams"] as! [Team]
         self.challenges = dict["challenges"] as! [Challenge]

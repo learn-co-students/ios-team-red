@@ -11,10 +11,12 @@ import Foundation
 
 struct Challenge {
     
-    
-    
-    
-    
-    
+    var startDate: Date
+    var endDate: Date
+    var goal: Goal
+    var creator: User
+    var user: [User]
+    var isPublic: Bool
+    var team: Team?
     
 }

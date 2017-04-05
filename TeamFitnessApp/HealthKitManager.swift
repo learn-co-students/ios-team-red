@@ -15,6 +15,9 @@ final class HealthKidManager {
   private init () {}
   fileprivate let healthStore = HKHealthStore()
 
+
+
+  //request user authorization
    func requestHealthKitAuth() -> Bool {
 
     var isEnabled = true
@@ -25,6 +28,7 @@ final class HealthKidManager {
 
     let weight = HKObjectType.quantityType(forIdentifier: .bodyMass)
     let height = HKObjectType.quantityType(forIdentifier: .height)
+
 
     if HKHealthStore.isHealthDataAvailable() {
 
@@ -38,4 +42,11 @@ final class HealthKidManager {
     }
     return isEnabled
   }
+
+
+  //TODO: make methods to get healthkit data, make mehtods to write to healthkit
+
+
+
+
 }

@@ -11,24 +11,24 @@ import Foundation
 
 struct Team {
     
-    var users: [User]
+    var userUIDs: [String]
     var captain: User
-    var challenges: [Challenge]
+    var challengeIDs: [String]
     var imageURL: String
     var id: String
     
     init(id: String, dict: [String: Any]) {
-        self.users = dict["users"] as! [User]
+        self.userUIDs = dict["users"] as! [String]
         self.captain = dict["captain"] as! User
-        self.challenges = dict["challenges"] as! [Challenge]
+        self.challengeIDs = dict["challenges"] as! [String]
         self.imageURL = dict["teamImage"] as? String ?? ""
         self.id = id
     }
     
-    init(users: [User], captain: User, challenges: [Challenge], imageURL: String, id: String) {
-        self.users = users
+    init(userUIDs: [String], captain: User, challengeIDs: [String], imageURL: String, id: String) {
+        self.userUIDs = userUIDs
         self.captain = captain
-        self.challenges = challenges
+        self.challengeIDs = challengeIDs
         self.imageURL = imageURL
         self.id = id
     }

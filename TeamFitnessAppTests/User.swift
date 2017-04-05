@@ -15,8 +15,8 @@ struct User {
     var sex: String
     var height: Float
     var weight: Int
-    var teams: [Team]
-    var challenges: [Challenge]
+    var teamIDs = [String]()
+    var challengeIDs = [String]()
     var imageURL: String
     var uid: String
     var email: String?
@@ -26,19 +26,27 @@ struct User {
         self.name = dict["name"] as? String ?? ""
         self.sex = dict["Sex"] as? String ?? ""
         self.height = dict["height"] as? Float ?? 0.0
-        self.weight = dict["weight"] as! Int
-        self.teams = dict["teams"] as! [Team]
-        self.challenges = dict["challenges"] as! [Challenge]
-        self.imageURL = dict["userImage"] as! String
+        self.weight = dict["weight"] as? Int ?? 0
+        self.imageURL = dict["imageURL"] as? String ?? ""
+        
+        let challengeDict = dict["challenges"] as? [String: Bool] ?? [:]
+        for (challengeID, _) in challengeDict {
+            self.challengeIDs.append(challengeID)
+        }
+        
+        let teamDict = dict["teams"] as? [String: Bool] ?? [:]
+        for (teamID, _) in teamDict {
+            self.teamIDs.append(teamID)
+        }
     }
     
-    init(name: String, sex: String, height: Float, weight: Int, teams: [Team], challenges: [Challenge], imageURL: String, uid: String, email: String) {
+    init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], imageURL: String, uid: String, email: String) {
         self.name = name
         self.sex = sex
         self.height = height
         self.weight = weight
-        self.teams = teams
-        self.challenges = challenges
+        self.teamIDs = teamIDs
+        self.challengeIDs = challengeIDs
         self.imageURL = imageURL
         self.uid = uid
         self.email = email

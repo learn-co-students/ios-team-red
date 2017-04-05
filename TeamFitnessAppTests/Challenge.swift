@@ -14,8 +14,8 @@ struct Challenge {
     var startDate: Date
     var endDate: Date
     var goal: Goal
-    var creator: User
-    var users: [User]
+    var creator: String
+    var userUIDs: [String]
     var isPublic: Bool
     var team: Team?
     var id: String

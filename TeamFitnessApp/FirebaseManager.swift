@@ -49,4 +49,7 @@ struct FirebaseManager {
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
     
+    static func save(user: FIRUser) {
+        
+    }
 }

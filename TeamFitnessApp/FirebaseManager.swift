@@ -113,7 +113,7 @@ struct FirebaseManager {
             "isPublic": challenge.isPublic ?? nil,
 //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
 //            "endDate": String(challenge.endDate),
-            "team": [teamID: true]
+            "team": teamID
         ]
         
         key.updateChildValues(post)

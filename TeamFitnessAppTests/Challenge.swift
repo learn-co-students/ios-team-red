@@ -18,7 +18,7 @@ struct Challenge {
     var userUIDs = [String]()
     var isPublic: Bool?
     var teamID: String?
-    var id: String
+    var id: String?
     
     init(id: String, dict: [String: Any]) {
         self.creator = dict["creator"] as? String ?? nil
@@ -35,7 +35,7 @@ struct Challenge {
         }
     }
     
-    init(startDate: Date, endDate: Date, goal: Goal, creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String) {
+    init(startDate: Date, endDate: Date, goal: Goal, creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil) {
         self.startDate = startDate
         self.endDate = endDate
         self.goal = goal

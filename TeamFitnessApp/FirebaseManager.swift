@@ -98,7 +98,8 @@ struct FirebaseManager {
     }
     
     static func save(challenge: Challenge) {// saves a challenge to Firebase database
-        let key = dataRef.child("challenges").child(challenge.id)
+        guard let challengeID = challenge.id else {return}
+        let key = dataRef.child("challenges").child(challengeID)
         var usersDict = [String: Bool]()
         
         for user in challenge.userUIDs {
@@ -197,7 +198,7 @@ struct FirebaseManager {
             "isPublic": challenge.isPublic ?? nil,
             //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
             //            "endDate": String(challenge.endDate),
-            "team": [teamID: true]
+            "team": teamID
         ]
         
         challengeRef.updateChildValues(post)
@@ -206,9 +207,15 @@ struct FirebaseManager {
     
     
 // test data ******************************************************************************************************************************************
+    
+    
     static func generateTestData() {
+        let testUser3 = User(name: "test user 3", sex: "male", height: 120.2, weight: 300, teamIDs: [], challengeIDs: [], imageURL: "a cool imageurl", uid: "testUser3UID91011", email: "testuser3@testorama.com")
+        let testChallenge3 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(200), creator: testUser3, userUIDs: [], isPublic: true, team: "awesome test team", id: nil)
         
-        
+        FirebaseManager.addNew(challenge: testChallenge3) { (id) in
+            print("Challenge added to database \(id)")
+        }
     }
 }
 

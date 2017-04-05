@@ -24,8 +24,14 @@ class ViewController: UIViewController {
         testUser1.challenges = [testChallenge1, testChallenge2]
         testUser2.challenges = [testChallenge1, testChallenge2]
         
+        testTeam1.challenges = [testChallenge1, testChallenge2]
+        testTeam2.challenges = [testChallenge1, testChallenge2]
+        
         FirebaseManager.save(user: testUser1)
         FirebaseManager.save(user: testUser2)
+        
+        FirebaseManager.save(team: testTeam1)
+        FirebaseManager.save(team: testTeam2)
         
     }
     

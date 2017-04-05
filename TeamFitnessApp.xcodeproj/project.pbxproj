@@ -227,8 +227,8 @@
 		FEC839A21E93F9FB0014B6FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				FEC839A31E93FA0F0014B6FA /* Challenge.swift */,
 				FEB433FF1E9526C000A7D5E1 /* Goal.swift */,
+				FEC839A31E93FA0F0014B6FA /* Challenge.swift */,
 				FEC839A51E93FA3D0014B6FA /* Team.swift */,
 				FEC839A71E93FA4E0014B6FA /* User.swift */,
 			);

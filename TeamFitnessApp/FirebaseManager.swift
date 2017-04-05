@@ -49,21 +49,19 @@ struct FirebaseManager {
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
     
-    static func save(user: User) {
+    static func save(user: User) {// saves a user to the Firebase database
         let key = dataRef.child("users").child(user.uid)
         var challengesDict = [String: Bool]()
         var teamsDict = [String: Bool]()
+        
         for challenge in user.challenges {
-            if let id = challenge.id {
-                challengesDict[id] = true
-            }
+            challengesDict[challenge.id] = true
         }
         
         for team in user.teams {
-            if let id = team.id {
-                teamsDict[id] = true
-            }
+            teamsDict[team.id] = true
         }
+        
         let post: [String: Any] = [
             "name": user.name,
             "email": user.email ?? "",
@@ -76,4 +74,47 @@ struct FirebaseManager {
         ]
         key.updateChildValues(post)
     }
+    
+    static func save(team: Team) {
+        let key = dataRef.child("teams").child(team.id)
+        var usersDict = [String: Bool]()
+        var challengesDict = [String: Bool]()
+        
+        for user in team.users {
+            usersDict[user.uid] = true
+        }
+        
+        for challenge in team.challenges {
+            challengesDict[challenge.id] = true
+        }
+        let post: [String: Any] = [
+            "captain": [team.captain.uid: true],
+            "users": usersDict,
+            "challenges": challengesDict,
+            "imageURL": team.imageURL
+        ]
+        key.updateChildValues(post)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

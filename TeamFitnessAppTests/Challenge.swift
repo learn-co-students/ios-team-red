@@ -18,6 +18,6 @@ struct Challenge {
     var users: [User]
     var isPublic: Bool
     var team: Team?
-    var id: String? = nil
+    var id: String
     
 }

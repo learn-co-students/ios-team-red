@@ -15,13 +15,14 @@ struct Team {
     var captain: User
     var challenges: [Challenge]
     var imageURL: String
-    var id: String? = nil
+    var id: String
     
-    init(dict: [String: Any]) {
+    init(id: String, dict: [String: Any]) {
         self.users = dict["users"] as! [User]
         self.captain = dict["captain"] as! User
         self.challenges = dict["challenges"] as! [Challenge]
         self.imageURL = dict["teamImage"] as? String ?? ""
+        self.id = id
     }
     
     init(users: [User], captain: User, challenges: [Challenge], imageURL: String, id: String) {

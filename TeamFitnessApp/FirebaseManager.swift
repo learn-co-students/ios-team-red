@@ -109,11 +109,11 @@ struct FirebaseManager {
             usersDict[user] = true
         }
         
-        let teamID = challenge.team?.id ?? "no team"
+        let teamID = challenge.teamID ?? "no team"
         let post: [String: Any] = [
             "users": usersDict,
-            "creator": challenge.creator,
-            "isPublic": challenge.isPublic,
+            "creator": challenge.creator ?? nil,
+            "isPublic": challenge.isPublic ?? nil,
 //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
 //            "endDate": String(challenge.endDate),
             "team": [teamID: true]
@@ -133,11 +133,21 @@ struct FirebaseManager {
         })
     }
     
+    //fetches a team from Firebase given a team id string, and returns the team through a closure
     static func fetchTeam(withTeamID teamID: String, completion: @escaping (Team) -> Void) {
         dataRef.child("teams").child(teamID).observe(.value, with: { (snapshot) in
             if let teamDict = snapshot.value as? [String: Any] {
                 let team = Team(id: teamID, dict: teamDict)
                 completion(team)
+            }
+        })
+    }
+    
+    static func fetchChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
+        dataRef.child("challenges").child(challengeID).observe(.value, with: { (snapshot) in
+            if let challengeDict = snapshot.value as? [String: Any] {
+                let challenge = Challenge(id: challengeID, dict: challengeDict)
+                completion(challenge)
             }
         })
     }
@@ -148,8 +158,8 @@ struct FirebaseManager {
         var testUser2 = User(name: "test User 2", sex: "male", height: 80.1, weight: 200, teamIDs: [], challengeIDs: [], imageURL: "www.somethingelse.comm", uid: "UID5678", email: "testuser2@test.com")
         var testTeam1 = Team(userUIDs: [testUser1.uid, testUser2.uid], captain: testUser1, challengeIDs: [], imageURL: "www.cool.com", id: "team1UID1234")
         var testTeam2 = Team(userUIDs: [testUser1.uid, testUser2.uid], captain: testUser2, challengeIDs: [], imageURL: "www.notcool.com", id: "team2UID5678")
-        let testChallenge1 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(2000), creator: testUser1.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: true, team: nil, id: "testChallenge2ID1234")
-        let testChallenge2 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(4000), creator: testUser2.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: false, team: testTeam1, id: "testChallenge2ID5678")
+        let testChallenge1 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(2000), creator: testUser1, userUIDs: [testUser1.uid, testUser2.uid], isPublic: true, team: nil, id: "testChallenge2ID1234")
+        let testChallenge2 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(4000), creator: testUser2, userUIDs: [testUser1.uid, testUser2.uid], isPublic: false, team: testTeam1.id, id: "testChallenge2ID5678")
         
         testUser1.teamIDs = [testTeam1.id, testTeam2.id]
         testUser2.teamIDs = [testTeam1.id, testTeam2.id]
@@ -174,6 +184,10 @@ struct FirebaseManager {
         
         fetchTeam(withTeamID: "team1UID1234") { (team) in
             print("Team fetched: \(team.id)")
+        }
+        
+        fetchChallenge(withChallengeID: "testChallenge2ID1234") { (challenge) in
+            print("Challenge fetched: \(challenge.id)")
         }
         
     }

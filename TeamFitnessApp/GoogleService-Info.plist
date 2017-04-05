@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1094103273281-jsbqfvlk50dfgre9dhikst8dbrbb3hp7.apps.googleusercontent.com</string>
+	<string>1094103273281-0c19pv3eso610q8cok3bgt4rgeljts29.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1094103273281-jsbqfvlk50dfgre9dhikst8dbrbb3hp7</string>
+	<string>com.googleusercontent.apps.1094103273281-0c19pv3eso610q8cok3bgt4rgeljts29</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDDfSBa5SonnkoaMuG62zu6nfogCJ4aPfE</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>SweetPea.TeamFitnessApp</string>
+	<string>com.Lmusto.TeamFitnessApp</string>
 	<key>PROJECT_ID</key>
 	<string>teamfitnessapp-a8e45</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1094103273281:ios:6c351d9cc570a8d6</string>
+	<string>1:1094103273281:ios:28362b07990c67b8</string>
 	<key>DATABASE_URL</key>
 	<string>https://teamfitnessapp-a8e45.firebaseio.com</string>
 </dict>

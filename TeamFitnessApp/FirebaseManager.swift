@@ -92,7 +92,7 @@ struct FirebaseManager {
         }
         
         let post: [String: Any] = [
-            "captain": [team.captain.uid: true],
+            "captain": team.captain,
             "users": usersDict,
             "challenges": challengesDict,
             "imageURL": team.imageURL
@@ -123,7 +123,8 @@ struct FirebaseManager {
     }
 //fetch functions ************************************************************************************************************************************
     
-    static func fetchUser(fromUserUID uid: String, completion: @escaping (User) -> Void) {
+    //fetches a user from Firebase given a user id string, and returns the user through a closure
+    static func fetchUser(withUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
             if let userDict = snapshot.value as? [String: Any] {
                 let user = User(uid: uid, dict: userDict)
@@ -131,8 +132,15 @@ struct FirebaseManager {
             }
         })
     }
-//
-//    static func fetchTeam
+    
+    static func fetchTeam(withTeamID teamID: String, completion: @escaping (Team) -> Void) {
+        dataRef.child("teams").child(teamID).observe(.value, with: { (snapshot) in
+            if let teamDict = snapshot.value as? [String: Any] {
+                let team = Team(id: teamID, dict: teamDict)
+                completion(team)
+            }
+        })
+    }
     
 // test data ******************************************************************************************************************************************
     static func generateTestData() {
@@ -140,8 +148,8 @@ struct FirebaseManager {
         var testUser2 = User(name: "test User 2", sex: "male", height: 80.1, weight: 200, teamIDs: [], challengeIDs: [], imageURL: "www.somethingelse.comm", uid: "UID5678", email: "testuser2@test.com")
         var testTeam1 = Team(userUIDs: [testUser1.uid, testUser2.uid], captain: testUser1, challengeIDs: [], imageURL: "www.cool.com", id: "team1UID1234")
         var testTeam2 = Team(userUIDs: [testUser1.uid, testUser2.uid], captain: testUser2, challengeIDs: [], imageURL: "www.notcool.com", id: "team2UID5678")
-        var testChallenge1 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(2000), creator: testUser1.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: true, team: nil, id: "testChallenge2ID1234")
-        var testChallenge2 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(4000), creator: testUser2.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: false, team: testTeam1, id: "testChallenge2ID5678")
+        let testChallenge1 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(2000), creator: testUser1.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: true, team: nil, id: "testChallenge2ID1234")
+        let testChallenge2 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(4000), creator: testUser2.uid, userUIDs: [testUser1.uid, testUser2.uid], isPublic: false, team: testTeam1, id: "testChallenge2ID5678")
         
         testUser1.teamIDs = [testTeam1.id, testTeam2.id]
         testUser2.teamIDs = [testTeam1.id, testTeam2.id]
@@ -160,9 +168,14 @@ struct FirebaseManager {
         FirebaseManager.save(challenge: testChallenge1)
         FirebaseManager.save(challenge: testChallenge2)
         
-        fetchUser(fromUserUID: "UID1234") { (user) in
+        fetchUser(withUID: "UID1234") { (user) in
             print("User fetched: \(user.uid), \(user.email), \(user.height), \(user.name)")
         }
+        
+        fetchTeam(withTeamID: "team1UID1234") { (team) in
+            print("Team fetched: \(team.id)")
+        }
+        
     }
 }
 

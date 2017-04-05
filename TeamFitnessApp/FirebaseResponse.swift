@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 
 enum FirebaseResponse {
+    
     case successfulLogin(FIRUser)
     case failedLogin(String)
     case successfulNewUser(FIRUser)

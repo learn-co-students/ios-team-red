@@ -17,15 +17,30 @@ struct User {
     var weight: Int
     var teams: [Team]
     var challenges: [Challenge]
-    var userImage: String
+    var imageURL: String
+    var uid: String
+    var email: String?
     
-    init(dict: [String: Any]) {
+    init(uid: String, dict: [String: Any]) {
+        self.uid = uid
         self.name = dict["name"] as? String ?? ""
-        self.sex = dict["Sex"] as? String ??
+        self.sex = dict["Sex"] as? String ?? ""
         self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as! Int
         self.teams = dict["teams"] as! [Team]
         self.challenges = dict["challenges"] as! [Challenge]
-        self.userImage = dict["userImage"] as! String
+        self.imageURL = dict["userImage"] as! String
+    }
+    
+    init(name: String, sex: String, height: Float, weight: Int, teams: [Team], challenges: [Challenge], imageURL: String, uid: String, email: String) {
+        self.name = name
+        self.sex = sex
+        self.height = height
+        self.weight = weight
+        self.teams = teams
+        self.challenges = challenges
+        self.imageURL = imageURL
+        self.uid = uid
+        self.email = email
     }
 }

@@ -109,8 +109,8 @@ struct FirebaseManager {
         let teamID = challenge.teamID ?? "no team"
         let post: [String: Any] = [
             "users": usersDict,
-            "creator": challenge.creator ?? nil,
-            "isPublic": challenge.isPublic ?? nil,
+            "creator": challenge.creator ?? "No Creator",
+            "isPublic": challenge.isPublic ?? false,
 //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
 //            "endDate": String(challenge.endDate),
             "team": teamID
@@ -194,8 +194,8 @@ struct FirebaseManager {
         let teamID = challenge.teamID ?? "no team"
         let post: [String: Any] = [
             "users": usersDict,
-            "creator": challenge.creator ?? nil,
-            "isPublic": challenge.isPublic ?? nil,
+            "creator": challenge.creator ?? "No Creator",
+            "isPublic": challenge.isPublic ?? false,
             //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
             //            "endDate": String(challenge.endDate),
             "team": teamID

@@ -45,6 +45,7 @@ final class HealthKidManager {
 
 
   //MARK: - Read Data from HealthKit
+  //TODO: - write functions to get calories burned and exercise time
 
   func getSteps(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
     let now: Date!
@@ -131,6 +132,7 @@ final class HealthKidManager {
 
 
   //MARK: - Write to HealthKit
+
   func sendWeightToHealthKit(weight: Double, completion: @escaping (Bool) -> ()) {
     let date = Date()
     let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass)

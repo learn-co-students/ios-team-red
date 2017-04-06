@@ -15,6 +15,8 @@ class TeamsVC: UIViewController {
     let titleLabel = FitnessLabel()
     let myTeamsLabel = FitnessLabel()
     let myTeamsView = UITableView()
+    let teamSearchBar = UISearchBar()
+    let teamSearchView = UITableView()
 
     
     override func viewDidLoad() {
@@ -42,6 +44,7 @@ class TeamsVC: UIViewController {
         self.view = mainView
         setupTitle()
         setUpMyTeams()
+        setUpTeamSearch()
     }
     
     func setupTitle() {
@@ -76,7 +79,42 @@ class TeamsVC: UIViewController {
         myTeamsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         myTeamsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
         myTeamsView.backgroundColor = UIColor.green
+    }
+    
+    func setUpTeamSearch() {
+        view.addSubview(teamSearchBar)
+        teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        teamSearchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        teamSearchBar.topAnchor.constraint(equalTo: myTeamsView.bottomAnchor, constant: 20).isActive = true
+        teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        teamSearchBar.placeholder = "Find Teams by Name:"
+        teamSearchBar.backgroundColor = UIColor.foregroundOrange
         
+        view.addSubview(teamSearchView)
+        teamSearchView.translatesAutoresizingMaskIntoConstraints = false
+        teamSearchView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        teamSearchView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
+        teamSearchView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
+        teamSearchView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        teamSearchView.backgroundColor = UIColor.green
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

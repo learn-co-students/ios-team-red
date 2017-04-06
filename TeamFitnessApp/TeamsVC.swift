@@ -8,20 +8,25 @@
 
 import UIKit
 
-class TeamsVC: UIViewController {
+class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let screenBounds = UIScreen.main.bounds
     let mainView = FitnessView()
     let titleLabel = FitnessLabel()
     let myTeamsLabel = FitnessLabel()
-    let myTeamsView = UITableView()
+    let myTeamsView = TeamsTableView()
     let teamSearchBar = UISearchBar()
     let teamSearchView = UITableView()
-
+    var myTeams = [Team]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        myTeamsView.register(TeamsCell.self, forCellReuseIdentifier: "teamsCell")
+        myTeamsView.delegate = self
+        myTeamsView.dataSource = self
+        let user = generateTestUser()
+        getTeams(forUser: user)
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,66 +45,41 @@ class TeamsVC: UIViewController {
     }
     */
     
-    func setupSubViews() {
-        self.view = mainView
-        setupTitle()
-        setUpMyTeams()
-        setUpTeamSearch()
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    func setupTitle() {
-        self.view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        titleLabel.textAlignment = .center
-        titleLabel.changeFontSize(to: 28)
-        titleLabel.reverseColors()
-        titleLabel.text = "Teams"
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myTeams.count
     }
     
-    func setUpMyTeams() {
-        view.addSubview(myTeamsLabel)
-        myTeamsLabel.translatesAutoresizingMaskIntoConstraints = false
-        myTeamsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        myTeamsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        myTeamsLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        myTeamsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        myTeamsLabel.textAlignment = .center
-        myTeamsLabel.changeFontSize(to: 20)
-        myTeamsLabel.reverseColors()
-        myTeamsLabel.text = "My Teams:"
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = myTeamsView.dequeueReusableCell(withIdentifier: "teamsCell") as! TeamsCell
+        cell.team = myTeams[indexPath.row]
+        return cell
+    }
+    
+    func getTeams(forUser user: User) {
+        print("Getting teams: \(user.teamIDs)")
+        let teamList = user.teamIDs
+        for teamID in teamList {
+            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+                print("Fetched team: \(team.id)")
+                self.myTeams.append(team)
+                DispatchQueue.main.async {
+                    print(self.myTeams)
+                    self.myTeamsView.reloadData()
+                }
+            })
+        }
         
-        view.addSubview(myTeamsView)
-        myTeamsView.translatesAutoresizingMaskIntoConstraints = false
-        myTeamsView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        myTeamsView.topAnchor.constraint(equalTo: myTeamsLabel.bottomAnchor).isActive = true
-        myTeamsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        myTeamsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
-        myTeamsView.backgroundColor = UIColor.green
     }
     
-    func setUpTeamSearch() {
-        view.addSubview(teamSearchBar)
-        teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
-        teamSearchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        teamSearchBar.topAnchor.constraint(equalTo: myTeamsView.bottomAnchor, constant: 20).isActive = true
-        teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        teamSearchBar.placeholder = "Find Teams by Name:"
-        teamSearchBar.backgroundColor = UIColor.foregroundOrange
-        
-        view.addSubview(teamSearchView)
-        teamSearchView.translatesAutoresizingMaskIntoConstraints = false
-        teamSearchView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        teamSearchView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
-        teamSearchView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
-        teamSearchView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
-        teamSearchView.backgroundColor = UIColor.green
+    func generateTestUser() -> User {
+        let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
+        print("User teams: \(user.teamIDs)")
+        return user
     }
-
 }
 
 

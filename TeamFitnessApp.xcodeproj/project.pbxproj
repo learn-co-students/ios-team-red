@@ -20,6 +20,10 @@
 		EC6A3D461E92EDC800F5E717 /* TeamFitnessAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D451E92EDC800F5E717 /* TeamFitnessAppTests.swift */; };
 		EC6A3D511E92EDC800F5E717 /* TeamFitnessAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */; };
 		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
+		EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA21E967ECB009664F5 /* TeamsVC.swift */; };
+		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
+		EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */; };
+		EC859EAB1E96AEBA009664F5 /* TeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
@@ -76,6 +80,9 @@
 		EC6A3D501E92EDC800F5E717 /* TeamFitnessAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamFitnessAppUITests.swift; sourceTree = "<group>"; };
 		EC6A3D521E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
+		EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVCExtension.swift; sourceTree = "<group>"; };
+		EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsCell.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -168,6 +175,7 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				FEC839A21E93F9FB0014B6FA /* Models */,
 				ECE3F5AE1E94090D001230CC /* Views */,
 				AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */,
 				ECE3F5A91E93E8AD001230CC /* Controllers */,
@@ -210,9 +218,19 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		EC859EA71E96AD83009664F5 /* Controller Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */,
+			);
+			name = "Controller Extensions";
+			sourceTree = "<group>";
+		};
 		ECE3F5A91E93E8AD001230CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EC859EA71E96AD83009664F5 /* Controller Extensions */,
+				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -223,6 +241,7 @@
 				ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */,
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 				ECE3F5AF1E940C70001230CC /* FitnessView.swift */,
+				EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -246,7 +265,7 @@
 			);
 			name = Models;
 			path = TeamFitnessAppTests;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -521,9 +540,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE06185E1E96BAB10028A2C2 /* FitnessLabel.swift in Sources */,
+				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
+				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
+				EC859EAB1E96AEBA009664F5 /* TeamsCell.swift in Sources */,
+				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,

@@ -18,7 +18,6 @@ class ViewController: UIViewController {
 
     }
 
-
   override func viewWillAppear(_ animated: Bool) {
     if store.requestHealthKitAuth() {
       print("good")

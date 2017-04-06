@@ -16,10 +16,12 @@ struct Team {
     var challengeIDs = [String]()
     var imageURL: String
     var id: String
+    var name: String
     
     init(id: String, dict: [String: Any]) {
         self.captain = dict["captain"] as? String ?? ""
         self.imageURL = dict["teamImage"] as? String ?? ""
+        self.name = dict["name"] as? String ?? ""
         self.id = id
         
         let userDict = dict["users"] as? [String: Bool] ?? [:]
@@ -33,12 +35,13 @@ struct Team {
         }
     }
     
-    init(userUIDs: [String], captain: User, challengeIDs: [String], imageURL: String, id: String) {
+    init(userUIDs: [String], captain: User, challengeIDs: [String], imageURL: String, id: String, name: String) {
         self.userUIDs = userUIDs
         self.captain = captain.uid
         self.challengeIDs = challengeIDs
         self.imageURL = imageURL
         self.id = id
+        self.name = name
     }
 
 }

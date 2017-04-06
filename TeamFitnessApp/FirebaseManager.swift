@@ -36,6 +36,8 @@ struct FirebaseManager {
             }
         })
     }
+    
+    
     //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
         do {

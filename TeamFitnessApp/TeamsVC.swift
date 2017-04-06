@@ -98,6 +98,23 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let teamDetailVC = TeamDetailVC()
+        
+        if tableView == self.myTeamsView {
+            teamDetailVC.setTeam(team: myTeams[indexPath.row])
+            present(teamDetailVC, animated: true, completion: nil)
+        } else if tableView == self.searchTableView {
+            if searchActive {
+                teamDetailVC.setTeam(team: filteredTeams[indexPath.row])
+                present(teamDetailVC, animated: true, completion: nil)
+            } else {
+                teamDetailVC.setTeam(team: allTeams[indexPath.row])
+                present(teamDetailVC, animated: true, completion: nil)
+            }
+        }
+    }
+    
     func getTeams(forUser user: User) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
         let teamList = user.teamIDs
         for teamID in teamList {

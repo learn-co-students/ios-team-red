@@ -42,16 +42,10 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         
-        let user = generateTestUser()
+        let user = generateTestUser() //test function
         getTeams(forUser: user)
         loadAllTeams()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -104,7 +98,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func getTeams(forUser user: User) {
+    func getTeams(forUser user: User) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
         let teamList = user.teamIDs
         for teamID in teamList {
             FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
@@ -116,7 +110,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func generateTestUser() -> User {
+    func generateTestUser() -> User {//test function
         let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
         return user
     }

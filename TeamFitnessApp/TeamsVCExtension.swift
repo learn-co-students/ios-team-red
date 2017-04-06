@@ -94,7 +94,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
         print("Did end editing")
     }
     

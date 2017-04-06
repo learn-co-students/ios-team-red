@@ -149,7 +149,8 @@ struct FirebaseManager {
             }
         })
     }
-
+    
+    
 // addNew functions ******************************************************************************************************************************************
     static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)

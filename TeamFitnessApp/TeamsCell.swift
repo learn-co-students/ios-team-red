@@ -12,7 +12,7 @@ class TeamsCell: UITableViewCell {
     
     var team: Team? {
         didSet {
-            teamNameLabel.text = team?.id
+            teamNameLabel.text = team?.name
         }
     }
     let teamNameLabel = FitnessLabel()
@@ -30,7 +30,6 @@ class TeamsCell: UITableViewCell {
     
     func commonInit() {
         self.backgroundColor = UIColor.clear
-        print("Content view frame: \(self.contentView.frame)")
         setupLabels()
     }
 

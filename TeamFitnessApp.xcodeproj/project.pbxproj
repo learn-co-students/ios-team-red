@@ -23,7 +23,6 @@
 		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
 		EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA21E967ECB009664F5 /* TeamsVC.swift */; };
 		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
-		EC859EA61E96ACB8009664F5 /* TeamsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA51E96ACB8009664F5 /* TeamsTableView.swift */; };
 		EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */; };
 		EC859EAB1E96AEBA009664F5 /* TeamsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
@@ -82,7 +81,6 @@
 		EC6A3D521E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
-		EC859EA51E96ACB8009664F5 /* TeamsTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsTableView.swift; sourceTree = "<group>"; };
 		EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVCExtension.swift; sourceTree = "<group>"; };
 		EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsCell.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 				ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */,
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 				ECE3F5AF1E940C70001230CC /* FitnessView.swift */,
-				EC859EA51E96ACB8009664F5 /* TeamsTableView.swift */,
 				EC859EAA1E96AEBA009664F5 /* TeamsCell.swift */,
 			);
 			name = Views;
@@ -545,7 +542,6 @@
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,
 				ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */,
-				EC859EA61E96ACB8009664F5 /* TeamsTableView.swift in Sources */,
 				EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */,

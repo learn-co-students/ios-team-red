@@ -133,7 +133,6 @@ struct FirebaseManager {
     //fetches a team from Firebase given a team id string, and returns the team through a closure
     static func fetchTeam(withTeamID teamID: String, completion: @escaping (Team) -> Void) {
         dataRef.child("teams").child(teamID).observe(.value, with: { (snapshot) in
-            print("found team data: \(snapshot.value)")
             if let teamDict = snapshot.value as? [String: Any] {
                 let team = Team(id: teamID, dict: teamDict)
                 completion(team)

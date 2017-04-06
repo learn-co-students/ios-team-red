@@ -10,10 +10,23 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let store = HealthKidManager.sharedInstance
+
+
     override func viewDidLoad() {
-        FirebaseManager.generateTestData()
+       FirebaseManager.generateTestData()
+
     }
-    
-    
+
+
+  override func viewWillAppear(_ animated: Bool) {
+    if store.requestHealthKitAuth() {
+      print("good")
+    } else {
+      print("bad")
+    }
+  }
+
 }
+
 

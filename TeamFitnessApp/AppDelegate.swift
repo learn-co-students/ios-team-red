@@ -18,7 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
-
+        
+        // initalize the window
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        
+        //check for nill
+        guard let window = self.window else { fatalError("no window") }
+        
+        //set the root view controller
+        window.rootViewController = LogInViewController()
+        
+        //make the window visible
+        window.makeKeyAndVisible()
+                
         // Override point for customization after application launch.
         return true
     }

@@ -27,7 +27,7 @@ class FitnessLabel: UILabel {
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 5
     }
-    
+     
     func reverseColors() {
         self.textColor = UIColor.foregroundOrange
         self.backgroundColor = UIColor.clear

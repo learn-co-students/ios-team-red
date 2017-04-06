@@ -150,9 +150,7 @@ struct FirebaseManager {
         })
     }
     
-<<<<<<< HEAD
-    
-=======
+
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         var teams = [Team]()
         dataRef.child("teams").observe(.value, with: { (snapshot) in
@@ -183,7 +181,6 @@ struct FirebaseManager {
         })
     }
 
->>>>>>> utility/firebase
 // addNew functions ******************************************************************************************************************************************
     static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)

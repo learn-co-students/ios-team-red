@@ -519,11 +519,8 @@
 			files = (
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
-<<<<<<< HEAD
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
-=======
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
->>>>>>> utility/firebase
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,

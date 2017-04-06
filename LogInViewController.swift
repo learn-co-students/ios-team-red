@@ -17,17 +17,6 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//      FirebaseManager.generateTestData()
-      
-//      let screenSize = UIScreen.main.bounds
-//      let screenWidth = screenSize.width
-//      let screenHeight = screenSize.height
-//      let x: CGFloat = 0.0
-//      let y: CGFloat = 0.0//
-//      let myBounds = CGRect(x: x, y: y, width: screenWidth, height: screenHeight)
-//      let myView = FitnessView(frame: myBounds)
-//      view.addSubview(myView)
-        
         let fitnessBabyLabel = FitnessLabel()
         self.view.addSubview(fitnessBabyLabel)
         fitnessBabyLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -73,24 +62,37 @@ class LogInViewController: UIViewController {
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         
-        let newUser = FitnessButton()
-        self.view.addSubview(newUser)
-        newUser.translatesAutoresizingMaskIntoConstraints = false
-        newUser.setTitle("New User", for: .normal)
-        newUser.changeFontSize(to: 20.0)
-        newUser.reverseColors()
-        newUser.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-        newUser.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        newUser.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        newUser.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 50).isActive = true
+        let newUserButton = FitnessButton()
+        self.view.addSubview(newUserButton)
+        newUserButton.translatesAutoresizingMaskIntoConstraints = false
+        newUserButton.setTitle("New User", for: .normal)
+        newUserButton.changeFontSize(to: 20.0)
+        newUserButton.reverseColors()
+        newUserButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        newUserButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        newUserButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        newUserButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
+        
+        let googleButton = FitnessButton()
+        self.view.addSubview(googleButton)
+        googleButton.translatesAutoresizingMaskIntoConstraints = false
+        googleButton.setTitle("Google", for: .normal)
+        googleButton.changeFontSize(to: 16.0)
+        googleButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        googleButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        googleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
+        
+        let facebookButton = FitnessButton()
+        self.view.addSubview(facebookButton)
+        facebookButton.translatesAutoresizingMaskIntoConstraints = false
+        facebookButton.setTitle("Facebook", for: .normal)
+        facebookButton.changeFontSize(to: 16.0)
+        facebookButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
+        facebookButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        facebookButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
 
-        
-        
-        
-        
-        
-    
-    
     }
     
     override func loadView() {

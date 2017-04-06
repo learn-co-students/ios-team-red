@@ -22,7 +22,7 @@ class FitnessButton: UIButton {
 
     func commoInit() {
         self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: 17.0)
-        self.setTitleColor(UIColor.backgroundBlack, for: .normal)
+        self.setTitleColor(UIColor.clear, for: .normal)
         self.backgroundColor = UIColor.foregroundOrange
         self.layer.cornerRadius = 5
     }

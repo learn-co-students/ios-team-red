@@ -35,7 +35,7 @@ class FitnessView: UIView {
         let image = images[randomNum]
         let sportImageView = UIImageView()
         sportImageView.image = image
-//        sportImageView.contentMode = .scaleAspectFill
+        //sportImageView.contentMode = .scaleAspectFit
         self.addSubview(sportImageView)
 
         sportImageView.translatesAutoresizingMaskIntoConstraints = false

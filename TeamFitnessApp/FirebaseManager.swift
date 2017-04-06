@@ -149,6 +149,36 @@ struct FirebaseManager {
             }
         })
     }
+    
+    static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
+        var teams = [Team]()
+        dataRef.child("teams").observe(.value, with: { (snapshot) in
+            let teamDict = snapshot.value as? [String: Any]
+            if let teamDict = teamDict {
+                for team in teamDict {
+                    let teamValues = team.value as? [String: Any] ?? [:]
+                    let team = Team(id: team.key, dict: teamValues)
+                    teams.append(team)
+                }
+            }
+            completion(teams)
+        })
+    }
+    
+    static func fetchAllChallenges(completion: @escaping ([Challenge]) -> Void) { //fetches all challenges and returns them in an array through a completion
+        var challenges = [Challenge]()
+        dataRef.child("challenges").observe(.value, with: { (snapshot) in
+            let challengesDict = snapshot.value as? [String: Any]
+            if let challengesDict = challengesDict {
+                for challenge in challengesDict {
+                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+                    challenges.append(challenge)
+                }
+            }
+            completion(challenges)
+        })
+    }
 
 // addNew functions ******************************************************************************************************************************************
     static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database

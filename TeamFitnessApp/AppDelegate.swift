@@ -18,11 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
-
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.backgroundColor = UIColor.green
-        self.window?.rootViewController = TeamsViewController()//Sets the initial UIViewController
-        self.window?.makeKeyAndVisible()
+//
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.backgroundColor = UIColor.green
+//        self.window?.rootViewController = TeamsVC()//Sets the initial UIViewController
+//        self.window?.makeKeyAndVisible()
         
         return true
     }

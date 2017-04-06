@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamsViewController: UIViewController {
+class TeamsVC: UIViewController {
     
     let screenBounds = UIScreen.main.bounds
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Patrick O'Leary. All rights reserved.
 //
 
-<<<<<<< HEAD
+
 //import UIKit
 //
 //class ViewController: UIViewController {
@@ -28,7 +28,7 @@
 //  }
 //
 //}
-=======
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -50,6 +50,6 @@ class ViewController: UIViewController {
   }
 
 }
->>>>>>> master
+
 
 

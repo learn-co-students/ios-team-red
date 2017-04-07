@@ -29,7 +29,8 @@
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
 		ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5BB1E944583001230CC /* FirebaseResponse.swift */; };
 		FE06185D1E96802E0028A2C2 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE06185C1E96802E0028A2C2 /* LogInViewController.swift */; };
-		FE06185E1E96BAB10028A2C2 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
+		FE0618601E96E6010028A2C2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE06185F1E96E6010028A2C2 /* ProfileViewController.swift */; };
+		FE0618621E96F26E0028A2C2 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE0618611E96F26E0028A2C2 /* NewUserViewController.swift */; };
 		FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB433FF1E9526C000A7D5E1 /* Goal.swift */; };
 		FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC839A31E93FA0F0014B6FA /* Challenge.swift */; };
 		FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC839A51E93FA3D0014B6FA /* Team.swift */; };
@@ -89,6 +90,8 @@
 		ECE3F5B91E94441A001230CC /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		ECE3F5BB1E944583001230CC /* FirebaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseResponse.swift; sourceTree = "<group>"; };
 		FE06185C1E96802E0028A2C2 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		FE06185F1E96E6010028A2C2 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FE0618611E96F26E0028A2C2 /* NewUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		FEB433FF1E9526C000A7D5E1 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		FEC839A31E93FA0F0014B6FA /* Challenge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Challenge.swift; sourceTree = "<group>"; };
 		FEC839A51E93FA3D0014B6FA /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
@@ -151,7 +154,7 @@
 		EC6A3D241E92EDC800F5E717 = {
 			isa = PBXGroup;
 			children = (
-				FE0618591E967FDE0028A2C2 /* ViewControllers */,
+				FE0618591E967FDE0028A2C2 /* Controllers */,
 				FEC839A21E93F9FB0014B6FA /* Models */,
 				EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */,
 				EC6A3D441E92EDC800F5E717 /* TeamFitnessAppTests */,
@@ -175,7 +178,6 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
-				FEC839A21E93F9FB0014B6FA /* Models */,
 				ECE3F5AE1E94090D001230CC /* Views */,
 				AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */,
 				ECE3F5A91E93E8AD001230CC /* Controllers */,
@@ -246,13 +248,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
-		FE0618591E967FDE0028A2C2 /* ViewControllers */ = {
+		FE0618591E967FDE0028A2C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				EC6A3D321E92EDC800F5E717 /* ViewController.swift */,
 				FE06185C1E96802E0028A2C2 /* LogInViewController.swift */,
+				FE06185F1E96E6010028A2C2 /* ProfileViewController.swift */,
+				FE0618611E96F26E0028A2C2 /* NewUserViewController.swift */,
 			);
-			name = ViewControllers;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		FEC839A21E93F9FB0014B6FA /* Models */ = {
@@ -550,8 +554,10 @@
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,
+				FE0618601E96E6010028A2C2 /* ProfileViewController.swift in Sources */,
 				ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */,
 				EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */,
+				FE0618621E96F26E0028A2C2 /* NewUserViewController.swift in Sources */,
 				FE06185D1E96802E0028A2C2 /* LogInViewController.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */,

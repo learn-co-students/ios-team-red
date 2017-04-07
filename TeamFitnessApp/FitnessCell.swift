@@ -23,7 +23,7 @@ class FitnessCell: UITableViewCell {
         
     }
     
-    func commonInit() {
+    private func commonInit() {
         self.backgroundColor = UIColor.clear
         setupLabels()
     }

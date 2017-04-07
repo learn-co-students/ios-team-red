@@ -30,10 +30,17 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         membersView.delegate = self
         membersView.dataSource = self
         
+        challengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        challengesView.delegate = self
+        challengesView.dataSource = self
+        
         super.viewDidLoad()
         setupViews()
         getTeamMembers(forTeam: team) { 
             self.membersView.reloadData()
+        }
+        getTeamChallenges(forTeam: team) { 
+            self.challengesView.reloadData()
         }
     }
     
@@ -48,11 +55,11 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows: Int = 0
-        
         if tableView == membersView {
             rows = teamUsers.count
+        } else if tableView == challengesView {
+            return teamChallenges.count
         }
-        
         return rows
     }
     
@@ -79,9 +86,14 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func getChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
+    func getTeamChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
         if let challengeList = team?.challengeIDs {
-            
+            for challengeID in challengeList {
+                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                    self.teamChallenges.append(challenge)
+                    completion()
+                })
+            }
         }
     }
 }

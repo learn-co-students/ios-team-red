@@ -86,7 +86,7 @@ extension LogInViewController {
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         loginButton.isEnabled = true
-//        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
+        //        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
         
         let newUserButton = FitnessButton()
         self.view.addSubview(newUserButton)
@@ -100,7 +100,6 @@ extension LogInViewController {
         newUserButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
         newUserButton.isEnabled = true
         newUserButton.addTarget(self, action: #selector(pressNewUserButton), for: UIControlEvents.touchUpInside)
-
         
         let googleButton = FitnessButton()
         self.view.addSubview(googleButton)
@@ -121,5 +120,9 @@ extension LogInViewController {
         facebookButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
+        
     }
+
+        
+
 }

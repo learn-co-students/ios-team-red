@@ -161,11 +161,9 @@
 		EC6A3D241E92EDC800F5E717 = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-=======
+
 				FE0618591E967FDE0028A2C2 /* Controllers */,
 				FEC839A21E93F9FB0014B6FA /* Models */,
->>>>>>> c001e513eade93bcd0975e3aa96f513cf08a65e4
 				EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */,
 				EC6A3D441E92EDC800F5E717 /* TeamFitnessAppTests */,
 				EC6A3D4F1E92EDC800F5E717 /* TeamFitnessAppUITests */,
@@ -188,11 +186,10 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
+
 				FE0618591E967FDE0028A2C2 /* ViewControllers */,
 				FEC839A21E93F9FB0014B6FA /* Models */,
-=======
->>>>>>> c001e513eade93bcd0975e3aa96f513cf08a65e4
+
 				ECE3F5AE1E94090D001230CC /* Views */,
 				AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */,
 				ECE3F5A91E93E8AD001230CC /* Controllers */,
@@ -246,11 +243,11 @@
 		ECE3F5A91E93E8AD001230CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
+
 				EC9D94301E96E95000E33362 /* NewTeamVC.swift */,
-=======
+
 				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
->>>>>>> c001e513eade93bcd0975e3aa96f513cf08a65e4
+
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
@@ -277,12 +274,12 @@
 				FE06185F1E96E6010028A2C2 /* ProfileViewController.swift */,
 				FE0618611E96F26E0028A2C2 /* NewUserViewController.swift */,
 			);
-<<<<<<< HEAD
+
 			name = ViewControllers;
 			path = ..;
-=======
+
 			name = Controllers;
->>>>>>> c001e513eade93bcd0975e3aa96f513cf08a65e4
+
 			sourceTree = "<group>";
 		};
 		FEC839A21E93F9FB0014B6FA /* Models */ = {

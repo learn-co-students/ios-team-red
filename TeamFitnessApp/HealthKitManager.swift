@@ -22,7 +22,7 @@ final class HealthKidManager {
 
     var isEnabled = true
 
-    let stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+    let stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)
     let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
     let calories = HKObjectType.quantityType(forIdentifier: .activeEnergyBurned)
     let workoutTime = HKObjectType.quantityType(forIdentifier: .appleExerciseTime)
@@ -33,7 +33,14 @@ final class HealthKidManager {
 
     if HKHealthStore.isHealthDataAvailable() {
 
-      healthStore.requestAuthorization(toShare: [weight!, height!], read: [stepsCount, distance!, calories!, workoutTime!]) { (success, error) in
+      guard let weight = weight,
+        let height = height,
+        let distance = distance,
+        let calories = calories,
+        let workoutTime = workoutTime,
+        let stepsCount = stepsCount else { return false }
+
+      healthStore.requestAuthorization(toShare: [weight, height], read: [stepsCount, distance, calories, workoutTime]) { (success, error) in
         if success {
           isEnabled = true
         } else {
@@ -49,6 +56,7 @@ final class HealthKidManager {
 
   //get total steps between two dates
   func getSteps(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
+    //If no endDate provided, make endDate now
     let now: Date!
     if endDate != nil {
       now = endDate
@@ -61,36 +69,41 @@ final class HealthKidManager {
     var interval = DateComponents()
     interval.day = 1
 
-    let sampleType = HKQuantityType.quantityType(forIdentifier: .stepCount)
+    if let sampleType = HKQuantityType.quantityType(forIdentifier: .stepCount) {
 
-    let stepsQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
+      let stepsQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
-    stepsQuery.initialResultsHandler = { query, results, error in
-      DispatchQueue.main.async {
-        if error != nil {
-          print(error!.localizedDescription)
-          completion(nil, error)
-        }
-        let calendarSince = Calendar.current
-        let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
-        var steps = 0.0
-        let hours = (components.day! * 24) + components.hour!
-        let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now)
-
-        if let myResults = results { myResults.enumerateStatistics(from: startDate!, to: now, with: { (statistics, stop) in
-          if let quantity = statistics.sumQuantity() {
-            steps += quantity.doubleValue(for: HKUnit.count())
+      stepsQuery.initialResultsHandler = { query, results, error in
+        DispatchQueue.main.async {
+          if error != nil {
+            print(error!.localizedDescription)
+            completion(nil, error)
           }
-        })
-          completion(steps, nil)
+          let calendarSince = Calendar.current
+          let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
+          var steps = 0.0
+          guard let day = components.day, let hour = components.hour else { return }
+          let hours = (day * 24) + hour
+          if let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now) {
+
+            if let myResults = results {
+              myResults.enumerateStatistics(from: startDate, to: now, with: { (statistics, stop) in
+                if let quantity = statistics.sumQuantity() {
+                  steps += quantity.doubleValue(for: HKUnit.count())
+                }
+              })
+            }
+            completion(steps, nil)
+          }
         }
       }
+      healthStore.execute(stepsQuery)
     }
-    healthStore.execute(stepsQuery)
   }
 
   //Get distance in miles between two dates
   func getDistance(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
+    //If no endDate provided, make endDate now
     let now: Date!
     if endDate != nil {
       now = endDate
@@ -103,36 +116,41 @@ final class HealthKidManager {
     var interval = DateComponents()
     interval.day = 1
 
-    let sampleType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning)
+    if let sampleType = HKQuantityType.quantityType(forIdentifier: .distanceWalkingRunning) {
 
-    let distanceQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
+      let distanceQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
-    distanceQuery.initialResultsHandler = { query, results, error in
-      DispatchQueue.main.async {
-        if error != nil {
-          print(error!.localizedDescription)
-          completion(nil, error)
-        }
-        let calendarSince = Calendar.current
-        let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
-        var distance = 0.0
-        let hours = (components.day! * 24) + components.hour!
-        let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now)
-
-        if let myResults = results { myResults.enumerateStatistics(from: startDate!, to: now, with: { (statistics, stop) in
-          if let quantity = statistics.sumQuantity() {
-            distance += quantity.doubleValue(for: HKUnit.mile())
+      distanceQuery.initialResultsHandler = { query, results, error in
+        DispatchQueue.main.async {
+          if error != nil {
+            print(error!.localizedDescription)
+            completion(nil, error)
           }
-        })
-          completion(distance, nil)
+          let calendarSince = Calendar.current
+          let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
+          var distance = 0.0
+          guard let day = components.day, let hour = components.hour else { return }
+          let hours = (day * 24) + hour
+          if let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now) {
+
+            if let myResults = results {
+              myResults.enumerateStatistics(from: startDate, to: now, with: { (statistics, stop) in
+                if let quantity = statistics.sumQuantity() {
+                  distance += quantity.doubleValue(for: HKUnit.mile())
+                }
+              })
+            }
+            completion(distance, nil)
+          }
         }
       }
+      healthStore.execute(distanceQuery)
     }
-    healthStore.execute(distanceQuery)
   }
 
   //get calories between two dates
   func getCalories(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
+    //If no endDate provided, make endDate now
     let now: Date!
     if endDate != nil {
       now = endDate
@@ -145,36 +163,41 @@ final class HealthKidManager {
     var interval = DateComponents()
     interval.day = 1
 
-    let sampleType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned)
+    if let sampleType = HKQuantityType.quantityType(forIdentifier: .activeEnergyBurned) {
 
-    let calorieQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
+      let calorieQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
-    calorieQuery.initialResultsHandler = { query, results, error in
-      DispatchQueue.main.async {
-        if error != nil {
-          print(error!.localizedDescription)
-          completion(nil, error)
-        }
-        let calendarSince = Calendar.current
-        let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
-        var calories = 0.0
-        let hours = (components.day! * 24) + components.hour!
-        let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now)
-
-        if let myResults = results { myResults.enumerateStatistics(from: startDate!, to: now, with: { (statistics, stop) in
-          if let quantity = statistics.sumQuantity() {
-            calories += (quantity.doubleValue(for: HKUnit.calorie()))/1000
+      calorieQuery.initialResultsHandler = { query, results, error in
+        DispatchQueue.main.async {
+          if error != nil {
+            print(error!.localizedDescription)
+            completion(nil, error)
           }
-        })
-          completion(calories, nil)
+          let calendarSince = Calendar.current
+          let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
+          var calories = 0.0
+          guard let day = components.day, let hour = components.hour else { return }
+          let hours = (day * 24) + hour
+          if let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now) {
+
+            if let myResults = results {
+              myResults.enumerateStatistics(from: startDate, to: now, with: { (statistics, stop) in
+                if let quantity = statistics.sumQuantity() {
+                  calories += (quantity.doubleValue(for: HKUnit.calorie()))/1000
+                }
+              })
+            }
+            completion(calories, nil)
+          }
         }
       }
+      healthStore.execute(calorieQuery)
     }
-    healthStore.execute(calorieQuery)
   }
 
   //Get exercise time in minutes between to dates
   func getExerciseTime(fromDate startDate: Date, toDate endDate: Date?, completion: @escaping (Double?, Error?) -> ()) {
+    //If no endDate provided, make endDate now
     let now: Date!
     if endDate != nil {
       now = endDate
@@ -187,32 +210,36 @@ final class HealthKidManager {
     var interval = DateComponents()
     interval.day = 1
 
-    let sampleType = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime)
+    if let sampleType = HKQuantityType.quantityType(forIdentifier: .appleExerciseTime) {
 
-    let exerciseQuery = HKStatisticsCollectionQuery(quantityType: sampleType!, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
+      let exerciseQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
-    exerciseQuery.initialResultsHandler = { query, results, error in
-      DispatchQueue.main.async {
-        if error != nil {
-          print(error!.localizedDescription)
-          completion(nil, error)
-        }
-        let calendarSince = Calendar.current
-        let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
-        var exerciseTime = 0.0
-        let hours = (components.day! * 24) + components.hour!
-        let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now)
-
-        if let myResults = results { myResults.enumerateStatistics(from: startDate!, to: now, with: { (statistics, stop) in
-          if let quantity = statistics.sumQuantity() {
-            exerciseTime += quantity.doubleValue(for: HKUnit.minute())
+      exerciseQuery.initialResultsHandler = { query, results, error in
+        DispatchQueue.main.async {
+          if error != nil {
+            print(error!.localizedDescription)
+            completion(nil, error)
           }
-        })
-          completion(exerciseTime, nil)
+          let calendarSince = Calendar.current
+          let components = calendarSince.dateComponents([Calendar.Component.day, .hour], from: past, to: now)
+          var exerciseTime = 0.0
+          guard let day = components.day, let hour = components.hour else { return }
+          let hours = (day * 24) + hour
+          if let startDate = calendarSince.date(byAdding: .hour, value: -hours, to: now) {
+
+            if let myResults = results {
+              myResults.enumerateStatistics(from: startDate, to: now, with: { (statistics, stop) in
+                if let quantity = statistics.sumQuantity() {
+                  exerciseTime += quantity.doubleValue(for: HKUnit.minute())
+                }
+              })
+            }
+            completion(exerciseTime, nil)
+          }
         }
       }
+      healthStore.execute(exerciseQuery)
     }
-    healthStore.execute(exerciseQuery)
   }
 
 
@@ -221,16 +248,17 @@ final class HealthKidManager {
   //Send Weight in lbs.
   func sendWeightToHealthKit(weight: Double, completion: @escaping (Bool) -> ()) {
     let date = Date()
-    let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass)
     let weightQuantity = HKQuantity(unit: HKUnit.pound(), doubleValue: weight)
-    let weightSample = HKQuantitySample(type: weightType!, quantity: weightQuantity, start: date, end: date)
+    if let weightType = HKQuantityType.quantityType(forIdentifier: .bodyMass) {
+      let weightSample = HKQuantitySample(type: weightType, quantity: weightQuantity, start: date, end: date)
 
-    healthStore.save(weightSample) { (success, error) in
-      if error != nil {
-        print(error!.localizedDescription)
-        completion(false)
-      } else {
-        completion(true)
+      healthStore.save(weightSample) { (success, error) in
+        if error != nil {
+          print(error!.localizedDescription)
+          completion(false)
+        } else {
+          completion(true)
+        }
       }
     }
   }
@@ -238,16 +266,17 @@ final class HealthKidManager {
   //Send Height in inches
   func sendHeightToHealthKit(height: Double, completion: @escaping (Bool) -> ()) {
     let date = Date()
-    let heightType = HKQuantityType.quantityType(forIdentifier: .height)
     let heightQuantity = HKQuantity(unit: HKUnit.inch(), doubleValue: height)
-    let heightSample = HKQuantitySample(type: heightType!, quantity: heightQuantity, start: date, end: date)
+    if let heightType = HKQuantityType.quantityType(forIdentifier: .height) {
+      let heightSample = HKQuantitySample(type: heightType, quantity: heightQuantity, start: date, end: date)
 
-    healthStore.save(heightSample) { (success, error) in
-      if error != nil {
-        print(error!.localizedDescription)
-        completion(false)
-      } else {
-        completion(true)
+      healthStore.save(heightSample) { (success, error) in
+        if error != nil {
+          print(error!.localizedDescription)
+          completion(false)
+        } else {
+          completion(true)
+        }
       }
     }
   }

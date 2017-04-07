@@ -9,9 +9,9 @@
 import Foundation
 import HealthKit
 
-final class HealthKidManager {
+final class HealthKitManager {
 
-  static let sharedInstance = HealthKidManager()
+  static let sharedInstance = HealthKitManager()
   private init () {}
   fileprivate let healthStore = HKHealthStore()
 

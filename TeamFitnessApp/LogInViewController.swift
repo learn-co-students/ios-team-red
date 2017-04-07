@@ -12,6 +12,7 @@ import UIKit
 class LogInViewController: UIViewController {
     
     var logInView = FitnessView()
+    
   
     
     override func viewDidLoad() {
@@ -78,9 +79,11 @@ extension LogInViewController {
         passwordTextField.backgroundColor = UIColor.white
         
         let loginButton = FitnessButton()
+        loginButton.setTitle("Login", for: .normal)
+
         self.view.addSubview(loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.setTitle("Login", for: .normal)
+//        loginButton.setTitleColor(UIColor.green, for: .normal)
         loginButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2).isActive = true
         loginButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

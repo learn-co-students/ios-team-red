@@ -12,17 +12,17 @@ class FitnessButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commoInit()
+        commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commoInit()
+        commonInit()
     }
 
-    func commoInit() {
+    func commonInit() {
         self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: 17.0)
-        self.setTitleColor(UIColor.clear, for: .normal)
+        self.setTitleColor(UIColor.backgroundBlack, for: .normal)
         self.backgroundColor = UIColor.foregroundOrange
         self.layer.cornerRadius = 5
     }

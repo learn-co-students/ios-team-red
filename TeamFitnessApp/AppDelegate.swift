@@ -31,9 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //make the window visible
         window.makeKeyAndVisible()
-                
-        // Override point for customization after application launch.
-
+        
         return true
     }
 

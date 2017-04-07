@@ -7,6 +7,7 @@
 //
 
 
+
 import UIKit
 
 class ViewController: UIViewController {
@@ -15,9 +16,9 @@ class ViewController: UIViewController {
 
 
     override func viewDidLoad() {
-       FirebaseManager.generateTestData()
-
+       
     }
+
 
   override func viewWillAppear(_ animated: Bool) {
     if store.requestHealthKitAuth() {
@@ -28,6 +29,8 @@ class ViewController: UIViewController {
   }
 
 }
+
+
 
 
 

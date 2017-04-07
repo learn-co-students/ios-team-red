@@ -11,11 +11,35 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-    var myView = FitnessView()
+    var logInView = FitnessView()
   
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadLogInViewUI()
+        
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.view = logInView
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    
+    }
+
+    func pressNewUserButton() {
+        
+        self.present(NewUserViewController(), animated: true, completion: nil)
+    }
+
+}
+
+extension LogInViewController {
+    
+    func loadLogInViewUI () {
         
         let fitnessBabyLabel = FitnessLabel()
         self.view.addSubview(fitnessBabyLabel)
@@ -34,8 +58,8 @@ class LogInViewController: UIViewController {
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.layer.cornerRadius = 5
         emailTextField.textAlignment = NSTextAlignment.center
-        emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-        emailTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18)
+        emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+        emailTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 50).isActive = true
         emailTextField.placeholder = "email"
@@ -46,8 +70,8 @@ class LogInViewController: UIViewController {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.textAlignment = NSTextAlignment.center
-        passwordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.18)
+        passwordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+        passwordTextField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
         passwordTextField.placeholder = "password"
@@ -61,6 +85,8 @@ class LogInViewController: UIViewController {
         loginButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
+        loginButton.isEnabled = true
+//        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
         
         let newUserButton = FitnessButton()
         self.view.addSubview(newUserButton)
@@ -72,6 +98,9 @@ class LogInViewController: UIViewController {
         newUserButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         newUserButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         newUserButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
+        newUserButton.isEnabled = true
+        newUserButton.addTarget(self, action: #selector(pressNewUserButton), for: UIControlEvents.touchUpInside)
+
         
         let googleButton = FitnessButton()
         self.view.addSubview(googleButton)
@@ -92,17 +121,5 @@ class LogInViewController: UIViewController {
         facebookButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
-
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.view = myView
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    
     }
 }

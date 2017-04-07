@@ -8,9 +8,11 @@
 
 import UIKit
 
-class TeamDetailVC: UIViewController {
+class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var team: Team?
+    var teamUsers = [User]()
+    var teamChallenges = [Challenge]()
     let teamNameLabel = FitnessLabel()
     let captainLabel = FitnessLabel()
     let membersLabel = FitnessLabel()
@@ -23,80 +25,63 @@ class TeamDetailVC: UIViewController {
     let teamImageView = UIImageView()
     
     override func viewDidLoad() {
+        
+        membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        membersView.delegate = self
+        membersView.dataSource = self
+        
         super.viewDidLoad()
         setupViews()
-        
+        getTeamMembers(forTeam: team) { 
+            self.membersView.reloadData()
+        }
     }
     
-    func setupViews() {
-        view = FitnessView()
-        
-        self.view.addSubview(teamNameLabel)
-        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        teamNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamNameLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
-        teamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        teamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        teamNameLabel.textAlignment = .center
-        teamNameLabel.changeFontSize(to: 28)
-        teamNameLabel.reverseColors()
-        
-        if let captain = team?.captain { //get the captain and set their name to the captain label
-            FirebaseManager.fetchUser(withUID: captain, completion: { (captain) in
-                self.captainLabel.text = "Captain: \(captain.name)"
-            })
-        }
-        self.view.addSubview(captainLabel)
-        captainLabel.translatesAutoresizingMaskIntoConstraints = false
-        captainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        captainLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
-        captainLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        captainLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        captainLabel.textAlignment = .center
-        captainLabel.changeFontSize(to: 20)
-        captainLabel.reverseColors()
-        
-        self.view.addSubview(membersLabel)
-        membersLabel.translatesAutoresizingMaskIntoConstraints = false
-        membersLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        membersLabel.topAnchor.constraint(equalTo: captainLabel.bottomAnchor, constant: 25).isActive = true
-        membersLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        membersLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        membersLabel.textAlignment = .center
-        membersLabel.changeFontSize(to: 18)
-        membersLabel.reverseColors()
-        membersLabel.text = "Members:"
-        
-        self.view.addSubview(membersView)
-        membersView.translatesAutoresizingMaskIntoConstraints = false
-        membersView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        membersView.topAnchor.constraint(equalTo: membersLabel.bottomAnchor).isActive = true
-        membersView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        membersView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
-        membersView.backgroundColor = UIColor.foregroundOrange
-        
-        self.view.addSubview(challengesLabel)
-        challengesLabel.translatesAutoresizingMaskIntoConstraints = false
-        challengesLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        challengesLabel.topAnchor.constraint(equalTo: membersView.bottomAnchor, constant: 25).isActive = true
-        challengesLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        challengesLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        challengesLabel.changeFontSize(to: 18)
-        challengesLabel.textAlignment = .center
-        challengesLabel.reverseColors()
-        challengesLabel.text = "Challenges:"
-        
-        self.view.addSubview(challengesView)
-        challengesView.translatesAutoresizingMaskIntoConstraints = false
-        challengesView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        challengesView.topAnchor.constraint(equalTo: challengesLabel.bottomAnchor).isActive = true
-        challengesView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        challengesView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
-        challengesView.backgroundColor = UIColor.foregroundOrange
-    }
-
     func setTeam(team: Team) {
         self.team = team
         teamNameLabel.text = team.name
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var rows: Int = 0
+        
+        if tableView == membersView {
+            rows = teamUsers.count
+        }
+        
+        return rows
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = FitnessCell()
+        if tableView == membersView {
+            cell = membersView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell //TODO set default cell layout
+            cell.setLabels(forUser: teamUsers[indexPath.row])
+        } else if tableView == challengesView {
+            cell = challengesView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+            cell.setLabels(forChallenge: teamChallenges[indexPath.row])
+        }
+        return cell
+    }
+    
+    func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
+        if let memberList = team?.userUIDs {
+            for memberID in memberList {
+                FirebaseManager.fetchUser(withUID: memberID, completion: { (user) in
+                    self.teamUsers.append(user)
+                    completion()
+                })
+            }
+        }
+    }
+    
+    func getChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
+        if let challengeList = team?.challengeIDs {
+            
+        }
     }
 }

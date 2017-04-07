@@ -13,6 +13,7 @@
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
 		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
+		AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE30AD1E96887F001AF51C /* DashboardVC.swift */; };
 		EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */; };
 		EC6A3D331E92EDC800F5E717 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D321E92EDC800F5E717 /* ViewController.swift */; };
 		EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D371E92EDC800F5E717 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
 		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		AAEE30AD1E96887F001AF51C /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.release.xcconfig"; sourceTree = "<group>"; };
 		EC6A3D2D1E92EDC800F5E717 /* TeamFitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamFitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		ECE3F5A91E93E8AD001230CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
 			);
@@ -547,6 +550,7 @@
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
+				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
 				EC859EAB1E96AEBA009664F5 /* TeamsCell.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,

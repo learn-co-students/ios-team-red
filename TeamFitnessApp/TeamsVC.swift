@@ -15,7 +15,9 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let mainView = FitnessView()
     let titleLabel = FitnessLabel()
     let myTeamsLabel = FitnessLabel()
+    let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
+    
     
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
@@ -110,6 +112,11 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 present(teamDetailVC, animated: true, completion: nil)
             }
         }
+    }
+    
+    func segueCreateTeam() {
+        let createTeamVC = CreateTeamVC()
+        present(createTeamVC, animated: true, completion: nil)
     }
     
 // Calls to Firebase *******************************************************************************************************************

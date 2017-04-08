@@ -15,6 +15,7 @@ class CreateTeamVC: UIViewController {
     var userID = FIRAuth.auth()?.currentUser?.uid
     let teamNameField = UITextField()
     let submitButton = FitnessButton()
+    let imageButton = FitnessButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,15 @@ class CreateTeamVC: UIViewController {
         submitButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         submitButton.setTitle("Submit", for: .normal)
         submitButton.addTarget(self, action: #selector(createNewTeam), for: .touchUpInside)
+        
+        self.view.addSubview(imageButton)
+        imageButton.translatesAutoresizingMaskIntoConstraints = false
+        imageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        imageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        imageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+        imageButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+        imageButton.setTitle("+ Team Image", for: .normal)
+        imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
     }
     
     func createNewTeam() {
@@ -83,6 +93,10 @@ class CreateTeamVC: UIViewController {
         } else {
             //TODO: - Add animation indicating text fields are not filled out
         }
+    }
+    
+    func getTeamImage() {
+        print("hey go get a team image")
     }
 
 }

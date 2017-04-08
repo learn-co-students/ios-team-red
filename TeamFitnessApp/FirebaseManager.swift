@@ -21,7 +21,7 @@ struct FirebaseManager {
                 addNew(user: user)
                 completion(.successfulNewUser(user))
             } else {
-                completion(.failedNewUser("FirebaseManager could not create new user"))
+                completion(.failure("FirebaseManager could not create new user"))
             }
         })
     }
@@ -32,7 +32,7 @@ struct FirebaseManager {
             if let user = user {
                 completion(.successfulLogin(user))
             } else {
-                completion(.failedNewUser("FirebaseManager could not log in user"))
+                completion(.failure("FirebaseManager could not log in user"))
             }
         })
     }
@@ -44,7 +44,7 @@ struct FirebaseManager {
             try FIRAuth.auth()?.signOut()
             completion(.successfulLogout("User logged out"))
         } catch {
-            completion(.failedLogout("FirebaseManager could not log out user"))
+            completion(.failure("FirebaseManager could not log out user"))
         }
     }
 
@@ -208,6 +208,7 @@ struct FirebaseManager {
         }
         
         let post: [String: Any] = [
+            "name": team.name,
             "captain": team.captainID,
             "users": usersDict,
             "challenges": challengesDict,

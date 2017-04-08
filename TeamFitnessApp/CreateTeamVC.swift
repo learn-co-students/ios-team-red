@@ -9,13 +9,15 @@
 import UIKit
 import Firebase
 
-class CreateTeamVC: UIViewController {
+class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let titleLabel = FitnessLabel()
     var userID = FIRAuth.auth()?.currentUser?.uid
     let teamNameField = UITextField()
     let submitButton = FitnessButton()
     let imageButton = FitnessButton()
+    let teamImage = UIImageView()
+    var chosenImage: UIImage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +28,6 @@ class CreateTeamVC: UIViewController {
         userID = "TEST USER ID" //TODO: - remove this line after login is functional
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     func setupLabels() {
         self.view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -75,28 +68,65 @@ class CreateTeamVC: UIViewController {
         imageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         imageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         imageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        imageButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
+        imageButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         imageButton.setTitle("+ Team Image", for: .normal)
         imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
+        
+        imageButton.addSubview(teamImage)
+        teamImage.translatesAutoresizingMaskIntoConstraints = false
+        teamImage.leftAnchor.constraint(equalTo: imageButton.leftAnchor).isActive = true
+        teamImage.rightAnchor.constraint(equalTo: imageButton.rightAnchor).isActive = true
+        teamImage.topAnchor.constraint(equalTo: imageButton.topAnchor).isActive = true
+        teamImage.bottomAnchor.constraint(equalTo: imageButton.bottomAnchor).isActive = true
     }
     
     func createNewTeam() {
         print("CREATE TEAM fired")
         if let userID = userID {
             if let teamName = teamNameField.text {
+                self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
                     print("Team created: \(team.name) with ID: \(team.id!)")
                 })
+                
+                guard let teamID = team.id, let chosenImage = chosenImage else {return} //TODO: - handle this error better
+                    FirebaseStoreageManager.upload(teamImage: chosenImage, withTeamID: teamID, completion: { (response) in
+                        switch response {
+                        case let .failure(failString):
+                            print(failString)
+                        case let .succesfulUpload(successString):
+                            print(successString)
+                        default:
+                            print("Invalid reponse returned from Firebase storage")
+                        }
+                })
             }
         } else {
             //TODO: - Add animation indicating text fields are not filled out
         }
+        
+        
     }
     
     func getTeamImage() {
-        print("hey go get a team image")
+        let imagePicker  = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        dismiss(animated:true, completion: nil)
+        teamImage.image = chosenImage
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 
 }

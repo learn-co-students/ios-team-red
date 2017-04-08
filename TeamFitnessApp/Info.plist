@@ -32,6 +32,8 @@
 	<string></string>
 	<key>CFBundleDisplayName</key>
 	<string></string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This application would like permission to access your photo library</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

@@ -31,6 +31,7 @@
 		EC9D94391E97EF8200E33362 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94381E97EF8200E33362 /* LogInViewController.swift */; };
 		EC9D943B1E97EFA000E33362 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D943A1E97EFA000E33362 /* NewUserViewController.swift */; };
 		EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D943E1E98130400E33362 /* CreateTeamVC.swift */; };
+		EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
@@ -95,6 +96,7 @@
 		EC9D94381E97EF8200E33362 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		EC9D943A1E97EFA000E33362 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		EC9D943E1E98130400E33362 /* CreateTeamVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamVC.swift; sourceTree = "<group>"; };
+		EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		EC6A3D631E92F4F000F5E717 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */,
 				ECE3F5B91E94441A001230CC /* FirebaseManager.swift */,
 				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
 				AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */,
@@ -580,6 +583,7 @@
 				EC9D94311E96E95000E33362 /* NewTeamVC.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,
 				ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */,
+				EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */,
 				EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */,

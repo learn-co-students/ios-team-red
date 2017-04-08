@@ -12,10 +12,10 @@ import Firebase
 enum FirebaseResponse {
     
     case successfulLogin(FIRUser)
-    case failedLogin(String)
     case successfulNewUser(FIRUser)
-    case failedNewUser(String)
     case successfulLogout(String)
-    case failedLogout(String)
+    case succesfulUpload(String)
+    case failure(String)
+
     
 }

@@ -54,7 +54,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         loadAllTeams()
     }
     
-//tableview datasource/delegate ********************************************************************************************************
+// MARK: - Delegate and Data Source
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -119,7 +119,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         present(createTeamVC, animated: true, completion: nil)
     }
     
-// Calls to Firebase *******************************************************************************************************************
+// MARK: - calls to Firebase
     func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
         let teamList = user.teamIDs
         for teamID in teamList {

@@ -77,7 +77,8 @@ struct FirebaseManager {
     }
     
     static func save(team: Team) {// saves a team to Firebase database
-        let key = dataRef.child("teams").child(team.id)
+        guard let teamID = team.id else {return} //TODO: - handle this error better
+        let key = dataRef.child("teams").child(teamID)
         var usersDict = [String: Bool]()
         var challengesDict = [String: Bool]()
         
@@ -90,7 +91,7 @@ struct FirebaseManager {
         }
         
         let post: [String: Any] = [
-            "captain": team.captain,
+            "captain": team.captainID,
             "users": usersDict,
             "challenges": challengesDict,
             "imageURL": team.imageURL
@@ -207,7 +208,7 @@ struct FirebaseManager {
         }
         
         let post: [String: Any] = [
-            "captain": team.captain,
+            "captain": team.captainID,
             "users": usersDict,
             "challenges": challengesDict,
             "imageURL": team.imageURL

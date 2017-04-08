@@ -23,7 +23,7 @@ extension TeamDetailVC {
         teamNameLabel.changeFontSize(to: 28)
         teamNameLabel.reverseColors()
         
-        if let captain = team?.captain { //get the captain and set their name to the captain label
+        if let captain = team?.captainID { //get the captain and set their name to the captain label
             FirebaseManager.fetchUser(withUID: captain, completion: { (captain) in
                 self.captainLabel.text = "Captain: \(captain.name)"
             })

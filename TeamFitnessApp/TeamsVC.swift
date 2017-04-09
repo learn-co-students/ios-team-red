@@ -19,6 +19,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let teamSearchBar = UISearchBar()
     
     
+    
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     

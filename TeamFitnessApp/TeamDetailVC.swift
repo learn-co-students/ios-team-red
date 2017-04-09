@@ -18,11 +18,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let membersLabel = FitnessLabel()
     let challengesLabel = FitnessLabel()
     let inviteMembersButton = FitnessButton()
+    let teamImageView = UIImageView()
     
     let membersView = UITableView()
     let challengesView = UITableView()
-    
-    let teamImageView = UIImageView()
     
     override func viewDidLoad() {
         

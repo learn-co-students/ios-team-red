@@ -95,4 +95,12 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let challengeDetailVC = ChallengeDetailVC()
+        if tableView == challengesView {
+            challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
+            present(challengeDetailVC, animated: true, completion: nil)
+        }
+    }
 }

@@ -13,7 +13,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var team: Team?
     var teamUsers = [User]()
     var teamChallenges = [Challenge]()
-    let teamNameLabel = FitnessLabel()
+    let teamNameLabel = TitleLabel()
     let captainLabel = FitnessLabel()
     let membersLabel = FitnessLabel()
     let challengesLabel = FitnessLabel()

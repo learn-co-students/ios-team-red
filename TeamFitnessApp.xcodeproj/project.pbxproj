@@ -32,6 +32,8 @@
 		EC9D943B1E97EFA000E33362 /* NewUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D943A1E97EFA000E33362 /* NewUserViewController.swift */; };
 		EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D943E1E98130400E33362 /* CreateTeamVC.swift */; };
 		EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */; };
+		EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */; };
+		EC9D94471E9AA77800E33362 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94461E9AA77800E33362 /* TitleLabel.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
@@ -97,6 +99,8 @@
 		EC9D943A1E97EFA000E33362 /* NewUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewUserViewController.swift; sourceTree = "<group>"; };
 		EC9D943E1E98130400E33362 /* CreateTeamVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateTeamVC.swift; sourceTree = "<group>"; };
 		EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
+		EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailVC.swift; sourceTree = "<group>"; };
+		EC9D94461E9AA77800E33362 /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -249,8 +253,9 @@
 				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
-				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				EC9D943E1E98130400E33362 /* CreateTeamVC.swift */,
+				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
+				EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 				ECE3F5AF1E940C70001230CC /* FitnessView.swift */,
 				EC9D94341E97CEAF00E33362 /* FitnessCell.swift */,
+				EC9D94461E9AA77800E33362 /* TitleLabel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -570,6 +576,7 @@
 				EC9D943B1E97EFA000E33362 /* NewUserViewController.swift in Sources */,
 				EC9D94391E97EF8200E33362 /* LogInViewController.swift in Sources */,
 				EC9D94371E97EF4B00E33362 /* ProfileViewController.swift in Sources */,
+				EC9D94471E9AA77800E33362 /* TitleLabel.swift in Sources */,
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
@@ -586,6 +593,7 @@
 				EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */,
 				EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
+				EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */,
 				FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */,
 				EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */,
 				EC9D94351E97CEAF00E33362 /* FitnessCell.swift in Sources */,

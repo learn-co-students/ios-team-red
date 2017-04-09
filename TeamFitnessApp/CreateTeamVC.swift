@@ -11,7 +11,7 @@ import Firebase
 
 class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    let titleLabel = FitnessLabel()
+    let titleLabel = TitleLabel()
     var userID = FIRAuth.auth()?.currentUser?.uid
     let teamNameField = UITextField()
     let submitButton = FitnessButton()
@@ -30,14 +30,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func setupLabels() {
         self.view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        titleLabel.textAlignment = .center
-        titleLabel.changeFontSize(to: 28)
-        titleLabel.reverseColors()
+        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setText(toString: "New Team")
         titleLabel.text = "New Team"
     }
     

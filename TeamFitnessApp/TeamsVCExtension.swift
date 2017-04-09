@@ -20,15 +20,8 @@ extension TeamsVC { // Extension for setting up all views
     
     func setupTitle() {
         self.view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        titleLabel.textAlignment = .center
-        titleLabel.changeFontSize(to: 28)
-        titleLabel.reverseColors()
-        titleLabel.text = "Teams"
+        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setText(toString: "Teams")
     }
     
     func setUpMyTeams() {

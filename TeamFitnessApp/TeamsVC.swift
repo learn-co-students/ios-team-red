@@ -13,7 +13,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let screenBounds = UIScreen.main.bounds
     
     let mainView = FitnessView()
-    let titleLabel = FitnessLabel()
+    let titleLabel = TitleLabel()
     let myTeamsLabel = FitnessLabel()
     let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()

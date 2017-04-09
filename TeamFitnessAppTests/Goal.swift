@@ -16,4 +16,18 @@ enum Goal {
     case excerciseTime(Float)
     case weight(Float)
     
+    func stringValue() -> String {
+        switch self {
+        case .distance:
+            return "Distance"
+        case .stepCount:
+            return "Step Count"
+        case .caloriesBurned:
+            return "Calories Burned"
+        case .excerciseTime:
+            return "Excersize Time"
+        case .weight:
+            return "Weight"
+        }
+    }
 }

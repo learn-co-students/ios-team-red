@@ -13,7 +13,7 @@ struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
     
-// Login funcions ******************************************************************************************************************************
+// MARK: - Login functions
     //create a new user with a given email in Firebase, and add that user's UID and email to the database
     static func createNewUser(withEmail email: String, andPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
@@ -48,7 +48,7 @@ struct FirebaseManager {
         }
     }
 
-//save functions ************************************************************************************************************************************
+// MARK: - save functions
     static func save(user: User) {// saves a user to the Firebase database
         let key = dataRef.child("users").child(user.uid)
         var challengesDict = [String: Bool]()
@@ -114,6 +114,7 @@ struct FirebaseManager {
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,
+            "goal": challenge.goal.stringValue(),
 //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
 //            "endDate": String(challenge.endDate),
             "team": teamID
@@ -121,8 +122,7 @@ struct FirebaseManager {
         
         key.updateChildValues(post)
     }
-//fetch functions ************************************************************************************************************************************
-    
+// MARK: - Fetch functions
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in

@@ -85,9 +85,9 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
         print("is user enabled?\(teamSearchBar.isUserInteractionEnabled)")
     }
     
-    func loadAllTeams() {
+    func getAllTeams() {
         FirebaseManager.fetchAllTeams { (teams) in
-            self.allTeams = teams.sorted{$0.name < $1.name}
+            self.allTeams = teams
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

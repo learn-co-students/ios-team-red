@@ -18,8 +18,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
     
-    
-    
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     
@@ -52,7 +50,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.myTeamsView.reloadData()
             }
         }
-        loadAllTeams()
+        getAllTeams()
     }
     
 // MARK: - Delegate and Data Source

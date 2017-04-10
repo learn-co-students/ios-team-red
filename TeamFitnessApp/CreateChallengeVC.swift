@@ -23,6 +23,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let teamSearchBar = UISearchBar()
     let publicButton = FitnessButton()
     let teamsTableView = UITableView()
+    let startDatePicker = FitnessDatePickerView()
     
     
     override func viewDidLoad() {
@@ -87,6 +88,14 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         teamsTableView.delegate = self
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        
+        view.addSubview(startDatePicker)
+        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        startDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        startDatePicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 50).isActive = true
+        startDatePicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
+        startDatePicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        startDatePicker.setTitle(toString: "Challenge Start Date:")
 
     }
     
@@ -111,29 +120,37 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
         print("Did begin editing")
+        self.view.bringSubview(toFront: teamsTableView)
+        startDatePicker.isHidden = true
         teamsTableView.isHidden = false
         teamsTableView.isUserInteractionEnabled = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
+        startDatePicker.isHidden = false
         print("Did end editing")
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
+        filteredTeams = myTeams
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Clicked cacel button")
+        startDatePicker.isHidden = false
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
+        filteredTeams = myTeams
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Search button clicked")
+        startDatePicker.isHidden = false
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
+        filteredTeams = myTeams
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -187,6 +204,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             teamIndicator.text = selectedTeam.name
             self.team = selectedTeam
         }
+        tableView.isHidden = true
+        startDatePicker.isHidden = false
     }
     
 //MARK: - Firebase calls

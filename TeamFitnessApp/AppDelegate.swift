@@ -22,12 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // initalize the window
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
         //check for nill
         guard let window = self.window else { fatalError("no window") }
         
         //set the root view controller
-        window.rootViewController = LogInViewController()
+        window.rootViewController = DashboardVC()
         
         //make the window visible
         window.makeKeyAndVisible()

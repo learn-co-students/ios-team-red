@@ -8,12 +8,17 @@
 
 import Foundation
 
-enum Goal {
-    
-    case distance(Float)
-    case stepCount(Int)
-    case caloriesBurned(Int)
-    case excerciseTime(Float)
-    case weight(Float)
-    
+enum GoalType: String {
+    case distance, stepCount, caloriesBurned, exerciseTime
+}
+
+
+struct Goal {
+  var type: GoalType!
+  var value: Double!
+
+  init(type: GoalType, value: Double) {
+    self.type = type
+    self.value = value
+  }
 }

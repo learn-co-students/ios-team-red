@@ -131,7 +131,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func generateTestUser() -> User {//test function
-        let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
+      let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "", goals: [])
         return user
     }
     

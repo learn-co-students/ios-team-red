@@ -147,11 +147,16 @@ struct FirebaseManager {
     
     //fetches a challenge from Firebase given a challenge id string, and returns the challenge through a closure
     static func fetchChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
-        dataRef.child("challenges").child(challengeID).observe(.value, with: { (snapshot) in
+      print(challengeID)
+        dataRef.child("challenges").child(challengeID).observe(.value, with: {(snapshot) in
+          print(snapshot)
             if let challengeDict = snapshot.value as? [String: Any] {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
+                print("Entering completion")
                 completion(challenge)
-            }
+            } else {
+              print("not in completion")
+          }
         })
     }
     
@@ -247,8 +252,9 @@ struct FirebaseManager {
     
     
     static func generateTestData() {
-        let testUser3 = User(name: "test user 3", sex: "male", height: 120.2, weight: 300, teamIDs: [], challengeIDs: [], imageURL: "a cool imageurl", uid: "testUser3UID91011", email: "testuser3@testorama.com")
-        let testChallenge3 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(200), creator: testUser3, userUIDs: [], isPublic: true, team: "awesome test team", id: nil)
+      let testUser3 = User(name: "test user 3", sex: "male", height: 120.2, weight: 300, teamIDs: [], challengeIDs: [], imageURL: "a cool imageurl", uid: "testUser3UID91011", email: "testuser3@testorama.com", goals: [])
+      let goal = Goal(type: .caloriesBurned, value: 200)
+        let testChallenge3 = Challenge(startDate: Date(), endDate: Date(), goal: goal, creator: testUser3, userUIDs: [], isPublic: true, team: "awesome test team", id: nil)
         
         FirebaseManager.addNew(challenge: testChallenge3) { (id) in
             print("Challenge added to database \(id)")

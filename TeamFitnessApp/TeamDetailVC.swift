@@ -111,6 +111,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func segueCreateChallenge() {
-        print("Segue to create challenge")
+        let createChallengeVC = CreateChallengeVC()
+        present(createChallengeVC, animated: true, completion: nil)
     }
 }

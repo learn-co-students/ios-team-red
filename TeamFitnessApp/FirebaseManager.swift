@@ -126,7 +126,7 @@ struct FirebaseManager {
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,
-            "goal": challenge.goal.stringValue(),
+            "goal": challenge.goal,
 //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
 //            "endDate": String(challenge.endDate),
             "team": teamID
@@ -160,11 +160,16 @@ struct FirebaseManager {
     
     //fetches a challenge from Firebase given a challenge id string, and returns the challenge through a closure
     static func fetchChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
-        dataRef.child("challenges").child(challengeID).observe(.value, with: { (snapshot) in
+      print(challengeID)
+        dataRef.child("challenges").child(challengeID).observe(.value, with: {(snapshot) in
+          print(snapshot)
             if let challengeDict = snapshot.value as? [String: Any] {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
+                print("Entering completion")
                 completion(challenge)
-            }
+            } else {
+              print("not in completion")
+          }
         })
     }
     
@@ -255,18 +260,23 @@ struct FirebaseManager {
         completion(challengeID)
     }
 
+
 // MARK: - Test functions
-    static func generateTestUser(withName name: String) {
-        let user = User(name: "\(name)", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "\(name)@\(name).com", uid: nil)
-        FirebaseManager.createNew(User: user, withPassword: "\(name)1234") { (response) in
-            switch response {
-            case let .successfulNewUser(newUser):
-                print("NEW USER CREATED with ID \(newUser.uid!)")
-            default:
-                print("could not create new user")
-            }
-        }
-    }
+
+
+//    static func generateTestUser() {
+//        let user = User(name: "Wonder Woman", email: <#T##String#>, sex: <#T##String#>, height: <#T##Float#>, weight: <#T##Int#>, teamIDs: <#T##[String]#>, challengeIDs: <#T##[String]#>, imageURL: <#T##String#>)
+//        FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
+//            switch response {
+//            case let .successfulNewUser(newUser):
+//                print("NEW USER CREATED with ID \(newUser.uid!)")
+//            default:
+//                print("could not create new user")
+//            }
+//
+//        }
+//    }
+
     
     static func loginTestUser () {
         FirebaseManager.loginUser(withEmail: "superman@superman.com", andPassword: "superman1234") { (response) in

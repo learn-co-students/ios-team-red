@@ -13,7 +13,7 @@ struct Challenge {
     
     var startDate: Date?
     var endDate: Date?
-    var goal: Goal
+    var goal: [String:Double]
     var creator: String?
     var userUIDs = [String]()
     var isPublic: Bool?
@@ -27,17 +27,17 @@ struct Challenge {
         self.isPublic = dict["isPublic"] as? Bool ?? nil
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
-        self.goal = .caloriesBurned(20)
+
+        self.goal = dict["goal"] as? [String: Double] ?? [:]
         self.startDate = (dict["startDate"] as? String)?.convertToDate()
         self.endDate = (dict["endDate"] as? String)?.convertToDate()
-        
         let userDict = dict["users"] as? [String: Bool] ?? [:]
         for (userID, _) in userDict {
             self.userUIDs.append(userID)
         }
     }
     
-    init(startDate: Date, endDate: Date, goal: Goal, creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil, name: String = "") {
+    init(startDate: Date, endDate: Date, goal: [String: Double], creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil, name: String = "") {
         self.startDate = startDate
         self.endDate = endDate
         self.goal = goal

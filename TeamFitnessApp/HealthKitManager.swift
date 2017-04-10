@@ -9,9 +9,9 @@
 import Foundation
 import HealthKit
 
-final class HealthKidManager {
+final class HealthKitManager {
 
-  static let sharedInstance = HealthKidManager()
+  static let sharedInstance = HealthKitManager()
   private init () {}
   fileprivate let healthStore = HKHealthStore()
 
@@ -73,7 +73,6 @@ final class HealthKidManager {
       let stepsQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
       stepsQuery.initialResultsHandler = { query, results, error in
-        DispatchQueue.main.async {
           if error != nil {
             print(error!.localizedDescription)
             completion(nil, error)
@@ -95,7 +94,6 @@ final class HealthKidManager {
             completion(steps, nil)
           }
         }
-      }
       healthStore.execute(stepsQuery)
     }
   }
@@ -120,7 +118,6 @@ final class HealthKidManager {
       let distanceQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
       distanceQuery.initialResultsHandler = { query, results, error in
-        DispatchQueue.main.async {
           if error != nil {
             print(error!.localizedDescription)
             completion(nil, error)
@@ -142,7 +139,6 @@ final class HealthKidManager {
             completion(distance, nil)
           }
         }
-      }
       healthStore.execute(distanceQuery)
     }
   }
@@ -167,7 +163,6 @@ final class HealthKidManager {
       let calorieQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
       calorieQuery.initialResultsHandler = { query, results, error in
-        DispatchQueue.main.async {
           if error != nil {
             print(error!.localizedDescription)
             completion(nil, error)
@@ -189,7 +184,6 @@ final class HealthKidManager {
             completion(calories, nil)
           }
         }
-      }
       healthStore.execute(calorieQuery)
     }
   }
@@ -214,7 +208,6 @@ final class HealthKidManager {
       let exerciseQuery = HKStatisticsCollectionQuery(quantityType: sampleType, quantitySamplePredicate: nil, options: .cumulativeSum, anchorDate: past, intervalComponents: interval)
 
       exerciseQuery.initialResultsHandler = { query, results, error in
-        DispatchQueue.main.async {
           if error != nil {
             print(error!.localizedDescription)
             completion(nil, error)
@@ -236,7 +229,6 @@ final class HealthKidManager {
             completion(exerciseTime, nil)
           }
         }
-      }
       healthStore.execute(exerciseQuery)
     }
   }

@@ -126,6 +126,28 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let createTeamVC = CreateTeamVC()
         present(createTeamVC, animated: true, completion: nil)
     }
+<<<<<<< HEAD
+=======
+    
+// MARK: - calls to Firebase
+    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
+        print("GET TEAMS CALLED")
+        myTeams.removeAll()
+        filteredTeams.removeAll()
+        let teamList = user.teamIDs
+        for teamID in teamList {
+            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+                self.myTeams.append(team)
+                completion()
+            })
+        }
+    }
+    
+    func generateTestUser() -> User {//test function
+      let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "", goals: [])
+        return user
+    }
+>>>>>>> c9c7c1b440118a8a1bd7c4810ad9ee1416a8cf44
 
 }
 

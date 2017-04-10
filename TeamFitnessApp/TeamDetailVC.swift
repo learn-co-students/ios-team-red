@@ -77,7 +77,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
         if let memberList = team?.userUIDs {
             for memberID in memberList {
-                FirebaseManager.fetchUser(withUID: memberID, completion: { (user) in
+                FirebaseManager.fetchUser(withFirebaseUID: memberID, completion: { (user) in
                     self.teamUsers.append(user)
                     completion()
                 })

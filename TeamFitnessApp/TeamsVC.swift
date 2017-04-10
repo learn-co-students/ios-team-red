@@ -33,6 +33,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
+        FirebaseManager.generateTestData()
         super.viewDidLoad()
         setupSubViews()
         setupSearchBar()
@@ -136,7 +137,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func generateTestUser() -> User {//test function
-        let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
+        var user = User(name: "", sex: "", height: 100, weight: 100, email: "")
+        user.teamIDs = ["team1UID1234", "team2UID5678"]
         return user
     }
 

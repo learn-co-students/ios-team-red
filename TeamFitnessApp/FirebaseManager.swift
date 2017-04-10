@@ -14,12 +14,18 @@ struct FirebaseManager {
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
     
 //MARK: - login functions
-    //create a new user with a given email in Firebase, and add that user's UID and email to the database
-    static func createNewUser(withEmail email: String, andPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
-        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user, error) in
-            if let user = user {
-                addNew(user: user)
-                completion(.successfulNewUser(user))
+    //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
+    static func createNew(User user: User, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
+        guard let userEmail = user.email else {
+            print("Could not create new user in database - user has no email")
+            return
+        }
+        FIRAuth.auth()?.createUser(withEmail: userEmail, password: password, completion: { (firUser, error) in
+            if let firUser = firUser {
+                var updatedUser  = user
+                updatedUser.uid = firUser.uid
+                FirebaseManager.save(user: updatedUser)
+                completion(.successfulNewUser(updatedUser))
             } else {
                 completion(.failure("FirebaseManager could not create new user"))
             }
@@ -50,7 +56,11 @@ struct FirebaseManager {
 
 //MARK: - save functions
     static func save(user: User) {// saves a user to the Firebase database
-        let key = dataRef.child("users").child(user.uid)
+        guard let userUID = user.uid else {
+            print("Attempt to save user to database failed. User has no UID")
+            return
+        }
+        let key = dataRef.child("users").child(userUID)
         var challengesDict = [String: Bool]()
         var teamsDict = [String: Bool]()
         
@@ -70,7 +80,6 @@ struct FirebaseManager {
             "weight": user.weight,
             "teams": teamsDict,
             "challenges": challengesDict,
-            "imageURL": user.imageURL
         ]
         
         key.updateChildValues(post)
@@ -124,7 +133,7 @@ struct FirebaseManager {
 //MARK: - Fetch functions
     
     //fetches a user from Firebase given a user id string, and returns the user through a closure
-    static func fetchUser(withUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
+    static func fetchUser(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
             if let userDict = snapshot.value as? [String: Any] {
                 let user = User(uid: uid, dict: userDict)
@@ -187,7 +196,7 @@ struct FirebaseManager {
     }
 
 // addNew functions ******************************************************************************************************************************************
-    static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
+    private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
     
@@ -243,15 +252,17 @@ struct FirebaseManager {
     }
     
     
-// test data ******************************************************************************************************************************************
-    
-    
+// MARK: - Test functions
     static func generateTestData() {
-        let testUser3 = User(name: "test user 3", sex: "male", height: 120.2, weight: 300, teamIDs: [], challengeIDs: [], imageURL: "a cool imageurl", uid: "testUser3UID91011", email: "testuser3@testorama.com")
-        let testChallenge3 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(200), creator: testUser3, userUIDs: [], isPublic: true, team: "awesome test team", id: nil)
-        
-        FirebaseManager.addNew(challenge: testChallenge3) { (id) in
-            print("Challenge added to database \(id)")
+        print("generating test data")
+        let newUser = User(name: "Pat is cool", sex: "Batman", height: 5000, weight: 10, email: "batman@batman.com")
+        FirebaseManager.createNew(User: newUser, withPassword: "1234batman") { (response) in
+            switch response {
+            case let .successfulNewUser(user):
+                print("NEW USER CREATED WITH UID: \(user.uid!)")
+            default:
+                print("new user not created :(")
+            }
         }
     }
 }

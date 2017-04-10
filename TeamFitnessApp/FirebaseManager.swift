@@ -48,7 +48,7 @@ struct FirebaseManager {
         }
     }
 
-//save functions ************************************************************************************************************************************
+//MARK: - save functions
     static func save(user: User) {// saves a user to the Firebase database
         let key = dataRef.child("users").child(user.uid)
         var challengesDict = [String: Bool]()
@@ -121,7 +121,7 @@ struct FirebaseManager {
         
         key.updateChildValues(post)
     }
-//fetch functions ************************************************************************************************************************************
+//MARK: - Fetch functions
     
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling

@@ -160,11 +160,16 @@ struct FirebaseManager {
     
     //fetches a challenge from Firebase given a challenge id string, and returns the challenge through a closure
     static func fetchChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
-        dataRef.child("challenges").child(challengeID).observe(.value, with: { (snapshot) in
+      print(challengeID)
+        dataRef.child("challenges").child(challengeID).observe(.value, with: {(snapshot) in
+          print(snapshot)
             if let challengeDict = snapshot.value as? [String: Any] {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
+                print("Entering completion")
                 completion(challenge)
-            }
+            } else {
+              print("not in completion")
+          }
         })
     }
     
@@ -261,7 +266,7 @@ struct FirebaseManager {
 
 
     static func generateTestUser() {
-        let user = User(name: "Superman", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "superman@superman.com", uid: nil)
+        let user = User(name: "Wonder Woman", sex: "Female", height: 75, weight: 200, teamIDs: [], challengeIDs: [], imageURL: "none", uid: <#T##String#>, email: <#T##String#>, goals: <#T##[Goal]#>)
         FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
             switch response {
             case let .successfulNewUser(newUser):
@@ -269,6 +274,7 @@ struct FirebaseManager {
             default:
                 print("could not create new user")
             }
+
         }
     }
     

@@ -22,12 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // initalize the window
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
         //check for nill
         guard let window = self.window else { fatalError("no window") }
         
         //set the root view controller
+<<<<<<< HEAD
         window.rootViewController = TeamsVC()
+=======
+        window.rootViewController = DashboardVC()
+>>>>>>> c9c7c1b440118a8a1bd7c4810ad9ee1416a8cf44
         
         //make the window visible
         window.makeKeyAndVisible()

@@ -23,6 +23,7 @@ class FitnessLabel: UILabel {
     func commonInit() {
         self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
         self.textColor = UIColor.backgroundBlack
+        self.textAlignment = .center
         self.backgroundColor = UIColor.foregroundOrange
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 5

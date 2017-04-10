@@ -15,7 +15,7 @@ enum Goal {
     case caloriesBurned(Int)
     case excerciseTime(Float)
     case weight(Float)
-    
+
     func stringValue() -> String {
         switch self {
         case .distance:
@@ -31,3 +31,4 @@ enum Goal {
         }
     }
 }
+

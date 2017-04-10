@@ -13,6 +13,8 @@ class ChallengeDetailVC: UIViewController {
     let challenge: Challenge? = nil
     
     var titleLabel = TitleLabel()
+    var startDateLabel = FitnessLabel()
+    var endDateLabel = FitnessLabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -199,7 +199,7 @@ struct FirebaseManager {
         })
     }
 
-// addNew functions ******************************************************************************************************************************************
+// MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
@@ -254,15 +254,11 @@ struct FirebaseManager {
         challengeRef.updateChildValues(post)
         completion(challengeID)
     }
-    
-    
+
 // MARK: - Test functions
-    
-
-
-    static func generateTestUser() {
-        let user = User(name: "Superman", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "superman@superman.com", uid: nil)
-        FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
+    static func generateTestUser(withName name: String) {
+        let user = User(name: "\(name)", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "\(name)@\(name).com", uid: nil)
+        FirebaseManager.createNew(User: user, withPassword: "\(name)1234") { (response) in
             switch response {
             case let .successfulNewUser(newUser):
                 print("NEW USER CREATED with ID \(newUser.uid!)")

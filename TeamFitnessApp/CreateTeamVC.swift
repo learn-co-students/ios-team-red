@@ -33,7 +33,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         setupLabels()
         setUpTextFields()
         setupButtons()
-        userID = "TEST USER ID" //TODO: - remove this line after login is functional
     }
     
     func setupLabels() {

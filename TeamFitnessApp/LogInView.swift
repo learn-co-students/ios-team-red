@@ -8,18 +8,24 @@
 
 import UIKit
 
+protocol LoginViewDelegate: class {
+    func pressNewUser()
+    
+}
+
 class LogInView: FitnessView {
     
-    let fitnessBabyLabel = FitnessLabel()
-    let emailTextField = UITextField()
-    let passwordTextField = UITextField()
-    let loginButton = FitnessButton()
-    let newUserButton = FitnessButton()
-    let googleButton = FitnessButton()
-    let facebookButton = FitnessButton()
-
-    override init() {
-        super.init()
+    var fitnessBabyLabel: FitnessLabel!
+    var emailTextField: UITextField!
+    var passwordTextField: UITextField!
+    var loginButton: FitnessButton!
+    var newUserButton: FitnessButton!
+    var googleButton: FitnessButton!
+    var facebookButton: FitnessButton!
+    weak var delegate: LoginViewDelegate?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         loadUI()
     }
     
@@ -27,8 +33,13 @@ class LogInView: FitnessView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadUI() {
-   
+    func pressNewUser(sender: UIButton) {
+        delegate?.pressNewUser()
+    }
+    
+    private func loadUI() {
+        
+        fitnessBabyLabel = FitnessLabel()
         self.addSubview(fitnessBabyLabel)
         fitnessBabyLabel.translatesAutoresizingMaskIntoConstraints = false
         fitnessBabyLabel.textAlignment = NSTextAlignment.center
@@ -39,7 +50,15 @@ class LogInView: FitnessView {
         fitnessBabyLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         fitnessBabyLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         fitnessBabyLabel.text = "Fitness Baby"
+        
+        
+        setupTextFields()
+        setupFitnessButtons()
+    }
     
+    private func setupTextFields() {
+        
+        emailTextField = UITextField()
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.layer.cornerRadius = 5
@@ -51,6 +70,7 @@ class LogInView: FitnessView {
         emailTextField.placeholder = "email"
         emailTextField.backgroundColor = UIColor.white
         
+        passwordTextField = UITextField()
         self.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
@@ -62,8 +82,10 @@ class LogInView: FitnessView {
         passwordTextField.placeholder = "password"
         passwordTextField.backgroundColor = UIColor.white
         
-       
-       
+    }
+    
+    private func setupFitnessButtons() {
+        loginButton = FitnessButton()
         self.addSubview(loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         loginButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
@@ -72,9 +94,8 @@ class LogInView: FitnessView {
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         loginButton.isEnabled = true
         loginButton.setTitle("Login", for: .normal)
-        //        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
         
-       
+        newUserButton = FitnessButton()
         self.addSubview(newUserButton)
         newUserButton.translatesAutoresizingMaskIntoConstraints = false
         newUserButton.setTitle("New User", for: .normal)
@@ -85,7 +106,9 @@ class LogInView: FitnessView {
         newUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         newUserButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
         newUserButton.isEnabled = true
-                
+        newUserButton.addTarget(self, action: #selector(pressNewUser), for: .touchUpInside)
+        
+        googleButton = FitnessButton()
         self.addSubview(googleButton)
         googleButton.translatesAutoresizingMaskIntoConstraints = false
         googleButton.setTitle("Google", for: .normal)
@@ -95,7 +118,7 @@ class LogInView: FitnessView {
         googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
         
-      
+        facebookButton = FitnessButton()
         self.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.setTitle("Facebook", for: .normal)
@@ -104,6 +127,6 @@ class LogInView: FitnessView {
         facebookButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
-    
+        
     }
 }

@@ -9,21 +9,20 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, LoginViewDelegate {
     
     let logInView = LogInView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-         self.logInView.newUserButton.addTarget(self, action: #selector(pressNewUserButton), for: UIControlEvents.touchUpInside)
-    }
     
     override func loadView() {
         self.view = logInView
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        logInView.delegate = self
+    }
     
-    func pressNewUserButton() {
+    func pressNewUser() {
         self.present(NewUserViewController(), animated: true, completion: nil)
     }
+
 }

@@ -17,10 +17,15 @@ class FitnessView: UIView {
         commonInit()
     }
     
-    init() {
-        super.init(frame: CGRect.zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         commonInit()
     }
+    
+//    init() {
+//        super.init(frame: CGRect.zero)
+//        commonInit()
+//    }
     
     func commonInit() {
         self.backgroundColor = UIColor.backgroundBlack

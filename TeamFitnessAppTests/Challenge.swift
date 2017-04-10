@@ -51,4 +51,5 @@ struct Challenge {
     
     func convertDateToString(date: Date) {}
     
+    func convertSringToDate(inputString str: String) {}
 }

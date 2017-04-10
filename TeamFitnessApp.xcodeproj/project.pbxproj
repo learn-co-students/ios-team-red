@@ -17,6 +17,7 @@
 		AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13071E9ACF1F00154522 /* CustomHorizontalBarChart.swift */; };
 		AAFD130A1E9ACF2700154522 /* CustomPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13091E9ACF2700154522 /* CustomPieChart.swift */; };
 		AAFD130C1E9AD23D00154522 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD130B1E9AD23D00154522 /* DashboardView.swift */; };
+		EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */; };
 		EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */; };
 		EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D371E92EDC800F5E717 /* Assets.xcassets */; };
 		EC6A3D3B1E92EDC800F5E717 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC6A3D391E92EDC800F5E717 /* LaunchScreen.storyboard */; };
@@ -82,6 +83,7 @@
 		AAFD13091E9ACF2700154522 /* CustomPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPieChart.swift; sourceTree = "<group>"; };
 		AAFD130B1E9AD23D00154522 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.release.xcconfig"; sourceTree = "<group>"; };
+		EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensions.swift; path = TeamFitnessAppTests/DateExtensions.swift; sourceTree = SOURCE_ROOT; };
 		EC6A3D2D1E92EDC800F5E717 /* TeamFitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamFitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC6A3D371E92EDC800F5E717 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +173,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EC5DBD821E9BF26400CECA34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		EC6A3D241E92EDC800F5E717 = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +206,7 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				EC5DBD821E9BF26400CECA34 /* Extensions */,
 				FEC839A21E93F9FB0014B6FA /* Models */,
 				ECE3F5AE1E94090D001230CC /* Views */,
 				ECE3F5A91E93E8AD001230CC /* Controllers */,
@@ -593,6 +604,7 @@
 				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
+				EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,

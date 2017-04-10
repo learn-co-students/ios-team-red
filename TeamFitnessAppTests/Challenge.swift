@@ -48,8 +48,5 @@ struct Challenge {
         self.id = id
         self.name = name
     }
-    
-    func convertDateToString(date: Date) {}
-    
-    func convertSringToDate(inputString str: String) {}
 }
+

@@ -15,7 +15,10 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let mainView = FitnessView()
     let titleLabel = FitnessLabel()
     let myTeamsLabel = FitnessLabel()
+    let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
+    
+    
     
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
@@ -30,6 +33,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
+        FirebaseManager.generateTestData()
         super.viewDidLoad()
         setupSubViews()
         setupSearchBar()
@@ -46,13 +50,14 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         getTeams(forUser: user) {
             DispatchQueue.main.async {
+                self.myTeams.sort {$0.name < $1.name}
                 self.myTeamsView.reloadData()
             }
         }
         loadAllTeams()
     }
     
-//tableview datasource/delegate ********************************************************************************************************
+// MARK: - Delegate and Data Source
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -112,8 +117,16 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-// Calls to Firebase *******************************************************************************************************************
+    func segueCreateTeam() {
+        let createTeamVC = CreateTeamVC()
+        present(createTeamVC, animated: true, completion: nil)
+    }
+    
+// MARK: - calls to Firebase
     func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
+        print("GET TEAMS CALLED")
+        myTeams.removeAll()
+        filteredTeams.removeAll()
         let teamList = user.teamIDs
         for teamID in teamList {
             FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
@@ -124,11 +137,10 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func generateTestUser() -> User {//test function
-        let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
+      let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "", goals: [])
         return user
     }
-    
-    
+
 }
 
 

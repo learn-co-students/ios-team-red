@@ -8,14 +8,16 @@
 
 import Foundation
 import Firebase
+import UIKit
 
 enum FirebaseResponse {
     
     case successfulLogin(FIRUser)
-    case failedLogin(String)
-    case successfulNewUser(FIRUser)
-    case failedNewUser(String)
+    case successfulNewUser(User)
     case successfulLogout(String)
-    case failedLogout(String)
+    case succesfulUpload(String)
+    case successfulDownload(UIImage)
+    case failure(String)
+
     
 }

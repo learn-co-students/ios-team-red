@@ -8,9 +8,12 @@
 
 import UIKit
 
-class NewUserViewController: UIViewController, NewUserViewDelegate {
+class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
     
     var createNewUserView = NewUserView()
+    var user: User?
+    var email: String = ""
+    var userPassword: String = ""
 
     override func loadView() {
         
@@ -20,12 +23,16 @@ class NewUserViewController: UIViewController, NewUserViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         createNewUserView.delegate = self
+        
     }
-
     
+ 
     func pressProfileButton() {
         
         self.present(ProfileViewController(), animated: true, completion: nil)
+    
+    
+    
     }
     
 }

@@ -15,6 +15,7 @@ extension TeamsVC { // Extension for setting up all views
         setupTitle()
         setUpMyTeams()
         setUpTeamSearch()
+        setupCreateTeamButton()
     }
     
     func setupTitle() {
@@ -69,6 +70,18 @@ extension TeamsVC { // Extension for setting up all views
         searchTableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         searchTableView.backgroundColor = UIColor.clear
     }
+    
+    func setupCreateTeamButton() {
+        view.addSubview(createTeamButton)
+        createTeamButton.translatesAutoresizingMaskIntoConstraints = false
+        createTeamButton.leftAnchor.constraint(equalTo: myTeamsLabel.rightAnchor).isActive = true
+        createTeamButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        createTeamButton.topAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        createTeamButton.bottomAnchor.constraint(equalTo: myTeamsLabel.topAnchor).isActive = true
+        createTeamButton.setTitle("+", for: .normal)
+        createTeamButton.changeFontSize(to: 18)
+        createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
+    }
 }
 
 extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
@@ -80,8 +93,9 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func loadAllTeams() {
+        allTeams.removeAll()
         FirebaseManager.fetchAllTeams { (teams) in
-            self.allTeams = teams
+            self.allTeams = teams.sorted {$0.name < $1.name}
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

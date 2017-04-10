@@ -13,7 +13,7 @@ struct Challenge {
     
     var startDate: Date //TODO come up with functions to convert dates to strings!
     var endDate: Date
-    var goal: Goal
+    var goal: [String:Double]
     var creator: String?
     var userUIDs = [String]()
     var isPublic: Bool?
@@ -27,7 +27,7 @@ struct Challenge {
         self.isPublic = dict["isPublic"] as? Bool ?? nil
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
-        self.goal = .caloriesBurned(20)
+      self.goal = dict["goal"] as? [String: Double] ?? [:]
         self.endDate = Date()
         self.startDate = Date()
         
@@ -40,7 +40,7 @@ struct Challenge {
     init(startDate: Date, endDate: Date, goal: Goal, creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil, name: String = "") {
         self.startDate = startDate
         self.endDate = endDate
-        self.goal = goal
+        self.goal = [goal.type.rawValue: goal.value]
         self.creator = creator.uid
         self.userUIDs = userUIDs
         self.isPublic = isPublic

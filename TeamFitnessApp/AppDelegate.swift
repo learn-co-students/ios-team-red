@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // initalize the window
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        
         //check for nill
         guard let window = self.window else { fatalError("no window") }
         

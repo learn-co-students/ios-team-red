@@ -9,7 +9,8 @@
 import UIKit
 
 extension TeamsVC { // Extension for setting up all views
-    
+
+//MARK: - subview setup
     func setupSubViews() {
         self.view = mainView
         setupTitle()
@@ -75,14 +76,18 @@ extension TeamsVC { // Extension for setting up all views
         createTeamButton.changeFontSize(to: 18)
         createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
     }
-}
-
-extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     
-    
-    func setupSearchBar() {
-        teamSearchBar.delegate = self
-        print("is user enabled?\(teamSearchBar.isUserInteractionEnabled)")
+// MARK: - calls to Firebase
+    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
+        myTeams.removeAll()
+        filteredTeams.removeAll()
+        let teamList = user.teamIDs
+        for teamID in teamList {
+            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+                self.myTeams.append(team)
+                completion()
+            })
+        }
     }
     
     func getAllTeams() { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
@@ -92,6 +97,16 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
                 self.searchTableView.reloadData()
             }
         }
+    }
+}
+
+extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
+    
+
+//MARK: - search bar
+    func setupSearchBar() {
+        teamSearchBar.delegate = self
+        print("is user enabled?\(teamSearchBar.isUserInteractionEnabled)")
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

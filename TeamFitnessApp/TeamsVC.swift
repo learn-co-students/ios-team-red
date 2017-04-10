@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let screenBounds = UIScreen.main.bounds
     
+    let uid = FIRAuth.auth()?.currentUser?.uid
     let mainView = FitnessView()
     let titleLabel = TitleLabel()
     let myTeamsLabel = FitnessLabel()
@@ -21,8 +23,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     
-    var myTeams = [Team]()
     var allTeams = [Team]()
+    var myTeams = [Team]()
     var filteredTeams = [Team]()
     var searchActive: Bool = false {
         didSet {
@@ -43,13 +45,17 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         
-        let user = generateTestUser() //test function
-        
-        getTeams(forUser: user) {
-            DispatchQueue.main.async {
-                self.myTeamsView.reloadData()
+        if let uid = self.uid {
+            FirebaseManager.fetchUser(withUID: uid) { (user) in
+                self.getTeams(forUser: user) {
+                    self.myTeams.sort {$0.name.lowercased() < $1.name.lowercased()}
+                    DispatchQueue.main.async {
+                        self.myTeamsView.reloadData()
+                    }
+                }
             }
         }
+        
         getAllTeams()
     }
     
@@ -117,24 +123,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let createTeamVC = CreateTeamVC()
         present(createTeamVC, animated: true, completion: nil)
     }
-    
-// MARK: - calls to Firebase
-    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
-        let teamList = user.teamIDs
-        for teamID in teamList {
-            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
-                self.myTeams.append(team)
-                completion()
-            })
-        }
-    }
-    
-    func generateTestUser() -> User {//test function
-        let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "")
-        return user
-    }
-    
-    
 }
 
 

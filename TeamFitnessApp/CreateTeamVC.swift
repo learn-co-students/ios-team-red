@@ -12,6 +12,7 @@ import Firebase
 class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let titleLabel = TitleLabel()
+    var user: User?
     var userID = FIRAuth.auth()?.currentUser?.uid
     let teamNameField = UITextField()
     let submitButton = FitnessButton()
@@ -21,6 +22,13 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let userID = userID {
+            FirebaseManager.fetchUser(withUID: userID, completion: { (user) in
+                self.user = user
+            })
+        }
+        
         self.view = FitnessView()
         setupLabels()
         setUpTextFields()
@@ -81,6 +89,10 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
+                    if var user = self.user {
+                        user.teamIDs.append(teamID)
+                        FirebaseManager.save(user: user)
+                    }
                     print("Team created: \(team.name) with ID: \(team.id!)")
                 })
                 

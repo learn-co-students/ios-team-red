@@ -247,12 +247,11 @@ struct FirebaseManager {
     
     
     static func generateTestData() {
-        let testUser3 = User(name: "test user 3", sex: "male", height: 120.2, weight: 300, teamIDs: [], challengeIDs: [], imageURL: "a cool imageurl", uid: "testUser3UID91011", email: "testuser3@testorama.com")
-        let testChallenge3 = Challenge(startDate: Date(), endDate: Date(), goal: .caloriesBurned(200), creator: testUser3, userUIDs: [], isPublic: true, team: "awesome test team", id: nil)
-        
-        FirebaseManager.addNew(challenge: testChallenge3) { (id) in
-            print("Challenge added to database \(id)")
+        FirebaseManager.logoutUser { (response) in
+            print("LOGOUT")
         }
+        
+        
     }
 }
 

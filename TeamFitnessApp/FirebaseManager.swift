@@ -246,8 +246,8 @@ struct FirebaseManager {
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,
-            //            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
-            //            "endDate": String(challenge.endDate),
+            "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
+            "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
             "team": teamID
         ]
         

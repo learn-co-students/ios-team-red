@@ -11,8 +11,8 @@ import Foundation
 
 struct Challenge {
     
-    var startDate: Date //TODO come up with functions to convert dates to strings!
-    var endDate: Date
+    var startDate: Date?
+    var endDate: Date?
     var goal: Goal
     var creator: String?
     var userUIDs = [String]()
@@ -28,8 +28,8 @@ struct Challenge {
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
         self.goal = .caloriesBurned(20)
-        self.endDate = Date()
-        self.startDate = Date()
+        self.startDate = (dict["startDate"] as? String)?.convertToDate()
+        self.endDate = (dict["endDate"] as? String)?.convertToDate()
         
         let userDict = dict["users"] as? [String: Bool] ?? [:]
         for (userID, _) in userDict {

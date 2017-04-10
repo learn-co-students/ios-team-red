@@ -49,4 +49,6 @@ struct Challenge {
         self.name = name
     }
     
+    func convertDateToString(date: Date) {}
+    
 }

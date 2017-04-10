@@ -30,10 +30,11 @@ class CreateChallengeVC: UIViewController {
     func setupViews() {
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view)
-        titleLabel.setText(toString: "Create Challenge")
+        titleLabel.setText(toString: "New Challenge")
         
         self.view.addSubview(teamSearchBar)
-        teamSearchBar.translatesAutoresizingMaskIntoConstraints = true
+        teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        teamSearchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         teamSearchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
@@ -41,25 +42,32 @@ class CreateChallengeVC: UIViewController {
         teamSearchBar.backgroundColor = UIColor.foregroundOrange
         
         self.view.addSubview(publicButton)
-        publicButton.translatesAutoresizingMaskIntoConstraints = true
+        publicButton.translatesAutoresizingMaskIntoConstraints = false
         publicButton.topAnchor.constraint(equalTo: teamSearchBar.topAnchor).isActive = true
+        publicButton.rightAnchor.constraint(equalTo: teamSearchBar.leftAnchor, constant: -10).isActive = true
         publicButton.heightAnchor.constraint(equalTo: teamSearchBar.heightAnchor).isActive = true
-        publicButton.rightAnchor.constraint(equalTo: teamSearchBar.leftAnchor).isActive = true
-        publicButton.widthAnchor.constraint(equalTo: publicButton.widthAnchor).isActive = true
+        publicButton.widthAnchor.constraint(equalTo: publicButton.heightAnchor).isActive = true
         publicButton.reverseColors()
         publicButton.setTitle("Public?", for: .normal)
         publicButton.addTarget(self, action: #selector(publicButtonPressed), for: .touchUpInside)
+        teamSearchBar.isUserInteractionEnabled = true
+        teamSearchBar.alpha = 1.0
+        print("public button frame: \(publicButton.frame)")
 
     }
     
-    func publicButtonPressed() {
+    func publicButtonPressed() { //switch the 'public button' to on or off. If public button is on, turn off the search bar, and vice versa
         if challengeIsPublic {
-            challengeIsPublic = false
             publicButton.reverseColors()
+            teamSearchBar.isUserInteractionEnabled = true
+            teamSearchBar.alpha = 1.0
+            challengeIsPublic = false
         } else {
-            challengeIsPublic = true
             publicButton.backgroundColor = UIColor.foregroundOrange
-            publicButton.titleLabel?.textColor = UIColor.backgroundBlack
+            publicButton.setTitleColor(UIColor.backgroundBlack, for: .normal)
+            teamSearchBar.isUserInteractionEnabled = false
+            teamSearchBar.alpha = 0.5
+            challengeIsPublic = true
         }
     }
 

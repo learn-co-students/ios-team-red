@@ -33,7 +33,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
-        FirebaseManager.generateTestData()
+        FirebaseManager.loginTestUser() //TODO: - replace test function
         super.viewDidLoad()
         setupSubViews()
         setupSearchBar()

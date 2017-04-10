@@ -257,22 +257,22 @@ struct FirebaseManager {
     
     
 // MARK: - Test functions
-    static func generateTestData() {
+    
 
-//        FirebaseManager.logoutUser { (response) in
-//            print("LOGOUT")
-//        }
-        
-//        let user = User(name: "Superman", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "superman@superman.com", uid: nil)
-//        FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
-//            switch response {
-//            case let .successfulNewUser(newUser):
-//                print("NEW USER CREATED with ID \(newUser.uid!)")
-//            default:
-//                print("could not create new user")
-//            }
-//        }
-        
+
+    static func generateTestUser() {
+        let user = User(name: "Superman", sex: "Male", height: 120, weight: 200, teamIDs: ["-KhK18OVrp50_SDEnf6Z", "-KhK1_q5h39TdCTkzm7L"], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], email: "superman@superman.com", uid: nil)
+        FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
+            switch response {
+            case let .successfulNewUser(newUser):
+                print("NEW USER CREATED with ID \(newUser.uid!)")
+            default:
+                print("could not create new user")
+            }
+        }
+    }
+    
+    static func loginTestUser () {
         FirebaseManager.loginUser(withEmail: "superman@superman.com", andPassword: "superman1234") { (response) in
             switch response {
             case let .successfulLogin(firUser):

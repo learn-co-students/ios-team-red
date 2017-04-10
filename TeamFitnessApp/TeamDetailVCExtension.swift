@@ -23,15 +23,39 @@ extension TeamDetailVC {
         teamNameLabel.changeFontSize(to: 28)
         teamNameLabel.reverseColors()
         
+        view.addSubview(teamImageView)
+        teamImageView.translatesAutoresizingMaskIntoConstraints = false
+        teamImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        teamImageView.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
+        teamImageView.widthAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
+        teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
+        teamImageView.backgroundColor = UIColor.foregroundOrange
+        if let team = self.team {
+            FirebaseStoreageManager.downloadImage(forTeam: team) { (response) in //download image for team and set it = to teamImageView
+                switch response {
+                case let .successfulDownload(teamImage):
+                    DispatchQueue.main.async {
+                        self.teamImageView.image = teamImage
+                    }
+                case let .failure(failString):
+                    print(failString)
+                default:
+                    print("Invalid Firebase response")
+                }
+            }
+        } else {
+            //TODO: - replace image with default image
+        }
+        
+        self.view.addSubview(captainLabel)
         if let captain = team?.captainID { //get the captain and set their name to the captain label
-            FirebaseManager.fetchUser(withUID: captain, completion: { (captain) in
+            FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
                 self.captainLabel.text = "Captain: \(captain.name)"
             })
         }
-        self.view.addSubview(captainLabel)
         captainLabel.translatesAutoresizingMaskIntoConstraints = false
         captainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        captainLabel.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
+        captainLabel.topAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
         captainLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         captainLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         captainLabel.textAlignment = .center

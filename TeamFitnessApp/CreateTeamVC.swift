@@ -47,7 +47,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         teamNameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         teamNameField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         teamNameField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        // teamNameField.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         teamNameField.backgroundColor = UIColor.foregroundOrange
         teamNameField.layer.cornerRadius = 5
         teamNameField.placeholder = "Enter team name"

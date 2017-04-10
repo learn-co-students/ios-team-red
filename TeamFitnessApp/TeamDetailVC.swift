@@ -18,11 +18,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let membersLabel = FitnessLabel()
     let challengesLabel = FitnessLabel()
     let inviteMembersButton = FitnessButton()
+    let teamImageView = UIImageView()
     
     let membersView = UITableView()
     let challengesView = UITableView()
-    
-    let teamImageView = UIImageView()
     
     override func viewDidLoad() {
         
@@ -78,7 +77,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
         if let memberList = team?.userUIDs {
             for memberID in memberList {
-                FirebaseManager.fetchUser(withUID: memberID, completion: { (user) in
+                FirebaseManager.fetchUser(withFirebaseUID: memberID, completion: { (user) in
                     self.teamUsers.append(user)
                     completion()
                 })

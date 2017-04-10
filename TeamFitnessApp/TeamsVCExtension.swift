@@ -93,8 +93,9 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func loadAllTeams() {
+        allTeams.removeAll()
         FirebaseManager.fetchAllTeams { (teams) in
-            self.allTeams = teams
+            self.allTeams = teams.sorted {$0.name < $1.name}
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

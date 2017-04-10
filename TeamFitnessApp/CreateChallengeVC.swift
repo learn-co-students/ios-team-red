@@ -19,6 +19,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     var filteredTeams = [Team]()
     
     let titleLabel = TitleLabel()
+    let teamIndicator = FitnessLabel()
     let teamSearchBar = UISearchBar()
     let publicButton = FitnessButton()
     let teamsTableView = UITableView()
@@ -28,7 +29,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         super.viewDidLoad()
         self.view = FitnessView()
         setupViews()
-        getMyTeams { 
+        getMyTeams {
+            self.filteredTeams = self.myTeams
             DispatchQueue.main.async {
                 self.teamsTableView.reloadData()
             }
@@ -41,13 +43,22 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         titleLabel.setConstraints(toView: self.view)
         titleLabel.setText(toString: "New Challenge")
         
+        self.view.addSubview(teamIndicator)
+        teamIndicator.translatesAutoresizingMaskIntoConstraints = false
+        teamIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        teamIndicator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        teamIndicator.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        teamIndicator.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        teamIndicator.reverseColors()
+        teamIndicator.text = "Find team to add new challenge:"
+        
         self.view.addSubview(teamSearchBar)
         teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
         teamSearchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamSearchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        teamSearchBar.topAnchor.constraint(equalTo: teamIndicator.bottomAnchor).isActive = true
         teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        teamSearchBar.placeholder = "Team to add challenge to:"
+        teamSearchBar.placeholder = "Find team"
         teamSearchBar.backgroundColor = UIColor.foregroundOrange
         
         self.view.addSubview(publicButton)
@@ -55,7 +66,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         publicButton.topAnchor.constraint(equalTo: teamSearchBar.topAnchor).isActive = true
         publicButton.rightAnchor.constraint(equalTo: teamSearchBar.leftAnchor, constant: -10).isActive = true
         publicButton.heightAnchor.constraint(equalTo: teamSearchBar.heightAnchor).isActive = true
-        publicButton.widthAnchor.constraint(equalTo: publicButton.heightAnchor).isActive = true
+        publicButton.widthAnchor.constraint(equalTo: publicButton.heightAnchor, multiplier: 2.0).isActive = true
         publicButton.reverseColors()
         publicButton.setTitle("Public?", for: .normal)
         publicButton.addTarget(self, action: #selector(publicButtonPressed), for: .touchUpInside)
@@ -84,12 +95,14 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             publicButton.reverseColors()
             teamSearchBar.isUserInteractionEnabled = true
             teamSearchBar.alpha = 1.0
+            teamIndicator.text = "Find team to add new challenge:"
             challengeIsPublic = false
         } else {
             publicButton.backgroundColor = UIColor.foregroundOrange
             publicButton.setTitleColor(UIColor.backgroundBlack, for: .normal)
             teamSearchBar.isUserInteractionEnabled = false
             teamSearchBar.alpha = 0.5
+            teamIndicator.text = "Public Challenge"
             challengeIsPublic = true
         }
     }
@@ -162,6 +175,18 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.setLabels(forTeam: myTeams[indexPath.row])
         }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if searchActive {
+            let selectedTeam = filteredTeams[indexPath.row]
+            teamIndicator.text = selectedTeam.name
+            self.team = selectedTeam
+        } else {
+            let selectedTeam = myTeams[indexPath.row]
+            teamIndicator.text = selectedTeam.name
+            self.team = selectedTeam
+        }
     }
     
 //MARK: - Firebase calls

@@ -17,14 +17,8 @@ class FitnessView: UIView {
         commonInit()
     }
     
-//    init() {
-//        super.init(frame: CGRect.zero)
-//        commonInit()
-//    }
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: CGRect.zero)
         commonInit()
     }
     
@@ -35,7 +29,7 @@ class FitnessView: UIView {
         let image = images[randomNum]
         let sportImageView = UIImageView()
         sportImageView.image = image
-//        sportImageView.contentMode = .scaleAspectFill
+        //sportImageView.contentMode = .scaleAspectFit
         self.addSubview(sportImageView)
 
         sportImageView.translatesAutoresizingMaskIntoConstraints = false

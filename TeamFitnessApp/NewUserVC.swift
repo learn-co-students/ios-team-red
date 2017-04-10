@@ -15,16 +15,10 @@ class NewUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NewUserViewUI()
-        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-  
-    }
-    
     override func loadView() {
-        super.loadView()
+
         self.view = createNewUserView
     }
     

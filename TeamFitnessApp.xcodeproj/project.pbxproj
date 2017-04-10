@@ -236,8 +236,8 @@
 		EC859EA71E96AD83009664F5 /* Controller Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */,
 				EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */,
+				EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */,
 			);
 			name = "Controller Extensions";
 			sourceTree = "<group>";

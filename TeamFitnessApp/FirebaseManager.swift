@@ -277,7 +277,6 @@ struct FirebaseManager {
                 print("could not log user in")
             }
         }
-        
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -18,11 +19,16 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let membersLabel = FitnessLabel()
     let challengesLabel = FitnessLabel()
     let inviteMembersButton = FitnessButton()
+    let createChallengeButton = FitnessButton()
     let teamImageView = UIImageView()
     
     let membersView = UITableView()
     let challengesView = UITableView()
     
+    var userIsCaptain: Bool {
+        return team?.captainID == FIRAuth.auth()?.currentUser?.uid
+    }
+
     override func viewDidLoad() {
         
         membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
@@ -102,5 +108,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
             present(challengeDetailVC, animated: true, completion: nil)
         }
+    }
+    
+    func segueCreateChallenge() {
+        print("Segue to create challenge")
     }
 }

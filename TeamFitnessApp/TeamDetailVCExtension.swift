@@ -92,5 +92,16 @@ extension TeamDetailVC {
         challengesView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         challengesView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
         challengesView.backgroundColor = UIColor.clear
+        
+        if userIsCaptain {
+            self.view.addSubview(createChallengeButton)
+            createChallengeButton.translatesAutoresizingMaskIntoConstraints = false
+            createChallengeButton.leftAnchor.constraint(equalTo: challengesLabel.rightAnchor).isActive = true
+            createChallengeButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+            createChallengeButton.topAnchor.constraint(equalTo: challengesLabel.topAnchor).isActive = true
+            createChallengeButton.bottomAnchor.constraint(equalTo: challengesLabel.bottomAnchor).isActive = true
+            createChallengeButton.setTitle("+", for: .normal)
+            createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
+        }
     }
 }

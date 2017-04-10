@@ -33,6 +33,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
+        FirebaseManager.generateTestData()
         super.viewDidLoad()
         setupSubViews()
         setupSearchBar()
@@ -44,15 +45,16 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        
+
         if let uid = self.uid {
-            FirebaseManager.fetchUser(withUID: uid) { (user) in
+            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
                 self.getTeams(forUser: user) {
                     self.myTeams.sort {$0.name.lowercased() < $1.name.lowercased()}
                     DispatchQueue.main.async {
                         self.myTeamsView.reloadData()
                     }
                 }
+
             }
         }
         
@@ -123,6 +125,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let createTeamVC = CreateTeamVC()
         present(createTeamVC, animated: true, completion: nil)
     }
+
 }
 
 

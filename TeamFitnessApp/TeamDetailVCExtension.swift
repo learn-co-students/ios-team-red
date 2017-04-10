@@ -42,7 +42,7 @@ extension TeamDetailVC {
         
         self.view.addSubview(captainLabel)
         if let captain = team?.captainID { //get the captain and set their name to the captain label
-            FirebaseManager.fetchUser(withUID: captain, completion: { (captain) in
+            FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
                 self.captainLabel.text = "Captain: \(captain.name)"
             })
         }

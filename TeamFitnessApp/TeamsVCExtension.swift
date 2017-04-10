@@ -93,6 +93,7 @@ extension TeamsVC { // Extension for setting up all views
     func getAllTeams() { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
         FirebaseManager.fetchAllTeams { (teams) in
             self.allTeams = teams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }

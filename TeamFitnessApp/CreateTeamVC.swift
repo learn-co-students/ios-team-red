@@ -24,7 +24,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         super.viewDidLoad()
         
         if let userID = userID {
-            FirebaseManager.fetchUser(withUID: userID, completion: { (user) in
+            FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
                 self.user = user
             })
         }

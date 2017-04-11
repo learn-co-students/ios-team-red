@@ -17,6 +17,7 @@
 		AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13071E9ACF1F00154522 /* CustomHorizontalBarChart.swift */; };
 		AAFD130A1E9ACF2700154522 /* CustomPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13091E9ACF2700154522 /* CustomPieChart.swift */; };
 		AAFD130C1E9AD23D00154522 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD130B1E9AD23D00154522 /* DashboardView.swift */; };
+		EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */; };
 		EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */; };
 		EC5DBD841E9C0A9B00CECA34 /* CreateChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */; };
 		EC5DBD861E9C2DD600CECA34 /* FitnessDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */; };
@@ -85,6 +86,7 @@
 		AAFD13091E9ACF2700154522 /* CustomPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPieChart.swift; sourceTree = "<group>"; };
 		AAFD130B1E9AD23D00154522 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		D446E68A6D57055C70C0BC66 /* Pods-TeamFitnessApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessApp/Pods-TeamFitnessApp.release.xcconfig"; sourceTree = "<group>"; };
+		EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPickerView.swift; sourceTree = "<group>"; };
 		EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensions.swift; path = TeamFitnessAppTests/DateExtensions.swift; sourceTree = SOURCE_ROOT; };
 		EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeVC.swift; sourceTree = "<group>"; };
 		EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessDatePickerView.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				EC9D94341E97CEAF00E33362 /* FitnessCell.swift */,
 				EC9D94461E9AA77800E33362 /* TitleLabel.swift */,
 				EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */,
+				EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
 				EC5DBD861E9C2DD600CECA34 /* FitnessDatePickerView.swift in Sources */,
+				EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
 				EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */,

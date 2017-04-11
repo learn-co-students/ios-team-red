@@ -26,7 +26,14 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let teamsTableView = UITableView()
     let startDatePicker = FitnessDatePickerView()
     let endDatePicker = FitnessDatePickerView()
+    let goalPicker = GoalPickerView()
     let nextButton = FitnessButton()
+    let previousButton = FitnessButton()
+    var viewState: ViewState = .first
+    
+    enum ViewState {
+        case first, second
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,14 +109,23 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         teamsTableView.delegate = self
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+
+        
+        view.addSubview(goalPicker)
+        goalPicker.translatesAutoresizingMaskIntoConstraints = false
+        goalPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        goalPicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 50).isActive = true
+        goalPicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
+        goalPicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         
         view.addSubview(startDatePicker)
         startDatePicker.translatesAutoresizingMaskIntoConstraints = false
         startDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        startDatePicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 50).isActive = true
+        startDatePicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
         startDatePicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
         startDatePicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         startDatePicker.setTitle(toString: "Challenge Start Date:")
+        startDatePicker.isHidden = true
         
         view.addSubview(endDatePicker)
         endDatePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -118,16 +134,28 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         endDatePicker.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
         endDatePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         endDatePicker.setTitle(toString: "Challenge End Date:")
+        endDatePicker.isHidden = true
         
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
-        nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nextButton.leftAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         nextButton.topAnchor.constraint(equalTo: endDatePicker.bottomAnchor, constant: 10).isActive = true
         nextButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
         nextButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         nextButton.setTitle("➡", for: .normal)
+        nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+        
+        view.addSubview(previousButton)
+        previousButton.translatesAutoresizingMaskIntoConstraints = false
+        previousButton.rightAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        previousButton.topAnchor.constraint(equalTo: endDatePicker.bottomAnchor, constant: 10).isActive = true
+        previousButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        previousButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
+        previousButton.setTitle("Cancel", for: .normal)
     }
-    
+
+// MARK: - button functions
     func publicButtonPressed() { //switch the 'public button' to on or off. If public button is on, turn off the search bar, and vice versa
         if challengeIsPublic {
             publicButton.reverseColors()
@@ -144,20 +172,39 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             challengeIsPublic = true
         }
     }
+    
+    func nextButtonPressed() {
+        if viewState == .first {
+            publicButton.isHidden = true
+            teamSearchBar.isHidden = true
+            goalPicker.isHidden = true
+            startDatePicker.isHidden = false
+            endDatePicker.isHidden = false
+            nextButton.setTitle("Submit", for: .normal)
+            viewState = .second
+        } else if viewState == .second {
+            print("save new challenge")
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func previousButtonPressed() {
+        self.dismiss(animated: true, completion: nil)
+    }
 //MARK: - Search bar delegate
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
         print("Did begin editing")
         self.view.bringSubview(toFront: teamsTableView)
-        startDatePicker.isHidden = true
+        goalPicker.isHidden = true
         teamsTableView.isHidden = false
         teamsTableView.isUserInteractionEnabled = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false;
-        startDatePicker.isHidden = false
+        goalPicker.isHidden = false
         print("Did end editing")
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
@@ -167,7 +214,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Clicked cacel button")
-        startDatePicker.isHidden = false
+        goalPicker.isHidden = false
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
         filteredTeams = myTeams
@@ -176,7 +223,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Search button clicked")
-        startDatePicker.isHidden = false
+        goalPicker.isHidden = false
         teamsTableView.isHidden = true
         teamsTableView.isUserInteractionEnabled = false
         filteredTeams = myTeams
@@ -234,7 +281,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             self.team = selectedTeam
         }
         tableView.isHidden = true
-        startDatePicker.isHidden = false
+        goalPicker.isHidden = false
     }
     
 //MARK: - Firebase calls

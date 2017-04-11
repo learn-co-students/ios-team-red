@@ -33,6 +33,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
+      navigationItem.title = "Fitness Baby"
+
         FirebaseManager.generateTestData()
         super.viewDidLoad()
         setupSubViews()
@@ -105,21 +107,21 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         if tableView == self.myTeamsView {
             teamDetailVC.setTeam(team: myTeams[indexPath.row])
-            present(teamDetailVC, animated: true, completion: nil)
+            navigationController?.pushViewController(teamDetailVC, animated: true)
         } else if tableView == self.searchTableView {
             if searchActive {
                 teamDetailVC.setTeam(team: filteredTeams[indexPath.row])
-                present(teamDetailVC, animated: true, completion: nil)
+              navigationController?.pushViewController(teamDetailVC, animated: true)
             } else {
                 teamDetailVC.setTeam(team: allTeams[indexPath.row])
-                present(teamDetailVC, animated: true, completion: nil)
+              navigationController?.pushViewController(teamDetailVC, animated: true)
             }
         }
     }
     
     func segueCreateTeam() {
         let createTeamVC = CreateTeamVC()
-        present(createTeamVC, animated: true, completion: nil)
+        navigationController?.pushViewController(createTeamVC, animated: true)
     }
     
 // MARK: - calls to Firebase

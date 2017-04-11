@@ -40,7 +40,7 @@ extension AppController {
 extension AppController {
   func loadInitialViewController() {
 
-    let vc = FIRAuth.auth()?.currentUser != nil ? DashboardVC() : LogInViewController()
+    let vc = FIRAuth.auth()?.currentUser != nil ? TabBarController() : LogInViewController()
     self.actingVC = vc
     self.add(viewController: self.actingVC, animated: true)
 
@@ -67,7 +67,7 @@ extension AppController {
   func switchViewController(with notification: Notification) {
     switch notification.name {
     case Notification.Name.closeLoginVC:
-      switchToViewController(with: DashboardVC())
+      switchToViewController(with: TabBarController())
     case Notification.Name.closeDashboardVC:
       switchToViewController(with: LogInViewController())
     default:

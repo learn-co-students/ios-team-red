@@ -56,7 +56,7 @@ struct FirebaseManager {
 
 //MARK: - save functions
     static func save(user: User) {// saves a user to the Firebase database
-        let key = dataRef.child("users").child(user.uid)
+        let key = dataRef.child("users").child(user.uid!)
         var challengesDict = [String: Bool]()
         var teamsDict = [String: Bool]()
         

@@ -20,6 +20,8 @@ class DashboardVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      navigationItem.title = "Fitness Baby"
+
       createTestUser()
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView

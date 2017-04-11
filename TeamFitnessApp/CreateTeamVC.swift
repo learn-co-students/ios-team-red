@@ -120,12 +120,13 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        dismiss(animated:true, completion: nil)
         teamImage.image = chosenImage
+        navigationController?.popViewController(animated: true)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+
     }
 
 }

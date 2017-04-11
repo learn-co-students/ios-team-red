@@ -217,6 +217,8 @@
    limitations under the License.
 
 </string>
+			<key>License</key>
+			<string>Apache License, Version 2.0</string>
 			<key>Title</key>
 			<string>Charts</string>
 			<key>Type</key>
@@ -225,6 +227,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>Firebase</string>
 			<key>Type</key>
@@ -233,6 +237,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseAnalytics</string>
 			<key>Type</key>
@@ -241,6 +247,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseAuth</string>
 			<key>Type</key>
@@ -249,6 +257,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseCore</string>
 			<key>Type</key>
@@ -257,6 +267,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseDatabase</string>
 			<key>Type</key>
@@ -265,6 +277,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseInstanceID</string>
 			<key>Type</key>
@@ -273,6 +287,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseStorage</string>
 			<key>Type</key>
@@ -483,6 +499,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMOAuth2</string>
 			<key>Type</key>
@@ -693,6 +711,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMSessionFetcher</string>
 			<key>Type</key>
@@ -701,6 +721,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2017 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>GoogleSignIn</string>
 			<key>Type</key>
@@ -911,6 +933,8 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GoogleToolboxForMac</string>
 			<key>Type</key>

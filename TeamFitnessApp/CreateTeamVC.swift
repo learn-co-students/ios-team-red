@@ -22,6 +22,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         
         if let userID = userID {
             FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
@@ -120,17 +121,20 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(imagePicker, animated: true, completion: nil)
+        imagePicker.isModalInPopover = true
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         teamImage.image = chosenImage
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
 
     }
 

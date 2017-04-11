@@ -16,6 +16,7 @@ final class AppController: UIViewController {
 
 
   override func viewDidLoad() {
+
     super.viewDidLoad()
     containerView = UIView(frame: view.frame)
     view = containerView

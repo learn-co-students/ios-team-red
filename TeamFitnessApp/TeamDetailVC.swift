@@ -30,6 +30,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
         
         membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         membersView.delegate = self
@@ -38,8 +39,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengesView.delegate = self
         challengesView.dataSource = self
-        
-        super.viewDidLoad()
+
         setupViews()
         getTeamMembers(forTeam: team) { 
             self.membersView.reloadData()

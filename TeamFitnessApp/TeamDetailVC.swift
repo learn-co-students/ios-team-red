@@ -7,22 +7,28 @@
 //
 
 import UIKit
+import Firebase
 
 class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var team: Team?
     var teamUsers = [User]()
     var teamChallenges = [Challenge]()
-    let teamNameLabel = FitnessLabel()
+    let teamNameLabel = TitleLabel()
     let captainLabel = FitnessLabel()
     let membersLabel = FitnessLabel()
     let challengesLabel = FitnessLabel()
     let inviteMembersButton = FitnessButton()
+    let createChallengeButton = FitnessButton()
     let teamImageView = UIImageView()
     
     let membersView = UITableView()
     let challengesView = UITableView()
     
+    var userIsCaptain: Bool {
+        return team?.captainID == FIRAuth.auth()?.currentUser?.uid
+    }
+
     override func viewDidLoad() {
         
         membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
@@ -94,5 +100,18 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 })
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let challengeDetailVC = ChallengeDetailVC()
+        if tableView == challengesView {
+            challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
+            present(challengeDetailVC, animated: true, completion: nil)
+        }
+    }
+    
+    func segueCreateChallenge() {
+        let createChallengeVC = CreateChallengeVC()
+        present(createChallengeVC, animated: true, completion: nil)
     }
 }

@@ -9,7 +9,8 @@
 import UIKit
 
 extension TeamsVC { // Extension for setting up all views
-    
+
+//MARK: - subview setup
     func setupSubViews() {
         self.view = mainView
         setupTitle()
@@ -20,15 +21,8 @@ extension TeamsVC { // Extension for setting up all views
     
     func setupTitle() {
         self.view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        titleLabel.textAlignment = .center
-        titleLabel.changeFontSize(to: 28)
-        titleLabel.reverseColors()
-        titleLabel.text = "Teams"
+        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setText(toString: "Teams")
     }
     
     func setUpMyTeams() {
@@ -82,24 +76,38 @@ extension TeamsVC { // Extension for setting up all views
         createTeamButton.changeFontSize(to: 18)
         createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
     }
-}
-
-extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     
-    
-    func setupSearchBar() {
-        teamSearchBar.delegate = self
-        print("is user enabled?\(teamSearchBar.isUserInteractionEnabled)")
+// MARK: - calls to Firebase
+    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
+        myTeams.removeAll()
+        filteredTeams.removeAll()
+        let teamList = user.teamIDs
+        for teamID in teamList {
+            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+                self.myTeams.append(team)
+                completion()
+            })
+        }
     }
     
-    func loadAllTeams() {
-        allTeams.removeAll()
+    func getAllTeams() { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
         FirebaseManager.fetchAllTeams { (teams) in
-            self.allTeams = teams.sorted {$0.name < $1.name}
+            self.allTeams = teams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+            self.filteredTeams = self.allTeams
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
             }
         }
+    }
+}
+
+extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
+    
+
+//MARK: - search bar
+    func setupSearchBar() {
+        teamSearchBar.delegate = self
+        print("is user enabled?\(teamSearchBar.isUserInteractionEnabled)")
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

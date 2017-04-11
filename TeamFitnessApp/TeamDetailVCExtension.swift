@@ -14,14 +14,7 @@ extension TeamDetailVC {
         view = FitnessView()
         
         self.view.addSubview(teamNameLabel)
-        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        teamNameLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamNameLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 25).isActive = true
-        teamNameLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        teamNameLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        teamNameLabel.textAlignment = .center
-        teamNameLabel.changeFontSize(to: 28)
-        teamNameLabel.reverseColors()
+        teamNameLabel.setConstraints(toView: self.view)
         
         view.addSubview(teamImageView)
         teamImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -99,5 +92,16 @@ extension TeamDetailVC {
         challengesView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         challengesView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
         challengesView.backgroundColor = UIColor.clear
+        
+        if userIsCaptain {
+            self.view.addSubview(createChallengeButton)
+            createChallengeButton.translatesAutoresizingMaskIntoConstraints = false
+            createChallengeButton.leftAnchor.constraint(equalTo: challengesLabel.rightAnchor).isActive = true
+            createChallengeButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+            createChallengeButton.topAnchor.constraint(equalTo: challengesLabel.topAnchor).isActive = true
+            createChallengeButton.bottomAnchor.constraint(equalTo: challengesLabel.bottomAnchor).isActive = true
+            createChallengeButton.setTitle("+", for: .normal)
+            createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
+        }
     }
 }

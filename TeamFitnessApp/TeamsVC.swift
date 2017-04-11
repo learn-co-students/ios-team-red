@@ -7,24 +7,24 @@
 //
 
 import UIKit
+import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let screenBounds = UIScreen.main.bounds
     
+    let uid = FIRAuth.auth()?.currentUser?.uid
     let mainView = FitnessView()
-    let titleLabel = FitnessLabel()
+    let titleLabel = TitleLabel()
     let myTeamsLabel = FitnessLabel()
     let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
     
-    
-    
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     
-    var myTeams = [Team]()
     var allTeams = [Team]()
+    var myTeams = [Team]()
     var filteredTeams = [Team]()
     var searchActive: Bool = false {
         didSet {
@@ -35,7 +35,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
       navigationItem.title = "Fitness Baby"
 
-        FirebaseManager.generateTestData()
+
+        FirebaseManager.loginTestUser() //TODO: - replace test function
         super.viewDidLoad()
         setupSubViews()
         setupSearchBar()
@@ -47,16 +48,20 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         searchTableView.delegate = self
         searchTableView.dataSource = self
-        
-        let user = generateTestUser() //test function
-        
-        getTeams(forUser: user) {
-            DispatchQueue.main.async {
-                self.myTeams.sort {$0.name < $1.name}
-                self.myTeamsView.reloadData()
+
+        if let uid = self.uid {
+            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+                self.getTeams(forUser: user) {
+                    self.myTeams.sort {$0.name.lowercased() < $1.name.lowercased()}
+                    DispatchQueue.main.async {
+                        self.myTeamsView.reloadData()
+                    }
+                }
+
             }
         }
-        loadAllTeams()
+        
+        getAllTeams()
     }
     
 // MARK: - Delegate and Data Source
@@ -122,25 +127,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     func segueCreateTeam() {
         let createTeamVC = CreateTeamVC()
         navigationController?.pushViewController(createTeamVC, animated: true)
-    }
-    
-// MARK: - calls to Firebase
-    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
-        print("GET TEAMS CALLED")
-        myTeams.removeAll()
-        filteredTeams.removeAll()
-        let teamList = user.teamIDs
-        for teamID in teamList {
-            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
-                self.myTeams.append(team)
-                completion()
-            })
-        }
-    }
-    
-    func generateTestUser() -> User {//test function
-      let user = User(name: "", sex: "", height: 123, weight: 123, teamIDs: ["team1UID1234", "team2UID5678"], challengeIDs: [], imageURL: "", uid: "", email: "", goals: [])
-        return user
     }
 
 }

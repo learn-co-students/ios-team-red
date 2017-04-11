@@ -19,7 +19,7 @@ struct User {
     var challengeIDs = [String]()
     var imageURL: String?
     var goals = [Goal]()
-    var uid: String
+    var uid: String?
     var email: String?
     
     init(uid: String, dict: [String: Any]) {

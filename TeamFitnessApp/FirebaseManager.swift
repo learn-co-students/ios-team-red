@@ -241,20 +241,28 @@ struct FirebaseManager {
         let challengeID = challengeRef.key
         
         var usersDict = [String: Bool]()
+        var goalDict = [String: Double]()
         
         for user in challenge.userUIDs {
             usersDict[user] = true
         }
         
+        if let goalType = challenge.goal?.type.rawValue {
+            if let goalValue = challenge.goal?.value {
+                goalDict = [goalType: goalValue] 
+            }
+        }
+        
         let teamID = challenge.teamID ?? "no team"
         let post: [String: Any] = [
-            "name": challenge.name ?? "No challenge name",
+            "name": challenge.name ,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,
             "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
             "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
-            "team": teamID
+            "team": teamID,
+            "goal": goalDict
         ]
         
         challengeRef.updateChildValues(post)

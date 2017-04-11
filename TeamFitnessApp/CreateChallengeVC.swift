@@ -24,6 +24,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let publicButton = FitnessButton()
     let teamsTableView = UITableView()
     let startDatePicker = FitnessDatePickerView()
+    let endDatePicker = FitnessDatePickerView()
     
     
     override func viewDidLoad() {
@@ -96,6 +97,14 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         startDatePicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
         startDatePicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         startDatePicker.setTitle(toString: "Challenge Start Date:")
+        
+        view.addSubview(endDatePicker)
+        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
+        endDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        endDatePicker.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 50).isActive = true
+        endDatePicker.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
+        endDatePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        endDatePicker.setTitle(toString: "Challenge End Date:")
 
     }
     

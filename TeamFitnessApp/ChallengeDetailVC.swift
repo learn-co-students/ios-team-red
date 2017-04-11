@@ -12,9 +12,18 @@ class ChallengeDetailVC: UIViewController {
     
     let challenge: Challenge? = nil
     
-    var titleLabel = TitleLabel()
-    var startDateLabel = FitnessLabel()
-    var endDateLabel = FitnessLabel()
+    let titleLabel = TitleLabel()
+    let startDateLabel = FitnessLabel()
+    let endDateLabel = FitnessLabel()
+    let goalPieChart = CustomPieChartView()
+    
+//    var goal: [String:Double]
+//    var creator: String?
+//    var userUIDs = [String]()
+//    var isPublic: Bool?
+//    var teamID: String?
+//    var id: String?
+//    var name: String
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +37,16 @@ class ChallengeDetailVC: UIViewController {
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view)
         titleLabel.setText(toString: "Challenge Info")
+        
+        self.view.addSubview(goalPieChart)
+        goalPieChart.translatesAutoresizingMaskIntoConstraints = false
+        goalPieChart.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
+        // redo challenge goal as an instance of Goal
+       // goalPieChart.setData(goal: challenge.goal, current: <#T##Double#>)
+        
     }
     
     func setChallenge(challenge: Challenge) {

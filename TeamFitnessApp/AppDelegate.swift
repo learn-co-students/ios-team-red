@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //set the root view controller
 
-        window.rootViewController = TeamsVC()
+
+        window.rootViewController = LogInViewController()
+
 
         
         //make the window visible

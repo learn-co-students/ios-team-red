@@ -1,4 +1,3 @@
-//
 //  DashboardVC.swift
 //  TeamFitnessApp
 //
@@ -12,16 +11,16 @@ import Firebase
 class DashboardVC: UIViewController {
 
   var dashboadView: DashboardView!
-  var user: User!
+  var user = FIRAuth.auth()?.currentUser
   var testUser: User!
   var challenges = [Challenge]()
   var goals = [Goal]()
 
 
-
-
     override func viewDidLoad() {
         super.viewDidLoad()
+      navigationItem.title = "Fitness Baby"
+
       createTestUser()
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView
@@ -48,19 +47,15 @@ class DashboardVC: UIViewController {
   func getChallenges() {
     if testUser.challengeIDs.count > 0 {
       for challenge in testUser.challengeIDs {
-        print("CHALLENGE", challenge)
         FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
           DispatchQueue.main.async {
             self.challenges.append(challenge)
             self.dashboadView.tableView.reloadData()
           }
         })
-
       }
     }
   }
-
-
 }
 
 extension DashboardVC: UITableViewDelegate, UITableViewDataSource {

@@ -17,9 +17,10 @@ struct User {
     var weight: Int
     var teamIDs = [String]()
     var challengeIDs = [String]()
+    var imageURL: String?
     var goals = [Goal]()
-    var uid: String?
-    var email: String?
+    var email: String? = nil
+    var uid: String? = nil
     
     init(uid: String, dict: [String: Any]) {
         self.uid = uid
@@ -27,6 +28,7 @@ struct User {
         self.sex = dict["Sex"] as? String ?? ""
         self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as? Int ?? 0
+        self.email = dict["email"] as? String ?? ""
         
         let challengeDict = dict["challenges"] as? [String: Bool] ?? [:]
         for (challengeID, _) in challengeDict {
@@ -48,7 +50,7 @@ struct User {
         }
     }
     
-  init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], imageURL: String, uid: String, email: String, goals: [Goal]) {
+    init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], goals: [Goal] = [], email: String? = nil, uid: String? = nil) {
 
         self.name = name
         self.sex = sex
@@ -56,9 +58,10 @@ struct User {
         self.weight = weight
         self.teamIDs = teamIDs
         self.challengeIDs = challengeIDs
-        self.uid = uid
-        self.email = email
         self.goals = goals
+        self.email = email
+        self.uid = uid
+        
     }
     
     mutating func set(UID uid: String) {

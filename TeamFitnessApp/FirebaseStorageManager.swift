@@ -40,6 +40,7 @@ struct FirebaseStoreageManager {
             return
         }
         let imageRef = teamImagesRef.child("\(teamID).png")
+        print("Downloading image at \(teamID).png")
         imageRef.data(withMaxSize: 5000000000) { (data, error) in
             if let data = data {
                 if let teamImage = UIImage(data: data) {

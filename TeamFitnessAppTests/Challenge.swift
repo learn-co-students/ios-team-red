@@ -11,9 +11,9 @@ import Foundation
 
 struct Challenge {
     
-    var startDate: Date //TODO come up with functions to convert dates to strings!
-    var endDate: Date
-    var goal: [String:Double]
+    var startDate: Date?
+    var endDate: Date?
+    var goal: Goal?
     var creator: String?
     var userUIDs = [String]()
     var isPublic: Bool?
@@ -27,26 +27,31 @@ struct Challenge {
         self.isPublic = dict["isPublic"] as? Bool ?? nil
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
-      self.goal = dict["goal"] as? [String: Double] ?? [:]
-        self.endDate = Date()
-        self.startDate = Date()
         
+        let goalDict = dict["goal"] as? [String: Double] ?? [:] //I don't like the way we're handling storing goals in Firebase. Discuss! - Pat
+        for (key, value) in goalDict {
+            goal?.setType(from: key)
+            goal?.setValue(from: value)
+        }
+        
+        self.startDate = (dict["startDate"] as? String)?.convertToDate()
+        self.endDate = (dict["endDate"] as? String)?.convertToDate()
         let userDict = dict["users"] as? [String: Bool] ?? [:]
         for (userID, _) in userDict {
             self.userUIDs.append(userID)
         }
     }
     
-    init(startDate: Date, endDate: Date, goal: Goal, creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil, name: String = "") {
+    init(name: String = "", startDate: Date, endDate: Date, goal: Goal, creatorID: String, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil) {
         self.startDate = startDate
         self.endDate = endDate
-        self.goal = [goal.type.rawValue: goal.value]
-        self.creator = creator.uid
+        self.goal = goal
+        self.creator = creatorID
         self.userUIDs = userUIDs
         self.isPublic = isPublic
         self.teamID = team
         self.id = id
         self.name = name
     }
-    
 }
+

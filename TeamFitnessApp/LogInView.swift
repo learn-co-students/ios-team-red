@@ -14,6 +14,7 @@ protocol LoginViewDelegate: class {
     
 }
 
+
 class LogInView: FitnessView {
     
     var fitnessBabyLabel: FitnessLabel!
@@ -25,7 +26,7 @@ class LogInView: FitnessView {
     var facebookButton: FitnessButton!
     var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadUI()
@@ -38,6 +39,7 @@ class LogInView: FitnessView {
     func pressNewUser(sender: UIButton) {
         delegate?.pressNewUser()
     }
+
     
     func pressLogin(sender: UIButton) {
         delegate?.pressLogin()
@@ -56,7 +58,6 @@ class LogInView: FitnessView {
         fitnessBabyLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         fitnessBabyLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         fitnessBabyLabel.text = "Fitness Baby"
-        
         
         setupTextFields()
         setupFitnessButtons()
@@ -121,6 +122,7 @@ class LogInView: FitnessView {
         loginButton.isEnabled = true
         loginButton.setTitle("Login", for: .normal)
         loginButton.addTarget(self, action: #selector(pressLogin), for: .touchUpInside)
+
         
         newUserButton = FitnessButton()
         self.addSubview(newUserButton)
@@ -156,4 +158,10 @@ class LogInView: FitnessView {
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
         
     }
+
+//  func pressLoginButton(_ sender: UIButton) {
+//    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
+//      NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+//    }
+//  }
 }

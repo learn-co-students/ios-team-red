@@ -56,11 +56,7 @@ struct FirebaseManager {
 
 //MARK: - save functions
     static func save(user: User) {// saves a user to the Firebase database
-        guard let userUID = user.uid else {
-            print("Attempt to save user to database failed. User has no UID")
-            return
-        }
-        let key = dataRef.child("users").child(userUID)
+        let key = dataRef.child("users").child(user.uid)
         var challengesDict = [String: Bool]()
         var teamsDict = [String: Bool]()
         
@@ -156,9 +152,7 @@ struct FirebaseManager {
     
     //fetches a challenge from Firebase given a challenge id string, and returns the challenge through a closure
     static func fetchChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
-      print(challengeID)
         dataRef.child("challenges").child(challengeID).observe(.value, with: {(snapshot) in
-          print(snapshot)
             if let challengeDict = snapshot.value as? [String: Any] {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
                 print("Entering completion")

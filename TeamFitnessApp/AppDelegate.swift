@@ -9,28 +9,39 @@
 import UIKit
 import Firebase
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
 
+
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
 
-        
-        // initalize the window
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        //check for nill
-        guard let window = self.window else { fatalError("no window") }
-        
-        //set the root view controller
-        window.rootViewController = DashboardVC()
-        
-        //make the window visible
-        window.makeKeyAndVisible()
-        
+
+      // initalize the window
+      self.window = UIWindow(frame: UIScreen.main.bounds)
+      //check for nill
+      guard let window = self.window else { fatalError("no window") }
+
+      //set the root view controller
+      window.rootViewController = AppController()
+
+      //make the window visible
+      window.makeKeyAndVisible()
+
+//      FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
+//        if let user = user {
+//          self.currentUser = user
+//          NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+//        } else {
+//          NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
+//        }
+//      }
+
+
         return true
     }
 

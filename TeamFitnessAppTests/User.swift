@@ -17,7 +17,7 @@ struct User {
     var weight: Int
     var teamIDs = [String]()
     var challengeIDs = [String]()
-    var imageURL: String
+    var imageURL: String?
     var goals = [Goal]()
     var uid: String
     var email: String?
@@ -28,6 +28,7 @@ struct User {
         self.sex = dict["Sex"] as? String ?? ""
         self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as? Int ?? 0
+        self.email = dict["email"] as? String ?? ""
         
         let challengeDict = dict["challenges"] as? [String: Bool] ?? [:]
         for (challengeID, _) in challengeDict {

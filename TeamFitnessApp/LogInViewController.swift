@@ -12,7 +12,9 @@ import UIKit
 class LogInViewController: UIViewController {
     
     var logInView = FitnessView()
-    
+  var emailTextField: UITextField!
+  var passwordTextField: UITextField!
+
   
     
     override func viewDidLoad() {
@@ -36,6 +38,12 @@ class LogInViewController: UIViewController {
         self.present(NewUserViewController(), animated: true, completion: nil)
     }
 
+  func pressLoginButton(_ sender: UIButton) {
+    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
+      NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+    }
+  }
+
 }
 
 extension LogInViewController {
@@ -54,7 +62,7 @@ extension LogInViewController {
         fitnessBabyLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         fitnessBabyLabel.text = "Fitness Baby"
         
-        let emailTextField = UITextField()
+        emailTextField = UITextField()
         self.view.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.layer.cornerRadius = 5
@@ -66,7 +74,7 @@ extension LogInViewController {
         emailTextField.placeholder = "email"
         emailTextField.backgroundColor = UIColor.white
         
-        let passwordTextField = UITextField()
+        passwordTextField = UITextField()
         self.view.addSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
@@ -89,8 +97,8 @@ extension LogInViewController {
         loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         loginButton.isEnabled = true
-//        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
-        
+        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
+
         let newUserButton = FitnessButton()
         self.view.addSubview(newUserButton)
         newUserButton.translatesAutoresizingMaskIntoConstraints = false

@@ -123,7 +123,6 @@ class DashboardView: FitnessView {
           self.pieChartView2.setData(goal: self.goalTwo, current: calories)
         }
       }
-
     }
 
     healhKitManager.getExerciseTime(fromDate: dateAtMidnight, toDate: Date()) { (time, error) in
@@ -132,10 +131,8 @@ class DashboardView: FitnessView {
           self.pieChartView1.setData(goal: self.goalOne, current: time)
         }
       }
-
     }
   }
-
 }
 
 

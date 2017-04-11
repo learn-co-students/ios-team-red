@@ -13,6 +13,9 @@
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
 		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
+		AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90961E9C0CC800EC6703 /* LoginManager.swift */; };
+		AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90981E9C0CD100EC6703 /* AppController.swift */; };
+		AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */; };
 		AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAEE30AD1E96887F001AF51C /* DashboardVC.swift */; };
 		AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13071E9ACF1F00154522 /* CustomHorizontalBarChart.swift */; };
 		AAFD130A1E9ACF2700154522 /* CustomPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFD13091E9ACF2700154522 /* CustomPieChart.swift */; };
@@ -75,6 +78,9 @@
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
 		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		AABA90961E9C0CC800EC6703 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
+		AABA90981E9C0CD100EC6703 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContollerCases.swift; sourceTree = "<group>"; };
 		AAEE30AD1E96887F001AF51C /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		AAFD13071E9ACF1F00154522 /* CustomHorizontalBarChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHorizontalBarChart.swift; sourceTree = "<group>"; };
 		AAFD13091E9ACF2700154522 /* CustomPieChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPieChart.swift; sourceTree = "<group>"; };
@@ -231,6 +237,9 @@
 				EC6A3D611E92F4D200F5E717 /* Formatting.swift */,
 				AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */,
 				ECE3F5BB1E944583001230CC /* FirebaseResponse.swift */,
+				AABA90961E9C0CC800EC6703 /* LoginManager.swift */,
+				AABA90981E9C0CD100EC6703 /* AppController.swift */,
+				AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -585,10 +594,13 @@
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
+				AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */,
+				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
+				AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */,
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
 				EC9D94311E96E95000E33362 /* NewTeamVC.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,

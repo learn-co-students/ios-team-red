@@ -15,7 +15,8 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     let valueLabel = FitnessLabel()
     let stepper = UIStepper()
     
-    var goal: Goal? = nil
+    var goal = Goal(type: .distance, value: 0)
+
     var stepMultiplier: Int = 5
     var goalTag: String = ""
     
@@ -102,24 +103,25 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         stepper.value = 0
         switch row {
         case 0:
-            goal?.type = .distance
+            goal.type = .distance
             goalTag = "Miles"
             stepMultiplier = 1
         case 1:
-            goal?.type = .stepCount
+            goal.type = .stepCount
             goalTag = "Steps"
             stepMultiplier = 1000
         case 2:
-            goal?.type = .caloriesBurned
+            goal.type = .caloriesBurned
             goalTag = "Calories Burned"
             stepMultiplier = 1000
         case 3:
-            goal?.type = .exerciseTime
+            goal.type = .exerciseTime
             goalTag = "Exercise Minutes"
             stepMultiplier = 5
         default:
             print("Goal Picker View error: Out of range")
         }
+        goal.setValue(from: stepper.value * Double(stepMultiplier))
         valueLabel.text = "\(Int(stepper.value) * stepMultiplier) \(goalTag)"
     }
     
@@ -128,6 +130,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     func stepperChanged(sender: UIStepper!) {
         print("Stepper changed called")
         print(sender.value)
+        goal.value = stepper.value * Double(stepMultiplier)
         valueLabel.text = "\(Int(stepper.value) * stepMultiplier) \(goalTag)"
     }
 }

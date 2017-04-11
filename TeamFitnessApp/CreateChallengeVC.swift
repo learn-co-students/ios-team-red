@@ -15,6 +15,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     var searchActive: Bool = false
     var team: Team? = nil
     var challenge: Challenge? = nil
+    var user: User? = nil
     
     var myTeams = [Team]()
     var filteredTeams = [Team]()
@@ -32,6 +33,15 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let previousButton = FitnessButton()
     var viewState: ViewState = .first
     
+    //MARK: - properties being stored to create challenge instance:
+    var challengeName: String? = nil
+    var challengeStartDate: Date? = nil
+    var challengeEndDate: Date? = nil
+    var challengeGoal: Goal? = nil
+    let challengeCreatorID = FIRAuth.auth()?.currentUser?.uid
+    var challengeUserIDs: [String?] = [(FIRAuth.auth()?.currentUser?.uid)]
+    var challengeTeamID: String?
+    
     enum ViewState {
         case first, second
     }
@@ -39,6 +49,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = FitnessView()
+        getUser()
         setupViews()
         getMyTeams {
             self.filteredTeams = self.myTeams
@@ -189,10 +200,33 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             nextButton.setTitle("Submit", for: .normal)
             viewState = .second
             
+            challengeName = challengeNameField.text
+            challengeGoal = goalPicker.goal
+            challengeTeamID = team?.id
             
         } else if viewState == .second {
             print("save new challenge")
-            self.dismiss(animated: true, completion: nil)
+            challengeStartDate = startDatePicker.date
+            challengeEndDate = endDatePicker.date
+            if let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID, let challengeTeamID = challengeTeamID {
+                challenge = Challenge(startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
+                guard let challenge = challenge else {return}
+                guard var user = user else {return}
+                FirebaseManager.addNew(challenge: challenge, completion: { (challengeID) in
+                    user.challengeIDs.append(challengeID)
+                    FirebaseManager.save(user: user)
+                    if challengeIsPublic {
+                        //save challenge to public challenges
+                    } else {
+                        guard var team = team else {return}
+                        team.challengeIDs.append(challengeID)
+                        FirebaseManager.save(team: team)
+                    }
+                })
+                
+                
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
@@ -309,6 +343,13 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                     }
                 })
             }
+        }
+    }
+    
+    func getUser() {
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            self.user = user
         }
     }
 }

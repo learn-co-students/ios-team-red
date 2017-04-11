@@ -12,6 +12,7 @@ class FitnessDatePickerView: UIView {
 
     let titleLabel = FitnessLabel()
     let datePicker = UIDatePicker()
+    var date = Date()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -45,10 +46,15 @@ class FitnessDatePickerView: UIView {
         datePicker.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75)
         //datePicker.backgroundColor = UIColor.foregroundOrange
         datePicker.minimumDate = Date()
+        datePicker.addTarget(self, action: #selector(changeDate(sender:)), for: .valueChanged)
     }
     
     func setTitle(toString title: String) {
         self.titleLabel.text = title
+    }
+    
+    func changeDate(sender: UIDatePicker!) {
+        date = sender.date
     }
 
 }

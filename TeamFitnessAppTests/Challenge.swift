@@ -13,7 +13,7 @@ struct Challenge {
     
     var startDate: Date?
     var endDate: Date?
-    var goal: [String:Double]
+    var goal: Goal?
     var creator: String?
     var userUIDs = [String]()
     var isPublic: Bool?
@@ -27,8 +27,13 @@ struct Challenge {
         self.isPublic = dict["isPublic"] as? Bool ?? nil
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
-
-        self.goal = dict["goal"] as? [String: Double] ?? [:]
+        
+        let goalDict = dict["goal"] as? [String: Double] ?? [:] //I don't like the way we're handling storing goals in Firebase. Discuss! - Pat
+        for (key, value) in goalDict {
+            goal?.setType(from: key)
+            goal?.setValue(from: value)
+        }
+        
         self.startDate = (dict["startDate"] as? String)?.convertToDate()
         self.endDate = (dict["endDate"] as? String)?.convertToDate()
         let userDict = dict["users"] as? [String: Bool] ?? [:]
@@ -37,11 +42,11 @@ struct Challenge {
         }
     }
     
-    init(startDate: Date, endDate: Date, goal: [String: Double], creator: User, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil, name: String = "") {
+    init(name: String = "", startDate: Date, endDate: Date, goal: Goal, creatorID: String, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil) {
         self.startDate = startDate
         self.endDate = endDate
         self.goal = goal
-        self.creator = creator.uid
+        self.creator = creatorID
         self.userUIDs = userUIDs
         self.isPublic = isPublic
         self.teamID = team

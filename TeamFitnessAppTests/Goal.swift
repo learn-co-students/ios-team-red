@@ -23,6 +23,25 @@ struct Goal {
     self.type = type
     self.value = value
   }
+    
+    mutating func setType(from str: String) {
+        switch str {
+            case "distance":
+            self.type = .distance
+            case "stepCount":
+            self.type = .stepCount
+            case "caloriesBurnes":
+            self.type = .caloriesBurned
+            case "exerciseTime":
+            self.type = .exerciseTime
+        default:
+            print("Could not get goal type from String") //TODO: - come up with a better way to handle this error
+        }
+    }
+    
+    mutating func setValue(from num: Double) {
+        self.value = num
+    }
 
 }
 

@@ -26,6 +26,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let teamsTableView = UITableView()
     let startDatePicker = FitnessDatePickerView()
     let endDatePicker = FitnessDatePickerView()
+    let nextButton = FitnessButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,7 +118,14 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         endDatePicker.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
         endDatePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         endDatePicker.setTitle(toString: "Challenge End Date:")
-
+        
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nextButton.topAnchor.constraint(equalTo: endDatePicker.bottomAnchor, constant: 10).isActive = true
+        nextButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
+        nextButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        nextButton.setTitle("➡", for: .normal)
     }
     
     func publicButtonPressed() { //switch the 'public button' to on or off. If public button is on, turn off the search bar, and vice versa

@@ -44,7 +44,7 @@ class ChallengeDetailVC: UIViewController {
         goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        // redo challenge goal as an instance of Goal
+        // refactor challenge goal as an instance of Goal
        // goalPieChart.setData(goal: challenge.goal, current: <#T##Double#>)
         
     }

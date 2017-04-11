@@ -19,13 +19,13 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     var filteredTeams = [Team]()
     
     let titleLabel = TitleLabel()
+    let challengeNameField = UITextField()
     let teamIndicator = FitnessLabel()
     let teamSearchBar = UISearchBar()
     let publicButton = FitnessButton()
     let teamsTableView = UITableView()
     let startDatePicker = FitnessDatePickerView()
     let endDatePicker = FitnessDatePickerView()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,10 +45,22 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         titleLabel.setConstraints(toView: self.view)
         titleLabel.setText(toString: "New Challenge")
         
+        self.view.addSubview(challengeNameField)
+        challengeNameField.translatesAutoresizingMaskIntoConstraints = false
+        challengeNameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        challengeNameField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        challengeNameField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
+        challengeNameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        challengeNameField.placeholder = "Name challenge"
+        challengeNameField.backgroundColor = UIColor.foregroundOrange
+        challengeNameField.textColor = UIColor.backgroundBlack
+        challengeNameField.layer.cornerRadius = 5
+        
+        
         self.view.addSubview(teamIndicator)
         teamIndicator.translatesAutoresizingMaskIntoConstraints = false
         teamIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamIndicator.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
+        teamIndicator.topAnchor.constraint(equalTo: challengeNameField.bottomAnchor).isActive = true
         teamIndicator.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         teamIndicator.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
         teamIndicator.reverseColors()

@@ -17,7 +17,6 @@ struct User {
     var weight: Int
     var teamIDs = [String]()
     var challengeIDs = [String]()
-    var imageURL: String
     var goals = [Goal]()
     var uid: String? = nil
     var email: String? = nil

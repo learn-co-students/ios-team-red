@@ -14,8 +14,11 @@ protocol NewUserViewDelegate: class {
     func pressProfileButton()
 }
 
+
+
 class NewUserView: FitnessView {
     
+
     var newUser: FitnessLabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
@@ -32,6 +35,8 @@ class NewUserView: FitnessView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
 
     
     func pressProfileButton(sender: UIButton) {
@@ -48,7 +53,7 @@ class NewUserView: FitnessView {
     newUser.reverseColors()
     newUser.changeFontSize(to: 32.0)
     newUser.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    newUser.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+    newUser.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
     newUser.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
     newUser.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     newUser.text = "Create New User"
@@ -86,7 +91,7 @@ class NewUserView: FitnessView {
     confirmTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     confirmTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     confirmTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20).isActive = true
-    confirmTextField.placeholder = "re-type password"
+    confirmTextField.placeholder = "confirm password"
     confirmTextField.backgroundColor = UIColor.white
     
     completeCreation = FitnessLabel()
@@ -99,7 +104,7 @@ class NewUserView: FitnessView {
     completeCreation.topAnchor.constraint(equalTo: confirmTextField.bottomAnchor, constant: 20).isActive = true
     completeCreation.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
     completeCreation.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
-    completeCreation.text = "Almost done!"
+    completeCreation.text = "A little more info to get started!"
     
     profileButton = FitnessButton()
     self.addSubview(profileButton)

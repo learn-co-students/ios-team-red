@@ -12,6 +12,17 @@ import UIKit
 
 class GoalsViewController: UIViewController {
     
+    
+    var name: String!
+    var userEmail: String!
+    var userPassword: String!
+    var weight: Int!
+    var gender: String!
+    var height: Int!
+    
+    
+    
+    
     let goalsView = GoalsView()
     
     override func loadView() {
@@ -19,6 +30,13 @@ class GoalsViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(name)
+        print(userEmail)
+        print(userPassword)
+        print(weight)
+        print(gender)
+        print(height)
     }
     
 }

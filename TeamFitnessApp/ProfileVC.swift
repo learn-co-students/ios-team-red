@@ -11,8 +11,16 @@ import Foundation
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfileViewDelegate {
 
-   
     let profileView = ProfileView()
+    
+    var userEmail: String =  ""
+    var userPassword: String = ""
+    var weight: Int = 0
+    var gender: String = ""
+    var height: Int = 0
+    var userImage: String = ""
+    
+    
     
     override func loadView() {
         self.view = profileView
@@ -22,6 +30,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
     
         profileView.delegate = self
+        self.hideKeyboardWhenTappedAround()
+        print(userEmail)
     
     }
     
@@ -85,9 +95,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
+            self.gender = "Male"
+            
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
+            self.gender = "Female"
         }
         
         alertController.addAction(cancelAction)

@@ -65,9 +65,9 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     func pressProfileButton() {
         
         userEmail = createNewUserView.emailTextField.text!
-            
+        
+        // check not working
         if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
-            
             
             let vc: ProfileViewController = ProfileViewController()
             vc.userEmail = userEmail

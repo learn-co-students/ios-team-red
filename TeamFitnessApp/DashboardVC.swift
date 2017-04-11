@@ -21,7 +21,7 @@ class DashboardVC: UIViewController {
         super.viewDidLoad()
       navigationItem.title = "Fitness Baby"
 
-      createTestUser()
+//      createTestUser()
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView
       dashboadView.user = testUser
@@ -36,13 +36,13 @@ class DashboardVC: UIViewController {
     getChallenges()
   }
 
-  func createTestUser() {
-    let goal = Goal(type: .exerciseTime, value: 60)
-    let goal1 = Goal(type: .caloriesBurned, value: 800)
-    let goals = [goal, goal1]
-
-    testUser = User(name: "Sandro", sex: "male", height: 62, weight: 240, teamIDs: [], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], imageURL: "", uid: "ueIVp3UT2mVJHwVT8Pgoz0GPfbK2", email: "ales.musto@gmail.com", goals: goals)
-  }
+//  func createTestUser() {
+//    let goal = Goal(type: .exerciseTime, value: 60)
+//    let goal1 = Goal(type: .caloriesBurned, value: 800)
+//    let goals = [goal, goal1]
+//
+//    testUser = User(name: "Sandro", sex: "male", height: 62, weight: 240, teamIDs: [], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], imageURL: "", uid: "ueIVp3UT2mVJHwVT8Pgoz0GPfbK2", email: "ales.musto@gmail.com", goals: goals)
+//  }
 
   func getChallenges() {
     if testUser.challengeIDs.count > 0 {

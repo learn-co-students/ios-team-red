@@ -48,7 +48,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         searchTableView.delegate = self
         searchTableView.dataSource = self
-
+        
         if let uid = self.uid {
             FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
                 self.getTeams(forUser: user) {
@@ -57,11 +57,16 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                         self.myTeamsView.reloadData()
                     }
                 }
-
+                
             }
         }
-        
         getAllTeams()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
     }
     
 // MARK: - Delegate and Data Source

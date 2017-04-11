@@ -55,10 +55,11 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func setupButtons() {
+        
         self.view.addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         submitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        submitButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.15).isActive = true
         submitButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         submitButton.setTitle("Submit", for: .normal)
@@ -85,7 +86,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         print("CREATE TEAM fired")
         if let userID = userID {
             if let teamName = teamNameField.text {
-                self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
+                navigationController?.popViewController(animated: true)
+                //self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID

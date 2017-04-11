@@ -14,6 +14,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     var challengeIsPublic: Bool = false
     var searchActive: Bool = false
     var team: Team? = nil
+    var challenge: Challenge? = nil
     
     var myTeams = [Team]()
     var filteredTeams = [Team]()
@@ -114,9 +115,10 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         view.addSubview(goalPicker)
         goalPicker.translatesAutoresizingMaskIntoConstraints = false
         goalPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        goalPicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 50).isActive = true
-        goalPicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
+        goalPicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
+        goalPicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
         goalPicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        self.view.bringSubview(toFront: goalPicker.stepper)
         
         view.addSubview(startDatePicker)
         startDatePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -175,6 +177,10 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func nextButtonPressed() {
         if viewState == .first {
+            if !challengeIsPublic && team == nil {
+                print("Must select a team to add the challenge to, or set challenge to public")
+                return
+            }
             publicButton.isHidden = true
             teamSearchBar.isHidden = true
             goalPicker.isHidden = true
@@ -182,6 +188,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             endDatePicker.isHidden = false
             nextButton.setTitle("Submit", for: .normal)
             viewState = .second
+            
+            
         } else if viewState == .second {
             print("save new challenge")
             self.dismiss(animated: true, completion: nil)

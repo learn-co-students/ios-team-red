@@ -60,8 +60,8 @@ extension TeamsVC { // Extension for setting up all views
         createTeamButton.translatesAutoresizingMaskIntoConstraints = false
         createTeamButton.leftAnchor.constraint(equalTo: myTeamsLabel.rightAnchor).isActive = true
         createTeamButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        createTeamButton.topAnchor.constraint(equalTo: myTeamsLabel.centerYAnchor).isActive = true
-        createTeamButton.bottomAnchor.constraint(equalTo: myTeamsLabel.topAnchor).isActive = true
+        createTeamButton.centerYAnchor.constraint(equalTo: myTeamsLabel.centerYAnchor).isActive = true
+        createTeamButton.heightAnchor.constraint(equalTo: myTeamsLabel.heightAnchor, multiplier: 0.5).isActive = true
         createTeamButton.setTitle("+", for: .normal)
         createTeamButton.changeFontSize(to: 18)
         createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
@@ -77,6 +77,9 @@ extension TeamsVC { // Extension for setting up all views
     }
     
     private func getAllTeams(user: User) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
+        myTeams.removeAll()
+        allTeams.removeAll()
+        filteredTeams.removeAll()
         FirebaseManager.fetchAllTeams { (teams) in
             for team in teams {
                 if let teamID = team.id  {

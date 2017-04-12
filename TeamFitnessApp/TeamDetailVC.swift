@@ -11,7 +11,17 @@ import Firebase
 
 class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var team: Team?
+    var team: Team? {
+        didSet {
+            getTeamMembers(forTeam: team) {
+                self.membersView.reloadData()
+            }
+            
+            getTeamChallenges(forTeam: team) {
+                self.challengesView.reloadData()
+            }
+        }
+    }
     let teamNameLabel = TitleLabel()
     let captainLabel = FitnessLabel()
     let membersLabel = FitnessLabel()
@@ -51,14 +61,8 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengesView.dataSource = self
 
         setupViews()
-        
-        getTeamMembers(forTeam: team) {
-            self.membersView.reloadData()
-        }
-        
-        getTeamChallenges(forTeam: team) {
-            self.challengesView.reloadData()
-        }
+        membersView.reloadData()
+        challengesView.reloadData()
     }
     
     func setTeam(team: Team) {
@@ -135,7 +139,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
                 getTeamMembers(forTeam: self.team, completion: {
-                    self.membersView.reloadData()
+                    DispatchQueue.main.async {
+                        self.membersView.reloadData()
+                        self.joinButton.isHidden = true
+                    }
                 })
             }
         }

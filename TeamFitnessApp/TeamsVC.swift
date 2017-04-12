@@ -11,7 +11,6 @@ import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let screenBounds = UIScreen.main.bounds
     let mainView = FitnessView()
     let uid = FIRAuth.auth()?.currentUser?.uid
     var user: User? = nil
@@ -25,11 +24,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var allTeams = [Team]()
     var myTeams = [Team]()
     var filteredTeams = [Team]()
-    var searchActive: Bool = false {
-        didSet {
-            print(searchActive)
-        }
-    }
+    var searchActive: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()

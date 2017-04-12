@@ -12,9 +12,8 @@ import Firebase
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let screenBounds = UIScreen.main.bounds
-    
-    let uid = FIRAuth.auth()?.currentUser?.uid
     let mainView = FitnessView()
+    let uid = FIRAuth.auth()?.currentUser?.uid
     let titleLabel = TitleLabel()
     let myTeamsLabel = FitnessLabel()
     let createTeamButton = FitnessButton()
@@ -33,11 +32,9 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func viewDidLoad() {
-      navigationItem.title = "Fitness Baby"
-
-
-        FirebaseManager.loginTestUser() //TODO: - replace test function
         super.viewDidLoad()
+        
+        navigationItem.title = "Fitness Baby"
         setupSubViews()
         setupSearchBar()
         
@@ -61,12 +58,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         getAllTeams()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
     }
     
 // MARK: - Delegate and Data Source

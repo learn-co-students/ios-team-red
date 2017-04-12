@@ -86,6 +86,7 @@ struct FirebaseManager {
     
     static func save(team: Team) {// saves a team to Firebase database
         guard let teamID = team.id else {return} //TODO: - handle this error better
+       
         let key = dataRef.child("teams").child(teamID)
         var usersDict = [String: Bool]()
         var challengesDict = [String: Bool]()
@@ -230,8 +231,16 @@ struct FirebaseManager {
         completion(teamID)
     }
     
-    static func addNew(challenge: Challenge, completion: (String) -> Void) {
-        let challengeRef = dataRef.child("challenges").childByAutoId()
+    static func addNew(challenge: Challenge, isPublic: Bool, completion: (String) -> Void) {
+        let challengeRef: FIRDatabaseReference
+        
+        if isPublic {
+            print("set post reference to public challenges")
+            challengeRef = dataRef.child("publicChallenges").childByAutoId()
+        } else {
+            challengeRef = dataRef.child("challenges").childByAutoId()
+        }
+        
         let challengeID = challengeRef.key
         
         var usersDict = [String: Bool]()
@@ -241,18 +250,17 @@ struct FirebaseManager {
             usersDict[user] = true
         }
         
-        if let goalType = challenge.goal?.type.rawValue {
-            if let goalValue = challenge.goal?.value {
-                goalDict = [goalType: goalValue] 
-            }
+        if let goalType = challenge.goal?.type.rawValue, let goalValue = challenge.goal?.value {
+                goalDict = [goalType: goalValue]
         }
         
         let teamID = challenge.teamID ?? "no team"
+        
         let post: [String: Any] = [
             "name": challenge.name,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ?? false,
+            "isPublic": challenge.isPublic ,
             "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
             "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
             "team": teamID,

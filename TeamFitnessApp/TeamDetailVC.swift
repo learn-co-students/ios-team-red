@@ -21,6 +21,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let teamImageView = UIImageView()
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     
+    var teamUsers = [User]()
+    var teamChallenges = [Challenge]()
+    
     let membersView = UITableView()
     let challengesView = UITableView()
     let joinButton = FitnessButton()
@@ -71,9 +74,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         var rows: Int = 0
         
         if tableView == membersView {
-            rows = team?.userUIDs.count ?? 0
+            rows = teamUsers.count
         } else if tableView == challengesView {
-            rows = team?.challengeIDs.count ?? 0
+            rows = teamChallenges.count
         }
         return rows
     }
@@ -130,7 +133,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         //self.team?.userUIDs.append(uid)
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                self.membersView.reloadData()
+                getTeamMembers(forTeam: self.team, completion: {
+                    self.membersView.reloadData()
+                })
             }
         }
         

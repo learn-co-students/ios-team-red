@@ -208,16 +208,17 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             print("save new challenge")
             challengeStartDate = startDatePicker.date
             challengeEndDate = endDatePicker.date
-            if let challengeName = challengeName ,let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID, let challengeTeamID = challengeTeamID {
+            let challengeTeamID = self.challengeTeamID ?? "No team"
+            if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
                 challenge = Challenge(name: challengeName,startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
                 guard let challenge = challenge else {return}
-                guard var user = user else {return}
-                FirebaseManager.addNew(challenge: challenge, completion: { (challengeID) in
-                    user.challengeIDs.append(challengeID)
-                    FirebaseManager.save(user: user)
+                FirebaseManager.addNew(challenge: challenge, isPublic: challenge.isPublic, completion: { (challengeID) in
                     if challengeIsPublic {
-                        //save challenge to public challenges
+                        print("Challenged saved to public challenges")
                     } else {
+                        guard var user = user else {return}
+                        user.challengeIDs.append(challengeID)
+                        FirebaseManager.save(user: user)
                         guard var team = team else {return}
                         team.challengeIDs.append(challengeID)
                         FirebaseManager.save(team: team)

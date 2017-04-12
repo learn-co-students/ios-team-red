@@ -20,6 +20,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         
         self.view = createNewUserView
         createNewUserView.delegate = self
+        self.hideKeyboardWhenTappedAround()
         
         
     }
@@ -40,6 +41,10 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         return userPassword == confirmPassword
     }
     
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textfielddidendediting")
+    }
     
     //fix not working for retype password
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -68,17 +73,23 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         userPassword = createNewUserView.passwordTextField.text!
         confirmPassword = createNewUserView.confirmTextField.text!
         
-        // check not working
+    
         if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
             
+//            
+            
+            
+            
+            
+            
             let vc: ProfileViewController = ProfileViewController()
-            vc.userEmail = userEmail
-            vc.userPassword = userPassword
+//            vc.userEmail = userEmail
+//            vc.userPassword = userPassword
             
-            print("New User's \(userEmail)")
-            print("New User's \(userPassword)")
+            print("New User's email\(userEmail)")
+            print("New User's password\(userPassword)")
             
-            self.present(vc, animated: true, completion: nil)
+//            self.present(vc, animated: true, completion: nil)
            
         } else {
             

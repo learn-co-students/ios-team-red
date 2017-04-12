@@ -16,8 +16,7 @@ class TabBarController: UITabBarController {
 
     }
 
-
-  func setup() {
+    func setup() {
     self.tabBar.barTintColor = UIColor.foregroundOrange
     self.tabBar.tintColor = UIColor.backgroundBlack
     let dashboardVC = NavigationController(rootViewController: DashboardVC())
@@ -30,7 +29,7 @@ class TabBarController: UITabBarController {
     trophyVC.tabBarItem.title = "Trophies"
     trophyVC.tabBarItem.image = #imageLiteral(resourceName: "trophy")
     self.setViewControllers([dashboardVC, teamVC, trophyVC], animated: false)
-  }
+    }
 
 
 

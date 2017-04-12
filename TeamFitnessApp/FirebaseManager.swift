@@ -28,7 +28,7 @@ struct FirebaseManager {
                 FirebaseManager.save(user: updatedUser)
                 completion(.successfulNewUser(updatedUser))
             } else {
-                completion(.failure("FirebaseManager could not create new user"))
+                completion(.failure(error!.localizedDescription))
             }
         })
     }

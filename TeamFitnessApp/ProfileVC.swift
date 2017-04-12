@@ -62,7 +62,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         print("ProfileVC weight\(weight)")
         
             
-        self.present(vc, animated: true, completion: nil)
+      self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func displayImagePickerButtonTapped() {

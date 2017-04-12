@@ -64,7 +64,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         FirebaseManager.save(user: user) { (success) in
             if success {
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .closeGoalsVC, object: nil)
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                 }
             }
         }

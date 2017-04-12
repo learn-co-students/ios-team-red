@@ -29,7 +29,6 @@ final class AppController: UIViewController {
 
 extension AppController {
     func addNotifcationObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeGoalsVC, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeDashboardVC, object: nil)
         
@@ -41,7 +40,7 @@ extension AppController {
 extension AppController {
     func loadInitialViewController() {
         
-        let vc = FIRAuth.auth()?.currentUser != nil ? TabBarController() : LogInViewController()
+        let vc = FIRAuth.auth()?.currentUser != nil ? TabBarController() : LoginNavVC()
         self.actingVC = vc
         self.add(viewController: self.actingVC, animated: true)
         
@@ -70,10 +69,7 @@ extension AppController {
         case Notification.Name.closeLoginVC:
             switchToViewController(with: TabBarController())
         case Notification.Name.closeDashboardVC:
-            switchToViewController(with: LogInViewController())
-        case Notification.Name.closeGoalsVC:
-            print("WE ARE HERE!")
-            switchToViewController(with: TabBarController())
+            switchToViewController(with: LoginNavVC())
         default:
             fatalError("\(#function) - Unable to match notficiation name.")
         }
@@ -90,13 +86,10 @@ extension AppController {
         UIView.animate(withDuration: 0.8, animations: {
             self.actingVC.view.alpha = 1.0
             existingVC?.view.alpha = 0.0
-        }) { success in
-            
-            
-            
-            existingVC?.childViewControllers.forEach { $0.view.removeFromSuperview() }
+        }) {
+
+          success in
             existingVC?.view.removeFromSuperview()
-            existingVC?.childViewControllers.forEach { $0.removeFromParentViewController() }
             existingVC?.removeFromParentViewController()
             self.actingVC.didMove(toParentViewController: self)
         }
@@ -107,11 +100,8 @@ extension AppController {
 }
 
 extension Notification.Name {
-    
     static let closeLoginVC = Notification.Name("close-login-view-controller")
     static let closeDashboardVC = Notification.Name("close-dashboard-view-controller")
-    static let closeGoalsVC = Notification.Name("close-goals-view-controller")
-    
 }
 
 extension UIView {

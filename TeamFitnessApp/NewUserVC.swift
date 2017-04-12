@@ -84,7 +84,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
                     vc.userEmail = self.userEmail
                     vc.userPassword = self.userPassword
                     vc.uid = uid
-                    self.present(vc, animated: true, completion: nil)
+                    self.navigationController?.pushViewController(vc, animated: true)
                    
                 case let .failure(error):
                     self.alert(message: error)

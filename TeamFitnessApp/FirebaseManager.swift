@@ -262,6 +262,14 @@ struct FirebaseManager {
         challengeRef.updateChildValues(post)
         completion(challengeID)
     }
+    
+//MARK: - add one one team/challenge/user to another team/challenge/user
+    
+    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+        completion()
+    }
 
 
 // MARK: - Test functions

@@ -12,8 +12,6 @@ import Firebase
 class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var team: Team?
-    var teamUsers = [User]()
-    var teamChallenges = [Challenge]()
     let teamNameLabel = TitleLabel()
     let captainLabel = FitnessLabel()
     let membersLabel = FitnessLabel()
@@ -71,10 +69,11 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows: Int = 0
+        
         if tableView == membersView {
-            rows = teamUsers.count
+            rows = team?.userUIDs.count ?? 0
         } else if tableView == challengesView {
-            return teamChallenges.count
+            rows = team?.challengeIDs.count ?? 0
         }
         return rows
     }
@@ -127,9 +126,14 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 //MARK: - Button functions
     
     func joinTeam() {
-        guard let uid = self.uid, let team = self.team else {return} //TODO: handle this error better
-        self.team?.userUIDs.append(uid)
-        FirebaseManager.save(team: team)
+        guard let uid = self.uid, let teamID = self.team?.id else {return} //TODO: handle this error better
+        //self.team?.userUIDs.append(uid)
+        FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
+            FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
+                self.membersView.reloadData()
+            }
+        }
+        
     }
     
     func segueCreateChallenge() {

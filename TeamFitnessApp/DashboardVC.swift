@@ -20,6 +20,9 @@ class DashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       navigationItem.title = "Fitness Baby"
+      let button = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogout(_:)))
+
+      navigationItem.setLeftBarButton(button, animated: false)
 
       createTestUser()
       dashboadView = DashboardView(frame: view.frame)
@@ -41,7 +44,8 @@ class DashboardVC: UIViewController {
     let goal1 = Goal(type: .caloriesBurned, value: 800)
     let goals = [goal, goal1]
 
-    testUser = User(name: "Sandro", sex: "male", height: 62, weight: 240, teamIDs: [], challengeIDs: ["-Kh-2VOryz2zuH2ht90j", "-Kh-4CnhvvQ7GCkJHUOM"], imageURL: "", uid: "ueIVp3UT2mVJHwVT8Pgoz0GPfbK2", email: "ales.musto@gmail.com", goals: goals)
+    testUser = User(name: "Sandro", sex: "male", height: 62, weight: 200, teamIDs: [], challengeIDs: ["-KhU260OQP09rXtwC43M", "-KhUTSehLIDfg7x7rlu-", "-KhUUzDXDcupM2xozo3D", "-KhUgr27zft-EDgW3ot6"], goals: goals, email: "ales.musto@gmail.com", uid: "ueIVp3UT2mVJHwVT8Pgoz0GPfbK2")
+
   }
 
   func getChallenges() {
@@ -56,6 +60,15 @@ class DashboardVC: UIViewController {
       }
     }
   }
+
+  func onLogout(_ sender: UIBarButtonItem) {
+    FirebaseManager.logoutUser { (response) in
+      print(response)
+
+      NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
+
+    }
+  }
 }
 
 extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
@@ -67,6 +80,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     cell.textLabel?.text = challenges[indexPath.row].name
+    cell.backgroundColor = UIColor.clear
     cell.textLabel?.textColor = UIColor.foregroundOrange
     return cell
   }

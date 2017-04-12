@@ -28,6 +28,9 @@ class CustomPieChartView: PieChartView {
     self.chartDescription?.text = ""
     self.legend.enabled = false
     self.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+    self.rotationEnabled = false
+    self.highlightPerTapEnabled = false
+
   }
 
 

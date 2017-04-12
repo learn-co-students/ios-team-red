@@ -49,14 +49,9 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = FitnessView()
-        getUser()
+        
         setupViews()
-        getMyTeams {
-            self.filteredTeams = self.myTeams
-            DispatchQueue.main.async {
-                self.teamsTableView.reloadData()
-            }
-        }
+        getData()
         
     }
     
@@ -326,29 +321,40 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
 //MARK: - Firebase calls
-    
-    func getMyTeams(completion: @escaping () -> Void) {
-        guard let uid = FIRAuth.auth()?.currentUser?.uid else {
-            print("Could not get user, no user logged in")
-            return
-        }
-        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-            let teamList = user.teamIDs
-            for teamID in teamList {
-                FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
-                    if team.captainID == uid {
-                        self.myTeams.append(team)
-                        completion()
-                    }
-                })
-            }
+    func getData() {
+        getUser { (user) in
+            self.getTeams(forUser: user, completion: {
+                self.filteredTeams = self.myTeams
+                DispatchQueue.main.async {
+                    self.teamsTableView.reloadData()
+                }
+            })
         }
     }
     
-    func getUser() {
+    func getUser(completion: @escaping (User) -> Void) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
             self.user = user
+            completion(user)
         }
     }
+    
+    private func getTeams(forUser user: User, completion: @escaping () -> Void) {
+        myTeams.removeAll()
+        filteredTeams.removeAll()
+        let teamList = user.teamIDs
+        for teamID in teamList {
+            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+                if team.captainID == user.uid {
+                    self.myTeams.append(team)
+                    completion()
+                }
+            })
+        }
+    }
+    
+    
+    
+    
 }

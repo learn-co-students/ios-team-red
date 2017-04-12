@@ -16,19 +16,13 @@ struct FirebaseManager {
 
 //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
-    static func createNew(User user: User, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
-        guard let userEmail = user.email else {
-            print("Could not create new user in database - user has no email")
-            return
-        }
-        FIRAuth.auth()?.createUser(withEmail: userEmail, password: password, completion: { (firUser, error) in
+  static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
+
+        FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
             if let firUser = firUser {
-                var updatedUser  = user
-                updatedUser.uid = firUser.uid
-                FirebaseManager.save(user: updatedUser)
-                completion(.successfulNewUser(updatedUser))
+                completion(.successfulNewUser(firUser.uid))
             } else {
-                completion(.failure("FirebaseManager could not create new user"))
+                completion(.failure(error!.localizedDescription))
             }
         })
     }
@@ -39,11 +33,12 @@ struct FirebaseManager {
             if let user = user {
                 completion(.successfulLogin(user))
             } else {
-                completion(.failure("FirebaseManager could not log in user"))
+              let error1 = error!
+                completion(.failure(error1.localizedDescription))
             }
         })
     }
-    
+
     
     //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
@@ -160,13 +155,13 @@ struct FirebaseManager {
         dataRef.child("challenges").child(challengeID).observe(.value, with: {(snapshot) in
             if let challengeDict = snapshot.value as? [String: Any] {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
-                print("Entering completion")
                 completion(challenge)
             } else {
               print("not in completion")
           }
         })
     }
+
     
 
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion

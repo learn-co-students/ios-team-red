@@ -11,8 +11,15 @@ import Foundation
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfileViewDelegate {
 
-   
     let profileView = ProfileView()
+    
+    var name: String!
+    var userEmail: String!
+    var userPassword: String!
+    var weight: Int = 0
+    var gender: String = ""
+    var height: Int = 0
+//    var userImage: UImage!
     
     override func loadView() {
         self.view = profileView
@@ -22,16 +29,40 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
     
         profileView.delegate = self
+        self.hideKeyboardWhenTappedAround()
+    
     
     }
     
     func setGoalsButton() {
         
-        self.present(GoalsViewController(), animated: true, completion: nil)
+        
+        weight = Int(profileView.weightTextField.text!)!
+        
+        height = ((Int(profileView.heightFeetTextField.text!)! * 12) + (Int(profileView.heightInchesTextField.text!)!))
+            
+        let vc: GoalsViewController = GoalsViewController()
+        
+        vc.userEmail = userEmail
+        vc.userPassword = userPassword
+        vc.name = name
+        vc.gender = gender
+        vc.height = height
+        vc.weight = weight
+        
+        print("ProfileVC \(userEmail)")
+        print("ProfileVC \(userPassword)")
+        print("ProfileVC \(name)")
+        print("ProfileVC \(gender)")
+        print("ProfileVC \(height)")
+        print("ProfileVC \(weight)")
+        
+            
+        self.present(vc, animated: true, completion: nil)
     }
 
     
-//  _ sender:UIButton
+
     
     func displayImagePickerButtonTapped() {
         
@@ -64,9 +95,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
      }
     
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         profileView.myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+//        userImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profileView.myImageView.backgroundColor = UIColor.clear
         profileView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
         self.dismiss(animated: true, completion: nil)
@@ -85,9 +119,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
+            self.gender = "Male"
+            
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
+            self.gender = "Female"
         }
         
         alertController.addAction(cancelAction)

@@ -10,11 +10,14 @@ import UIKit
 
 protocol LoginViewDelegate: class {
     func pressNewUser()
-
+    func pressLogin()
+    
 }
 
+
 class LogInView: FitnessView {
-    
+
+    let healthKitManager = HealthKitManager.sharedInstance
     var fitnessBabyLabel: FitnessLabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
@@ -22,6 +25,7 @@ class LogInView: FitnessView {
     var newUserButton: FitnessButton!
     var googleButton: FitnessButton!
     var facebookButton: FitnessButton!
+    var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
 
     override init(frame: CGRect) {
@@ -38,6 +42,10 @@ class LogInView: FitnessView {
     }
 
     
+    func pressLogin(sender: UIButton) {
+        delegate?.pressLogin()
+    }
+    
     private func loadUI() {
         
         fitnessBabyLabel = FitnessLabel()
@@ -47,7 +55,7 @@ class LogInView: FitnessView {
         fitnessBabyLabel.reverseColors()
         fitnessBabyLabel.changeFontSize(to: 32.0)
         fitnessBabyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        fitnessBabyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 80).isActive = true
+        fitnessBabyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
         fitnessBabyLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         fitnessBabyLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         fitnessBabyLabel.text = "Fitness Baby"
@@ -62,16 +70,22 @@ class LogInView: FitnessView {
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.layer.cornerRadius = 5
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         emailTextField.textAlignment = NSTextAlignment.center
         emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         emailTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 50).isActive = true
+        emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 30).isActive = true
         emailTextField.placeholder = "email"
+        emailTextField.autocorrectionType = UITextAutocorrectionType.no
+        emailTextField.autocapitalizationType = .none
         emailTextField.backgroundColor = UIColor.white
         
         passwordTextField = UITextField()
         self.addSubview(passwordTextField)
+        passwordTextField.autocorrectionType = .no
+        passwordTextField.autocapitalizationType = .none
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.textAlignment = NSTextAlignment.center
@@ -80,11 +94,29 @@ class LogInView: FitnessView {
         passwordTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
         passwordTextField.placeholder = "password"
+        passwordTextField.autocorrectionType = UITextAutocorrectionType.no
+        passwordTextField.autocapitalizationType = .none
+        passwordTextField.isSecureTextEntry = true
         passwordTextField.backgroundColor = UIColor.white
         
     }
     
     private func setupFitnessButtons() {
+        
+        forgotButton = FitnessButton()
+        self.addSubview(forgotButton)
+        forgotButton.translatesAutoresizingMaskIntoConstraints = false
+        forgotButton.reverseColors()
+        forgotButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 0).isActive = true
+        forgotButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+
+        forgotButton.setTitle("Forgot Password?", for: .normal)
+        forgotButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: 0).isActive = true
+        
+        
+        
+        
+        
         loginButton = FitnessButton()
         self.addSubview(loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +126,8 @@ class LogInView: FitnessView {
         loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         loginButton.isEnabled = true
         loginButton.setTitle("Login", for: .normal)
-        loginButton.addTarget(self, action: #selector(pressLoginButton), for: UIControlEvents.touchUpInside)
+        loginButton.addTarget(self, action: #selector(pressLogin), for: .touchUpInside)
+
         
         newUserButton = FitnessButton()
         self.addSubview(newUserButton)
@@ -131,9 +164,16 @@ class LogInView: FitnessView {
         
     }
 
-  func pressLoginButton(_ sender: UIButton) {
-    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
-      NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-    }
-  }
+//  func pressLoginButton(_ sender: UIButton) {
+//    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
+//
+//      if self.healthKitManager.requestHealthKitAuth(completion: (Bool) -> ()) {
+//        NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+//      } else {
+//        print("nope")
+//      }
+//
+//    }
+//  }
 }
+

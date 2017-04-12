@@ -45,6 +45,7 @@ class ProfileView: FitnessView {
     }
     
     func pressSetGoals(sender:UIButton) {
+        print("pressedSetGoals")
         delegate?.setGoalsButton()
     }
         
@@ -58,7 +59,7 @@ class ProfileView: FitnessView {
         profileLabel.reverseColors()
         profileLabel.changeFontSize(to: 32.0)
         profileLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
         profileLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         profileLabel.text = "Profile"

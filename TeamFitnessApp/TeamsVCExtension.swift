@@ -20,22 +20,12 @@ extension TeamsVC { // Extension for setting up all views
     }
     
     func setupTitle() {
-        self.view.addSubview(titleLabel)
-        titleLabel.setConstraints(toView: self.view)
-        titleLabel.setText(toString: "Teams")
+        self.view.addSubview(myTeamsLabel)
+        myTeamsLabel.setConstraints(toView: self.view, andViewController: self)
+        myTeamsLabel.setText(toString: "My Teams")
     }
     
     func setUpMyTeams() {
-        view.addSubview(myTeamsLabel)
-        myTeamsLabel.translatesAutoresizingMaskIntoConstraints = false
-        myTeamsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        myTeamsLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        myTeamsLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        myTeamsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.1).isActive = true
-        myTeamsLabel.textAlignment = .center
-        myTeamsLabel.changeFontSize(to: 20)
-        myTeamsLabel.reverseColors()
-        myTeamsLabel.text = "My Teams:"
         
         view.addSubview(myTeamsView)
         myTeamsView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,7 +60,7 @@ extension TeamsVC { // Extension for setting up all views
         createTeamButton.translatesAutoresizingMaskIntoConstraints = false
         createTeamButton.leftAnchor.constraint(equalTo: myTeamsLabel.rightAnchor).isActive = true
         createTeamButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        createTeamButton.topAnchor.constraint(equalTo: titleLabel.centerYAnchor).isActive = true
+        createTeamButton.topAnchor.constraint(equalTo: myTeamsLabel.centerYAnchor).isActive = true
         createTeamButton.bottomAnchor.constraint(equalTo: myTeamsLabel.topAnchor).isActive = true
         createTeamButton.setTitle("+", for: .normal)
         createTeamButton.changeFontSize(to: 18)
@@ -78,27 +68,35 @@ extension TeamsVC { // Extension for setting up all views
     }
     
 // MARK: - calls to Firebase
-    func getTeams(forUser user: User, completion: @escaping () -> Void) {//gets all of the teams for the user from Firebase, and sets them to the teams property of the VC
-        myTeams.removeAll()
-        filteredTeams.removeAll()
-        let teamList = user.teamIDs
-        for teamID in teamList {
-            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
-                self.myTeams.append(team)
-                completion()
-            })
+    func fetchData() {
+        guard let uid = uid else {return}
+        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            self.user = user
+            self.getAllTeams(user: user)
         }
     }
     
-    func getAllTeams() { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
+    private func getAllTeams(user: User) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
         FirebaseManager.fetchAllTeams { (teams) in
-            self.allTeams = teams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+            for team in teams {
+                if let teamID = team.id  {
+                    if user.teamIDs.contains(teamID) {
+                        self.myTeams.append(team)
+                    } else {
+                        self.allTeams.append(team)
+                    }
+                }
+            }
+            self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+            self.allTeams = self.allTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
             self.filteredTeams = self.allTeams
             DispatchQueue.main.async {
                 self.searchTableView.reloadData()
+                self.myTeamsView.reloadData()
             }
         }
     }
+
 }
 
 extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar

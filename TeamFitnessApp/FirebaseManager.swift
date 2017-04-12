@@ -294,12 +294,13 @@ struct FirebaseManager {
 
 
     static func generateTestUser() {
-        var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
+        var user = User(name: "Superman", sex: "Male", height: 80, weight: 200, teamIDs: [], challengeIDs: [])
+        //var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
         user.email = "batman@batman.com"
-        FirebaseManager.createNew(User: user, withPassword: "batman1234") { (response) in
+        FirebaseManager.createNew(withEmail: user.email!, withPassword: "batman1234") { (response) in
             switch response {
             case let .successfulNewUser(newUser):
-                print("NEW USER CREATED with ID \(newUser.uid!)")
+                print("NEW USER CREATED with ID \(newUser)")
             default:
                 print("could not create new user")
             }

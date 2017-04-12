@@ -14,7 +14,7 @@ extension TeamDetailVC {
         view = FitnessView()
         
         self.view.addSubview(teamNameLabel)
-        teamNameLabel.setConstraints(toView: self.view)
+        teamNameLabel.setConstraints(toView: self.view, andViewController: self)
         
         view.addSubview(teamImageView)
         teamImageView.translatesAutoresizingMaskIntoConstraints = false

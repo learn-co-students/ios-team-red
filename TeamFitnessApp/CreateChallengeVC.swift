@@ -62,7 +62,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     func setupViews() {
         self.view.addSubview(titleLabel)
-        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setConstraints(toView: self.view, andViewController: self)
         titleLabel.setText(toString: "New Challenge")
         
         self.view.addSubview(challengeNameField)

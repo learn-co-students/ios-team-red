@@ -14,8 +14,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let screenBounds = UIScreen.main.bounds
     let mainView = FitnessView()
     let uid = FIRAuth.auth()?.currentUser?.uid
-    let titleLabel = TitleLabel()
-    let myTeamsLabel = FitnessLabel()
+    var user: User? = nil
+    let myTeamsLabel = TitleLabel()
     let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
     
@@ -34,7 +34,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Fitness Baby"
+        navigationItem.title = "Teams"
         setupSubViews()
         setupSearchBar()
         
@@ -46,18 +46,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         
-        if let uid = self.uid {
-            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-                self.getTeams(forUser: user) {
-                    self.myTeams.sort {$0.name.lowercased() < $1.name.lowercased()}
-                    DispatchQueue.main.async {
-                        self.myTeamsView.reloadData()
-                    }
-                }
-                
-            }
-        }
-        getAllTeams()
+        fetchData()
     }
     
 // MARK: - Delegate and Data Source

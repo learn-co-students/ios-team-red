@@ -38,7 +38,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func setupLabels() {
         self.view.addSubview(titleLabel)
-        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setConstraints(toView: self.view, andViewController: self)
         titleLabel.setText(toString: "New Team")
         titleLabel.text = "New Team"
     }

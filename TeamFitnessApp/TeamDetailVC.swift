@@ -21,9 +21,18 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let inviteMembersButton = FitnessButton()
     let createChallengeButton = FitnessButton()
     let teamImageView = UIImageView()
+    var uid: String? = FIRAuth.auth()?.currentUser?.uid
     
     let membersView = UITableView()
     let challengesView = UITableView()
+    let joinButton = FitnessButton()
+    
+    var userIsTeamMember: Bool {
+        var test = false
+        guard let UIDs = team?.userUIDs, let uid = self.uid else {return test}
+        if UIDs.contains(uid) {test = true}
+        return test
+    }
     
     var userIsCaptain: Bool {
         return team?.captainID == FIRAuth.auth()?.currentUser?.uid
@@ -82,6 +91,14 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let challengeDetailVC = ChallengeDetailVC()
+        if tableView == challengesView {
+            challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
+            present(challengeDetailVC, animated: true, completion: nil)
+        }
+    }
+    
 // MARK: - calls to firebase
     func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
         teamUsers.removeAll()
@@ -107,12 +124,12 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let challengeDetailVC = ChallengeDetailVC()
-        if tableView == challengesView {
-            challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
-            present(challengeDetailVC, animated: true, completion: nil)
-        }
+//MARK: - Button functions
+    
+    func joinTeam() {
+        guard let uid = self.uid, let team = self.team else {return} //TODO: handle this error better
+        self.team?.userUIDs.append(uid)
+        FirebaseManager.save(team: team)
     }
     
     func segueCreateChallenge() {

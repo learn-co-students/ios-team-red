@@ -49,11 +49,22 @@ extension TeamDetailVC {
         captainLabel.translatesAutoresizingMaskIntoConstraints = false
         captainLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         captainLabel.topAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
-        captainLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        captainLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         captainLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         captainLabel.textAlignment = .center
         captainLabel.changeFontSize(to: 20)
         captainLabel.reverseColors()
+        
+        if !userIsTeamMember {
+            self.view.addSubview(joinButton)
+            joinButton.translatesAutoresizingMaskIntoConstraints = false
+            joinButton.leftAnchor.constraint(equalTo: captainLabel.rightAnchor).isActive = true
+            joinButton.topAnchor.constraint(equalTo: captainLabel.topAnchor).isActive = true
+            joinButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.2).isActive = true
+            joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
+            joinButton.setTitle("Join Team", for: .normal)
+            joinButton.addTarget(self, action: #selector(joinTeam), for: .touchUpInside)
+        }
         
         self.view.addSubview(membersLabel)
         membersLabel.translatesAutoresizingMaskIntoConstraints = false

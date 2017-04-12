@@ -50,7 +50,7 @@ struct User {
     
 
     
-    init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], goals: [Goal] = [], email: String? = nil, uid: String? = nil) {
+    init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], goals: [Goal], email: String? = nil, uid: String? = nil) {
 
         self.name = name
         self.sex = sex

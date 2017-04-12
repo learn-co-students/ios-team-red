@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Firebase
+
 
 protocol GoalsViewDelegate: class {
     func pressCreateUserButton()

@@ -13,12 +13,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     let profileView = ProfileView()
     
-    var name: String!
+    var name: String = ""
     var userEmail: String = ""
     var userPassword: String = ""
     var weight: Int = 0
     var gender: String = ""
     var height: Float = 0
+    var uid: String = ""
 //    var userImage: UImage!
     
     override func loadView() {
@@ -30,8 +31,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         profileView.delegate = self
         self.hideKeyboardWhenTappedAround()
-        print("ProfileVC email\(userEmail)")
-        print("ProfileVC password\(userPassword)")
+//        print("ProfileVC email\(userEmail)")
+//        print("ProfileVC password\(userPassword)")
     
     
     }
@@ -51,6 +52,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.gender = gender
         vc.height = height
         vc.weight = weight
+        vc.uid = uid
         
         print("ProfileVC email\(userEmail)")
         print("ProfileVC password\(userPassword)")
@@ -63,9 +65,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.present(vc, animated: true, completion: nil)
     }
 
-    
-
-    
     func displayImagePickerButtonTapped() {
         
         

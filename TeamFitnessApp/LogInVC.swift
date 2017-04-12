@@ -76,13 +76,6 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             switch response {
             case let .successfulLogin(user):
                 print(user.uid)
-                
-                self.healthKitManager.requestHealthKitAuth(completion: { (success) in
-                  if success {
-                  } else {
-                    print("nope")
-                  }
-                })
                 NotificationCenter.default.post(name: .closeLoginVC, object: nil)
 
             case let .failure(failString):

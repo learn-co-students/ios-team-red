@@ -13,16 +13,17 @@ import UIKit
 class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     
-    var name: String!
-    var userEmail: String!
-    var userPassword: String!
-    var weight: Int!
-    var gender: String!
-    var height: Float!
+    var name: String = ""
+    var userEmail: String = ""
+    var userPassword: String = ""
+    var weight: Int = 0
+    var gender: String = ""
+    var height: Float = 0
     var firstGoal = Goal(type: .exerciseTime, value: 0)
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
+    var uid: String = ""
     
-    
+ 
     
     let goalsView = GoalsView()
     
@@ -31,47 +32,55 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         goalsView.delegate = self
         self.view = goalsView
         self.hideKeyboardWhenTappedAround()
+        
+//        
+//        print("Goals name \(name)")
+//        print("Goals email \(userEmail)")
+//        print("Goals password \(userPassword)")
+//        print("Goals weight \(weight)")
+//        print("Goals gender \(gender)")
+//        print("Goals height \(height)")
+//        print("Goals uid \(uid)")
 
+    
     }
+    
+    
     
     func pressCreateUserButton() {
         
         let tempGoal = Double(goalsView.activityMinutesADay.text!)
         firstGoal.setValue(from: tempGoal!)
+        print(firstGoal.value)
         
         let tempGoal2 = Double(goalsView.caloriesADay.text!)
         secondGoal.setValue(from: tempGoal2!)
+        print(secondGoal.value)
         
-        let user = User(name: name!, sex: gender!, height: height!, weight: weight!, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail!, uid: nil)
+        let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)
         
-        FirebaseManager.createNew(User: user, withPassword: userPassword!) { (response) in
-            switch response {
-            case let .successfulNewUser(user):
-//                print (user.uid)
-                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-            case let .failure(error):
-                print(error)
-            default:
-                print("default")
-                
-            
+        
+        
+        FirebaseManager.save(user: user) { (success) in
+            if success {
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .closeGoalsVC, object: nil)
+                }
             }
         }
         
-//        FirebaseManager.loginUser(withEmail: email, andPassword: password) { (response) in
-//            switch response {
-//            case let .successfulLogin(user):
-//                print(user.uid)
-//                self.present(DashboardVC(), animated: true, completion: nil)
-//            case let .failure(failString):
-//                print(failString)
-//                self.alert(message: "Log In Failed")
-//                
-//            default:
-//                print("Firebase login failure")
-//            }
-//
-//        
+        
+  
+        print("Goals name \(name)")
+        print("Goals email \(userEmail)")
+        print("Goals password \(userPassword)")
+        print("Goals weight \(weight)")
+        print("Goals gender \(gender)")
+        print("Goals height \(height)")
+        print("Goals uid \(uid)")
+
+
+        
         
 
     }
@@ -79,12 +88,6 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("Goals name \(name)")
-        print("Goals email \(userEmail)")
-        print("Goals password \(userPassword)")
-        print("Goals weight \(weight)")
-        print("Goals gender \(gender)")
-        print("Goals height \(height)")
     }
     
 }

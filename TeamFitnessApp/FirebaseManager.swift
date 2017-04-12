@@ -53,8 +53,9 @@ struct FirebaseManager {
 
 // MARK: - save functions
 
-    static func save(user: User) {// saves a user to the Firebase database
+    static func save(user: User, completion: @escaping (Bool) -> ()) {// saves a user to the Firebase database
         let key = dataRef.child("users").child(user.uid!)
+        var goalDict = [String: Double]()
         var challengesDict = [String: Bool]()
         var teamsDict = [String: Bool]()
         
@@ -62,6 +63,12 @@ struct FirebaseManager {
             challengesDict[challenge] = true
         }
         
+        for goal in user.goals {
+            
+            goalDict[goal.type.rawValue] = goal.value
+            
+            
+        }
         for team in user.teamIDs {
             teamsDict[team] = true
         }
@@ -72,11 +79,13 @@ struct FirebaseManager {
             "gender": user.sex,
             "height": user.height,
             "weight": user.weight,
-            "teams": teamsDict,
-            "challenges": challengesDict,
+            "teams": teamsDict ?? "No Teams",
+            "goals": goalDict ?? "No Goals",
+            "challenges": challengesDict ?? "No Challenges",
         ]
         
         key.updateChildValues(post)
+        completion(true)
     }
     
     static func save(team: Team) {// saves a team to Firebase database

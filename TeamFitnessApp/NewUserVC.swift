@@ -76,28 +76,35 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     
         if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
             
-//            
-            
-            
-            
-            
-            
-            let vc: ProfileViewController = ProfileViewController()
-//            vc.userEmail = userEmail
-//            vc.userPassword = userPassword
-            
+            FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
+                switch response {
+                case let .successfulNewUser(uid):
+                
+                    let vc: ProfileViewController = ProfileViewController()
+                    vc.userEmail = self.userEmail
+                    vc.userPassword = self.userPassword
+                    vc.uid = uid
+                    self.present(vc, animated: true, completion: nil)
+                   
+                case let .failure(error):
+                    self.alert(message: error)
+                default:
+                    print("default")
+                        
+            }
+        })
+  
             print("New User's email\(userEmail)")
             print("New User's password\(userPassword)")
             
-//            self.present(vc, animated: true, completion: nil)
-           
         } else {
             
-           print("passwords don't match")
-            
+            self.alert(message: "Passwords Don't Match")
         }
         
     }
+    
+    
     
 }
 

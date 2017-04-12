@@ -40,11 +40,11 @@ class CustomPieChartView: PieChartView {
     var values = [PieChartDataEntry]()
 
     if current > goal {
-      values.append(PieChartDataEntry(value: abs(goal-current), label: "over goal"))
-      values.append(PieChartDataEntry(value: goal, label: "goal"))
+      values.append(PieChartDataEntry(value: abs(goal-current).rounded(), label: "over goal"))
+      values.append(PieChartDataEntry(value: goal.rounded(), label: "goal"))
     } else {
-      values.append(PieChartDataEntry(value: goal-current, label: "left"))
-      values.append(PieChartDataEntry(value: current, label: "you"))
+      values.append(PieChartDataEntry(value: (goal-current).rounded(), label: "left"))
+      values.append(PieChartDataEntry(value: current.rounded(), label: "you"))
     }
 
 

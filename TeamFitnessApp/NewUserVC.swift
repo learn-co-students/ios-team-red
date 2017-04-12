@@ -11,28 +11,81 @@ import UIKit
 class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
     
     var createNewUserView = NewUserView()
-    var user: User?
-    var email: String = ""
+   
+    var userEmail: String = ""
     var userPassword: String = ""
+    var confirmPassword: String = ""
 
     override func loadView() {
         
         self.view = createNewUserView
+        createNewUserView.delegate = self
+        
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createNewUserView.delegate = self
         
+        createNewUserView.emailTextField.delegate = self
+        createNewUserView.emailTextField.tag = 0
+        createNewUserView.passwordTextField.delegate = self
+        createNewUserView.passwordTextField.tag = 1
+        createNewUserView.confirmTextField.delegate = self
+        createNewUserView.confirmTextField.tag = 2
+    
     }
     
- 
+    func checkPassword(userPassword: String, confirmPassword: String) -> Bool {
+        return userPassword == confirmPassword
+    }
+    
+    
+    //fix not working for retype password
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if let nextField = createNewUserView.emailTextField.superview?.viewWithTag(createNewUserView.emailTextField.tag + 1) as? UITextField {
+            nextField.becomeFirstResponder()
+            
+        } else {
+            createNewUserView.resignFirstResponder()
+        }
+
+        return false
+    }
+    
+    //??????
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        return true
+    }
+    
+    
+    
+   
     func pressProfileButton() {
         
-        self.present(ProfileViewController(), animated: true, completion: nil)
-    
-    
-    
+        userEmail = createNewUserView.emailTextField.text!
+        userPassword = createNewUserView.passwordTextField.text!
+        confirmPassword = createNewUserView.confirmTextField.text!
+        
+        // check not working
+        if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
+            
+            let vc: ProfileViewController = ProfileViewController()
+            vc.userEmail = userEmail
+            vc.userPassword = userPassword
+            
+            print("New User's \(userEmail)")
+            print("New User's \(userPassword)")
+            
+            self.present(vc, animated: true, completion: nil)
+           
+        } else {
+            
+           print("passwords don't match")
+            
+        }
+        
     }
     
 }

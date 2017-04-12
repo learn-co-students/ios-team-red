@@ -30,7 +30,6 @@ class ChallengeDetailVC: UIViewController {
         self.view = FitnessView()
         setupViews()
 
-        // Do any additional setup after loading the view.
     }
 
     func setupViews() {
@@ -44,7 +43,7 @@ class ChallengeDetailVC: UIViewController {
         goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        // refactor challenge goal as an instance of Goal
+        
        // goalPieChart.setData(goal: challenge.goal, current: <#T##Double#>)
         
     }

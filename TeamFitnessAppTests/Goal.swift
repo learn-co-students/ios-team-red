@@ -30,7 +30,7 @@ struct Goal {
             self.type = .distance
             case "stepCount":
             self.type = .stepCount
-            case "caloriesBurnes":
+            case "caloriesBurned":
             self.type = .caloriesBurned
             case "exerciseTime":
             self.type = .exerciseTime

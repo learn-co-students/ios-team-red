@@ -13,7 +13,7 @@ import UIKit
 enum FirebaseResponse {
     
     case successfulLogin(FIRUser)
-    case successfulNewUser(User)
+    case successfulNewUser(String)
     case successfulLogout(String)
     case succesfulUpload(String)
     case successfulDownload(UIImage)

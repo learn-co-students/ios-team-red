@@ -18,9 +18,7 @@ final class HealthKitManager {
 
 
   //request user authorization to read steps,distance,calories and workoutTime. to write height and weight
-  func requestHealthKitAuth() -> Bool {
-
-    var isEnabled = true
+  func requestHealthKitAuth(completion: @escaping (Bool) -> ()) {
 
     let stepsCount = HKQuantityType.quantityType(forIdentifier: .stepCount)
     let distance = HKObjectType.quantityType(forIdentifier: .distanceWalkingRunning)
@@ -38,17 +36,16 @@ final class HealthKitManager {
         let distance = distance,
         let calories = calories,
         let workoutTime = workoutTime,
-        let stepsCount = stepsCount else { return false }
+        let stepsCount = stepsCount else { completion(false); return  }
 
       healthStore.requestAuthorization(toShare: [weight, height], read: [stepsCount, distance, calories, workoutTime]) { (success, error) in
         if success {
-          isEnabled = true
+          completion(true)
         } else {
-          isEnabled = false
+          completion(false)
         }
       }
     }
-    return isEnabled
   }
 
 

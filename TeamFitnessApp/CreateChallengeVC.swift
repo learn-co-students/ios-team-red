@@ -208,8 +208,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             print("save new challenge")
             challengeStartDate = startDatePicker.date
             challengeEndDate = endDatePicker.date
-            if let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID, let challengeTeamID = challengeTeamID {
-                challenge = Challenge(startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
+            if let challengeName = challengeName ,let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID, let challengeTeamID = challengeTeamID {
+                challenge = Challenge(name: challengeName,startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
                 guard let challenge = challenge else {return}
                 guard var user = user else {return}
                 FirebaseManager.addNew(challenge: challenge, completion: { (challengeID) in
@@ -223,8 +223,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                         FirebaseManager.save(team: team)
                     }
                 })
-                
-                
                 self.dismiss(animated: true, completion: nil)
             }
         }

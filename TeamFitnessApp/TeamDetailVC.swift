@@ -41,10 +41,15 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengesView.dataSource = self
 
         setupViews()
-        getTeamMembers(forTeam: team) { 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        getTeamMembers(forTeam: team) {
             self.membersView.reloadData()
         }
-        getTeamChallenges(forTeam: team) { 
+        getTeamChallenges(forTeam: team) {
             self.challengesView.reloadData()
         }
     }
@@ -79,8 +84,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         return cell
     }
-    
+// MARK: - calls to firebase
     func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
+        teamUsers.removeAll()
         if let memberList = team?.userUIDs {
             for memberID in memberList {
                 FirebaseManager.fetchUser(withFirebaseUID: memberID, completion: { (user) in
@@ -92,14 +98,22 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func getTeamChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
-        if let challengeList = team?.challengeIDs {
-            for challengeID in challengeList {
-                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
-                    self.teamChallenges.append(challenge)
-                    completion()
-                })
+        teamChallenges.removeAll()
+        guard let teamID = team?.id else {return}
+        //update teamChallengeIDs
+        guard let team = team else {return}
+        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
+            self.team?.challengeIDs = team.challengeIDs
+            if let challengeList = self.team?.challengeIDs {
+                for challengeID in challengeList {
+                    FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                        self.teamChallenges.append(challenge)
+                        completion()
+                    })
+                }
             }
         }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

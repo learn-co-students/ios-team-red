@@ -249,7 +249,7 @@ struct FirebaseManager {
         
         let teamID = challenge.teamID ?? "no team"
         let post: [String: Any] = [
-            "name": challenge.name ,
+            "name": challenge.name,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,

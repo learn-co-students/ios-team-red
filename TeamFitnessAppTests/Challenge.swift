@@ -28,12 +28,15 @@ struct Challenge {
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
         
-        let goalDict = dict["goal"] as? [String: Double] ?? [:] //I don't like the way we're handling storing goals in Firebase. Discuss! - Pat
+        let goalDict = dict["goal"] as? [String: Double] ?? [:] 
         for (key, value) in goalDict {
-            goal?.setType(from: key)
-            goal?.setValue(from: value)
+          if let goalType = GoalType(rawValue: key) {
+            let goal = Goal(type: goalType, value: value)
+            self.goal = goal
+          }
         }
-        
+
+
         self.startDate = (dict["startDate"] as? String)?.convertToDate()
         self.endDate = (dict["endDate"] as? String)?.convertToDate()
         let userDict = dict["users"] as? [String: Bool] ?? [:]

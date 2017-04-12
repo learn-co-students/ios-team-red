@@ -125,6 +125,11 @@ struct FirebaseManager {
         
         key.updateChildValues(post)
     }
+
+  static func updateChallengeData(challengeID: String, userID: String, withData data: Double) {
+    let key = dataRef.child("challenges").child(challengeID).child("users")
+    key.updateChildValues([userID:data])
+  }
 // MARK: - Fetch functions
 
     //fetches a user from Firebase given a user id string, and returns the user through a closure
@@ -287,25 +292,3 @@ struct FirebaseManager {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

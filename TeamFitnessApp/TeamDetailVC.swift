@@ -97,7 +97,8 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         let challengeDetailVC = ChallengeDetailVC()
         if tableView == challengesView {
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
-            present(challengeDetailVC, animated: true, completion: nil)
+            navigationController?.pushViewController(challengeDetailVC, animated: true)
+            //present(challengeDetailVC, animated: true, completion: nil)
         }
     }
     

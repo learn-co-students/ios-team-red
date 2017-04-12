@@ -93,6 +93,24 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == myChallengesView {
+            let challengeDetailVC = ChallengeDetailVC()
+            challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
+            navigationController?.pushViewController(challengeDetailVC, animated: true)
+        } else if tableView == publicChallengesView {
+            if searchActive {
+                let challengeDetailVC = ChallengeDetailVC()
+                challengeDetailVC.setChallenge(challenge: filteredChallenges[indexPath.row])
+                navigationController?.pushViewController(challengeDetailVC, animated: true)
+            } else {
+                let challengeDetailVC = ChallengeDetailVC()
+                challengeDetailVC.setChallenge(challenge: publicChallenges[indexPath.row])
+                navigationController?.pushViewController(challengeDetailVC, animated: true)
+            }
+        }
+    }
 
 //MARK: Firebase calls
     func getMyChallenges() {

@@ -10,7 +10,7 @@ import UIKit
 
 class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let challenge: Challenge? = nil
+    var challenge: Challenge? = nil
     
     let titleLabel = TitleLabel()
     let startDateLabel = FitnessLabel()
@@ -63,6 +63,8 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func setChallenge(challenge: Challenge) {
+        self.challenge = challenge
+        getChartData()
         self.titleLabel.setText(toString: challenge.name)
     }
     

@@ -16,6 +16,7 @@ extension ChallengesVC {
         setupMyChallenges()
         setupChallengeSearch()
         setupCreateChallengeButton()
+        setupSearchBar()
     }
     
     func setupMyChallenges() {
@@ -75,7 +76,51 @@ extension ChallengesVC {
         present(createChallengeVC, animated: true, completion: nil)
     }
     
+}
+
+extension ChallengesVC: UISearchBarDelegate {//controls functionality for search bar
+    
+    
+    //MARK: - search bar
     func setupSearchBar() {
+        challengeSearchBar.delegate = self
+        print("is user enabled?\(challengeSearchBar.isUserInteractionEnabled)")
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchActive = true;
+        print("Did begin editing")
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchActive = false;
+        print("Did end editing")
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        print("Clicked cacel button")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchActive = false;
+        print("Search button clicked")
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("text did change")
         
+        filteredChallenges = publicChallenges.filter({ (challenge) -> Bool in
+            let temp: String = challenge.name
+            let range = temp.range(of: searchText, options: .caseInsensitive)
+            return range != nil
+        })
+        
+        if(filteredChallenges.count == 0){
+            searchActive = false;
+        } else {
+            searchActive = true;
+        }
+        publicChallengesView.reloadData()
     }
 }

@@ -27,8 +27,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     let createChallengeButton = FitnessButton()
     var searchActive: Bool = false
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +41,9 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         publicChallengesView.delegate = self
         publicChallengesView.dataSource = self
+        
+        getMyChallenges()
+        getPublicChallenges()
         
     }
     
@@ -91,5 +92,26 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         return cell
+    }
+
+//MARK: Firebase calls
+    func getMyChallenges() {
+        guard let uid = self.uid else {return}
+        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            for challengeID in user.challengeIDs {
+                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                    self.myChallenges.append(challenge)
+                    self.myChallengesView.reloadData()
+                })
+            }
+        }
+        
+    }
+    
+    func getPublicChallenges() {
+        FirebaseManager.fetchPublicChallenges { (challenges) in
+            self.publicChallenges = challenges
+            self.publicChallengesView.reloadData()
+        }
     }
 }

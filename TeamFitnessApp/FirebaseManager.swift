@@ -198,6 +198,21 @@ struct FirebaseManager {
             completion(challenges)
         })
     }
+    
+    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {
+        var challenges = [Challenge]()
+        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
+            let challengesDict = snapshot.value as? [String: Any]
+            if let challengesDict = challengesDict {
+                for challenge in challengesDict {
+                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+                    challenges.append(challenge)
+                }
+            }
+            completion(challenges)
+        })
+    }
 
 // MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database

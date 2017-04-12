@@ -16,6 +16,7 @@
 		AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90961E9C0CC800EC6703 /* LoginManager.swift */; };
 		AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90981E9C0CD100EC6703 /* AppController.swift */; };
 		AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */; };
+		AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */; };
 		AAED5D671E9D4BFD002C0F4A /* TrophyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */; };
 		AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D681E9D4D75002C0F4A /* TabBarController.swift */; };
 		AAED5D6B1E9D614A002C0F4A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */; };
@@ -95,6 +96,7 @@
 		AABA90961E9C0CC800EC6703 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AABA90981E9C0CD100EC6703 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContollerCases.swift; sourceTree = "<group>"; };
+		AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNavVC.swift; sourceTree = "<group>"; };
 		AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyVC.swift; sourceTree = "<group>"; };
 		AAED5D681E9D4D75002C0F4A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -132,7 +134,6 @@
 		EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailVC.swift; sourceTree = "<group>"; };
 		EC9D94461E9AA77800E33362 /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
-
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -297,6 +298,7 @@
 				AABA90981E9C0CD100EC6703 /* AppController.swift */,
 				AAED5D681E9D4D75002C0F4A /* TabBarController.swift */,
 				AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */,
+				AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */,
 				AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */,
 				EC9D943A1E97EFA000E33362 /* NewUserVC.swift */,
 				EC9D94381E97EF8200E33362 /* LogInVC.swift */,
@@ -305,17 +307,11 @@
 				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
-
 				EC9D943E1E98130400E33362 /* CreateTeamVC.swift */,
-				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */,
-
 				EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */,
-
-
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				FE9586461E9C0D3A009C3BFE /* GoalsVC.swift */,
-
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -330,19 +326,13 @@
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 				ECE3F5AF1E940C70001230CC /* FitnessView.swift */,
 				EC9D94341E97CEAF00E33362 /* FitnessCell.swift */,
-
 				EC9D94461E9AA77800E33362 /* TitleLabel.swift */,
-
 				EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */,
 				EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */,
-
-
 				FE1F1D731E9816E100CB1E5F /* LogInView.swift */,
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
-
-
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -648,13 +638,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-
 				EC9D94471E9AA77800E33362 /* TitleLabel.swift in Sources */,
-
 				EC9D943B1E97EFA000E33362 /* NewUserVC.swift in Sources */,
 				EC9D94391E97EF8200E33362 /* LogInVC.swift in Sources */,
 				EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */,
-
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
@@ -665,6 +652,7 @@
 				EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */,
 				FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
+				AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */,
 				AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */,
 				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,

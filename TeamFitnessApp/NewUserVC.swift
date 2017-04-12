@@ -20,6 +20,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         
         self.view = createNewUserView
         createNewUserView.delegate = self
+        self.hideKeyboardWhenTappedAround()
         
         
     }
@@ -40,6 +41,10 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         return userPassword == confirmPassword
     }
     
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("textfielddidendediting")
+    }
     
     //fix not working for retype password
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -68,25 +73,38 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         userPassword = createNewUserView.passwordTextField.text!
         confirmPassword = createNewUserView.confirmTextField.text!
         
-        // check not working
+    
         if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
             
-            let vc: ProfileViewController = ProfileViewController()
-            vc.userEmail = userEmail
-            vc.userPassword = userPassword
+            FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
+                switch response {
+                case let .successfulNewUser(uid):
+                
+                    let vc: ProfileViewController = ProfileViewController()
+                    vc.userEmail = self.userEmail
+                    vc.userPassword = self.userPassword
+                    vc.uid = uid
+                    self.navigationController?.pushViewController(vc, animated: true)
+                   
+                case let .failure(error):
+                    self.alert(message: error)
+                default:
+                    print("default")
+                        
+            }
+        })
+  
+            print("New User's email\(userEmail)")
+            print("New User's password\(userPassword)")
             
-            print("New User's \(userEmail)")
-            print("New User's \(userPassword)")
-            
-            self.present(vc, animated: true, completion: nil)
-           
         } else {
             
-           print("passwords don't match")
-            
+            self.alert(message: "Passwords Don't Match")
         }
         
     }
+    
+    
     
 }
 

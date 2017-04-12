@@ -8,6 +8,12 @@
 
 import Foundation
 import UIKit
+import Firebase
+
+
+protocol GoalsViewDelegate: class {
+    func pressCreateUserButton()
+}
 
 
 
@@ -17,6 +23,7 @@ class GoalsView: FitnessView {
     var activityMinutesADay: UITextField!
     var caloriesADay: UITextField!
     var createUserButton: FitnessButton!
+    weak var delegate: GoalsViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,6 +33,11 @@ class GoalsView: FitnessView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func pressCreateUserButton(sender: UIButton) {
+        delegate?.pressCreateUserButton()
+    }
+
     
     func loadGoalsViewUI() {
         
@@ -57,6 +69,7 @@ class GoalsView: FitnessView {
         createUserButton.setTitle("Create New User", for: UIControlState.normal)
         createUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
         createUserButton.topAnchor.constraint(equalTo: caloriesADay.bottomAnchor, constant: 10).isActive = true
+        createUserButton.addTarget(self, action: #selector(pressCreateUserButton), for: .touchUpInside)
 
         
         

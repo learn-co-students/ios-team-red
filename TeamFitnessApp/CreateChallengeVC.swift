@@ -214,7 +214,9 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                 guard var user = user else {return}
                 FirebaseManager.addNew(challenge: challenge, completion: { (challengeID) in
                     user.challengeIDs.append(challengeID)
-                    FirebaseManager.save(user: user)
+                    FirebaseManager.save(user: user, completion: { (_) in
+                        
+                    })
                     if challengeIsPublic {
                         //save challenge to public challenges
                     } else {

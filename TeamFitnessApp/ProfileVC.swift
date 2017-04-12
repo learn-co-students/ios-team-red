@@ -13,12 +13,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     let profileView = ProfileView()
     
-    var name: String!
-    var userEmail: String!
-    var userPassword: String!
+    var name: String = ""
+    var userEmail: String = ""
+    var userPassword: String = ""
     var weight: Int = 0
     var gender: String = ""
-    var height: Int = 0
+    var height: Float = 0
+    var uid: String = ""
 //    var userImage: UImage!
     
     override func loadView() {
@@ -30,6 +31,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         profileView.delegate = self
         self.hideKeyboardWhenTappedAround()
+//        print("ProfileVC email\(userEmail)")
+//        print("ProfileVC password\(userPassword)")
     
     
     }
@@ -38,8 +41,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         
         weight = Int(profileView.weightTextField.text!)!
-        
-        height = ((Int(profileView.heightFeetTextField.text!)! * 12) + (Int(profileView.heightInchesTextField.text!)!))
+        height = ((Float(profileView.heightFeetTextField.text!)! * 12) + (Float(profileView.heightInchesTextField.text!)!))
+        name = profileView.nameTextField.text!
             
         let vc: GoalsViewController = GoalsViewController()
         
@@ -49,21 +52,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         vc.gender = gender
         vc.height = height
         vc.weight = weight
+        vc.uid = uid
         
-        print("ProfileVC \(userEmail)")
-        print("ProfileVC \(userPassword)")
-        print("ProfileVC \(name)")
-        print("ProfileVC \(gender)")
-        print("ProfileVC \(height)")
-        print("ProfileVC \(weight)")
+        print("ProfileVC email\(userEmail)")
+        print("ProfileVC password\(userPassword)")
+        print("ProfileVC name\(name)")
+        print("ProfileVC gender\(gender)")
+        print("ProfileVC height\(height)")
+        print("ProfileVC weight\(weight)")
         
             
-        self.present(vc, animated: true, completion: nil)
+      self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    
-
-    
     func displayImagePickerButtonTapped() {
         
         

@@ -90,7 +90,9 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     team.id = teamID
                     if var user = self.user {
                         user.teamIDs.append(teamID)
-                        FirebaseManager.save(user: user)
+                        FirebaseManager.save(user: user, completion: { (_) in
+                            
+                        })
                     }
                     print("Team created: \(team.name) with ID: \(team.id!)")
                 })

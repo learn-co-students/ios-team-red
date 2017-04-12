@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChallengeDetailVC: UIViewController {
+class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let challenge: Challenge? = nil
     
@@ -16,6 +16,8 @@ class ChallengeDetailVC: UIViewController {
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
     let goalPieChart = CustomPieChartView()
+    let leadersTable = UITableView()
+    let leaders = [User]()
     
 //    var goal: [String:Double]
 //    var creator: String?
@@ -29,7 +31,11 @@ class ChallengeDetailVC: UIViewController {
         super.viewDidLoad()
         self.view = FitnessView()
         setupViews()
-        getChartData()
+        getLeaders()
+        
+        leadersTable.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        leadersTable.delegate = self
+        leadersTable.dataSource = self
 
     }
 
@@ -42,8 +48,17 @@ class ChallengeDetailVC: UIViewController {
         goalPieChart.translatesAutoresizingMaskIntoConstraints = false
         goalPieChart.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
         goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
+        getChartData()
+        
+        self.view.addSubview(leadersTable)
+        leadersTable.translatesAutoresizingMaskIntoConstraints = false
+        leadersTable.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
+        leadersTable.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        leadersTable.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+        leadersTable.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.3).isActive = true
+        leadersTable.backgroundColor = UIColor.clear
         
     }
     
@@ -88,5 +103,23 @@ class ChallengeDetailVC: UIViewController {
                 }
             })
         }
+    }
+    
+    func getLeaders() {
+        
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+        cell.setLabels(forUser: leaders[indexPath.row])
+        return cell
     }
 }

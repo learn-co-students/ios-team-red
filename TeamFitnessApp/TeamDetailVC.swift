@@ -41,14 +41,11 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengesView.dataSource = self
 
         setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         getTeamMembers(forTeam: team) {
             self.membersView.reloadData()
         }
+        
         getTeamChallenges(forTeam: team) {
             self.challengesView.reloadData()
         }
@@ -84,6 +81,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         return cell
     }
+    
 // MARK: - calls to firebase
     func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
         teamUsers.removeAll()
@@ -99,21 +97,14 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func getTeamChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
         teamChallenges.removeAll()
-        guard let teamID = team?.id else {return}
-        //update teamChallengeIDs
-        guard let team = team else {return}
-        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
-            self.team?.challengeIDs = team.challengeIDs
-            if let challengeList = self.team?.challengeIDs {
-                for challengeID in challengeList {
-                    FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
-                        self.teamChallenges.append(challenge)
-                        completion()
-                    })
-                }
+        if let challengeList = team?.challengeIDs {
+            for challengeID in challengeList {
+                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                    self.teamChallenges.append(challenge)
+                    completion()
+                })
             }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

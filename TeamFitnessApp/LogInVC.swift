@@ -12,6 +12,7 @@ import UIKit
 class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate{
     
     let logInView = LogInView()
+    let healthKitManager = HealthKitManager.sharedInstance
     
     override func loadView() {
         self.view = logInView
@@ -75,10 +76,18 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             switch response {
             case let .successfulLogin(user):
                 print(user.uid)
-                self.present(DashboardVC(), animated: true, completion: nil)
+                
+                self.healthKitManager.requestHealthKitAuth(completion: { (success) in
+                  if success {
+                  } else {
+                    print("nope")
+                  }
+                })
+                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+
             case let .failure(failString):
                 print(failString)
-                self.alert(message: "Log In Failed")
+                self.alert(message: failString)
                 
             default:
                 print("Firebase login failure")

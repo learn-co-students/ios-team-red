@@ -34,15 +34,14 @@ struct User {
             self.challengeIDs.append(challengeID)
         }
 
-      let goalArray = dict["goals"] as? [[String:Double]] ?? [[:]]
-      for goal in goalArray {
-        for (key, value) in goal {
+      let goalDict = dict["goals"] as? [String:Double] ?? [:]
+        for (key, value) in goalDict {
           if let goalType = GoalType(rawValue: key) {
             let goal = Goal(type: goalType, value: value)
             goals.append(goal)
           }
         }
-      }
+
         let teamDict = dict["teams"] as? [String: Bool] ?? [:]
         for (teamID, _) in teamDict {
             self.teamIDs.append(teamID)

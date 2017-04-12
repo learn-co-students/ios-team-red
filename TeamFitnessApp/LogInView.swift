@@ -16,7 +16,8 @@ protocol LoginViewDelegate: class {
 
 
 class LogInView: FitnessView {
-    
+
+    let healthKitManager = HealthKitManager.sharedInstance
     var fitnessBabyLabel: FitnessLabel!
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
@@ -69,6 +70,8 @@ class LogInView: FitnessView {
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
         emailTextField.layer.cornerRadius = 5
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         emailTextField.textAlignment = NSTextAlignment.center
         emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         emailTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
@@ -81,6 +84,8 @@ class LogInView: FitnessView {
         
         passwordTextField = UITextField()
         self.addSubview(passwordTextField)
+        passwordTextField.autocorrectionType = .no
+        passwordTextField.autocapitalizationType = .none
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.textAlignment = NSTextAlignment.center
@@ -161,7 +166,14 @@ class LogInView: FitnessView {
 
 //  func pressLoginButton(_ sender: UIButton) {
 //    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
-//      NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+//
+//      if self.healthKitManager.requestHealthKitAuth(completion: (Bool) -> ()) {
+//        NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+//      } else {
+//        print("nope")
+//      }
+//
 //    }
 //  }
 }
+

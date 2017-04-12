@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       guard let window = self.window else { fatalError("no window") }
 
       //set the root view controller
-      window.rootViewController = LogInViewController()
+      window.rootViewController = AppController()
 
       //make the window visible
       window.makeKeyAndVisible()

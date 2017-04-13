@@ -63,7 +63,8 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     }
     
     func pressNewUser() {
-        self.present(NewUserViewController(), animated: true, completion: nil)
+      let vc = NewUserViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func pressLogin() {
@@ -76,13 +77,6 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             switch response {
             case let .successfulLogin(user):
                 print(user.uid)
-                
-                self.healthKitManager.requestHealthKitAuth(completion: { (success) in
-                  if success {
-                  } else {
-                    print("nope")
-                  }
-                })
                 NotificationCenter.default.post(name: .closeLoginVC, object: nil)
 
             case let .failure(failString):

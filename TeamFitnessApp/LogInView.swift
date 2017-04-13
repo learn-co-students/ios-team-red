@@ -164,16 +164,6 @@ class LogInView: FitnessView {
         
     }
 
-//  func pressLoginButton(_ sender: UIButton) {
-//    FirebaseManager.loginUser(withEmail: emailTextField.text!, andPassword: passwordTextField.text!) { (response) in
-//
-//      if self.healthKitManager.requestHealthKitAuth(completion: (Bool) -> ()) {
-//        NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-//      } else {
-//        print("nope")
-//      }
-//
-//    }
-//  }
+
 }
 

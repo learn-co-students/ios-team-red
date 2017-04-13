@@ -16,6 +16,7 @@
 		AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90961E9C0CC800EC6703 /* LoginManager.swift */; };
 		AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90981E9C0CD100EC6703 /* AppController.swift */; };
 		AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */; };
+		AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */; };
 		AAED5D671E9D4BFD002C0F4A /* TrophyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */; };
 		AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D681E9D4D75002C0F4A /* TabBarController.swift */; };
 		AAED5D6B1E9D614A002C0F4A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */; };
@@ -100,6 +101,7 @@
 		AABA90961E9C0CC800EC6703 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AABA90981E9C0CD100EC6703 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContollerCases.swift; sourceTree = "<group>"; };
+		AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNavVC.swift; sourceTree = "<group>"; };
 		AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyVC.swift; sourceTree = "<group>"; };
 		AAED5D681E9D4D75002C0F4A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				AABA90981E9C0CD100EC6703 /* AppController.swift */,
 				AAED5D681E9D4D75002C0F4A /* TabBarController.swift */,
 				AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */,
+				AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */,
 				AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */,
 				EC9D943A1E97EFA000E33362 /* NewUserVC.swift */,
 				EC9D94381E97EF8200E33362 /* LogInVC.swift */,
@@ -318,7 +321,9 @@
 				EC9D943E1E98130400E33362 /* CreateTeamVC.swift */,
 				EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */,
 				EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */,
+
 				EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */,
+
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				FE9586461E9C0D3A009C3BFE /* GoalsVC.swift */,
 			);
@@ -342,8 +347,10 @@
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
+
 				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
+
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -665,6 +672,7 @@
 				EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */,
 				FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
+				AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */,
 				AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */,
 				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,
 				EC4F0A4B1E9E79C6006A74E9 /* DataType.swift in Sources */,

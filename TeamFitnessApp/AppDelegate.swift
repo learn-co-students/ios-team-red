@@ -13,6 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    let healthKitManager = HealthKitManager.sharedInstance
 
 
 
@@ -56,7 +57,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+
+      if let userUid = FIRAuth.auth()?.currentUser?.uid {
+        FirebaseManager.fetchUser(withFirebaseUID: userUid) { (user) in
+          for challenge in user.challengeIDs {
+            FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
+              let startDate = challenge.startDate!
+              let endDate = challenge.endDate!
+              let challengeID = challenge.id!
+              let goal = challenge.goal!.type!
+
+              switch goal {
+              case .distance:
+                self.healthKitManager.getDistance(fromDate: startDate, toDate: endDate, completion: { (count, error) in
+                  if let count = count {
+                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                  }
+                })
+              case .stepCount:
+                self.healthKitManager.getSteps(fromDate: startDate, toDate: endDate, completion: { (count, error) in
+                  if let count = count {
+                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                  }
+                })
+              case .caloriesBurned:
+                self.healthKitManager.getCalories(fromDate: startDate, toDate: endDate, completion: { (count, error) in
+                  if let count = count {
+                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                  }
+                })
+              case .exerciseTime:
+                self.healthKitManager.getExerciseTime(fromDate: startDate, toDate: endDate, completion: { (count, error) in
+                  if let count = count {
+                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                  }
+                })
+              }
+            })
+          }
+        }
+      }
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

@@ -82,7 +82,7 @@ class ProfileView: FitnessView {
         showImagePickerButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05, constant: 0).isActive = true
         showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 50).isActive = true
         showImagePickerButton.setTitle("Choose Image", for: UIControlState.normal)
-        showImagePickerButton.backgroundColor = UIColor.lightGray
+        showImagePickerButton.backgroundColor = UIColor.clear
         showImagePickerButton.addTarget(self, action: #selector(displayImagePickerButtonTapped), for: .touchUpInside)
         
         
@@ -109,6 +109,7 @@ class ProfileView: FitnessView {
         weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
         weightTextField.placeholder = "Weight"
         weightTextField.backgroundColor = UIColor.white
+        weightTextField.keyboardType = UIKeyboardType.numberPad
         
         genderButton = FitnessButton()
         self.addSubview(genderButton)
@@ -145,7 +146,7 @@ class ProfileView: FitnessView {
         heightInchesTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 50).isActive = true
         heightInchesTextField.placeholder = "Inches"
         heightInchesTextField.backgroundColor = UIColor.white
-        heightFeetTextField.keyboardType = UIKeyboardType.numberPad
+        heightInchesTextField.keyboardType = UIKeyboardType.numberPad
         
         setGoalsButton = FitnessButton()
         self.addSubview(setGoalsButton)

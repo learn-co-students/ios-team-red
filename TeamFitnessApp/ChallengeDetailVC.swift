@@ -7,17 +7,30 @@
 //
 
 import UIKit
+import Firebase
 
 class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var challenge: Challenge? = nil
+    var challenge: Challenge? = nil {
+        didSet {
+            guard let challenge = self.challenge else {return}
+            if let uid = FIRAuth.auth()?.currentUser?.uid {
+                if challenge.userUIDs.contains(uid) {
+                    userIsChallengeMember = true
+                }
+            }
+        }
+    }
     
     let titleLabel = TitleLabel()
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
     let leadersTable = UITableView()
+    let joinButton = FitnessButton()
+    
     let leaders = [User]()
     var userScores = [(String, Double)]()
+    var userIsChallengeMember: Bool = false
     
     let goalPieChart = CustomPieChartView()
     let leadersChart = CustomHorizontalBarChart()
@@ -61,8 +74,29 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         leadersChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         leadersChart.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
         
-
+        if !userIsChallengeMember {
+            self.view.addSubview(joinButton)
+            joinButton.translatesAutoresizingMaskIntoConstraints = false
+            joinButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
+            joinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+            joinButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+            joinButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
+            joinButton.setTitle("Join Challenge", for: .normal)
+            joinButton.addTarget(self, action: #selector(joinChallenge), for: .touchUpInside)
+        }
         
+    }
+    
+    func joinChallenge() {
+        guard let challengeID = self.challenge?.id, let challengeIsPublic = self.challenge?.isPublic, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        if challengeIsPublic {
+            FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .publicChallenges, childDataType: .users) {}
+            FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .publicChallenges) {}
+        } else {
+            FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) { }
+            FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
+        }
+        joinButton.isHidden = true
     }
     
     func setChallenge(challenge: Challenge) {

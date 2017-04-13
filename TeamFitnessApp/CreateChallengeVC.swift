@@ -20,11 +20,12 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     var myTeams = [Team]()
     var filteredTeams = [Team]()
     
+    //MARK: Subviews
     let titleLabel = TitleLabel()
-    let challengeNameField = UITextField()
+    let challengeNameField = FitnessTextField()
     let teamIndicator = FitnessLabel()
     let teamSearchBar = UISearchBar()
-    let publicButton = FitnessButton()
+    let publicButton = PublicButton()
     let teamsTableView = UITableView()
     let startDatePicker = FitnessDatePickerView()
     let endDatePicker = FitnessDatePickerView()
@@ -61,25 +62,13 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         titleLabel.setText(toString: "New Challenge")
         
         self.view.addSubview(challengeNameField)
-        challengeNameField.translatesAutoresizingMaskIntoConstraints = false
-        challengeNameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        challengeNameField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        challengeNameField.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        challengeNameField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-        challengeNameField.placeholder = "Name challenge"
-        challengeNameField.backgroundColor = UIColor.foregroundOrange
-        challengeNameField.textColor = UIColor.backgroundBlack
-        challengeNameField.layer.cornerRadius = 5
-        
+        challengeNameField.setConstraints(toSuperview: self.view, belowView: titleLabel)
+        challengeNameField.setPlaceholder(toText: "Name challenge")
         
         self.view.addSubview(teamIndicator)
-        teamIndicator.translatesAutoresizingMaskIntoConstraints = false
-        teamIndicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamIndicator.topAnchor.constraint(equalTo: challengeNameField.bottomAnchor).isActive = true
-        teamIndicator.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        teamIndicator.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        teamIndicator.setConstraints(toSuperView: self.view, belowView: challengeNameField)
+        teamIndicator.set(text: "Find team to add new challenge:")
         teamIndicator.reverseColors()
-        teamIndicator.text = "Find team to add new challenge:"
         
         self.view.addSubview(teamSearchBar)
         teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -91,11 +80,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         teamSearchBar.backgroundColor = UIColor.foregroundOrange
         
         self.view.addSubview(publicButton)
-        publicButton.translatesAutoresizingMaskIntoConstraints = false
-        publicButton.topAnchor.constraint(equalTo: teamSearchBar.topAnchor).isActive = true
-        publicButton.rightAnchor.constraint(equalTo: teamSearchBar.leftAnchor, constant: -10).isActive = true
-        publicButton.heightAnchor.constraint(equalTo: teamSearchBar.heightAnchor).isActive = true
-        publicButton.widthAnchor.constraint(equalTo: publicButton.heightAnchor, multiplier: 2.0).isActive = true
+        publicButton.setConstraints(nextToView: teamSearchBar)
         publicButton.reverseColors()
         publicButton.setTitle("Public?", for: .normal)
         publicButton.addTarget(self, action: #selector(publicButtonPressed), for: .touchUpInside)
@@ -117,7 +102,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
 
-        
         view.addSubview(goalPicker)
         goalPicker.translatesAutoresizingMaskIntoConstraints = false
         goalPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -127,20 +111,12 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.bringSubview(toFront: goalPicker.stepper)
         
         view.addSubview(startDatePicker)
-        startDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        startDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        startDatePicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
-        startDatePicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
-        startDatePicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        startDatePicker.setConstraints(toSuperView: self.view, belowView: teamSearchBar)
         startDatePicker.setTitle(toString: "Challenge Start Date:")
         startDatePicker.isHidden = true
         
         view.addSubview(endDatePicker)
-        endDatePicker.translatesAutoresizingMaskIntoConstraints = false
-        endDatePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        endDatePicker.topAnchor.constraint(equalTo: startDatePicker.bottomAnchor, constant: 50).isActive = true
-        endDatePicker.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
-        endDatePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        endDatePicker.setConstraints(toSuperView: self.view, belowView: startDatePicker)
         endDatePicker.setTitle(toString: "Challenge End Date:")
         endDatePicker.isHidden = true
         
@@ -208,15 +184,20 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                 challenge = Challenge(name: challengeName,startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
                 guard let challenge = challenge else {return}
                 FirebaseManager.addNew(challenge: challenge, isPublic: challenge.isPublic, completion: { (challengeID) in
+                    guard let userUID = user?.uid else {return}
                     if challengeIsPublic {
-                        print("Challenged saved to public challenges")
+                        FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
+                            user?.challengeIDs.append(challengeID)
+                        })
                     } else {
-                        guard var user = user else {return}
-                        user.challengeIDs.append(challengeID)
-                        FirebaseManager.save(user: user)
-                        guard var team = team else {return}
-                        team.challengeIDs.append(challengeID)
-                        FirebaseManager.save(team: team)
+                        guard let userUID = user?.uid else {return}
+                        FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
+                            user?.challengeIDs.append(challengeID)
+                        })
+                        guard let teamID = team?.id else {return}
+                        FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
+                            team?.challengeIDs.append(challengeID)
+                        })
                     }
                 })
                 self.dismiss(animated: true, completion: nil)
@@ -353,8 +334,5 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             })
         }
     }
-    
-    
-    
-    
+
 }

@@ -123,7 +123,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 })
             }
         }
-        
     }
     
     func getPublicChallenges() {

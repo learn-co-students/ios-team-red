@@ -27,6 +27,8 @@
 		EC4F0A4B1E9E79C6006A74E9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4A1E9E79C6006A74E9 /* DataType.swift */; };
 		EC4F0A4D1E9EA631006A74E9 /* ChallengesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */; };
 		EC4F0A4F1E9EA7FD006A74E9 /* ChallengesVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4E1E9EA7FD006A74E9 /* ChallengesVCExtension.swift */; };
+		EC4F0A511E9EEF73006A74E9 /* FitnessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */; };
+		EC4F0A531E9EF401006A74E9 /* PublicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A521E9EF401006A74E9 /* PublicButton.swift */; };
 		EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */; };
 		EC5DBD841E9C0A9B00CECA34 /* CreateChallengeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */; };
 		EC5DBD861E9C2DD600CECA34 /* FitnessDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */; };
@@ -110,6 +112,8 @@
 		EC4F0A4A1E9E79C6006A74E9 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesVC.swift; sourceTree = "<group>"; };
 		EC4F0A4E1E9EA7FD006A74E9 /* ChallengesVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesVCExtension.swift; sourceTree = "<group>"; };
+		EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTextField.swift; sourceTree = "<group>"; };
+		EC4F0A521E9EF401006A74E9 /* PublicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicButton.swift; sourceTree = "<group>"; };
 		EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensions.swift; path = TeamFitnessAppTests/DateExtensions.swift; sourceTree = SOURCE_ROOT; };
 		EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeVC.swift; sourceTree = "<group>"; };
 		EC5DBD851E9C2DD600CECA34 /* FitnessDatePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessDatePickerView.swift; sourceTree = "<group>"; };
@@ -338,6 +342,8 @@
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
+				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
+				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */,
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
+				EC4F0A531E9EF401006A74E9 /* PublicButton.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
@@ -682,6 +689,7 @@
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */,
 				FEB434001E9526C000A7D5E1 /* Goal.swift in Sources */,
+				EC4F0A511E9EEF73006A74E9 /* FitnessTextField.swift in Sources */,
 				EC6A3D311E92EDC800F5E717 /* AppDelegate.swift in Sources */,
 				AAFD130C1E9AD23D00154522 /* DashboardView.swift in Sources */,
 				AAED5D6B1E9D614A002C0F4A /* NavigationController.swift in Sources */,

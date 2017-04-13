@@ -13,13 +13,8 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     var team: Team? {
         didSet {
-            getTeamMembers(forTeam: team) {
-                self.membersView.reloadData()
-            }
-            
-            getTeamChallenges(forTeam: team) {
-                self.challengesView.reloadData()
-            }
+            getTeamMembers(forTeam: team)
+            getTeamChallenges(forTeam: team)
         }
     }
     let teamNameLabel = TitleLabel()
@@ -102,30 +97,33 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == challengesView {
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
             navigationController?.pushViewController(challengeDetailVC, animated: true)
-            //present(challengeDetailVC, animated: true, completion: nil)
         }
     }
     
 // MARK: - calls to firebase
-    func getTeamMembers(forTeam team: Team?, completion: @escaping () -> Void) {
+    func getTeamMembers(forTeam team: Team?) {
         teamUsers.removeAll()
         if let memberList = team?.userUIDs {
             for memberID in memberList {
                 FirebaseManager.fetchUser(withFirebaseUID: memberID, completion: { (user) in
                     self.teamUsers.append(user)
-                    completion()
+                    DispatchQueue.main.async {
+                        self.membersView.reloadData()
+                    }
                 })
             }
         }
     }
     
-    func getTeamChallenges(forTeam team: Team?, completion: @escaping () -> Void) {
+    func getTeamChallenges(forTeam team: Team?) {
         teamChallenges.removeAll()
         if let challengeList = team?.challengeIDs {
             for challengeID in challengeList {
                 FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
                     self.teamChallenges.append(challenge)
-                    completion()
+                    DispatchQueue.main.async {
+                        self.challengesView.reloadData()
+                        }
                 })
             }
         }
@@ -138,12 +136,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         //self.team?.userUIDs.append(uid)
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                getTeamMembers(forTeam: self.team, completion: {
-                    DispatchQueue.main.async {
-                        self.membersView.reloadData()
-                        self.joinButton.isHidden = true
-                    }
-                })
+                getTeamMembers(forTeam: self.team)
             }
         }
         

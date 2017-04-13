@@ -37,5 +37,17 @@ class FitnessLabel: UILabel {
     func changeFontSize(to newFontSize: CGFloat) {
         self.font = UIFont(name: "Gurmukhi MN", size: newFontSize)
     }
+    
+    func setConstraints(toSuperView superView: UIView, belowView view: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
+        self.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.05).isActive = true
+        self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.8).isActive = true
+    }
+    
+    func set(text: String) {
+        self.text = text
+    }
 
 }

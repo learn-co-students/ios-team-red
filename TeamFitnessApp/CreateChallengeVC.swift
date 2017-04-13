@@ -158,53 +158,56 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func nextButtonPressed() {
-        if viewState == .first {
+        if viewState == .first { //if the user is on the first screen of the CreateChallengeView, store the values in the text/search/picker fields, and move to the next screen
             if !challengeIsPublic && team == nil {
                 print("Must select a team to add the challenge to, or set challenge to public")
                 return
             }
-            publicButton.isHidden = true
-            teamSearchBar.isHidden = true
-            goalPicker.isHidden = true
-            startDatePicker.isHidden = false
-            endDatePicker.isHidden = false
-            nextButton.setTitle("Submit", for: .normal)
-            viewState = .second
+            storeFirstFields()
+            moveToSecondFields()
             
-            challengeName = challengeNameField.text
-            challengeGoal = goalPicker.goal
-            challengeTeamID = team?.id
-            
-        } else if viewState == .second {
+        } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
             print("save new challenge")
             challengeStartDate = startDatePicker.date
             challengeEndDate = endDatePicker.date
             let challengeTeamID = self.challengeTeamID ?? "No team"
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
-                challenge = Challenge(name: challengeName,startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
-                guard let challenge = challenge else {return}
+                let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
 
-                FirebaseManager.addNew(challenge: challenge, isPublic: challenge.isPublic, completion: { (challengeID) in
+                FirebaseManager.addNew(challenge: newChallenge, isPublic: newChallenge.isPublic, completion: { (challengeID) in
                     guard let userUID = user?.uid else {return}
 
-                    if challengeIsPublic {
+                    if challengeIsPublic {//if challenge is public, add challenge to the challenges property of the user in Firebase. The userID will already have been stored in the users field of the public challenge
                         FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
-                            user?.challengeIDs.append(challengeID)
                         })
-                    } else {
+                    } else { //if the challenge is not public, add the challenge to the challenges property of the user and team in Firebase. The user and team IDs have already been stored in the challenge directory in Firebase
                         guard let userUID = user?.uid else {return}
                         FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
-                            user?.challengeIDs.append(challengeID)
                         })
                         guard let teamID = team?.id else {return}
                         FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
-                            team?.challengeIDs.append(challengeID)
                         })
                     }
                 })
                 self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+    func storeFirstFields() {
+        challengeName = challengeNameField.text
+        challengeGoal = goalPicker.goal
+        challengeTeamID = team?.id
+    }
+    
+    func moveToSecondFields() {
+        publicButton.isHidden = true
+        teamSearchBar.isHidden = true
+        goalPicker.isHidden = true
+        startDatePicker.isHidden = false
+        endDatePicker.isHidden = false
+        nextButton.setTitle("Submit", for: .normal)
+        viewState = .second
     }
     
     func previousButtonPressed() {

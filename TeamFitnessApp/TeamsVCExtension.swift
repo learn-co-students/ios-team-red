@@ -69,6 +69,9 @@ extension TeamsVC { // Extension for setting up all views
     
 // MARK: - calls to Firebase
     func fetchData(completion: @escaping () -> Void) {
+        self.myTeams.removeAll()
+        self.publicTeams.removeAll()
+        self.filteredTeams.removeAll()
         guard let uid = uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
             self.user = user
@@ -82,7 +85,7 @@ extension TeamsVC { // Extension for setting up all views
         
         FirebaseManager.fetchAllTeams { (teams) in
             self.myTeams.removeAll()
-            self.allTeams.removeAll()
+            self.publicTeams.removeAll()
             self.filteredTeams.removeAll()
             for team in teams {
                 if let teamID = team.id  {
@@ -90,14 +93,14 @@ extension TeamsVC { // Extension for setting up all views
                         print("APPEND MY TEAMS")
                         self.myTeams.append(team)
                     } else {
-                        print("APPEND ALL TEAMS")
-                        self.allTeams.append(team)
+                        print("APPEND Public TEAMS")
+                        self.publicTeams.append(team)
                     }
                 }
             }
             self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-            self.allTeams = self.allTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-            self.filteredTeams = self.allTeams
+            self.publicTeams = self.publicTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+            self.filteredTeams = self.publicTeams
             completion()
         }
     }
@@ -136,7 +139,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("text did change")
         
-        filteredTeams = allTeams.filter({ (team) -> Bool in
+        filteredTeams = publicTeams.filter({ (team) -> Bool in
             let temp: String = team.name
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range != nil

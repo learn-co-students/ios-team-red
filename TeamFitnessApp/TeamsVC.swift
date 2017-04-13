@@ -21,8 +21,13 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     
-    var allTeams = [Team]()
+    
     var myTeams = [Team]()
+    var publicTeams = [Team]() {
+        didSet {
+            print(publicTeams.count)
+        }
+    }
     var filteredTeams = [Team]()
     var searchActive: Bool = false
     
@@ -65,8 +70,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if searchActive {
                 count = filteredTeams.count
             } else {
-                print("ALAL TEAMS COUNT***** \(allTeams.count)")
-                count = allTeams.count
+                print("ALAL TEAMS COUNT***** \(publicTeams.count)")
+                count = publicTeams.count
             }
         }
         return count
@@ -87,7 +92,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } else {
                 cell = searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
                 
-                cell.setLabels(forTeam: allTeams[indexPath.row])
+                cell.setLabels(forTeam: publicTeams[indexPath.row])
             }
         }
         return cell
@@ -104,7 +109,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 teamDetailVC.setTeam(team: filteredTeams[indexPath.row])
               navigationController?.pushViewController(teamDetailVC, animated: true)
             } else {
-                teamDetailVC.setTeam(team: allTeams[indexPath.row])
+                teamDetailVC.setTeam(team: publicTeams[indexPath.row])
               navigationController?.pushViewController(teamDetailVC, animated: true)
             }
         }

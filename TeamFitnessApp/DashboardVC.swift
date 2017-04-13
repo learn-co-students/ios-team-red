@@ -99,7 +99,10 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    let challengeDetailVC = ChallengeDetailVC()
+    challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
+    navigationController?.pushViewController(challengeDetailVC, animated: true)
   }
+    
 
 }

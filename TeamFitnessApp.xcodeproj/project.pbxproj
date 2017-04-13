@@ -319,11 +319,9 @@
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC859EA21E967ECB009664F5 /* TeamsVC.swift */,
 				EC9D943E1E98130400E33362 /* CreateTeamVC.swift */,
-				EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */,
 				EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */,
-
+				EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */,
 				EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */,
-
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				FE9586461E9C0D3A009C3BFE /* GoalsVC.swift */,
 			);
@@ -347,10 +345,8 @@
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
-
 				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
-
 			);
 			name = Views;
 			sourceTree = "<group>";

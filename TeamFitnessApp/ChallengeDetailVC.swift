@@ -15,23 +15,25 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
     let titleLabel = TitleLabel()
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
-    let goalPieChart = CustomPieChartView()
     let leadersTable = UITableView()
     let leaders = [User]()
+    var userScores = [(String, Double)]()
     
-//    var goal: [String:Double]
-//    var creator: String?
-//    var userUIDs = [String]()
-//    var isPublic: Bool?
-//    var teamID: String?
-//    var id: String?
-//    var name: String
+    let goalPieChart = CustomPieChartView()
+    let leadersChart = CustomHorizontalBarChart()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = FitnessView()
         setupViews()
-        getLeaders()
+        
+        getChartData()
+        getLeaders { 
+            DispatchQueue.main.async {
+                self.displayLeaders()
+            }
+        }
+        
         
         leadersTable.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         leadersTable.delegate = self
@@ -52,13 +54,14 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
         getChartData()
         
-        self.view.addSubview(leadersTable)
-        leadersTable.translatesAutoresizingMaskIntoConstraints = false
-        leadersTable.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
-        leadersTable.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        leadersTable.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        leadersTable.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.3).isActive = true
-        leadersTable.backgroundColor = UIColor.clear
+        self.view.addSubview(leadersChart)
+        leadersChart.translatesAutoresizingMaskIntoConstraints = false
+        leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
+        leadersChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        leadersChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        leadersChart.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
+        
+
         
     }
     
@@ -107,8 +110,36 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func getLeaders() {
-        
+    func getLeaders(completion: () -> Void) {
+        //eliminate all but the top 5 users
+        //display the top 5 users progress in the chart
+        guard let uids = challenge?.userUIDs else {return} //TODO: - handle this error mo bettah
+        for uid in uids {
+            FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
+                guard let uid = user.uid, let challenge = self.challenge else {return}
+                FirebaseManager.fetchChallengeProgress(forUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
+                    switch response {
+                    case .successfulData(let data):
+                        let userScore: (String, Double) = (uid, data)
+                        self.userScores.append(userScore)
+                    case .failure(let failString):
+                        print(failString)
+                    default:
+                        print("FirebaseManager returned an invalid response")
+                    }
+                })
+            })
+        }
+    }
+    
+    fileprivate func displayLeaders() {
+        //determine five leaders
+        var leaderScores = [(String, Double)]()
+        userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score
+        for i in 0...4 {
+            leaderScores.append(userScores[i])
+        }
+        leadersChart.setData(group: leaderScores)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

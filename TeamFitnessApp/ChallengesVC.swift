@@ -98,16 +98,19 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == myChallengesView {
             let challengeDetailVC = ChallengeDetailVC()
             challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
-            navigationController?.pushViewController(challengeDetailVC, animated: true)
+            present(challengeDetailVC, animated: true, completion: nil)
+            //navigationController?.pushViewController(challengeDetailVC, animated: true)
         } else if tableView == publicChallengesView {
             if searchActive {
                 let challengeDetailVC = ChallengeDetailVC()
                 challengeDetailVC.setChallenge(challenge: filteredChallenges[indexPath.row])
-                navigationController?.pushViewController(challengeDetailVC, animated: true)
+                present(challengeDetailVC, animated: true, completion: nil)
+                //navigationController?.pushViewController(challengeDetailVC, animated: true)
             } else {
                 let challengeDetailVC = ChallengeDetailVC()
                 challengeDetailVC.setChallenge(challenge: publicChallenges[indexPath.row])
-                navigationController?.pushViewController(challengeDetailVC, animated: true)
+                present(challengeDetailVC, animated: true, completion: nil)
+                //navigationController?.pushViewController(challengeDetailVC, animated: true)
             }
         }
     }

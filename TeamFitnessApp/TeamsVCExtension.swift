@@ -72,15 +72,20 @@ extension TeamsVC { // Extension for setting up all views
         guard let uid = uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
             self.user = user
-            self.getAllTeams(user: user)
+            self.getAllTeams(user: user) {
+                DispatchQueue.main.async {
+                    self.myTeamsView.reloadData()
+                    self.searchTableView.reloadData()
+                }
+            }
         }
     }
     
-    private func getAllTeams(user: User) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
-        myTeams.removeAll()
-        allTeams.removeAll()
+    private func getAllTeams(user: User, completion: @escaping () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
         filteredTeams.removeAll()
         FirebaseManager.fetchAllTeams { (teams) in
+            self.myTeams.removeAll()
+            self.allTeams.removeAll()
             for team in teams {
                 if let teamID = team.id  {
                     if user.teamIDs.contains(teamID) {
@@ -89,14 +94,12 @@ extension TeamsVC { // Extension for setting up all views
                         self.allTeams.append(team)
                     }
                 }
+                
             }
             self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
             self.allTeams = self.allTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
             self.filteredTeams = self.allTeams
-            DispatchQueue.main.async {
-                self.searchTableView.reloadData()
-                self.myTeamsView.reloadData()
-            }
+            completion()
         }
     }
 

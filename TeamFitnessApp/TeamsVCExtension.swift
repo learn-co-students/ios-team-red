@@ -78,7 +78,7 @@ extension TeamsVC { // Extension for setting up all views
         }
     }
     
-    private func getAllTeams(user: User, completion: () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
+    private func getAllTeams(user: User, completion: @escaping () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
         
         FirebaseManager.fetchAllTeams { (teams) in
             self.myTeams.removeAll()
@@ -87,8 +87,10 @@ extension TeamsVC { // Extension for setting up all views
             for team in teams {
                 if let teamID = team.id  {
                     if user.teamIDs.contains(teamID) {
+                        print("APPEND MY TEAMS")
                         self.myTeams.append(team)
                     } else {
+                        print("APPEND ALL TEAMS")
                         self.allTeams.append(team)
                     }
                 }
@@ -96,6 +98,7 @@ extension TeamsVC { // Extension for setting up all views
             self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
             self.allTeams = self.allTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
             self.filteredTeams = self.allTeams
+            completion()
         }
     }
 

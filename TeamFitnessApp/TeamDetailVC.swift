@@ -146,7 +146,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         //self.team?.userUIDs.append(uid)
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                getTeamMembers(forTeam: self.team)
+                //getTeamMembers(forTeam: self.team)
+                DispatchQueue.main.async {
+                    self.membersView.reloadData()
+                }
             }
         }
         joinButton.isHidden = true

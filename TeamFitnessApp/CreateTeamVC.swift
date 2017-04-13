@@ -91,11 +91,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
-                    if var user = self.user {
-                        user.teamIDs.append(teamID)
-                        FirebaseManager.save(user: user, completion: { (_) in
-                            
-                        })
+                    if let uid = self.user?.uid {
+                        FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {}
                     }
                     print("Team created: \(team.name) with ID: \(team.id!)")
                 })

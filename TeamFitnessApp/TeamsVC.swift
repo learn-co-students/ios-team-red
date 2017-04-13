@@ -41,7 +41,12 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         
-        fetchData()
+        fetchData {
+            DispatchQueue.main.async {
+                self.searchTableView.reloadData()
+                self.myTeamsView.reloadData()
+            }
+        }
     }
     
 // MARK: - Delegate and Data Source
@@ -60,7 +65,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if searchActive {
                 count = filteredTeams.count
             } else {
-            print(allTeams.count)
+                print("ALAL TEAMS COUNT***** \(allTeams.count)")
                 count = allTeams.count
             }
         }
@@ -81,6 +86,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+                
                 cell.setLabels(forTeam: allTeams[indexPath.row])
             }
         }

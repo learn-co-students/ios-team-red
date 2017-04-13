@@ -149,7 +149,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 getTeamMembers(forTeam: self.team)
             }
         }
-        
+        joinButton.isHidden = true
     }
     
     func segueCreateChallenge() {

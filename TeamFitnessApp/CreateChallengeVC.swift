@@ -168,9 +168,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             
         } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
             print("save new challenge")
-            challengeStartDate = startDatePicker.date
-            challengeEndDate = endDatePicker.date
-            let challengeTeamID = self.challengeTeamID ?? "No team"
+            storeSecondFields()
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
 
@@ -194,13 +192,13 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func storeFirstFields() {
+    private func storeFirstFields() {
         challengeName = challengeNameField.text
         challengeGoal = goalPicker.goal
         challengeTeamID = team?.id
     }
     
-    func moveToSecondFields() {
+    private func moveToSecondFields() {
         publicButton.isHidden = true
         teamSearchBar.isHidden = true
         goalPicker.isHidden = true
@@ -208,6 +206,11 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         endDatePicker.isHidden = false
         nextButton.setTitle("Submit", for: .normal)
         viewState = .second
+    }
+    
+    private func storeSecondFields() {
+        challengeStartDate = startDatePicker.date
+        challengeEndDate = endDatePicker.date
     }
     
     func previousButtonPressed() {

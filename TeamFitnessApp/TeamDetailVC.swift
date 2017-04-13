@@ -13,8 +13,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     var team: Team? {
         didSet {
-            getTeamMembers(forTeam: team)
-            getTeamChallenges(forTeam: team)
+            getTeam { 
+                self.challengesView.reloadData()
+                self.membersView.reloadData()
+            }
         }
     }
     let teamNameLabel = TitleLabel()
@@ -101,6 +103,14 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
 // MARK: - calls to firebase
+    func getTeam(completion: () -> Void) {
+        guard let teamID = team?.id else {return}
+        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
+            self.getTeamMembers(forTeam: team)
+            self.getTeamChallenges(forTeam: team)
+        }
+    }
+    
     func getTeamMembers(forTeam team: Team?) {
         teamUsers.removeAll()
         if let memberList = team?.userUIDs {

@@ -17,7 +17,6 @@ struct FirebaseManager {
 //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
   static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
-
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
             if let firUser = firUser {
                 completion(.successfulNewUser(firUser.uid))
@@ -39,7 +38,6 @@ struct FirebaseManager {
         })
     }
 
-    
     //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
         do {
@@ -79,9 +77,9 @@ struct FirebaseManager {
             "gender": user.sex,
             "height": user.height,
             "weight": user.weight,
-            "teams": teamsDict ?? "No Teams",
-            "goals": goalDict ?? "No Goals",
-            "challenges": challengesDict ?? "No Challenges",
+            "teams": teamsDict,
+            "goals": goalDict,
+            "challenges": challengesDict,
         ]
         
         key.updateChildValues(post)
@@ -109,7 +107,6 @@ struct FirebaseManager {
             "challenges": challengesDict,
             "imageURL": team.imageURL
         ]
-        
         key.updateChildValues(post)
     }
     
@@ -126,10 +123,10 @@ struct FirebaseManager {
         let post: [String: Any] = [
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ?? false,
+            "isPublic": challenge.isPublic ,
             "goal": challenge.goal,
             "startDate": challenge.startDate?.convertToString(),
-            "endDate": challenge.endDate?.convertToString(),
+            "endDate": challenge.endDate?.convertToString() ?? "No end date",
             "team": teamID
         ]
         
@@ -223,13 +220,13 @@ struct FirebaseManager {
         })
     }
     
-    static func fetchChallengeProgress(forUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
+    static func fetchChallengeProgress(forChallengeID challengeID: String, andForUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
         let ref: FIRDatabaseReference
         
         if challengeIsPublic {
-           ref = dataRef.child("publicChallenges").child("users").child(uid)
+           ref = dataRef.child("publicChallenges").child(challengeID).child("users").child(uid)
         } else {
-           ref = dataRef.child("challenges").child("users").child(uid)
+           ref = dataRef.child("challenges").child(challengeID).child("users").child(uid)
         }
         
         ref.observe(.value, with: { (snapshot) in

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChallengeDetailVC: UIViewController {
     
     var challenge: Challenge? = nil {
         didSet {
@@ -40,18 +40,7 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view = FitnessView()
         setupViews()
         
-        getChartData()
-        getLeaders { 
-            DispatchQueue.main.async {
-                self.displayLeaders()
-            }
-        }
         
-        
-        leadersTable.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        leadersTable.delegate = self
-        leadersTable.dataSource = self
-
     }
 
     func setupViews() {
@@ -103,10 +92,15 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.challenge = challenge
         getChartData()
         self.titleLabel.setText(toString: challenge.name)
+        
+        getLeaders {
+            DispatchQueue.main.async {
+                self.displayLeaders()
+            }
+        }
     }
     
     func getChartData() {
-        
         guard let goalType = challenge?.goal?.type, let startDate = challenge?.startDate, let goalValue = challenge?.goal?.value else {return}
         switch goalType {
         case .caloriesBurned:
@@ -144,14 +138,15 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func getLeaders(completion: () -> Void) {
+    func getLeaders(completion: @escaping () -> Void) {
+        print("GET LEADERS CALLED")
         //eliminate all but the top 5 users
         //display the top 5 users progress in the chart
-        guard let uids = challenge?.userUIDs else {return} //TODO: - handle this error mo bettah
+        guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah
         for uid in uids {
             FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
                 guard let uid = user.uid, let challenge = self.challenge else {return}
-                FirebaseManager.fetchChallengeProgress(forUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
+                FirebaseManager.fetchChallengeProgress(forChallengeID: challengeID, andForUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
                     switch response {
                     case .successfulData(let data):
                         let userScore: (String, Double) = (uid, data)
@@ -161,32 +156,27 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
                     default:
                         print("FirebaseManager returned an invalid response")
                     }
+                    completion()
                 })
             })
         }
     }
     
     fileprivate func displayLeaders() {
+        print("DISPLAY LEADERS CALLED")
         //determine five leaders
         var leaderScores = [(String, Double)]()
         userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score
-        for i in 0...4 {
+        var num: Int = 0
+        if userScores.count >= 5 {
+            num = 4
+        } else {
+            num = userScores.count - 1
+        }
+        for i in 0...num {
             leaderScores.append(userScores[i])
         }
+        print(leaderScores)
         leadersChart.setData(group: leaderScores)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
-        cell.setLabels(forUser: leaders[indexPath.row])
-        return cell
     }
 }

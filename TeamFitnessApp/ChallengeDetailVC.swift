@@ -139,9 +139,6 @@ class ChallengeDetailVC: UIViewController {
     }
     
     func getLeaders(completion: @escaping () -> Void) {
-        print("GET LEADERS CALLED")
-        //eliminate all but the top 5 users
-        //display the top 5 users progress in the chart
         guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah
         for uid in uids {
             FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
@@ -149,7 +146,7 @@ class ChallengeDetailVC: UIViewController {
                 FirebaseManager.fetchChallengeProgress(forChallengeID: challengeID, andForUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
                     switch response {
                     case .successfulData(let data):
-                        let userScore: (String, Double) = (uid, data)
+                        let userScore: (String, Double) = (user.name, data)
                         self.userScores.append(userScore)
                     case .failure(let failString):
                         print(failString)
@@ -163,7 +160,6 @@ class ChallengeDetailVC: UIViewController {
     }
     
     fileprivate func displayLeaders() {
-        print("DISPLAY LEADERS CALLED")
         //determine five leaders
         var leaderScores = [(String, Double)]()
         userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score

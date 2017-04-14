@@ -52,6 +52,8 @@
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
 		ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5BB1E944583001230CC /* FirebaseResponse.swift */; };
+		FE1C67B51E9FCC1B00FE0C54 /* ProfileUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */; };
+		FE1C67B71E9FCC4D00FE0C54 /* ProfileUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */; };
 		FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F1D731E9816E100CB1E5F /* LogInView.swift */; };
 		FE9586411E9BD15E009C3BFE /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586401E9BD15E009C3BFE /* NewUserView.swift */; };
 		FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586421E9BFA5F009C3BFE /* ProfileView.swift */; };
@@ -139,6 +141,8 @@
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
 		ECE3F5B91E94441A001230CC /* FirebaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		ECE3F5BB1E944583001230CC /* FirebaseResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseResponse.swift; sourceTree = "<group>"; };
+		FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUpdateVC.swift; sourceTree = "<group>"; };
+		FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUpdateView.swift; sourceTree = "<group>"; };
 		FE1F1D731E9816E100CB1E5F /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		FE9586401E9BD15E009C3BFE /* NewUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 		FE9586421E9BFA5F009C3BFE /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -312,6 +316,7 @@
 				EC5DBD831E9C0A9B00CECA34 /* CreateChallengeVC.swift */,
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				FE9586461E9C0D3A009C3BFE /* GoalsVC.swift */,
+				FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
+				FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -642,6 +648,7 @@
 				EC9D943B1E97EFA000E33362 /* NewUserVC.swift in Sources */,
 				EC9D94391E97EF8200E33362 /* LogInVC.swift in Sources */,
 				EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */,
+				FE1C67B71E9FCC4D00FE0C54 /* ProfileUpdateView.swift in Sources */,
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
@@ -657,6 +664,7 @@
 				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
 				EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */,
+				FE1C67B51E9FCC1B00FE0C54 /* ProfileUpdateVC.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
 				FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,

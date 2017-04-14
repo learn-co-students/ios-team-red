@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var gender: String = ""
     var height: Float = 0
     var uid: String = ""
-//    var userImage: UImage!
+//    var userImage = UIImage()
     
     override func loadView() {
         self.view = profileView
@@ -36,6 +36,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     
     }
+    
     
     func setGoalsButton() {
         
@@ -104,7 +105,16 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 //        userImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profileView.myImageView.backgroundColor = UIColor.clear
         profileView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
-        self.dismiss(animated: true, completion: nil)
+        var userImage = profileView.myImageView.image!
+    
+        FirebaseStoreageManager.upload(userImage: userImage, withUserID: uid) { (FirebaseResponse) in
+            
+            // alert with erro
+            self.dismiss(animated: true, completion: nil)
+        }
+    
+        
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -121,11 +131,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
             self.gender = "Male"
+            self.profileView.genderButton.setTitle("Male", for: .normal)
             
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
             self.gender = "Female"
+            self.profileView.genderButton.setTitle("Female", for: .normal)
         }
         
         alertController.addAction(cancelAction)

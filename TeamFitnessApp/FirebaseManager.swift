@@ -12,7 +12,6 @@ import Firebase
 struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
-    
 
 //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
@@ -137,7 +136,7 @@ struct FirebaseManager {
           }
         })
     }
-
+    
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         var teams = [Team]()
         dataRef.child("teams").observe(.value, with: { (snapshot) in

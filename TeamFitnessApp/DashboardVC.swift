@@ -25,6 +25,10 @@ class DashboardVC: UIViewController {
       navigationItem.setLeftBarButton(button, animated: false)
 
 
+      let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
+      navigationItem.setRightBarButton(profileButton, animated: false)
+
+
       fetchUser()
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView
@@ -82,6 +86,13 @@ class DashboardVC: UIViewController {
 
     }
   }
+
+  func onProfile(_ sender: UIBarButtonItem) {
+    let vc = ProfileUpdateVC()
+    navigationController?.pushViewController(vc, animated: true)
+  }
+
+  
 }
 
 extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
@@ -103,6 +114,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
     challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
     navigationController?.pushViewController(challengeDetailVC, animated: true)
   }
-    
+  
+
 
 }

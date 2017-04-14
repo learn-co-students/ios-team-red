@@ -23,9 +23,13 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
     var uid: String = ""
     
- 
-    
     let goalsView = GoalsView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+
     
     override func loadView() {
         
@@ -51,14 +55,13 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         
         let tempGoal = Double(goalsView.activityMinutesADay.text!)
         firstGoal.setValue(from: tempGoal!)
-        print(firstGoal.value)
+      
         
         let tempGoal2 = Double(goalsView.caloriesADay.text!)
         secondGoal.setValue(from: tempGoal2!)
-        print(secondGoal.value)
+      
         
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)
-        
         
         
         FirebaseManager.save(user: user) { (success) in
@@ -78,16 +81,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         print("Goals gender \(gender)")
         print("Goals height \(height)")
         print("Goals uid \(uid)")
-
-
-        
-        
-
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     
 }

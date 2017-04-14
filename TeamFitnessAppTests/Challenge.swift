@@ -16,7 +16,7 @@ struct Challenge {
     var goal: Goal?
     var creator: String?
     var userUIDs = [String]()
-    var isPublic: Bool?
+    var isPublic: Bool
     var teamID: String?
     var id: String?
     var name: String
@@ -24,7 +24,7 @@ struct Challenge {
     init(id: String, dict: [String: Any]) {
         self.name = dict["name"] as? String ?? "No Name"
         self.creator = dict["creator"] as? String ?? nil
-        self.isPublic = dict["isPublic"] as? Bool ?? nil
+        self.isPublic = dict["isPublic"] as? Bool ?? false
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
         

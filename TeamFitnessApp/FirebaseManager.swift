@@ -90,6 +90,7 @@ struct FirebaseManager {
     
     static func save(team: Team) {// saves a team to Firebase database
         guard let teamID = team.id else {return} //TODO: - handle this error better
+       
         let key = dataRef.child("teams").child(teamID)
         var usersDict = [String: Bool]()
         var challengesDict = [String: Bool]()
@@ -127,8 +128,8 @@ struct FirebaseManager {
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic ?? false,
             "goal": challenge.goal,
-//            "startDate": String(challenge.startDate), TODO add function to the Challenge class that changes dates to string and vice versa
-//            "endDate": String(challenge.endDate),
+            "startDate": challenge.startDate?.convertToString(),
+            "endDate": challenge.endDate?.convertToString(),
             "team": teamID
         ]
         
@@ -206,6 +207,42 @@ struct FirebaseManager {
             completion(challenges)
         })
     }
+    
+    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {
+        var challenges = [Challenge]()
+        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
+            let challengesDict = snapshot.value as? [String: Any]
+            if let challengesDict = challengesDict {
+                for challenge in challengesDict {
+                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+                    challenges.append(challenge)
+                }
+            }
+            completion(challenges)
+        })
+    }
+    
+    static func fetchChallengeProgress(forUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
+        let ref: FIRDatabaseReference
+        
+        if challengeIsPublic {
+           ref = dataRef.child("publicChallenges").child("users").child(uid)
+        } else {
+           ref = dataRef.child("challenges").child("users").child(uid)
+        }
+        
+        ref.observe(.value, with: { (snapshot) in
+            let data: Double? = snapshot.value as? Double ?? nil
+            if let dataUW = data {
+                completion(.successfulData(dataUW))
+            } else {
+                completion(.failure("Could not get progress value for UID"))
+            }
+        })
+            
+        
+    }
 
 // MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
@@ -239,8 +276,16 @@ struct FirebaseManager {
         completion(teamID)
     }
     
-    static func addNew(challenge: Challenge, completion: (String) -> Void) {
-        let challengeRef = dataRef.child("challenges").childByAutoId()
+    static func addNew(challenge: Challenge, isPublic: Bool, completion: (String) -> Void) {
+        let challengeRef: FIRDatabaseReference
+        
+        if isPublic {
+            print("set post reference to public challenges")
+            challengeRef = dataRef.child("publicChallenges").childByAutoId()
+        } else {
+            challengeRef = dataRef.child("challenges").childByAutoId()
+        }
+        
         let challengeID = challengeRef.key
         
         var usersDict = [String: Bool]()
@@ -250,18 +295,17 @@ struct FirebaseManager {
             usersDict[user] = true
         }
         
-        if let goalType = challenge.goal?.type.rawValue {
-            if let goalValue = challenge.goal?.value {
-                goalDict = [goalType: goalValue] 
-            }
+        if let goalType = challenge.goal?.type.rawValue, let goalValue = challenge.goal?.value {
+                goalDict = [goalType: goalValue]
         }
         
         let teamID = challenge.teamID ?? "no team"
+        
         let post: [String: Any] = [
-            "name": challenge.name ,
+            "name": challenge.name,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ?? false,
+            "isPublic": challenge.isPublic ,
             "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
             "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
             "team": teamID,
@@ -271,23 +315,33 @@ struct FirebaseManager {
         challengeRef.updateChildValues(post)
         completion(challengeID)
     }
+    
+//MARK: - add one one team/challenge/user to another team/challenge/user
+    
+    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+        completion()
+    }
 
 
 // MARK: - Test functions
 
 
-//    static func generateTestUser() {
-//        let user = User(name: "Wonder Woman", email: <#T##String#>, sex: <#T##String#>, height: <#T##Float#>, weight: <#T##Int#>, teamIDs: <#T##[String]#>, challengeIDs: <#T##[String]#>, imageURL: <#T##String#>)
-//        FirebaseManager.createNew(User: user, withPassword: "superman1234") { (response) in
+    static func generateTestUser() {
+//        var user = User(name: "Superman", sex: "Male", height: 80, weight: 200, teamIDs: [], challengeIDs: [])
+//        //var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
+//        user.email = "batman@batman.com"
+//        FirebaseManager.createNew(withEmail: user.email!, withPassword: "batman1234") { (response) in
 //            switch response {
 //            case let .successfulNewUser(newUser):
-//                print("NEW USER CREATED with ID \(newUser.uid!)")
+//                print("NEW USER CREATED with ID \(newUser)")
 //            default:
 //                print("could not create new user")
 //            }
 //
 //        }
-//    }
+    }
 
     
     static func loginTestUser () {

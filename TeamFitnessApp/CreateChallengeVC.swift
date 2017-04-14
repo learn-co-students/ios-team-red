@@ -13,7 +13,11 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     var challengeIsPublic: Bool = false
     var searchActive: Bool = false
-    var team: Team? = nil
+    var team: Team? = nil {
+        didSet {
+            teamIndicator.text = team?.name
+        }
+    }
     var challenge: Challenge? = nil
     var user: User? = nil
     
@@ -67,7 +71,9 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         
         self.view.addSubview(teamIndicator)
         teamIndicator.setConstraints(toSuperView: self.view, belowView: challengeNameField)
-        teamIndicator.set(text: "Find team to add new challenge:")
+        if teamIndicator.text == nil {
+            teamIndicator.set(text: "Find team to add new challenge:")
+        }
         teamIndicator.reverseColors()
         
         self.view.addSubview(teamSearchBar)
@@ -148,6 +154,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         if viewState == .first { //if the user is on the first screen of the CreateChallengeView, store the values in the text/search/picker fields, and move to the next screen
             if !challengeIsPublic && team == nil {
                 print("Must select a team to add the challenge to, or set challenge to public")
+                //TODO: - if user has not entered all information needed to create challenge, indicate that to them
                 return
             }
             storeFirstFields()
@@ -176,6 +183,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                     }
                 })
                 self.dismiss(animated: true, completion: nil)
+            } else {
+                //TODO: - if user has not entered all information needed to create challenge, indicate that to them
             }
         }
     }
@@ -286,7 +295,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             self.team = selectedTeam
         } else {
             let selectedTeam = myTeams[indexPath.row]
-            teamIndicator.text = selectedTeam.name
             self.team = selectedTeam
         }
         tableView.isHidden = true

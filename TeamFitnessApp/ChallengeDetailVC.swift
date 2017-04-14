@@ -142,6 +142,7 @@ class ChallengeDetailVC: UIViewController {
             FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
                 guard let uid = user.uid, let challenge = self.challenge else {return}
                 FirebaseManager.fetchChallengeProgress(forChallengeID: challengeID, andForUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
+                    self.userScores.removeAll()
                     switch response {
                     case .successfulData(let data):
                         let userScore: (String, Double) = (user.name, data)

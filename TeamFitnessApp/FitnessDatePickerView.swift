@@ -44,7 +44,6 @@ class FitnessDatePickerView: UIView {
         datePicker.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         datePicker.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         datePicker.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75)
-        //datePicker.backgroundColor = UIColor.foregroundOrange
         datePicker.minimumDate = Date()
         datePicker.addTarget(self, action: #selector(changeDate(sender:)), for: .valueChanged)
     }
@@ -64,5 +63,4 @@ class FitnessDatePickerView: UIView {
         self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.25).isActive = true
         self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.8).isActive = true
     }
-
 }

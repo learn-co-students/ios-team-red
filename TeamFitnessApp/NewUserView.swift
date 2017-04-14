@@ -37,9 +37,6 @@ class NewUserView: FitnessView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-
-    
     func pressProfileButton(sender: UIButton) {
         delegate?.pressProfileButton()
     }

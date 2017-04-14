@@ -12,8 +12,9 @@ import Firebase
 class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     let profileUpdateView = updateProfileView()
-//    var user = FIRAuth.auth()!.currentUser
-//    var userName: String!
+    var user = FIRAuth.auth()!.currentUser
+
+    //    var userName: String!
 //    var userWeight: Int!
     
 //    var name: String = ""
@@ -23,10 +24,10 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
 //    var gender: String = ""
 //    var height: Float = 0
 //    var uid: String = ""
+//    
+//    var user = User(name: "profileuname", sex: "male", height: 62, weight: 85, teamIDs: [], challengeIDs: [], goals: [], email: "fggg@ggg.com", uid: "testString")
     
-    var user = User(name: "profileuname", sex: "male", height: 62, weight: 85, teamIDs: [], challengeIDs: [], goals: [], email: "fggg@ggg.com", uid: "testString")
     
-  
 
 
  
@@ -35,7 +36,9 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fetchUser()
+        
+        fetchUser()
+        
         profileUpdateView.delegate = self
         self.hideKeyboardWhenTappedAround()
         populateView()
@@ -72,13 +75,31 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     
     func pressSaveButton() {
         
-        FIRAuth.auth()!.currentUser.
+        user.name = profileUpdateView.nameTextField.text?
         
-        // update user
         
+        
+//        
+//        FIRAuth.auth()!.currentUser.
+//        
+//        // update user
+//        
         
         
     }
+    
+    func fetchUser() {
+        if let uid = user.uid {
+            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+                DispatchQueue.main.async {
+                    self.userName = user.name
+                    self.userWeight = user.weight
+                }
+            }
+        }
+        
+    }
+
     
     func displayImagePickerButtonTapped() {
         
@@ -152,19 +173,8 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     }
 
 
-//    
-//    func fetchUser() {
-//        if let uid = user.uid {
-//            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-//                DispatchQueue.main.async {
-//                    self.userName = user.name
-//                    self.userWeight = user.weight
-//                }
-//            }
-//        }
-//        
-//    }
-
+    
+    
     
 
   

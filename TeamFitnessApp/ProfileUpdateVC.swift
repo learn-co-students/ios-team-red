@@ -75,7 +75,11 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     
     func pressSaveButton() {
         
+ 
         user.name = profileUpdateView.nameTextField.text?
+
+//        FIRAuth.auth()!.currentUser.
+//         369f126191e18f870d50b18870406ea81528c134
         
         
         

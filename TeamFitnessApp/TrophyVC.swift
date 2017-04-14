@@ -13,7 +13,7 @@ class TrophyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      self.view = FitnessView()
+      self.view = TrophyView(frame: self.view.bounds)
       navigationItem.title = "Fitness Baby"
 
 

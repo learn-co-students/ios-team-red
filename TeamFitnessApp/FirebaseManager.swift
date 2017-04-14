@@ -279,9 +279,11 @@ struct FirebaseManager {
             "name": challenge.name,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ,
-            "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
-            "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
+            "isPublic": challenge.isPublic,
+            "startDate": challenge.startDate?.timeIntervalSince1970,
+            "endDate": challenge.endDate?.timeIntervalSince1970,
+            //"startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
+            //"endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
             "team": teamID,
             "goal": goalDict
         ]

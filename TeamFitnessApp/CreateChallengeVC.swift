@@ -55,7 +55,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         getData()
         
     }
-    
+//MARK = setup view constraints
     func setupViews() {
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view, andViewController: self)
@@ -71,11 +71,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         teamIndicator.reverseColors()
         
         self.view.addSubview(teamSearchBar)
-        teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
-        teamSearchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamSearchBar.topAnchor.constraint(equalTo: teamIndicator.bottomAnchor).isActive = true
-        teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
+        teamSearchBar.constrainVertically(belowView: teamIndicator, widthMultiplier: 0.5, heightMultiplier: 0.05)
         teamSearchBar.placeholder = "Find team"
         teamSearchBar.backgroundColor = UIColor.foregroundOrange
         
@@ -90,24 +86,15 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         print("public button frame: \(publicButton.frame)")
         
         view.addSubview(teamsTableView)
-        teamsTableView.translatesAutoresizingMaskIntoConstraints = false
-        teamsTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        teamsTableView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
-        teamsTableView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.25).isActive = true
-        teamsTableView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8).isActive = true
+        teamsTableView.constrainVertically(belowView: teamSearchBar, widthMultiplier: 0.8, heightMultiplier: 0.25)
         teamsTableView.backgroundColor = UIColor.clear
         teamsTableView.isHidden = true
-        teamsTableView.isUserInteractionEnabled = false
         teamsTableView.delegate = self
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
 
         view.addSubview(goalPicker)
-        goalPicker.translatesAutoresizingMaskIntoConstraints = false
-        goalPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        goalPicker.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
-        goalPicker.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.5).isActive = true
-        goalPicker.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        goalPicker.constrainVertically(belowView: teamSearchBar, widthMultiplier: 0.8, heightMultiplier: 0.5)
         self.view.bringSubview(toFront: goalPicker.stepper)
         
         view.addSubview(startDatePicker)
@@ -169,6 +156,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
             print("save new challenge")
             storeSecondFields()
+            
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
 
@@ -224,7 +212,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.bringSubview(toFront: teamsTableView)
         goalPicker.isHidden = true
         teamsTableView.isHidden = false
-        teamsTableView.isUserInteractionEnabled = true
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -232,7 +219,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         goalPicker.isHidden = false
         print("Did end editing")
         teamsTableView.isHidden = true
-        teamsTableView.isUserInteractionEnabled = false
         filteredTeams = myTeams
     }
     
@@ -241,7 +227,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         print("Clicked cacel button")
         goalPicker.isHidden = false
         teamsTableView.isHidden = true
-        teamsTableView.isUserInteractionEnabled = false
         filteredTeams = myTeams
     }
     
@@ -250,7 +235,6 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         print("Search button clicked")
         goalPicker.isHidden = false
         teamsTableView.isHidden = true
-        teamsTableView.isUserInteractionEnabled = false
         filteredTeams = myTeams
     }
     

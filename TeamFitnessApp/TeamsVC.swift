@@ -21,13 +21,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let myTeamsView = UITableView()
     let searchTableView = UITableView()
     
-    
     var myTeams = [Team]()
-    var publicTeams = [Team]() {
-        didSet {
-            print(publicTeams.count)
-        }
-    }
+    var publicTeams = [Team]()
     var filteredTeams = [Team]()
     var searchActive: Bool = false
     

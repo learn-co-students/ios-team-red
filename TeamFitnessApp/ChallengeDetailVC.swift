@@ -40,7 +40,6 @@ class ChallengeDetailVC: UIViewController {
         self.view = FitnessView()
         setupViews()
         
-        
     }
 
     func setupViews() {
@@ -54,7 +53,6 @@ class ChallengeDetailVC: UIViewController {
         goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        getChartData()
         
         self.view.addSubview(leadersChart)
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +60,7 @@ class ChallengeDetailVC: UIViewController {
         leadersChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         leadersChart.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
-        
+    
         if !userIsChallengeMember {
             self.view.addSubview(joinButton)
             joinButton.translatesAutoresizingMaskIntoConstraints = false
@@ -139,7 +137,7 @@ class ChallengeDetailVC: UIViewController {
     }
     
     func getLeaders(completion: @escaping () -> Void) {
-        guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah
+        guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah - set leaderboard to default image
         for uid in uids {
             FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
                 guard let uid = user.uid, let challenge = self.challenge else {return}
@@ -160,19 +158,15 @@ class ChallengeDetailVC: UIViewController {
     }
     
     fileprivate func displayLeaders() {
-        //determine five leaders
+        guard !userScores.isEmpty else {return} //TODO: - something to set default image for chart if no data exists
         var leaderScores = [(String, Double)]()
         userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score
-        var num: Int = 0
-        if userScores.count >= 5 {
-            num = 4
-        } else {
-            num = userScores.count - 1
-        }
+        
+        let num: Int = (userScores.count >= 5 ? 4 : userScores.count - 1)
+        
         for i in 0...num {
             leaderScores.append(userScores[i])
         }
-        print(leaderScores)
         leadersChart.setData(group: leaderScores)
     }
 }

@@ -291,6 +291,17 @@ struct FirebaseManager {
         
     }
     
+//MARK: Other
+    static func checkForPrevious(uid: String) -> Bool {
+        var check: Bool = false
+        dataRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            let dictionary = snapshot.value as? [String: Any] ?? [:]
+            check = dictionary.keys.contains(uid)
+        })
+        return check
+    }
+    
+    
 // MARK: - Test functions
 
 

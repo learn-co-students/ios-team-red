@@ -8,8 +8,10 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
-class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate{
+class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate {
     
     let logInView = LogInView()
     let healthKitManager = HealthKitManager.sharedInstance
@@ -44,8 +46,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         logInView.delegate = self
-    
+        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -93,6 +96,8 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         }
 
     }
+    
+    
 }
 
 extension UIViewController {

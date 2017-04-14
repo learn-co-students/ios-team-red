@@ -17,6 +17,7 @@ enum FirebaseResponse {
     case successfulLogout(String)
     case succesfulUpload(String)
     case successfulDownload(UIImage)
+    case successfulData(Double)
     case failure(String)
 
     

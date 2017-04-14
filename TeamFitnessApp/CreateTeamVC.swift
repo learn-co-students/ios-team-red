@@ -22,6 +22,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         
         if let userID = userID {
             FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
@@ -37,7 +38,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func setupLabels() {
         self.view.addSubview(titleLabel)
-        titleLabel.setConstraints(toView: self.view)
+        titleLabel.setConstraints(toView: self.view, andViewController: self)
         titleLabel.setText(toString: "New Team")
         titleLabel.text = "New Team"
     }
@@ -54,10 +55,11 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func setupButtons() {
+        
         self.view.addSubview(submitButton)
         submitButton.translatesAutoresizingMaskIntoConstraints = false
         submitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        submitButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        submitButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
         submitButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.15).isActive = true
         submitButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
         submitButton.setTitle("Submit", for: .normal)
@@ -84,7 +86,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         print("CREATE TEAM fired")
         if let userID = userID {
             if let teamName = teamNameField.text {
-                self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
+                navigationController?.popViewController(animated: true)
+                //self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
@@ -122,17 +125,20 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
         imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        present(imagePicker, animated: true, completion: nil)
+        imagePicker.isModalInPopover = true
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         teamImage.image = chosenImage
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
+
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true, completion: nil)
 
     }
 

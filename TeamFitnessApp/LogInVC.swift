@@ -69,24 +69,29 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     func pressLogin() {
         
-        let email = logInView.emailTextField.text!
+      
         let password = logInView.passwordTextField.text!
-        
-        
-        FirebaseManager.loginUser(withEmail: email, andPassword: password) { (response) in
-            switch response {
-            case let .successfulLogin(user):
-                print(user.uid)
-                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-
-            case let .failure(failString):
-                print(failString)
-                self.alert(message: failString)
-                
-            default:
-                print("Firebase login failure")
+        if let email = logInView.emailTextField.text {
+            
+            
+            FirebaseManager.loginUser(withEmail: email, andPassword: password) { (response) in
+                switch response {
+                case let .successfulLogin(user):
+                    print(user.uid)
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                    
+                case let .failure(failString):
+                    print(failString)
+                    self.alert(message: failString)
+                    
+                default:
+                    print("Firebase login failure")
+                }
             }
+        } else {
+            alert(message: "email required")
         }
+
     }
 }
 

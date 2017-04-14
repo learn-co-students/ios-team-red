@@ -11,12 +11,10 @@ import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let screenBounds = UIScreen.main.bounds
-    
-    let uid = FIRAuth.auth()?.currentUser?.uid
     let mainView = FitnessView()
-    let titleLabel = TitleLabel()
-    let myTeamsLabel = FitnessLabel()
+    let uid = FIRAuth.auth()?.currentUser?.uid
+    var user: User? = nil
+    let myTeamsLabel = TitleLabel()
     let createTeamButton = FitnessButton()
     let teamSearchBar = UISearchBar()
     
@@ -26,18 +24,12 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var allTeams = [Team]()
     var myTeams = [Team]()
     var filteredTeams = [Team]()
-    var searchActive: Bool = false {
-        didSet {
-            print(searchActive)
-        }
-    }
+    var searchActive: Bool = false
     
     override func viewDidLoad() {
-      navigationItem.title = "Fitness Baby"
-
-
-        FirebaseManager.loginTestUser() //TODO: - replace test function
         super.viewDidLoad()
+        
+        navigationItem.title = "Teams"
         setupSubViews()
         setupSearchBar()
         
@@ -48,20 +40,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         searchTableView.delegate = self
         searchTableView.dataSource = self
-
-        if let uid = self.uid {
-            FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-                self.getTeams(forUser: user) {
-                    self.myTeams.sort {$0.name.lowercased() < $1.name.lowercased()}
-                    DispatchQueue.main.async {
-                        self.myTeamsView.reloadData()
-                    }
-                }
-
-            }
-        }
         
-        getAllTeams()
+        fetchData()
     }
     
 // MARK: - Delegate and Data Source

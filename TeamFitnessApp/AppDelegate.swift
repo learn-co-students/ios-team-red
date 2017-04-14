@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let healthKitManager = HealthKitManager.sharedInstance
 
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
 

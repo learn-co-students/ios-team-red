@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 final class AppController: UIViewController {
+
     
     var containerView: UIView!
     var actingVC: UIViewController!
@@ -23,6 +24,7 @@ final class AppController: UIViewController {
         loadInitialViewController()
     }
     
+
 }
 
 //MARK: - Notification Observers

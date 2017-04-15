@@ -112,6 +112,15 @@ struct FirebaseManager {
             }
         })
     }
+
+  //fetch user trophies 
+  static func fetchUserTrophies(withFirebaseUID uid: String, completion: @escaping ([String:Int]) -> ()) {
+    dataRef.child("users").child(uid).child("trophies").observeSingleEvent(of: .value, with: { (snapshot) in
+      if let trophyDict = snapshot.value as? [String:Int] {
+        completion(trophyDict)
+      }
+    })
+  }
     
     static func fetchUserOnce(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {
         dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in

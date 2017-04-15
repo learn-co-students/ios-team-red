@@ -113,6 +113,15 @@ struct FirebaseManager {
         })
     }
     
+    static func fetchUserOnce(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {
+        dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userDict = snapshot.value as? [String: Any] {
+                let user = User(uid: uid, dict: userDict)
+                completion(user)
+            }
+        })
+    }
+    
     //fetches a team from Firebase given a team id string, and returns the team through a closure
     static func fetchTeam(withTeamID teamID: String, completion: @escaping (Team) -> Void) {
         dataRef.child("teams").child(teamID).observe(.value, with: { (snapshot) in
@@ -134,6 +143,17 @@ struct FirebaseManager {
             } else {
               print("not in completion")
           }
+        })
+    }
+    
+    static func fetchChallengeOnce(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
+        dataRef.child("challenges").child(challengeID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let challengeDict = snapshot.value as? [String: Any] {
+                let challenge = Challenge(id: challengeID, dict: challengeDict)
+                completion(challenge)
+            } else {
+                print("not in completion")
+            }
         })
     }
     

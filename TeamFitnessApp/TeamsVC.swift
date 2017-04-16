@@ -65,7 +65,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             if searchActive {
                 count = filteredTeams.count
             } else {
-                print("ALAL TEAMS COUNT***** \(publicTeams.count)")
                 count = publicTeams.count
             }
         }

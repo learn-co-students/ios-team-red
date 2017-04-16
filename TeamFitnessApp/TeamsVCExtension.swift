@@ -90,10 +90,8 @@ extension TeamsVC { // Extension for setting up all views
             for team in teams {
                 if let teamID = team.id  {
                     if user.teamIDs.contains(teamID) {
-                        print("APPEND MY TEAMS")
                         self.myTeams.append(team)
                     } else {
-                        print("APPEND Public TEAMS")
                         self.publicTeams.append(team)
                     }
                 }

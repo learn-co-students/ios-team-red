@@ -279,10 +279,8 @@ struct FirebaseManager {
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
             "isPublic": challenge.isPublic,
-            "startDate": challenge.startDate?.timeIntervalSince1970,
-            "endDate": challenge.endDate?.timeIntervalSince1970,
-            //"startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
-            //"endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
+            "startDate": challenge.startDate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
+            "endDate": challenge.endDate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
             "team": teamID,
             "goal": goalDict
         ]
@@ -292,13 +290,14 @@ struct FirebaseManager {
     }
     
 //MARK: Other
-    static func checkForPrevious(uid: String) -> Bool {
+    static func checkForPrevious(uid: String, completion: @escaping (Bool) -> Void) {
         var check: Bool = false
-        dataRef.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-            let dictionary = snapshot.value as? [String: Any] ?? [:]
-            check = dictionary.keys.contains(uid)
+        dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let dictionary = snapshot.value as? [String: Any] ?? nil
+            print(dictionary)
+            if dictionary != nil {check = true}
+            completion(check)
         })
-        return check
     }
     
     

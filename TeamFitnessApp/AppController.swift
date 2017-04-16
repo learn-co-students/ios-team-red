@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 
 
-final class AppController: UIViewController, GIDSignInDelegate {
+final class AppController: UIViewController {
 
     
     var containerView: UIView!
@@ -20,8 +20,6 @@ final class AppController: UIViewController, GIDSignInDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
-        GIDSignIn.sharedInstance().delegate = self
         containerView = UIView(frame: view.frame)
         view = containerView
         addNotifcationObservers()
@@ -104,47 +102,7 @@ extension AppController {
 
 }
 
-extension AppController {
-    // MARK: Google sign in delegate functions
-    
-    
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
-        // ...
-        guard let authentication = user.authentication else { return }
-        let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                          accessToken: authentication.accessToken)
-        FIRAuth.auth()?.signIn(with: credential) { (FIRUser, error) in
-            guard let FIRUser = FIRUser else {return}
-            if FirebaseManager.checkForPrevious(uid: FIRUser.uid) {
-                print("logged in previous user")
-                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-            } else {
-                print("logged in new user")
-                let googleLoginNav = UINavigationController()
-                let vc = NewUserViewController()
-                //self.present(vc, animated: true, completion: nil)
-                googleLoginNav.pushViewController(vc, animated: true)
-            }
-        }
-    
-        if let error = error {
-            return
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        FirebaseManager.logoutUser { (response) in
-            switch response {
-            case .successfulLogout(let successString):
-                print(successString)
-            case .failure(let failString):
-                print(failString)
-            default:
-                print("Invalid firebase response")
-            }
-        }
-    }
-}
+//MARK: Extensions
 
 extension Notification.Name {
     static let closeLoginVC = Notification.Name("close-login-view-controller")

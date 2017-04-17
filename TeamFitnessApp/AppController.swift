@@ -41,7 +41,15 @@ extension AppController {
 
 extension AppController {
     func loadInitialViewController() {
-        
+        if let uid = FIRAuth.auth()?.currentUser?.uid {
+        FirebaseManager.checkForPrevious(uid: uid) { (userExistsInDB) in
+            if userExistsInDB {
+                let vc = ProfileVC()
+            } else {
+                let vc = LoginNavVC
+            }
+        }
+        }
         let vc = FIRAuth.auth()?.currentUser != nil ? TabBarController() : LoginNavVC()
         self.actingVC = vc
         self.add(viewController: self.actingVC, animated: true)

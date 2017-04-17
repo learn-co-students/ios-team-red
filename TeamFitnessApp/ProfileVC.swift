@@ -12,15 +12,10 @@ import Foundation
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ProfileViewDelegate {
 
     let profileView = ProfileView()
-    
-    var name: String = ""
-    var userEmail: String = ""
-    var userPassword: String = ""
-    var weight: Int = 0
-    var gender: String = ""
-    var height: Float = 0
-    var uid: String = ""
-//    var userImage = UIImage()
+    var userEmail: String!
+    var userPassword: String!
+    var uid: String!
+    var userImage: UIImage = #imageLiteral(resourceName: "people")
     
     override func loadView() {
         self.view = profileView
@@ -41,9 +36,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func setGoalsButton() {
         
         
-        weight = Int(profileView.weightTextField.text!)!
-        height = ((Float(profileView.heightFeetTextField.text!)! * 12) + (Float(profileView.heightInchesTextField.text!)!))
-        name = profileView.nameTextField.text!
+        let weight = Int(profileView.weightTextField.text!)!
+        let height = ((Float(profileView.heightFeetTextField.text!)! * 12) + (Float(profileView.heightInchesTextField.text!)!))
+        let name = profileView.nameTextField.text!
+        let gender = profileView.genderButton.currentTitle!
             
         let vc: GoalsViewController = GoalsViewController()
         
@@ -102,15 +98,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
         profileView.myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-//        userImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         profileView.myImageView.backgroundColor = UIColor.clear
         profileView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
         var userImage = profileView.myImageView.image!
     
-        FirebaseStoreageManager.upload(userImage: userImage, withUserID: uid) { (FirebaseResponse) in
+        FirebaseStoreageManager.upload(userImage: userImage, withUserID: self.uid) { (FirebaseResponse) in
             
-            // alert with erro
-            self.dismiss(animated: true, completion: nil)
+           print("image upload complete")
+        
+        
         }
     
         
@@ -130,13 +126,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
-            self.gender = "Male"
+//            self.gender = "Male"
             self.profileView.genderButton.setTitle("Male", for: .normal)
             
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
-            self.gender = "Female"
+//            self.gender = "Female"
             self.profileView.genderButton.setTitle("Female", for: .normal)
         }
         

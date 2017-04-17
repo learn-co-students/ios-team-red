@@ -17,7 +17,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     var userEmail: String = ""
     var userPassword: String = ""
     var weight: Int = 0
-    var gender: String = ""
+    var gender: String!
     var height: Float = 0
     var firstGoal = Goal(type: .exerciseTime, value: 0)
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
@@ -61,7 +61,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         let tempGoal2 = Double(goalsView.caloriesADay.text!)
         secondGoal.setValue(from: tempGoal2!)
       
-        
+        print("saving gender \(gender)")
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)
         
         

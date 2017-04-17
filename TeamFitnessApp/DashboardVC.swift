@@ -89,6 +89,7 @@ class DashboardVC: UIViewController {
 
   func onProfile(_ sender: UIBarButtonItem) {
     let vc = ProfileUpdateVC()
+    vc.firUser = self.user
     navigationController?.pushViewController(vc, animated: true)
   }
 

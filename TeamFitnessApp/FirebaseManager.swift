@@ -13,9 +13,17 @@ struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
 
+    
+    
+    //MARK: - login functions
+    //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
+
+    
+
 //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
   static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
+
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
             if let firUser = firUser {
                 completion(.successfulNewUser(firUser.uid))
@@ -31,7 +39,7 @@ struct FirebaseManager {
             if let user = user {
                 completion(.successfulLogin(user))
             } else {
-              let error1 = error!
+                let error1 = error!
                 completion(.failure(error1.localizedDescription))
             }
         })
@@ -46,10 +54,8 @@ struct FirebaseManager {
             completion(.failure("FirebaseManager could not log out user"))
         }
     }
-
-
-// MARK: - save functions
-
+    
+    
     static func save(user: User, completion: @escaping (Bool) -> ()) {// saves a user to the Firebase database
         let key = dataRef.child("users").child(user.uid!)
         var goalDict = [String: Double]()
@@ -77,6 +83,7 @@ struct FirebaseManager {
             "goals": goalDict,
             "challenges": challengesDict,
         ]
+
         
         key.updateChildValues(post)
         completion(true)
@@ -84,7 +91,7 @@ struct FirebaseManager {
     
     static func save(team: Team) {// saves a team to Firebase database
         guard let teamID = team.id else {return} //TODO: - handle this error better
-       
+        
         let key = dataRef.child("teams").child(teamID)
         let post = FirebaseManager.makeDictionary(fromTeam: team)
         key.updateChildValues(post)
@@ -96,19 +103,21 @@ struct FirebaseManager {
         let post = FirebaseManager.makeDictionary(fromChallenge: challenge)
         key.updateChildValues(post)
     }
-
-  static func updateChallengeData(challengeID: String, userID: String, withData data: Double) {
-    let key = dataRef.child("challenges").child(challengeID).child("users")
-    key.updateChildValues([userID:data])
-  }
-// MARK: - Fetch functions
-
+    
+    static func updateChallengeData(challengeID: String, userID: String, withData data: Double) {
+        let key = dataRef.child("challenges").child(challengeID).child("users")
+        key.updateChildValues([userID:data])
+    }
+    // MARK: - Fetch functions
+    
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
-            if let userDict = snapshot.value as? [String: Any] {
-                let user = User(uid: uid, dict: userDict)
-                completion(user)
+            DispatchQueue.main.async {
+                if let userDict = snapshot.value as? [String: Any] {
+                    let user = User(uid: uid, dict: userDict)
+                    completion(user)
+                }
             }
         })
     }
@@ -150,10 +159,12 @@ struct FirebaseManager {
                 let challenge = Challenge(id: challengeID, dict: challengeDict)
                 completion(challenge)
             } else {
-              print("not in completion")
-          }
+                print("not in completion")
+            }
         })
     }
+    
+
     
     static func fetchChallengeOnce(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
         dataRef.child("challenges").child(challengeID).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -165,6 +176,7 @@ struct FirebaseManager {
             }
         })
     }
+
     
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         var teams = [Team]()
@@ -214,9 +226,10 @@ struct FirebaseManager {
     static func fetchChallengeProgress(forChallengeID challengeID: String, andForUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
         let ref: FIRDatabaseReference
         if challengeIsPublic {
-           ref = dataRef.child("publicChallenges").child(challengeID).child("users").child(uid)
+            ref = dataRef.child("publicChallenges").child(challengeID).child("users").child(uid)
         } else {
            ref = dataRef.child("challenges").child(challengeID).child("users").child(uid)
+
         }
         
         ref.observe(.value, with: { (snapshot) in
@@ -227,9 +240,10 @@ struct FirebaseManager {
                 completion(.failure("Could not get progress value for UID"))
             }
         })
-    }
 
-// MARK: - add new user/team/challenge functions
+    }
+    
+    // MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
@@ -261,11 +275,11 @@ struct FirebaseManager {
         completion(challengeID)
     }
     
-    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
-        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
-        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
-        completion()
-    }
+//    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+//        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+//        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+//        completion()
+//    }
     
 // MARK: - private helper functions
     private static func makeDictionary(fromTeam team: Team) -> [String: Any]{
@@ -317,8 +331,16 @@ struct FirebaseManager {
         return dict
         
     }
+
     
-//MARK: Other
+    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+        completion()
+    }
+    
+    
+
     static func checkForPrevious(uid: String, completion: @escaping (Bool) -> Void) {
         var check: Bool = false
         dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -330,21 +352,33 @@ struct FirebaseManager {
     }
     
     
-// MARK: - Test functions
-
 
     static func generateTestUser() {
-//        var user = User(name: "Superman", sex: "Male", height: 80, weight: 200, teamIDs: [], challengeIDs: [])
-//        //var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
-//        user.email = "batman@batman.com"
-//        FirebaseManager.createNew(withEmail: user.email!, withPassword: "batman1234") { (response) in
-//            switch response {
-//            case let .successfulNewUser(newUser):
-//                print("NEW USER CREATED with ID \(newUser)")
-//            default:
-//                print("could not create new user")
-//            }
-//
-//        }
+        //        var user = User(name: "Superman", sex: "Male", height: 80, weight: 200, teamIDs: [], challengeIDs: [])
+        //        //var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
+        //        user.email = "batman@batman.com"
+        //        FirebaseManager.createNew(withEmail: user.email!, withPassword: "batman1234") { (response) in
+        //            switch response {
+        //            case let .successfulNewUser(newUser):
+        //                print("NEW USER CREATED with ID \(newUser)")
+        //            default:
+        //                print("could not create new user")
+        //            }
+        //
+        //        }
     }
+
+    
+    
+    static func loginTestUser () {
+        FirebaseManager.loginUser(withEmail: "superman@superman.com", andPassword: "superman1234") { (response) in
+            switch response {
+            case let .successfulLogin(firUser):
+                print("logged in user: \(firUser.email!)")
+            default:
+                print("could not log user in")
+            }
+        }
+    }
+
 }

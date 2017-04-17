@@ -146,7 +146,6 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.teamUsers.removeAll()
             self.teamChallenges.removeAll()
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                //getTeamMembers(forTeam: self.team)
                 DispatchQueue.main.async {
                     self.membersView.reloadData()
                     self.challengesView.reloadData()

@@ -84,24 +84,20 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
    
     func pressProfileButton() {
         
-        userEmail = createNewUserView.emailTextField.text!
-        userPassword = createNewUserView.passwordTextField.text!
-        confirmPassword = createNewUserView.confirmTextField.text!
-        
         if thirdPartyLogin {
             let vc: ProfileViewController = ProfileViewController()
             vc.userEmail = self.userEmail
             vc.uid = self.uid ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         } else if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
-            
+            guard let userEmail = createNewUserView.emailTextField.text, let userPassword = createNewUserView.passwordTextField.text, let _ = createNewUserView.confirmTextField.text else {return}
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {
                 case let .successfulNewUser(uid):
                 
                     let vc: ProfileViewController = ProfileViewController()
-                    vc.userEmail = self.userEmail
-                    vc.userPassword = self.userPassword
+                    vc.userEmail = userEmail
+                    vc.userPassword = userPassword
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)
                    

@@ -69,7 +69,8 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     }
     
     func pressNewUser() {
-      
+        let vc = NewUserViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func pressLogin() {

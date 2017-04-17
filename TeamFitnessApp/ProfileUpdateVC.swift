@@ -19,7 +19,6 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     var myImage: UIImage!
 
     
-
     override func loadView() {
         
         self.view = profileUpdateView

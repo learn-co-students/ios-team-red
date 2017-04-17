@@ -74,7 +74,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func createNewTeam() {
-        print("CREATE TEAM fired")
         if let userID = userID {
             guard teamNameField.text != "" else {
                 teamNameField.flashRed()

@@ -19,8 +19,6 @@ protocol UpdateProfileViewDelegate: class {
 
 class updateProfileView: FitnessView {
     
-    
-  
     var profileLabel: FitnessLabel!
     var myImageView: UIImageView!
     var showImagePickerButton: UIButton!
@@ -41,7 +39,6 @@ class updateProfileView: FitnessView {
         super.init(frame: frame)
         loadProfileUpdateUI()
     
-//        FirebaseStoreageManager.downloadImage(forTeam: <#T##Team#>, completion: <#T##(FirebaseResponse) -> Void#>)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -57,7 +54,7 @@ class updateProfileView: FitnessView {
     }
     
     func pressSaveButton(sender:UIButton) {
-        print("pressedSetGoals")
+        print("SaveButton")
         delegate?.pressSaveButton()
     }
 
@@ -105,7 +102,7 @@ class updateProfileView: FitnessView {
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.layer.cornerRadius = 5
         nameTextField.textAlignment = NSTextAlignment.center
-        nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
+        nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 20).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -173,12 +170,6 @@ class updateProfileView: FitnessView {
         
         
         
-        
-        var changePassWordLabel = FitnessButton()
-        // send to create 
-        
-        var updateProfileButton = FitnessButton()
-        // upate user where textfields have changed value
     
         
     

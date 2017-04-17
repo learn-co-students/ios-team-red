@@ -24,7 +24,7 @@ struct User {
     init(uid: String, dict: [String: Any]) {
         self.uid = uid
         self.name = dict["name"] as? String ?? ""
-        self.sex = dict["Sex"] as? String ?? ""
+        self.sex = dict["gender"] as? String ?? ""
         self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as? Int ?? 0
         self.email = dict["email"] as? String ?? ""
@@ -66,5 +66,13 @@ struct User {
     
     mutating func set(UID uid: String) {
         self.uid = uid
+    }
+    
+    
+    mutating func update(name: String, weight: Int, height: Float, sex:String) {
+        self.name = name
+        self.weight = weight
+        self.height = height
+        self.sex = sex
     }
 }

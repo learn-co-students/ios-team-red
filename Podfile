@@ -12,6 +12,9 @@ target 'TeamFitnessApp' do
 	pod 'Firebase/Storage'
 	pod ‘Charts’
 	pod ‘GoogleSignIn’
+  pod 'FacebookCore'
+  pod 'FacebookLogin'
+  pod 'FacebookShare'
 
   target 'TeamFitnessAppTests' do
     inherit! :search_paths

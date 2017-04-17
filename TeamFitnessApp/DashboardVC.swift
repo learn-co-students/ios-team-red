@@ -43,6 +43,11 @@ class DashboardVC: UIViewController {
 
   func fetchUser() {
     if let uid = user?.uid {
+    FirebaseManager.checkForPrevious(uid: uid, completion: { (previousExists) in
+        if !previousExists {
+            NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
+        }
+    })
       FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
         DispatchQueue.main.async {
           self.testUser = user

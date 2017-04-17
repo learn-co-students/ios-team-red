@@ -37,9 +37,6 @@ class NewUserView: FitnessView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-
-    
     func pressProfileButton(sender: UIButton) {
         delegate?.pressProfileButton()
     }
@@ -62,6 +59,8 @@ class NewUserView: FitnessView {
     emailTextField = UITextField()
     self.addSubview(emailTextField)
     emailTextField.translatesAutoresizingMaskIntoConstraints = false
+    emailTextField.autocorrectionType = .no
+    emailTextField.autocapitalizationType = .none
     emailTextField.layer.cornerRadius = 5
     emailTextField.textAlignment = NSTextAlignment.center
     emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
@@ -73,6 +72,9 @@ class NewUserView: FitnessView {
     
     passwordTextField = UITextField()
     self.addSubview(passwordTextField)
+    passwordTextField.autocorrectionType = .no
+    passwordTextField.autocapitalizationType = .none
+    passwordTextField.isSecureTextEntry = true
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
     passwordTextField.layer.cornerRadius = 5
     passwordTextField.textAlignment = NSTextAlignment.center
@@ -85,6 +87,9 @@ class NewUserView: FitnessView {
     
     confirmTextField = UITextField()
     self.addSubview(confirmTextField)
+    confirmTextField.autocorrectionType = .no
+    confirmTextField.autocapitalizationType = .none
+    confirmTextField.isSecureTextEntry = true
     confirmTextField.translatesAutoresizingMaskIntoConstraints = false
     confirmTextField.layer.cornerRadius = 5
     confirmTextField.textAlignment = NSTextAlignment.center

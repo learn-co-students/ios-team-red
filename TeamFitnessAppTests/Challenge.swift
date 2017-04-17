@@ -36,9 +36,10 @@ struct Challenge {
           }
         }
 
-
-        self.startDate = (dict["startDate"] as? String)?.convertToDate()
-        self.endDate = (dict["endDate"] as? String)?.convertToDate()
+        self.startDate = Date(timeIntervalSince1970: dict["startDate"] as? TimeInterval ?? 0)
+        self.endDate = Date(timeIntervalSince1970: dict["endDate"] as? TimeInterval ?? 0)
+//        self.startDate = (dict["startDate"] as? String)?.convertToDate()
+//        self.endDate = (dict["endDate"] as? String)?.convertToDate()
         let userDict = dict["users"] as? [String: Bool] ?? [:]
         for (userID, _) in userDict {
             self.userUIDs.append(userID)

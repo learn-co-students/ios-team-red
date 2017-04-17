@@ -7,11 +7,11 @@
 //
 
 import UIKit
+import GoogleSignIn
 
 protocol LoginViewDelegate: class {
     func pressNewUser()
     func pressLogin()
-    
 }
 
 
@@ -23,7 +23,8 @@ class LogInView: FitnessView {
     var passwordTextField: UITextField!
     var loginButton: FitnessButton!
     var newUserButton: FitnessButton!
-    var googleButton: FitnessButton!
+    var googleButton: GIDSignInButton!
+    //var googleButton: FitnessButton!
     var facebookButton: FitnessButton!
     var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
@@ -142,11 +143,11 @@ class LogInView: FitnessView {
         newUserButton.isEnabled = true
         newUserButton.addTarget(self, action: #selector(pressNewUser), for: .touchUpInside)
         
-        googleButton = FitnessButton()
+        googleButton = GIDSignInButton()
         self.addSubview(googleButton)
         googleButton.translatesAutoresizingMaskIntoConstraints = false
-        googleButton.setTitle("Google", for: .normal)
-        googleButton.changeFontSize(to: 16.0)
+        //googleButton.setTitle("Google", for: .normal)
+        //googleButton.changeFontSize(to: 16.0)
         googleButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         googleButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

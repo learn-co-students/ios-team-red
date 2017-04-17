@@ -20,7 +20,9 @@ struct User {
     var goals = [Goal]()
     var email: String? = nil
     var uid: String? = nil
-    
+    var oldChallengeIDs = [String]()
+    var trophies = [String:Int]()
+
     init(uid: String, dict: [String: Any]) {
         self.uid = uid
         self.name = dict["name"] as? String ?? ""
@@ -41,6 +43,13 @@ struct User {
             goals.append(goal)
           }
         }
+
+       self.trophies = dict["trophies"] as? [String:Int] ?? [:]
+
+      let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
+      for (challengeID, _) in oldChallengeDict {
+        self.oldChallengeIDs.append(challengeID)
+      }
 
         let teamDict = dict["teams"] as? [String: Bool] ?? [:]
         for (teamID, _) in teamDict {

@@ -94,7 +94,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         view.addSubview(teamsTableView)
         teamsTableView.constrainVertically(belowView: teamSearchBar, widthMultiplier: 0.8, heightMultiplier: 0.25)
         teamsTableView.backgroundColor = UIColor.clear
-        teamsTableView.isHidden = true
+        teamsTableView.alpha = 0
         teamsTableView.delegate = self
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
@@ -106,12 +106,12 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         view.addSubview(startDatePicker)
         startDatePicker.setConstraints(toSuperView: self.view, belowView: teamSearchBar)
         startDatePicker.setTitle(toString: "Challenge Start Date:")
-        startDatePicker.isHidden = true
+        startDatePicker.alpha = 0
         
         view.addSubview(endDatePicker)
         endDatePicker.setConstraints(toSuperView: self.view, belowView: startDatePicker)
         endDatePicker.setTitle(toString: "Challenge End Date:")
-        endDatePicker.isHidden = true
+        endDatePicker.alpha = 0
         
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
@@ -196,11 +196,11 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     private func moveToSecondFields() {
-        publicButton.isHidden = true
-        teamSearchBar.isHidden = true
-        goalPicker.isHidden = true
-        startDatePicker.isHidden = false
-        endDatePicker.isHidden = false
+        publicButton.hide()
+        teamSearchBar.hide()
+        goalPicker.hide()
+        startDatePicker.show()
+        endDatePicker.show()
         nextButton.setTitle("Submit", for: .normal)
         viewState = .second
     }

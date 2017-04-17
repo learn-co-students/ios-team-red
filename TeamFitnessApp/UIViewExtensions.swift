@@ -37,4 +37,18 @@ extension UIView {
             })
         }, completion: nil)
     }
+    
+    func hide() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (animate) in
+        }
+    }
+    
+    func show() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 1
+        }) { (animate) in
+        }
+    }
 }

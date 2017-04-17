@@ -93,6 +93,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
             navigationController?.pushViewController(challengeDetailVC, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 // MARK: - calls to firebase
@@ -145,7 +146,6 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.teamUsers.removeAll()
             self.teamChallenges.removeAll()
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                //getTeamMembers(forTeam: self.team)
                 DispatchQueue.main.async {
                     self.membersView.reloadData()
                     self.challengesView.reloadData()

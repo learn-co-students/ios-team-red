@@ -47,7 +47,6 @@
 		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
 		EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */; };
 		EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */; };
-		EC9D94311E96E95000E33362 /* NewTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94301E96E95000E33362 /* NewTeamVC.swift */; };
 		EC9D94331E97C52500E33362 /* TeamDetailVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */; };
 		EC9D94351E97CEAF00E33362 /* FitnessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94341E97CEAF00E33362 /* FitnessCell.swift */; };
 		EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94361E97EF4B00E33362 /* ProfileVC.swift */; };
@@ -146,7 +145,6 @@
 		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
 		EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVCExtension.swift; sourceTree = "<group>"; };
 		EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
-		EC9D94301E96E95000E33362 /* NewTeamVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTeamVC.swift; sourceTree = "<group>"; };
 		EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVCExtension.swift; sourceTree = "<group>"; };
 		EC9D94341E97CEAF00E33362 /* FitnessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessCell.swift; sourceTree = "<group>"; };
 		EC9D94361E97EF4B00E33362 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 				EC9D943A1E97EFA000E33362 /* NewUserVC.swift */,
 				EC9D94381E97EF8200E33362 /* LogInVC.swift */,
 				EC9D94361E97EF4B00E33362 /* ProfileVC.swift */,
-				EC9D94301E96E95000E33362 /* NewTeamVC.swift */,
 				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
 				EC9D943E1E98130400E33362 /* CreateTeamVC.swift */,
@@ -409,6 +406,7 @@
 				EC6A3D2B1E92EDC800F5E717 /* Resources */,
 				5FF4BDC1FD1A9DB91C61EF84 /* [CP] Embed Pods Frameworks */,
 				726C4661EE8B5B3F9E2254D6 /* [CP] Copy Pods Resources */,
+				EC95596E1EA5005F008FA5FA /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -679,6 +677,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EC95596E1EA5005F008FA5FA /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -718,7 +730,6 @@
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */,
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
-				EC9D94311E96E95000E33362 /* NewTeamVC.swift in Sources */,
 				EC5DBD841E9C0A9B00CECA34 /* CreateChallengeVC.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,
 				EC4BD1CB1EA050700076B4D0 /* UIViewExtensions.swift in Sources */,
@@ -891,6 +902,10 @@
 				CODE_SIGN_ENTITLEMENTS = TeamFitnessApp/TeamFitnessApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7X3B669663;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessApp;
@@ -909,6 +924,10 @@
 				CODE_SIGN_ENTITLEMENTS = TeamFitnessApp/TeamFitnessApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 7X3B669663;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessApp;

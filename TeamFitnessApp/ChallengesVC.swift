@@ -47,17 +47,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -113,16 +102,20 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //navigationController?.pushViewController(challengeDetailVC, animated: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 //MARK: Firebase calls
     func getMyChallenges() {
         guard let uid = self.uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            self.myChallenges.removeAll()
             for challengeID in user.challengeIDs {
-                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
                     self.myChallenges.append(challenge)
-                    self.myChallengesView.reloadData()
+                    DispatchQueue.main.async {
+                        self.myChallengesView.reloadData()
+                    }
                 })
             }
         }
@@ -131,7 +124,9 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func getPublicChallenges() {
         FirebaseManager.fetchPublicChallenges { (challenges) in
             self.publicChallenges = challenges
-            self.publicChallengesView.reloadData()
+            DispatchQueue.main.async {
+                self.publicChallengesView.reloadData()
+            }
         }
     }
 }

@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FacebookCore
+import FBSDKLoginKit
 
 
 @UIApplicationMain
@@ -42,17 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //          NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
 //        }
 //      }
-        
-//        for family: String in UIFont.familyNames
-//        {
-//            print("\(family)")
-//            for names: String in UIFont.fontNames(forFamilyName: family)
-//            {
-//                print("== \(names)")
-//            }
-//        }
 
-        return true
+      
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -109,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppEventsLogger.activate(application)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -118,9 +112,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
-            return GIDSignIn.sharedInstance().handle(url,
+            print("FACEBOOK URL********** : \(url.absoluteString) END URL **********")
+            if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options) {
+                return true
+            } else if GIDSignIn.sharedInstance().handle(url,
                                                      sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                     annotation: [:])
+                                                     annotation: [:]) {
+                return true
+            } else {
+                return false
+            }
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        FBSDKAppEvents.activateApp()
     }
 
 

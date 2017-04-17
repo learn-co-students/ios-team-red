@@ -10,18 +10,17 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
 
-class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
+class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate {
     
     let logInView = LogInView()
     let healthKitManager = HealthKitManager.sharedInstance
     
     override func loadView() {
         self.view = logInView
-      
-        
-        
-    
+
+        logInView.facebookButton.delegate = self
         logInView.emailTextField.delegate = self
         logInView.emailTextField.tag = 0
         logInView.passwordTextField.delegate = self
@@ -67,7 +66,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
 //    }
     
     func pressNewUser() {
-      
+
         let vc = NewUserViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -104,10 +103,10 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         guard let authentication = user.authentication else { return }
         let credential = FIRGoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                           accessToken: authentication.accessToken)
-        FIRAuth.auth()?.signIn(with: credential) { (FIRUser, error) in
-            guard let FIRUser = FIRUser else {return}
-            print(FIRUser.uid)
-            FirebaseManager.checkForPrevious(uid: FIRUser.uid, completion: { (userExists) in
+        FIRAuth.auth()?.signIn(with: credential) { (firUser, error) in
+            guard let firUser = firUser else {return}
+            print(firUser.uid)
+            FirebaseManager.checkForPrevious(uid: firUser.uid, completion: { (userExists) in
                 if userExists {
                     print("logged in previous user")
                     NotificationCenter.default.post(name: .closeLoginVC, object: nil)
@@ -135,6 +134,52 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 print("Invalid firebase response")
             }
         }
+    }
+    
+    //MARK: Facebook login delegate
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        FIRAuth.auth()?.signIn(with: credential, completion: { (firUser, error) in
+            guard let firUser = firUser else {return}
+            FirebaseManager.checkForPrevious(uid: firUser.uid, completion: { (userExists) in
+                if userExists {
+                    print("logged in previous user")
+                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                } else {
+                    print("logged in new user")
+                    let vc = NewUserViewController()
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    //self.present(vc, animated: true, completion: nil)
+                }
+            })
+        })
+            if let error = error {
+                // ...
+                return
+            }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        FirebaseManager.logoutUser { (response) in
+            switch response {
+            case .successfulLogout(let successString):
+                print(successString)
+            case .failure(let failString):
+                print(failString)
+            default:
+                print("Invalid firebase response")
+            }
+        }
+        
+    }
+    
+    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        
+        return true
     }
 }
 

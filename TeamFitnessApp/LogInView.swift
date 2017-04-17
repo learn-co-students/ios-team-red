@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import FBSDKLoginKit
 
 protocol LoginViewDelegate: class {
     func pressNewUser()
@@ -24,8 +25,7 @@ class LogInView: FitnessView {
     var loginButton: FitnessButton!
     var newUserButton: FitnessButton!
     var googleButton: GIDSignInButton!
-    //var googleButton: FitnessButton!
-    var facebookButton: FitnessButton!
+    var facebookButton: FBSDKLoginButton!
     var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
 
@@ -148,24 +148,23 @@ class LogInView: FitnessView {
         googleButton = GIDSignInButton()
         self.addSubview(googleButton)
         googleButton.translatesAutoresizingMaskIntoConstraints = false
-        //googleButton.setTitle("Google", for: .normal)
-        //googleButton.changeFontSize(to: 16.0)
         googleButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         googleButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
         
-        facebookButton = FitnessButton()
+        facebookButton = FBSDKLoginButton()
         self.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
-        facebookButton.setTitle("Facebook", for: .normal)
-        facebookButton.changeFontSize(to: 16.0)
+        //facebookButton.setTitle("Facebook", for: .normal)
         facebookButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         facebookButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
         
     }
+    
+    
 
 
 }

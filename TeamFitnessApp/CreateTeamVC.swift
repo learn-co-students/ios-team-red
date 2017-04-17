@@ -74,8 +74,11 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     }
     
     func createNewTeam() {
-        print("CREATE TEAM fired")
         if let userID = userID {
+            guard teamNameField.text != "" else {
+                teamNameField.flashRed()
+                return
+            }
             if let teamName = teamNameField.text {
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
@@ -102,7 +105,9 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 })
             }
         } else {
-            //TODO: - Add animation indicating text fields are not filled out
+            if teamNameField.text == nil {
+                teamNameField.flashRed()
+            }
         }
     }
     

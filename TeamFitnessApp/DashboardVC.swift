@@ -53,6 +53,11 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
 
   func fetchUser() {
     if let uid = user?.uid {
+    FirebaseManager.checkForPrevious(uid: uid, completion: { (previousExists) in
+        if !previousExists {
+            NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
+        }
+    })
       FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
         DispatchQueue.main.async {
           self.testUser = user
@@ -124,6 +129,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
     let challengeDetailVC = ChallengeDetailVC()
     challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
     navigationController?.pushViewController(challengeDetailVC, animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
 

@@ -20,4 +20,36 @@ extension UIView {
         self.heightAnchor.constraint(equalTo: superview.heightAnchor, multiplier: heightMultiplier).isActive = true
         self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: widthMultiplier).isActive = true
     }
+    
+    func flashRed() {
+        UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeLinear, animations: {
+            let holdColor = self.backgroundColor
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
+                self.backgroundColor = UIColor.red
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.2, animations: {
+                self.backgroundColor = holdColor
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.2, animations: {
+                self.backgroundColor = UIColor.red
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.2, animations: {
+                self.backgroundColor = holdColor
+            })
+        }, completion: nil)
+    }
+    
+    func hide() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (animate) in
+        }
+    }
+    
+    func show() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 1
+        }) { (animate) in
+        }
+    }
 }

@@ -17,7 +17,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     var userPassword: String!
     var confirmPassword: String!
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
-    var googleLogin: Bool {
+    var thirdPartyLogin: Bool {
         return FIRAuth.auth()?.currentUser != nil
     }
 
@@ -40,11 +40,13 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
         
-        if googleLogin {
-            createNewUserView.emailTextField.isUserInteractionEnabled = false
-            createNewUserView.emailTextField.alpha = 0.5
-            createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email
-            createNewUserView.passwordTextField.isHidden = true
+        if thirdPartyLogin {//if someone has logged in via facebook or google
+            if FIRAuth.auth()?.currentUser?.email != "" { //check if facebook or google provided a valid email
+                createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email//if so, fill out email field and remove user interaction
+                createNewUserView.emailTextField.isUserInteractionEnabled = false
+                createNewUserView.emailTextField.alpha = 0.5
+            }
+            createNewUserView.passwordTextField.isHidden = true //remove password text fields
             createNewUserView.confirmTextField.isHidden = true
         }
     
@@ -84,6 +86,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
    
     func pressProfileButton() {
         
+
         guard let userEmail = createNewUserView.emailTextField.text else {
             alert(message: "Please enter a valid email.")
             return
@@ -100,20 +103,25 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         }
         
         
-        if googleLogin {
+       
+        if thirdPartyLogin {
+
             let vc: ProfileViewController = ProfileViewController()
             vc.userEmail = self.userEmail
             vc.uid = self.uid ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         } else if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
-            
+            guard let userEmail = createNewUserView.emailTextField.text, let userPassword = createNewUserView.passwordTextField.text, let _ = createNewUserView.confirmTextField.text else {return}
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {
                 case let .successfulNewUser(uid):
                 
                     let vc: ProfileViewController = ProfileViewController()
                     vc.userEmail = userEmail
+
 //                    vc.userPassword = userPassword
+
+                    vc.userPassword = userPassword
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)
                    

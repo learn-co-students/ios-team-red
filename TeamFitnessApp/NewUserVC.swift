@@ -17,7 +17,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     var userPassword: String = ""
     var confirmPassword: String = ""
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
-    var googleLogin: Bool {
+    var thirdPartyLogin: Bool {
         return FIRAuth.auth()?.currentUser != nil
     }
 
@@ -40,7 +40,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
         
-        if googleLogin {
+        if thirdPartyLogin {
             createNewUserView.emailTextField.isUserInteractionEnabled = false
             createNewUserView.emailTextField.alpha = 0.5
             createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email
@@ -86,7 +86,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         userPassword = createNewUserView.passwordTextField.text!
         confirmPassword = createNewUserView.confirmTextField.text!
         
-        if googleLogin {
+        if thirdPartyLogin {
             let vc: ProfileViewController = ProfileViewController()
             vc.userEmail = self.userEmail
             vc.uid = self.uid ?? ""

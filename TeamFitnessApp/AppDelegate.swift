@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FacebookCore
+import FBSDKLoginKit
 
 
 @UIApplicationMain
@@ -44,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //      }
 
 
-        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -101,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        AppEventsLogger.activate(application)
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -110,9 +112,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
             return GIDSignIn.sharedInstance().handle(url,
                                                      sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
                                                      annotation: [:])
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        FBSDKAppEvents.activateApp()
     }
 
 

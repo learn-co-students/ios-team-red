@@ -106,7 +106,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 })
             }
         } else {
-            //TODO: - Add animation indicating text fields are not filled out
             if teamNameField.text == nil {
                 teamNameField.flashRed()
             }

@@ -113,12 +113,10 @@ struct FirebaseManager {
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
-            DispatchQueue.main.async {
                 if let userDict = snapshot.value as? [String: Any] {
                     let user = User(uid: uid, dict: userDict)
                     completion(user)
                 }
-            }
         })
     }
 
@@ -163,9 +161,7 @@ struct FirebaseManager {
             }
         })
     }
-    
 
-    
     static func fetchChallengeOnce(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
         dataRef.child("challenges").child(challengeID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let challengeDict = snapshot.value as? [String: Any] {
@@ -243,7 +239,7 @@ struct FirebaseManager {
 
     }
     
-    // MARK: - add new user/team/challenge functions
+// MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }

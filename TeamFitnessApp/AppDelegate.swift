@@ -42,7 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //          NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
 //        }
 //      }
-
+        
+//        for family: String in UIFont.familyNames
+//        {
+//            print("\(family)")
+//            for names: String in UIFont.fontNames(forFamilyName: family)
+//            {
+//                print("== \(names)")
+//            }
+//        }
 
         return true
     }

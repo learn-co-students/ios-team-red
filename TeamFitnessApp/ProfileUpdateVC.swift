@@ -13,8 +13,7 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
 
     let ref = FIRDatabase.database().reference()
     let profileUpdateView = updateProfileView()
-//    var firUser = FIRAuth.auth()!.currentUser
-    var firUser: FIRUser!
+    var firUser = FIRAuth.auth()!.currentUser
     var user: User!
     var myImage: UIImage!
 
@@ -36,8 +35,6 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         
         profileUpdateView.delegate = self
         self.hideKeyboardWhenTappedAround()
-
- 
     }
     
     func populateView () {
@@ -51,7 +48,7 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
                 
             case let .failure(failString):
                 print(failString)
-//                self.alert(message: failString)
+                self.alert(message: failString)
             default:
                 print("Firebase login failure")
             }
@@ -68,27 +65,41 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         profileUpdateView.nameTextField.text = self.user!.name
         profileUpdateView.weightTextField.text = String(describing: self.user!.weight)
         profileUpdateView.genderButton.setTitle((self.user!.sex), for: .normal)
-        print(self.user!.sex)
-        
-
-
-
+   
     }
     
     func pressSaveButton() {
       
-        let userHeightFeet = Float((Int(profileUpdateView.heightFeetTextField.text!)!) * 12)
-        let userHeightInches = Float(profileUpdateView.heightInchesTextField.text!)!
+        guard let userHeightFeet = profileUpdateView.heightFeetTextField.text else {
+            alert(message: "Please enter feet")
+            return
+        }
         
-        let name = profileUpdateView.nameTextField.text!
-        let height = userHeightFeet + userHeightInches
-        let weightString = profileUpdateView.weightTextField.text!
-        let weight = Int(weightString) ?? 0
-        let sex = profileUpdateView.genderButton.currentTitle!
-//        print("sex - \(sex)")
-//        print(profileUpdateView.genderButton.currentTitle)
+        guard let userHeightInches = profileUpdateView.heightInchesTextField.text else{
+            alert(message: "Please enter inches")
+            return
+        }
         
-        self.user?.update(name: name, weight: weight, height: height, sex: sex)
+        
+        let height = Float(userHeightFeet)! + Float(userHeightInches)!
+        
+        guard let name = profileUpdateView.nameTextField.text else {
+            alert(message: "Please enter a name.")
+            return
+        }
+        
+        guard let weightString = profileUpdateView.weightTextField.text else {
+            alert(message: "Please enter a weight")
+            return
+        }
+        let weight = Int(weightString)
+       
+        guard let sex = profileUpdateView.genderButton.currentTitle else {
+            alert(message: "Please enter a gender")
+            return
+        }
+
+        self.user?.update(name: name, weight: weight!, height: height, sex: sex)
         
         if let user = self.user {
             FirebaseManager.save(user: user) { (success) in
@@ -99,9 +110,6 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
                 }
             }
         }
-        
-        
-        
     }
     
   
@@ -159,6 +167,7 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         profileUpdateView.myImageView.backgroundColor = UIColor.clear
         profileUpdateView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
         
+        
         FirebaseStoreageManager.upload(userImage: userImage!, withUserID: (self.user?.uid!)!) { (FirebaseResponse) in
             
             print("image upload complete")
@@ -166,6 +175,9 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
 
             
         }
+        
+        navigationController?.dismiss(animated: true, completion: nil)
+
 
     }
     
@@ -200,12 +212,4 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         self.present(alertController, animated: true)
         
     }
-
-
-    //    var user = User(name: "profileuname", sex: "male", height: 62, weight: 85, teamIDs: [], challengeIDs: [], goals: [], email: "fggg@ggg.com", uid: "testString")
-    
-    
-
-  
-
 }

@@ -26,3 +26,5 @@ class TitleLabel: FitnessLabel {
     }
     
 }
+
+

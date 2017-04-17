@@ -95,6 +95,7 @@ class ProfileView: FitnessView {
         nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
+        nameTextField.clearButtonMode = .whileEditing
         nameTextField.placeholder = "Name"
         nameTextField.backgroundColor = UIColor.white
         

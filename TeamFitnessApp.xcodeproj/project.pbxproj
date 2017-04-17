@@ -64,6 +64,8 @@
 		FE1C67B51E9FCC1B00FE0C54 /* ProfileUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */; };
 		FE1C67B71E9FCC4D00FE0C54 /* ProfileUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */; };
 		FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F1D731E9816E100CB1E5F /* LogInView.swift */; };
+		FE4446201EA52B7E0063C138 /* fontTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44461F1EA52B7E0063C138 /* fontTestViewController.swift */; };
+		FE4BB1F91EA4FA8C004BA4C9 /* Fresca-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE4BB1F81EA4FA6B004BA4C9 /* Fresca-Regular.ttf */; };
 		FE9586411E9BD15E009C3BFE /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586401E9BD15E009C3BFE /* NewUserView.swift */; };
 		FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586421E9BFA5F009C3BFE /* ProfileView.swift */; };
 		FE9586451E9C0D0A009C3BFE /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586441E9C0D0A009C3BFE /* GoalsView.swift */; };
@@ -162,6 +164,8 @@
 		FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUpdateVC.swift; sourceTree = "<group>"; };
 		FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileUpdateView.swift; sourceTree = "<group>"; };
 		FE1F1D731E9816E100CB1E5F /* LogInView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		FE44461F1EA52B7E0063C138 /* fontTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fontTestViewController.swift; sourceTree = "<group>"; };
+		FE4BB1F81EA4FA6B004BA4C9 /* Fresca-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fresca-Regular.ttf"; sourceTree = "<group>"; };
 		FE9586401E9BD15E009C3BFE /* NewUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 		FE9586421E9BFA5F009C3BFE /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FE9586441E9C0D0A009C3BFE /* GoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 		EC6A3D2F1E92EDC800F5E717 /* TeamFitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				FE4BB1F71EA4FA60004BA4C9 /* Font */,
 				EC5DBD821E9BF26400CECA34 /* Extensions */,
 				FEC839A21E93F9FB0014B6FA /* Models */,
 				ECE3F5AE1E94090D001230CC /* Views */,
@@ -338,6 +343,7 @@
 				EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */,
 				FE9586461E9C0D3A009C3BFE /* GoalsVC.swift */,
 				FE1C67B41E9FCC1B00FE0C54 /* ProfileUpdateVC.swift */,
+				FE44461F1EA52B7E0063C138 /* fontTestViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -367,6 +373,14 @@
 				EC4BD1CC1EA068B70076B4D0 /* SubmitButton.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		FE4BB1F71EA4FA60004BA4C9 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				FE4BB1F81EA4FA6B004BA4C9 /* Fresca-Regular.ttf */,
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 		FEC839A21E93F9FB0014B6FA /* Models */ = {
@@ -507,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */,
+				FE4BB1F91EA4FA8C004BA4C9 /* Fresca-Regular.ttf in Resources */,
 				EC6A3D3B1E92EDC800F5E717 /* LaunchScreen.storyboard in Resources */,
 				EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */,
 			);
@@ -697,6 +712,7 @@
 				EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */,
 				FE1C67B51E9FCC1B00FE0C54 /* ProfileUpdateVC.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
+				FE4446201EA52B7E0063C138 /* fontTestViewController.swift in Sources */,
 				FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,

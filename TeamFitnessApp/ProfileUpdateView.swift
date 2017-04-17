@@ -106,6 +106,7 @@ class updateProfileView: FitnessView {
         nameTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        nameTextField.clearButtonMode = .whileEditing
         nameTextField.backgroundColor = UIColor.white
         
         weightTextField = UITextField()

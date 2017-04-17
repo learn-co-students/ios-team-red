@@ -11,6 +11,10 @@ import Charts
 import HealthKit
 
 
+protocol DashboardVCProtocol: class {
+    func pressChallengeButton()
+}
+
 class DashboardView: FitnessView {
 
 
@@ -31,6 +35,8 @@ class DashboardView: FitnessView {
   var pieChartView2: CustomPieChartView!
   var pieTwoLabel: FitnessLabel!
   var tableView: UITableView!
+  var challengeButton: FitnessButton!
+  weak var delegate: DashboardVCProtocol?
 
 
   override init(frame: CGRect) {
@@ -44,6 +50,11 @@ class DashboardView: FitnessView {
     comInit()
     setConstraints()
   }
+    
+  func pressChallengeButton(sender: UIButton) {
+        delegate?.pressChallengeButton()
+  }
+
 
 
   func comInit() {
@@ -55,7 +66,12 @@ class DashboardView: FitnessView {
     pieOneLabel = FitnessLabel(frame: CGRect.zero)
     pieOneLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieOneLabel)
-
+    
+    challengeButton = FitnessButton(frame: CGRect.zero)
+    challengeButton.translatesAutoresizingMaskIntoConstraints = false
+    self .addSubview(challengeButton)
+    
+    
     pieChartView2 = CustomPieChartView(frame: CGRect.zero)
     pieChartView2.backgroundColor = UIColor.clear
     pieChartView2.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +93,15 @@ class DashboardView: FitnessView {
     pieOneLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieOneLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     pieOneLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
+    
+    challengeButton.topAnchor.constraint(equalTo: pieOneLabel.topAnchor, constant: 0).isActive = true
+    challengeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
+    challengeButton.leadingAnchor.constraint(equalTo: pieOneLabel.trailingAnchor, constant: 10).isActive = true
+    challengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2)
+    challengeButton.setTitle("New Challenge", for: .normal)
+    challengeButton.isEnabled = true
+    challengeButton.addTarget(self, action: #selector(pressChallengeButton), for: .touchUpInside)
+    
     pieChartView1.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: 5).isActive = true
     pieChartView1.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView1.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true

@@ -18,11 +18,15 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     override func loadView() {
         self.view = logInView
+      
+        
+        
     
         logInView.emailTextField.delegate = self
         logInView.emailTextField.tag = 0
         logInView.passwordTextField.delegate = self
         logInView.passwordTextField.tag = 1
+        
         
         self.hideKeyboardWhenTappedAround()
 
@@ -30,18 +34,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     
     // textbox return changes field form email to password  ++
-    
-    // turn off auto correct ++ set in view
-    
-    // pressing off field lowers textbox  ++ awesome ext thank you stackoverflow
-    
     // Login button become active once password starting to be entered ****
-    
     // textboxt change value of return key to next / Login ++
-    
     // failed log in attempt warning ++ / forgot password?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +61,15 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         return false
     }
     
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
+    
     func pressNewUser() {
       
+        let vc = NewUserViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func pressLogin() {

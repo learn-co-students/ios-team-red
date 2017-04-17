@@ -40,7 +40,8 @@ struct FirebaseStoreageManager {
                 if metadata != nil {
                     completion(.succesfulUpload("Uploaded team image to path userImages/\(userID).png"))
                 } else {
-                    completion(.failure("Could not upload image to Firebase"))
+//                    completion(.failure("Could not upload image to Firebase"))
+                    completion(.failure(error!.localizedDescription))
                 }
             })
         } else {
@@ -84,7 +85,8 @@ struct FirebaseStoreageManager {
                     if let userImage = UIImage(data: data) {
                         completion(.successfulDownload(userImage))
                     } else {
-                        completion(.failure("Could not convert dowloaded data to UIImage"))
+//                        completion(.failure("Could not convert dowloaded data to UIImage"))
+                        completion(.failure(error!.localizedDescription))
                         
                     }
                 } else {

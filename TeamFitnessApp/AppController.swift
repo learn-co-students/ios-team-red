@@ -50,7 +50,7 @@ extension AppController {
         }
         
         FirebaseManager.checkForPrevious(uid: uid) { (userExistsInDB) in
-            let vc = userExistsInDB ? TabBarController() : LoginNavVC()
+            let vc = userExistsInDB ? TabBarController() : NewUserViewController()
             self.actingVC = vc
             self.add(viewController: self.actingVC, animated: true)
         }

@@ -17,6 +17,7 @@ struct Team {
     var imageURL: String
     var id: String?
     var name: String
+    var oldChallengeIDs = [String]()
     
     init(id: String, dict: [String: Any]) {
         self.captainID = dict["captain"] as? String ?? ""
@@ -33,8 +34,13 @@ struct Team {
         for (challengeID, _) in challengeDict {
             self.challengeIDs.append(challengeID)
         }
+
+      let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
+      for (challengeID, _) in oldChallengeDict {
+        self.oldChallengeIDs.append(challengeID)
+      }
     }
-    
+
     init(userUIDs: [String], captainID: String, challengeIDs: [String], imageURL: String, id: String? = nil, name: String) {
         self.userUIDs = userUIDs
         self.captainID = captainID

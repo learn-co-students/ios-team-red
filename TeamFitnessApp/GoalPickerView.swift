@@ -17,7 +17,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var goal = Goal(type: .distance, value: 0)
 
-    var stepMultiplier: Int = 5
+    var stepMultiplier: Int = 1
     var goalTag: String = ""
     
     required init?(coder aDecoder: NSCoder) {

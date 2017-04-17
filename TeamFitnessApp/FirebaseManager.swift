@@ -12,12 +12,10 @@ import Firebase
 struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
-    
 
 //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
   static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
-
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
             if let firUser = firUser {
                 completion(.successfulNewUser(firUser.uid))
@@ -39,7 +37,6 @@ struct FirebaseManager {
         })
     }
 
-    
     //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
         do {
@@ -64,10 +61,7 @@ struct FirebaseManager {
         }
         
         for goal in user.goals {
-            
             goalDict[goal.type.rawValue] = goal.value
-            
-            
         }
         for team in user.teamIDs {
             teamsDict[team] = true
@@ -79,9 +73,9 @@ struct FirebaseManager {
             "gender": user.sex,
             "height": user.height,
             "weight": user.weight,
-            "teams": teamsDict ?? "No Teams",
-            "goals": goalDict ?? "No Goals",
-            "challenges": challengesDict ?? "No Challenges",
+            "teams": teamsDict,
+            "goals": goalDict,
+            "challenges": challengesDict,
         ]
         
         key.updateChildValues(post)
@@ -92,47 +86,14 @@ struct FirebaseManager {
         guard let teamID = team.id else {return} //TODO: - handle this error better
        
         let key = dataRef.child("teams").child(teamID)
-        var usersDict = [String: Bool]()
-        var challengesDict = [String: Bool]()
-        
-        for user in team.userUIDs {
-            usersDict[user] = true
-        }
-        
-        for challenge in team.challengeIDs {
-            challengesDict[challenge] = true
-        }
-        
-        let post: [String: Any] = [
-            "captain": team.captainID,
-            "users": usersDict,
-            "challenges": challengesDict,
-            "imageURL": team.imageURL
-        ]
-        
+        let post = FirebaseManager.makeDictionary(fromTeam: team)
         key.updateChildValues(post)
     }
     
     static func save(challenge: Challenge) {// saves a challenge to Firebase database
         guard let challengeID = challenge.id else {return}
         let key = dataRef.child("challenges").child(challengeID)
-        var usersDict = [String: Bool]()
-        
-        for user in challenge.userUIDs {
-            usersDict[user] = true
-        }
-        
-        let teamID = challenge.teamID ?? "no team"
-        let post: [String: Any] = [
-            "users": usersDict,
-            "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ?? false,
-            "goal": challenge.goal,
-            "startDate": challenge.startDate?.convertToString(),
-            "endDate": challenge.endDate?.convertToString(),
-            "team": teamID
-        ]
-        
+        let post = FirebaseManager.makeDictionary(fromChallenge: challenge)
         key.updateChildValues(post)
     }
 
@@ -145,6 +106,24 @@ struct FirebaseManager {
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
+            if let userDict = snapshot.value as? [String: Any] {
+                let user = User(uid: uid, dict: userDict)
+                completion(user)
+            }
+        })
+    }
+
+  //fetch user trophies 
+  static func fetchUserTrophies(withFirebaseUID uid: String, completion: @escaping ([String:Int]) -> ()) {
+    dataRef.child("users").child(uid).child("trophies").observeSingleEvent(of: .value, with: { (snapshot) in
+      if let trophyDict = snapshot.value as? [String:Int] {
+        completion(trophyDict)
+      }
+    })
+  }
+    
+    static func fetchUserOnce(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {
+        dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             if let userDict = snapshot.value as? [String: Any] {
                 let user = User(uid: uid, dict: userDict)
                 completion(user)
@@ -175,9 +154,18 @@ struct FirebaseManager {
           }
         })
     }
-
     
-
+    static func fetchChallengeOnce(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
+        dataRef.child("challenges").child(challengeID).observeSingleEvent(of: .value, with: { (snapshot) in
+            if let challengeDict = snapshot.value as? [String: Any] {
+                let challenge = Challenge(id: challengeID, dict: challengeDict)
+                completion(challenge)
+            } else {
+                print("not in completion")
+            }
+        })
+    }
+    
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         var teams = [Team]()
         dataRef.child("teams").observe(.value, with: { (snapshot) in
@@ -208,7 +196,7 @@ struct FirebaseManager {
         })
     }
     
-    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {
+    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
         var challenges = [Challenge]()
         dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
             let challengesDict = snapshot.value as? [String: Any]
@@ -223,13 +211,12 @@ struct FirebaseManager {
         })
     }
     
-    static func fetchChallengeProgress(forUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
+    static func fetchChallengeProgress(forChallengeID challengeID: String, andForUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
         let ref: FIRDatabaseReference
-        
         if challengeIsPublic {
-           ref = dataRef.child("publicChallenges").child("users").child(uid)
+           ref = dataRef.child("publicChallenges").child(challengeID).child("users").child(uid)
         } else {
-           ref = dataRef.child("challenges").child("users").child(uid)
+           ref = dataRef.child("challenges").child(challengeID).child("users").child(uid)
         }
         
         ref.observe(.value, with: { (snapshot) in
@@ -240,8 +227,6 @@ struct FirebaseManager {
                 completion(.failure("Could not get progress value for UID"))
             }
         })
-            
-        
     }
 
 // MARK: - add new user/team/challenge functions
@@ -253,25 +238,7 @@ struct FirebaseManager {
     static func addNew(team: Team, completion: (String) -> Void) {
         let teamRef = dataRef.child("teams").childByAutoId()
         let teamID = teamRef.key
-        
-        var usersDict = [String: Bool]()
-        var challengesDict = [String: Bool]()
-        
-        for user in team.userUIDs {
-            usersDict[user] = true
-        }
-        
-        for challenge in team.challengeIDs {
-            challengesDict[challenge] = true
-        }
-        
-        let post: [String: Any] = [
-            "name": team.name,
-            "captain": team.captainID,
-            "users": usersDict,
-            "challenges": challengesDict,
-            "imageURL": team.imageURL
-        ]
+        let post = FirebaseManager.makeDictionary(fromTeam: team)
         teamRef.updateChildValues(post)
         completion(teamID)
     }
@@ -288,6 +255,41 @@ struct FirebaseManager {
         
         let challengeID = challengeRef.key
         
+        let post = FirebaseManager.makeDictionary(fromChallenge: challenge)
+        
+        challengeRef.updateChildValues(post)
+        completion(challengeID)
+    }
+    
+    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+        completion()
+    }
+    
+// MARK: - private helper functions
+    private static func makeDictionary(fromTeam team: Team) -> [String: Any]{
+        var usersDict = [String: Bool]()
+        var challengesDict = [String: Bool]()
+        
+        for user in team.userUIDs {
+            usersDict[user] = true
+        }
+        
+        for challenge in team.challengeIDs {
+            challengesDict[challenge] = true
+        }
+        
+        let dict: [String: Any] = [
+            "name": team.name,
+            "captain": team.captainID,
+            "users": usersDict,
+            "challenges": challengesDict,
+            ]
+        return dict
+    }
+    
+    private static func makeDictionary(fromChallenge challenge: Challenge) -> [String: Any] {
         var usersDict = [String: Bool]()
         var goalDict = [String: Double]()
         
@@ -296,35 +298,38 @@ struct FirebaseManager {
         }
         
         if let goalType = challenge.goal?.type.rawValue, let goalValue = challenge.goal?.value {
-                goalDict = [goalType: goalValue]
+            goalDict = [goalType: goalValue]
         }
         
         let teamID = challenge.teamID ?? "no team"
         
-        let post: [String: Any] = [
+        let dict: [String: Any] = [
             "name": challenge.name,
             "users": usersDict,
             "creator": challenge.creator ?? "No Creator",
-            "isPublic": challenge.isPublic ,
-            "startDate": challenge.startDate?.convertToString() ?? Date().convertToString(), //TODO: - handle this error better
-            "endDate": challenge.endDate?.convertToString() ?? Date().convertToString(),
+            "isPublic": challenge.isPublic,
+            "startDate": challenge.startDate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
+            "endDate": challenge.endDate?.timeIntervalSince1970 ?? Date().timeIntervalSince1970,
             "team": teamID,
             "goal": goalDict
         ]
         
-        challengeRef.updateChildValues(post)
-        completion(challengeID)
+        return dict
+        
     }
     
-//MARK: - add one one team/challenge/user to another team/challenge/user
-    
-    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
-        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
-        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
-        completion()
+//MARK: Other
+    static func checkForPrevious(uid: String, completion: @escaping (Bool) -> Void) {
+        var check: Bool = false
+        dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            let dictionary = snapshot.value as? [String: Any] ?? nil
+            print(dictionary)
+            if dictionary != nil {check = true}
+            completion(check)
+        })
     }
-
-
+    
+    
 // MARK: - Test functions
 
 
@@ -341,17 +346,5 @@ struct FirebaseManager {
 //            }
 //
 //        }
-    }
-
-    
-    static func loginTestUser () {
-        FirebaseManager.loginUser(withEmail: "superman@superman.com", andPassword: "superman1234") { (response) in
-            switch response {
-            case let .successfulLogin(firUser):
-                print("logged in user: \(firUser.email!)")
-            default:
-                print("could not log user in")
-            }
-        }
     }
 }

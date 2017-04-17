@@ -24,18 +24,6 @@ class FitnessView: UIView {
         commonInit()
     }
     
-
-
-    
-    
-
-
-    
-//    init() {
-//        super.init(frame: CGRect.zero)
-//        commonInit()
-//    }
-    
     func commonInit() {
         self.backgroundColor = UIColor.backgroundBlack
         //sportImageView.contentMode = .scaleAspectFit

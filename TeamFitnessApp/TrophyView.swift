@@ -13,7 +13,16 @@ class TrophyView: FitnessView {
 
   var user: User! {
     didSet {
-
+      participationCountLabel.text = "\(user.oldChallengeIDs.count)"
+      if let firstCount = user.trophies["gold"] {
+        firstPlaceLabel.text = "\(firstCount)"
+      }
+      if let secondCount = user.trophies["silver"] {
+        secondPlaceLabel.text = "\(secondCount)"
+      }
+      if let thirdCount = user.trophies["bronze"] {
+        thirdPlaceLabel.text = "\(thirdCount)"
+      }
     }
   }
 

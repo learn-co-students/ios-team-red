@@ -15,7 +15,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     var user: User?
     var userID = FIRAuth.auth()?.currentUser?.uid
     let teamNameField = UITextField()
-    let submitButton = FitnessButton()
+    let submitButton = SubmitButton()
     let imageButton = FitnessButton()
     let teamImage = UIImageView()
     var chosenImage: UIImage?
@@ -29,7 +29,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                 self.user = user
             })
         }
-        
         self.view = FitnessView()
         setupLabels()
         setUpTextFields()
@@ -45,10 +44,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func setUpTextFields() {
         self.view.addSubview(teamNameField)
-        teamNameField.translatesAutoresizingMaskIntoConstraints = false
-        teamNameField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        teamNameField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        teamNameField.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
+        teamNameField.constrainVertically(belowView: titleLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         teamNameField.backgroundColor = UIColor.foregroundOrange
         teamNameField.layer.cornerRadius = 5
         teamNameField.placeholder = "Enter team name"
@@ -57,12 +53,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func setupButtons() {
         
         self.view.addSubview(submitButton)
-        submitButton.translatesAutoresizingMaskIntoConstraints = false
-        submitButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        submitButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
-        submitButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.15).isActive = true
-        submitButton.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        submitButton.setTitle("Submit", for: .normal)
+        submitButton.setConstraints(toView: self.view, andViewConroller: self)
         submitButton.addTarget(self, action: #selector(createNewTeam), for: .touchUpInside)
         
         self.view.addSubview(imageButton)
@@ -86,18 +77,16 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         print("CREATE TEAM fired")
         if let userID = userID {
             if let teamName = teamNameField.text {
-                navigationController?.popViewController(animated: true)
-                //self.dismiss(animated: true, completion: nil)//TODO: - Something is making this happen very slowly - queueing?
                 var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
-                    if var user = self.user {
-                        user.teamIDs.append(teamID)
-                        FirebaseManager.save(user: user, completion: { (_) in
-                            
-                        })
+                    if let uid = self.user?.uid {
+                        FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
+                            DispatchQueue.main.async {
+                                self.navigationController?.popViewController(animated: true)
+                            }
+                        }
                     }
-                    print("Team created: \(team.name) with ID: \(team.id!)")
                 })
                 
                 guard let teamID = team.id, let chosenImage = chosenImage else {return} //TODO: - handle this error better
@@ -115,8 +104,6 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         } else {
             //TODO: - Add animation indicating text fields are not filled out
         }
-        
-        
     }
     
     func getTeamImage() {
@@ -134,12 +121,10 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         teamImage.image = chosenImage
         navigationController?.dismiss(animated: true, completion: nil)
-
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         navigationController?.dismiss(animated: true, completion: nil)
-
     }
 
 }

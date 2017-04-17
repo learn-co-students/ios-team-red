@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
     
@@ -15,6 +16,10 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     var userEmail: String = ""
     var userPassword: String = ""
     var confirmPassword: String = ""
+    var uid: String? = FIRAuth.auth()?.currentUser?.uid
+    var googleLogin: Bool {
+        return FIRAuth.auth()?.currentUser != nil
+    }
 
     override func loadView() {
         
@@ -34,6 +39,14 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.passwordTextField.tag = 1
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
+        
+        if googleLogin {
+            createNewUserView.emailTextField.isUserInteractionEnabled = false
+            createNewUserView.emailTextField.alpha = 0.5
+            createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email
+            createNewUserView.passwordTextField.isHidden = true
+            createNewUserView.confirmTextField.isHidden = true
+        }
     
     }
     
@@ -73,8 +86,12 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         userPassword = createNewUserView.passwordTextField.text!
         confirmPassword = createNewUserView.confirmTextField.text!
         
-    
-        if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
+        if googleLogin {
+            let vc: ProfileViewController = ProfileViewController()
+            vc.userEmail = self.userEmail
+            vc.uid = self.uid ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
             
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {

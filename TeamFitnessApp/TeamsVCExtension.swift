@@ -68,35 +68,38 @@ extension TeamsVC { // Extension for setting up all views
     }
     
 // MARK: - calls to Firebase
-    func fetchData() {
+    func fetchData(completion: @escaping () -> Void) {
+        self.myTeams.removeAll()
+        self.publicTeams.removeAll()
+        self.filteredTeams.removeAll()
         guard let uid = uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
             self.user = user
-            self.getAllTeams(user: user)
+            self.getAllTeams(user: user) {
+                completion()
+            }
         }
     }
     
-    private func getAllTeams(user: User) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
-        myTeams.removeAll()
-        allTeams.removeAll()
-        filteredTeams.removeAll()
+    private func getAllTeams(user: User, completion: @escaping () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
+        
         FirebaseManager.fetchAllTeams { (teams) in
+            self.myTeams.removeAll()
+            self.publicTeams.removeAll()
+            self.filteredTeams.removeAll()
             for team in teams {
                 if let teamID = team.id  {
                     if user.teamIDs.contains(teamID) {
                         self.myTeams.append(team)
                     } else {
-                        self.allTeams.append(team)
+                        self.publicTeams.append(team)
                     }
                 }
             }
             self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-            self.allTeams = self.allTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-            self.filteredTeams = self.allTeams
-            DispatchQueue.main.async {
-                self.searchTableView.reloadData()
-                self.myTeamsView.reloadData()
-            }
+            self.publicTeams = self.publicTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
+            self.filteredTeams = self.publicTeams
+            completion()
         }
     }
 
@@ -134,7 +137,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("text did change")
         
-        filteredTeams = allTeams.filter({ (team) -> Bool in
+        filteredTeams = publicTeams.filter({ (team) -> Bool in
             let temp: String = team.name
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range != nil

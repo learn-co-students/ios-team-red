@@ -24,6 +24,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     var uid: String = ""
     
     let goalsView = GoalsView()
+    let healthKitManager = HealthKitManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +67,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         
         FirebaseManager.save(user: user) { (success) in
             if success {
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-                }
+              self.presentAlert()
             }
         }
         
@@ -82,6 +81,28 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         print("Goals height \(height)")
         print("Goals uid \(uid)")
     }
-    
-    
+
+  func presentAlert() {
+    let alertVC = UIAlertController(title: "Apple Health Kit Authorization Request", message: "In order for this app to function properly you must allow access to Apple's Health Kit fitness data", preferredStyle: .alert)
+    let allowAction = UIAlertAction(title: "Allow", style: .default) { (action) in
+      self.healthKitManager.requestHealthKitAuth { (success) in
+        if success {
+          DispatchQueue.main.async {
+            NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+          }
+        }
+      }
+
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+      self.dismiss(animated: true, completion: nil)
+    }
+
+    alertVC.addAction(allowAction)
+    alertVC.addAction(cancelAction)
+
+    self.present(alertVC, animated: true, completion: nil)
+  }
+
+
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChallengeDetailVC: UIViewController {
     
     var challenge: Challenge? = nil {
         didSet {
@@ -40,18 +40,6 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view = FitnessView()
         setupViews()
         
-        getChartData()
-        getLeaders { 
-            DispatchQueue.main.async {
-                self.displayLeaders()
-            }
-        }
-        
-        
-        leadersTable.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        leadersTable.delegate = self
-        leadersTable.dataSource = self
-
     }
 
     func setupViews() {
@@ -65,7 +53,6 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        getChartData()
         
         self.view.addSubview(leadersChart)
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
@@ -73,7 +60,7 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         leadersChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
         leadersChart.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
-        
+    
         if !userIsChallengeMember {
             self.view.addSubview(joinButton)
             joinButton.translatesAutoresizingMaskIntoConstraints = false
@@ -103,10 +90,15 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.challenge = challenge
         getChartData()
         self.titleLabel.setText(toString: challenge.name)
+        
+        getLeaders {
+            DispatchQueue.main.async {
+                self.displayLeaders()
+            }
+        }
     }
     
     func getChartData() {
-        
         guard let goalType = challenge?.goal?.type, let startDate = challenge?.startDate, let goalValue = challenge?.goal?.value else {return}
         switch goalType {
         case .caloriesBurned:
@@ -144,49 +136,38 @@ class ChallengeDetailVC: UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func getLeaders(completion: () -> Void) {
-        //eliminate all but the top 5 users
-        //display the top 5 users progress in the chart
-        guard let uids = challenge?.userUIDs else {return} //TODO: - handle this error mo bettah
+    func getLeaders(completion: @escaping () -> Void) {
+        guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah - set leaderboard to default image
         for uid in uids {
             FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
                 guard let uid = user.uid, let challenge = self.challenge else {return}
-                FirebaseManager.fetchChallengeProgress(forUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
+                FirebaseManager.fetchChallengeProgress(forChallengeID: challengeID, andForUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
+                    self.userScores.removeAll()
                     switch response {
                     case .successfulData(let data):
-                        let userScore: (String, Double) = (uid, data)
+                        let userScore: (String, Double) = (user.name, data)
                         self.userScores.append(userScore)
                     case .failure(let failString):
                         print(failString)
                     default:
                         print("FirebaseManager returned an invalid response")
                     }
+                    completion()
                 })
             })
         }
     }
     
     fileprivate func displayLeaders() {
-        //determine five leaders
+        guard !userScores.isEmpty else {return} //TODO: - something to set default image for chart if no data exists
         var leaderScores = [(String, Double)]()
         userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score
-        for i in 0...4 {
+        
+        let num: Int = (userScores.count >= 5 ? 4 : userScores.count - 1)
+        
+        for i in 0...num {
             leaderScores.append(userScores[i])
         }
         leadersChart.setData(group: leaderScores)
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
-        cell.setLabels(forUser: leaders[indexPath.row])
-        return cell
     }
 }

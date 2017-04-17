@@ -46,6 +46,7 @@
 		EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA21E967ECB009664F5 /* TeamsVC.swift */; };
 		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
 		EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */; };
+		EC95596D1EA4FF52008FA5FA /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC95596C1EA4FF52008FA5FA /* FBSDKLoginKit.framework */; };
 		EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */; };
 		EC9D94311E96E95000E33362 /* NewTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94301E96E95000E33362 /* NewTeamVC.swift */; };
 		EC9D94331E97C52500E33362 /* TeamDetailVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */; };
@@ -143,6 +144,7 @@
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
 		EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVCExtension.swift; sourceTree = "<group>"; };
+		EC95596C1EA4FF52008FA5FA /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../Documents/FacebookSDKs-iOS-4.21.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
 		EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
 		EC9D94301E96E95000E33362 /* NewTeamVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTeamVC.swift; sourceTree = "<group>"; };
 		EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVCExtension.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			files = (
 				0E29E1F24550661DB0F2A05D /* Pods_TeamFitnessApp.framework in Frameworks */,
 				AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */,
+				EC95596D1EA4FF52008FA5FA /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +220,7 @@
 		BCE6416B89075216C87BDACE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC95596C1EA4FF52008FA5FA /* FBSDKLoginKit.framework */,
 				AA89B0691E93E905007E55AC /* HealthKit.framework */,
 				400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */,
 				11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */,
@@ -395,6 +399,7 @@
 				EC6A3D2B1E92EDC800F5E717 /* Resources */,
 				5FF4BDC1FD1A9DB91C61EF84 /* [CP] Embed Pods Frameworks */,
 				726C4661EE8B5B3F9E2254D6 /* [CP] Copy Pods Resources */,
+				EC95596E1EA5005F008FA5FA /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -664,6 +669,20 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		EC95596E1EA5005F008FA5FA /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -878,6 +897,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(~/Documents/FacebookSDK)",
 				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -900,6 +920,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(~/Documents/FacebookSDK)",
 				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

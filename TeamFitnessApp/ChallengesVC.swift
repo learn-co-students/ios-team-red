@@ -119,10 +119,13 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func getMyChallenges() {
         guard let uid = self.uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            self.myChallenges.removeAll()
             for challengeID in user.challengeIDs {
-                FirebaseManager.fetchChallenge(withChallengeID: challengeID, completion: { (challenge) in
+                FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
                     self.myChallenges.append(challenge)
-                    self.myChallengesView.reloadData()
+                    DispatchQueue.main.async {
+                        self.myChallengesView.reloadData()
+                    }
                 })
             }
         }
@@ -131,7 +134,9 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func getPublicChallenges() {
         FirebaseManager.fetchPublicChallenges { (challenges) in
             self.publicChallenges = challenges
-            self.publicChallengesView.reloadData()
+            DispatchQueue.main.async {
+                self.publicChallengesView.reloadData()
+            }
         }
     }
 }

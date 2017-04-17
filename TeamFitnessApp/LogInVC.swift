@@ -10,14 +10,16 @@
 import UIKit
 import Firebase
 import GoogleSignIn
+import FBSDKLoginKit
 
-class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate {
+class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate {
     
     let logInView = LogInView()
     let healthKitManager = HealthKitManager.sharedInstance
     
     override func loadView() {
         self.view = logInView
+        logInView.facebookButton.delegate = self
     
         logInView.emailTextField.delegate = self
         logInView.emailTextField.tag = 0
@@ -133,6 +135,31 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 print("Invalid firebase response")
             }
         }
+    }
+    
+    //MARK: Facebook login delegate
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        FIRAuth.auth()?.signIn(with: credential) { (user, error) in
+            // ...
+            if let error = error {
+                // ...
+                return
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+    }
+    
+    func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
+        
+        return true
     }
 }
 

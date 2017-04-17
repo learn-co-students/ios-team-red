@@ -8,6 +8,7 @@
 
 import UIKit
 import GoogleSignIn
+import FBSDKLoginKit
 
 protocol LoginViewDelegate: class {
     func pressNewUser()
@@ -24,8 +25,9 @@ class LogInView: FitnessView {
     var loginButton: FitnessButton!
     var newUserButton: FitnessButton!
     var googleButton: GIDSignInButton!
+    var facebookButton: FBSDKLoginButton!
     //var googleButton: FitnessButton!
-    var facebookButton: FitnessButton!
+    //var facebookButton: FitnessButton!
     var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
 
@@ -153,17 +155,19 @@ class LogInView: FitnessView {
         googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
         
-        facebookButton = FitnessButton()
+        facebookButton = FBSDKLoginButton()
         self.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
         facebookButton.setTitle("Facebook", for: .normal)
-        facebookButton.changeFontSize(to: 16.0)
+        //facebookButton.changeFontSize(to: 16.0)
         facebookButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         facebookButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
         
     }
+    
+    
 
 
 }

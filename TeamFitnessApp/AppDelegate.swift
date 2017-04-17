@@ -44,8 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 //          NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
 //        }
 //      }
-
-
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 

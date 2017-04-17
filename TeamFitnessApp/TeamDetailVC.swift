@@ -93,6 +93,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
             navigationController?.pushViewController(challengeDetailVC, animated: true)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 // MARK: - calls to firebase

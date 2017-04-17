@@ -107,6 +107,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
               navigationController?.pushViewController(teamDetailVC, animated: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func segueCreateTeam() {

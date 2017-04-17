@@ -114,6 +114,7 @@ extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
     let challengeDetailVC = ChallengeDetailVC()
     challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
     navigationController?.pushViewController(challengeDetailVC, animated: true)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
   
 

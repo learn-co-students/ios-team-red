@@ -102,6 +102,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 //navigationController?.pushViewController(challengeDetailVC, animated: true)
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 //MARK: Firebase calls

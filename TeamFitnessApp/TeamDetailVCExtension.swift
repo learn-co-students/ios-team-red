@@ -32,12 +32,14 @@ extension TeamDetailVC {
                     }
                 case let .failure(failString):
                     print(failString)
+                    self.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
                 default:
                     print("Invalid Firebase response")
                 }
             }
         } else {
             //TODO: - replace image with default image
+            self.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
         }
         
         self.view.addSubview(captainLabel)

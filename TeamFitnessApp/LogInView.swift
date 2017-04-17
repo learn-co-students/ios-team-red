@@ -26,8 +26,6 @@ class LogInView: FitnessView {
     var newUserButton: FitnessButton!
     var googleButton: GIDSignInButton!
     var facebookButton: FBSDKLoginButton!
-    //var googleButton: FitnessButton!
-    //var facebookButton: FitnessButton!
     var forgotButton: FitnessButton!
     weak var delegate: LoginViewDelegate?
 
@@ -148,8 +146,6 @@ class LogInView: FitnessView {
         googleButton = GIDSignInButton()
         self.addSubview(googleButton)
         googleButton.translatesAutoresizingMaskIntoConstraints = false
-        //googleButton.setTitle("Google", for: .normal)
-        //googleButton.changeFontSize(to: 16.0)
         googleButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         googleButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -158,8 +154,7 @@ class LogInView: FitnessView {
         facebookButton = FBSDKLoginButton()
         self.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
-        facebookButton.setTitle("Facebook", for: .normal)
-        //facebookButton.changeFontSize(to: 16.0)
+        //facebookButton.setTitle("Facebook", for: .normal)
         facebookButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
         facebookButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

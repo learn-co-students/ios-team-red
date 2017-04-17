@@ -30,8 +30,6 @@ class CountLabel: UILabel {
     self.layer.masksToBounds = true
     self.textAlignment = .center
     self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
-
-
   }
 
 

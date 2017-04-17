@@ -40,11 +40,13 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
         
-        if thirdPartyLogin {
-            createNewUserView.emailTextField.isUserInteractionEnabled = false
-            createNewUserView.emailTextField.alpha = 0.5
-            createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email
-            createNewUserView.passwordTextField.isHidden = true
+        if thirdPartyLogin {//if someone has logged in via facebook or google
+            if FIRAuth.auth()?.currentUser?.email != "" { //check if facebook or google provided a valid email
+                createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email//if so, fill out email field and remove user interaction
+                createNewUserView.emailTextField.isUserInteractionEnabled = false
+                createNewUserView.emailTextField.alpha = 0.5
+            }
+            createNewUserView.passwordTextField.isHidden = true //remove password text fields
             createNewUserView.confirmTextField.isHidden = true
         }
     

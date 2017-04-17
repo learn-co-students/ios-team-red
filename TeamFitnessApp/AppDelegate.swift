@@ -112,10 +112,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
         -> Bool {
-            return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options)
-            return GIDSignIn.sharedInstance().handle(url,
+            print("FACEBOOK URL********** : \(url.absoluteString) END URL **********")
+            if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options) {
+                return true
+            } else if GIDSignIn.sharedInstance().handle(url,
                                                      sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                     annotation: [:])
+                                                     annotation: [:]) {
+                return true
+            } else {
+                return false
+            }
     }
     
     func applicationDidBecomeActive(application: UIApplication) {

@@ -81,7 +81,6 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 print("Invalid Firebase response during attempt to logout user")
             }
         }
-        
     }
     
     func pressLogin() {
@@ -95,7 +94,15 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 switch response {
                 case let .successfulLogin(user):
                     print(user.uid)
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                    //print("SHOULD GO TO DASHBOARD OR TO CREATE NEW USER VIEW IF USER DOES NOT HAVE A PROFILE***********")
+                    FirebaseManager.checkForPrevious(uid: user.uid, completion: { (userExistsInDB) in
+                        if userExistsInDB {
+                            NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                        } else {
+                            let vc = NewUserViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    })
                     
                 case let .failure(failString):
                     print(failString)

@@ -153,8 +153,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     //MARK: Facebook login delegate
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        print(error.localizedDescription)
+        
         guard !result.isCancelled else { return }
+        print(error.localizedDescription)
         
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (firUser, error) in

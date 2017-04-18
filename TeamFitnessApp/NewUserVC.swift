@@ -46,7 +46,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
             print("SOMEONE HAS LOGGED IN WITH A PREVIOUS EMAIL OR GOOGLE/FACEBOOK")
             createNewUserView.passwordTextField.isHidden = true //remove password text fields
             createNewUserView.confirmTextField.isHidden = true
-            if FIRAuth.auth()?.currentUser?.email != "" { //check if facebook or google provided a valid email
+            if FIRAuth.auth()?.currentUser?.email != nil { //check if facebook or google provided a valid email
                 print("VALID EMAIL, SHOULD PUSH TO PROFILE VIEW CONTROLLER")
                 createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email//if so, fill out email field and remove user interaction
                 createNewUserView.emailTextField.isUserInteractionEnabled = false
@@ -63,8 +63,19 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     }
     
     func pressCancelCreate() {
-        let vc = LogInViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.popViewController(animated: true)
+        if FIRAuth.auth()?.currentUser != nil {
+            FirebaseManager.logoutUser(completion: { (response) in
+                switch response {
+                case .successfulLogout(let logString):
+                    print(logString)
+                case .failure(let failString):
+                    print(failString)
+                default:
+                    print("invalid FirebaseManager response")
+                }
+            })
+        }
     }
     
     func checkPassword(userPassword: String, confirmPassword: String) -> Bool {

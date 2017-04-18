@@ -18,6 +18,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     var confirmPassword: String = ""
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     var thirdPartyLogin: Bool {
+        print("USER ALREADY LOGGED IN \(FIRAuth.auth()?.currentUser?.uid)")
         return FIRAuth.auth()?.currentUser != nil
     }
 
@@ -40,14 +41,19 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
         
-        if thirdPartyLogin {//if someone has logged in via facebook or google
+        if thirdPartyLogin {//if someone has logged in via facebook or google or already created an email Firebase auth
+            createNewUserView.passwordTextField.isHidden = true //remove password text fields
+            createNewUserView.confirmTextField.isHidden = true
             if FIRAuth.auth()?.currentUser?.email != "" { //check if facebook or google provided a valid email
                 createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email//if so, fill out email field and remove user interaction
                 createNewUserView.emailTextField.isUserInteractionEnabled = false
                 createNewUserView.emailTextField.alpha = 0.5
+                let vc: ProfileViewController = ProfileViewController() //then push to the next VC
+                vc.userEmail = userEmail
+                vc.userPassword = userPassword
+                vc.uid = uid
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            createNewUserView.passwordTextField.isHidden = true //remove password text fields
-            createNewUserView.confirmTextField.isHidden = true
         }
     
     }

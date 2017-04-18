@@ -69,8 +69,19 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     }
     
     func pressNewUser() {
-        let vc = NewUserViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        FirebaseManager.logoutUser { (response) in
+            switch response {
+            case .successfulLogout(let logString):
+                print(logString)
+                let vc = NewUserViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            case .failure(let failString):
+                print(failString)
+            default:
+                print("Invalid Firebase response during attempt to logout user")
+            }
+        }
+        
     }
     
     func pressLogin() {

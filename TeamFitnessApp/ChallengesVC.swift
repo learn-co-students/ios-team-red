@@ -43,7 +43,11 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         publicChallengesView.dataSource = self
         
         getMyChallenges()
-        getPublicChallenges()
+        getPublicChallenges() {
+            DispatchQueue.main.async {
+                self.publicChallengesView.reloadData()
+            }
+        }
         
     }
     
@@ -121,12 +125,11 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
     
-    func getPublicChallenges() {
-        FirebaseManager.fetchPublicChallenges { (challenges) in
-            self.publicChallenges = challenges
-            DispatchQueue.main.async {
-                self.publicChallengesView.reloadData()
-            }
+    func getPublicChallenges(completion: @escaping () -> Void) {
+        FirebaseManager.fetchAllChallenges { (challenges) in
+            self.publicChallenges.removeAll()
+            self.publicChallenges = challenges.filter{$0.isPublic}
+            completion()
         }
     }
 }

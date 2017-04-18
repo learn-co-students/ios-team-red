@@ -52,8 +52,8 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
                 createNewUserView.emailTextField.isUserInteractionEnabled = false
                 createNewUserView.emailTextField.alpha = 0.5
                 let vc: ProfileViewController = ProfileViewController() //then push to the next VC
-                vc.userEmail = userEmail
-                vc.userPassword = userPassword
+                vc.userEmail = createNewUserView.emailTextField.text
+                vc.userPassword = ""
                 vc.uid = uid
                 print("PUSH TO PROFILE VIEW CONTROLLER********************************")
                 self.navigationController?.pushViewController(vc, animated: true)

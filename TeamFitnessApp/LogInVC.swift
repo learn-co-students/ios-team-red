@@ -19,7 +19,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     override func loadView() {
         self.view = logInView
-
+        
         logInView.facebookButton.delegate = self
         logInView.emailTextField.delegate = self
         logInView.emailTextField.tag = 0
@@ -29,7 +29,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         
         
         self.hideKeyboardWhenTappedAround()
-
+        
     }
     
     
@@ -68,29 +68,44 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         return false
     }
     
-//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
+    //    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+    //        textField.resignFirstResponder()
+    //        return true
+    //    }
     
     func pressNewUser() {
-
-        let vc = NewUserViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        FirebaseManager.logoutUser { (response) in
+            switch response {
+            case .successfulLogout(let logString):
+                print(logString)
+                let vc = NewUserViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+            case .failure(let failString):
+                print(failString)
+            default:
+                print("Invalid Firebase response during attempt to logout user")
+            }
+        }
     }
     
     func pressLogin() {
-        
-      
+    
         let password = logInView.passwordTextField.text!
         if let email = logInView.emailTextField.text {
-            
             
             FirebaseManager.loginUser(withEmail: email, andPassword: password) { (response) in
                 switch response {
                 case let .successfulLogin(user):
                     print(user.uid)
-                    NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                    //print("SHOULD GO TO DASHBOARD OR TO CREATE NEW USER VIEW IF USER DOES NOT HAVE A PROFILE***********")
+                    FirebaseManager.checkForPrevious(uid: user.uid, completion: { (userExistsInDB) in
+                        if userExistsInDB {
+                            NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                        } else {
+                            let vc = NewUserViewController()
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    })
                     
                 case let .failure(failString):
                     print(failString)
@@ -103,9 +118,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         } else {
             alert(message: "email required")
         }
-
+        
     }
- //MARK: Google login
+    //MARK: Google login
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
         // ...
         guard let authentication = user.authentication else { return }
@@ -146,13 +161,13 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     //MARK: Facebook login delegate
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if let error = error {
-            print(error.localizedDescription)
-            return
-        }
+        
+        guard !result.isCancelled else { return }
+        print(error.localizedDescription)
+        
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (firUser, error) in
-            guard let firUser = firUser else {return}
+            guard let firUser = firUser else {return}// TODO: handle failed facebook login
             FirebaseManager.checkForPrevious(uid: firUser.uid, completion: { (userExists) in
                 if userExists {
                     print("logged in previous user")
@@ -165,10 +180,10 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 }
             })
         })
-            if let error = error {
-                // ...
-                return
-            }
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
@@ -213,7 +228,7 @@ extension UIViewController {
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(OKAction)
         self.present(alertController, animated: true, completion: nil)
-    
+        
     }
     
 }

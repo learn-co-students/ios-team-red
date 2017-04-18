@@ -93,7 +93,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let vc: GoalsViewController = GoalsViewController()
         
         vc.userEmail = userEmail
-//        vc.userPassword = userPassword
         vc.name = name
         vc.gender = gender
         vc.height = height

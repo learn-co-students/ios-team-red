@@ -41,11 +41,30 @@ extension AppController {
 
 extension AppController {
     func loadInitialViewController() {
+
+        guard let uid = FIRAuth.auth()?.currentUser?.uid else { //If there is no current user, go to the Login Screen
+            let vc = LoginNavVC()
+            self.actingVC = vc
+            self.add(viewController: self.actingVC, animated: true)
+            return
+        }
         
-        let vc = FIRAuth.auth()?.currentUser != nil ? TabBarController() : LoginNavVC()
-        self.actingVC = vc
-        self.add(viewController: self.actingVC, animated: true)
-        
+        FirebaseManager.checkForPrevious(uid: uid) { (userExistsInDB) in
+            if userExistsInDB {//If there is a current user, and they have created a profile, go to the dashboard
+                let vc = TabBarController()
+                self.actingVC = vc
+                self.add(viewController: self.actingVC, animated: true)
+            } else { //if there is a current user, but they have not created a profile, go to the create user screen(to check for email) and then create profile
+                let vc = LogInViewController()
+                self.actingVC = vc
+                print("SHOULD GO TO NEW USER view******************************")
+                self.add(viewController: self.actingVC, animated: true)
+                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                let newUserVC = NewUserViewController()
+                self.navigationController?.pushViewController(newUserVC, animated: true)
+            }
+            
+        }
     }
 }
 

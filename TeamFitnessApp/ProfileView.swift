@@ -19,19 +19,20 @@ class ProfileView: FitnessView {
     
     var profileLabel: FitnessLabel!
     var myImageView: UIImageView!
-    var showImagePickerButton: UIButton!
+    var showImagePickerButton: FitnessButton!
     var cancelButton: FitnessButton!
     var nameTextField: UITextField!
     var weightTextField: UITextField!
     var heightFeetTextField: UITextField!
     var heightInchesTextField: UITextField!
-    var genderButton: FitnessButton!
+    var genderButton: UIButton!
     var setGoalsButton: FitnessButton!
     weak var delegate: ProfileViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadProfileViewUI()
+        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -63,32 +64,19 @@ class ProfileView: FitnessView {
         profileLabel.translatesAutoresizingMaskIntoConstraints = false
         profileLabel.textAlignment = NSTextAlignment.center
         profileLabel.reverseColors()
-        profileLabel.changeFontSize(to: 32.0)
-        profileLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        profileLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
-        profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        profileLabel.text = "Profile"
+        profileLabel.changeFontSize(to: 20.0)
+        profileLabel.set(text: "...now lets setup your profile..")
         
         myImageView = UIImageView()
         self.addSubview(myImageView)
         myImageView.image = #imageLiteral(resourceName: "runner2")
         myImageView.translatesAutoresizingMaskIntoConstraints = false
-        myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        myImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
-        myImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2, constant: 0).isActive = true
-        myImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 0).isActive = true
         
         
-        showImagePickerButton = UIButton()
+        showImagePickerButton = FitnessButton()
         self.addSubview(showImagePickerButton)
         showImagePickerButton.translatesAutoresizingMaskIntoConstraints = false
-        showImagePickerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
-        showImagePickerButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
-        showImagePickerButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05, constant: 0).isActive = true
-        showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 50).isActive = true
-        showImagePickerButton.setTitle("Choose Image", for: UIControlState.normal)
-        showImagePickerButton.backgroundColor = UIColor.clear
+        showImagePickerButton.set(text: "choose image")
         showImagePickerButton.addTarget(self, action: #selector(displayImagePickerButtonTapped), for: .touchUpInside)
         
         
@@ -97,49 +85,48 @@ class ProfileView: FitnessView {
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
         nameTextField.layer.cornerRadius = 5
         nameTextField.textAlignment = NSTextAlignment.center
-        nameTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
-        nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
         nameTextField.clearButtonMode = .whileEditing
-        nameTextField.placeholder = "Name"
-        nameTextField.backgroundColor = UIColor.white
+        nameTextField.placeholder = "NAME"
+        nameTextField.backgroundColor = UIColor.reallyLightGray
         
         weightTextField = UITextField()
         self.addSubview(weightTextField)
         weightTextField.translatesAutoresizingMaskIntoConstraints = false
         weightTextField.layer.cornerRadius = 5
         weightTextField.textAlignment = NSTextAlignment.center
-        weightTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
-        weightTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        weightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
-        weightTextField.placeholder = "Weight"
-        weightTextField.backgroundColor = UIColor.white
+        weightTextField.placeholder = "WEIGHT"
+        weightTextField.backgroundColor = UIColor.reallyLightGray
         weightTextField.keyboardType = UIKeyboardType.numberPad
         
-        genderButton = FitnessButton()
+//        genderButton = FitnessButton()
+//        self.addSubview(genderButton)
+//        genderButton.translatesAutoresizingMaskIntoConstraints = false
+//        genderButton.set(text: "gender")
+//        genderButton.changeFontSize(to: 16.0)
+//        genderButton.addTarget(self, action: #selector(pressGenderButton), for: UIControlEvents.touchUpInside)
+
+
+        genderButton = UIButton(type: .custom)
         self.addSubview(genderButton)
         genderButton.translatesAutoresizingMaskIntoConstraints = false
-        genderButton.setTitle("Gender", for: .normal)
-        genderButton.changeFontSize(to: 16.0)
-        genderButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
-        genderButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        genderButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        genderButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 10).isActive = true
+        genderButton.backgroundColor = UIColor.reallyLightGray
+        genderButton.setTitleColor(UIColor.lightGray, for: .normal)
+        genderButton.layer.cornerRadius = 5
+        genderButton.setTitle("GENDER", for: .normal)
         genderButton.addTarget(self, action: #selector(pressGenderButton), for: UIControlEvents.touchUpInside)
+
+
+
+
+
         
         heightFeetTextField = UITextField()
         self.addSubview(heightFeetTextField)
         heightFeetTextField.translatesAutoresizingMaskIntoConstraints = false
         heightFeetTextField.layer.cornerRadius = 5
         heightFeetTextField.textAlignment = NSTextAlignment.center
-        heightFeetTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.12).isActive = true
-        heightFeetTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        heightFeetTextField.leadingAnchor.constraint(equalTo: weightTextField.leadingAnchor, constant: 0).isActive = true
-        heightFeetTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 50).isActive = true
-        heightFeetTextField.placeholder = "Feet"
-        heightFeetTextField.backgroundColor = UIColor.white
+        heightFeetTextField.placeholder = "FEET"
+        heightFeetTextField.backgroundColor = UIColor.reallyLightGray
         heightFeetTextField.keyboardType = UIKeyboardType.numberPad
         
         heightInchesTextField = UITextField()
@@ -147,36 +134,77 @@ class ProfileView: FitnessView {
         heightInchesTextField.translatesAutoresizingMaskIntoConstraints = false
         heightInchesTextField.layer.cornerRadius = 5
         heightInchesTextField.textAlignment = NSTextAlignment.center
-        heightInchesTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15).isActive = true
-        heightInchesTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        heightInchesTextField.trailingAnchor.constraint(equalTo: weightTextField.trailingAnchor, constant: 0).isActive = true
-        heightInchesTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 50).isActive = true
-        heightInchesTextField.placeholder = "Inches"
-        heightInchesTextField.backgroundColor = UIColor.white
+        heightInchesTextField.placeholder = "INCHES"
+        heightInchesTextField.backgroundColor = UIColor.reallyLightGray
         heightInchesTextField.keyboardType = UIKeyboardType.numberPad
         
         setGoalsButton = FitnessButton()
         self.addSubview(setGoalsButton)
         setGoalsButton.translatesAutoresizingMaskIntoConstraints = false
-        setGoalsButton.setTitle("Set Goals", for: UIControlState.normal)
-        setGoalsButton.topAnchor.constraint(equalTo: heightFeetTextField.bottomAnchor, constant: 10).isActive = true
-        setGoalsButton.widthAnchor.constraint(equalTo: genderButton.widthAnchor).isActive = true
-        setGoalsButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        setGoalsButton.set(text: "continue")
         setGoalsButton.addTarget(self, action: #selector(pressSetGoals), for: UIControlEvents.touchUpInside)
         
         cancelButton = FitnessButton()
         self.addSubview(cancelButton)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.setReversed(text: "cancel")
         cancelButton.reverseColors()
         cancelButton.changeFontSize(to: 14.0)
-        cancelButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
-        cancelButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        cancelButton.leadingAnchor.constraint(equalTo: setGoalsButton.trailingAnchor, constant: 10).isActive = true
-        cancelButton.topAnchor.constraint(equalTo: setGoalsButton.topAnchor, constant: 0).isActive = true
         cancelButton.addTarget(self, action: #selector(pressCancelButton), for: UIControlEvents.touchUpInside)
 
 
     }
+
+
+  func setConstraints() {
+    profileLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
+    profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+
+    myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+    myImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
+    myImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2, constant: 0).isActive = true
+    myImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 0).isActive = true
+
+    showImagePickerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
+    showImagePickerButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
+    showImagePickerButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05, constant: 0).isActive = true
+    showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 50).isActive = true
+
+    nameTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
+    nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
+
+    weightTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+    weightTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    weightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
+
+    heightFeetTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.12).isActive = true
+    heightFeetTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    heightFeetTextField.leadingAnchor.constraint(equalTo: weightTextField.leadingAnchor, constant: 0).isActive = true
+    heightFeetTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 15).isActive = true
+
+    heightInchesTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.17).isActive = true
+    heightInchesTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    heightInchesTextField.trailingAnchor.constraint(equalTo: weightTextField.trailingAnchor, constant: 0).isActive = true
+    heightInchesTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 15).isActive = true
+
+    genderButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+    genderButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    genderButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    genderButton.topAnchor.constraint(equalTo: heightFeetTextField.bottomAnchor, constant: 15).isActive = true
+
+    setGoalsButton.topAnchor.constraint(equalTo: genderButton.bottomAnchor, constant: 20).isActive = true
+    setGoalsButton.widthAnchor.constraint(equalTo: genderButton.widthAnchor).isActive = true
+    setGoalsButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+
+    cancelButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+    cancelButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    cancelButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    cancelButton.topAnchor.constraint(equalTo: setGoalsButton.bottomAnchor, constant: 15).isActive = true
+
+  }
 
 }

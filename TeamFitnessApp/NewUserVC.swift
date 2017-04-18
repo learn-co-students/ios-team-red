@@ -12,10 +12,8 @@ import Firebase
 class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
     
     var createNewUserView = NewUserView()
-   
-    var userEmail: String!
-    var userPassword: String!
-    var confirmPassword: String!
+
+
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     var thirdPartyLogin: Bool {
         print("USER ALREADY LOGGED IN \(FIRAuth.auth()?.currentUser?.uid)")
@@ -40,6 +38,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.passwordTextField.tag = 1
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
+        createNewUserView.confirmTextField.returnKeyType = .go
         
         print("CREATE NEW USER CHECK FOR AUTHORIZATION ALREADY EXISTING")
         if thirdPartyLogin {//if someone has logged in via facebook or google or already created an email Firebase auth
@@ -92,10 +91,19 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         
         if let nextField = createNewUserView.emailTextField.superview?.viewWithTag(createNewUserView.emailTextField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
-            
         } else {
             createNewUserView.resignFirstResponder()
         }
+
+      if textField == createNewUserView.passwordTextField {
+        if let nextField = createNewUserView.passwordTextField.superview?.viewWithTag(createNewUserView.passwordTextField.tag + 1) as? UITextField {
+          nextField.becomeFirstResponder()
+        }
+      }
+
+      if textField == createNewUserView.confirmTextField {
+        pressProfileButton()
+      }
 
         return false
     }
@@ -128,21 +136,16 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         if thirdPartyLogin {
 
             let vc: ProfileViewController = ProfileViewController()
-            vc.userEmail = self.userEmail
+            vc.userEmail = userEmail
             vc.uid = self.uid ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         } else if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
-            guard let userEmail = createNewUserView.emailTextField.text, let userPassword = createNewUserView.passwordTextField.text, let _ = createNewUserView.confirmTextField.text else {return}
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {
                 case let .successfulNewUser(uid):
                 
                     let vc: ProfileViewController = ProfileViewController()
                     vc.userEmail = userEmail
-
-//                    vc.userPassword = userPassword
-
-                    vc.userPassword = userPassword
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)
                    

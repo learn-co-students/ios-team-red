@@ -182,17 +182,29 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             print("OK")
             self.gender = "Male"
             self.profileView.genderButton.setTitle("Male", for: .normal)
-            
+            self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
             self.gender = "Female"
             self.profileView.genderButton.setTitle("Female", for: .normal)
+            self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+
         }
-        
+        let unspecifiedAction = UIAlertAction(title: "Unspecified", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+          print("ok")
+          self.gender = "Unspecified"
+          self.profileView.genderButton.setTitle("Unspecified", for: .normal)
+          self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+
+
+        }
+
         alertController.addAction(cancelAction)
         alertController.addAction(maleAction)
         alertController.addAction(femaleAction)
+        alertController.addAction(unspecifiedAction)
         
 
         self.present(alertController, animated: true)

@@ -36,14 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
       //make the window visible
       window.makeKeyAndVisible()
 
-//      FIRAuth.auth()?.addStateDidChangeListener() { (auth, user) in
-//        if let user = user {
-//          self.currentUser = user
-//          NotificationCenter.default.post(name: .closeLoginVC, object: nil)
-//        } else {
-//          NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
-//        }
-//      }
 
       return true
 

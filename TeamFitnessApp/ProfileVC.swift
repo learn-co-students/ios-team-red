@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var userEmail: String!
     var userPassword: String!
     var uid: String!
+    var gender: String!
     var userImage: UIImage = #imageLiteral(resourceName: "people")
     
     override func loadView() {
@@ -26,8 +27,35 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         profileView.delegate = self
         self.hideKeyboardWhenTappedAround()
-//        print("ProfileVC email\(userEmail)")
-//        print("ProfileVC password\(userPassword)")
+        print(userEmail)
+    }
+    
+    func pressCancelButton() {
+        
+        
+        let alertController = UIAlertController(title: "Log out", message: "Log out to finish setup later.", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
+            print("Cancel")
+        }
+        let logOutAction = UIAlertAction(title: "Log out", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+            print("OK")
+            
+            FirebaseManager.logoutUser(completion: { (response) in
+               print("logged out user")
+            })
+            
+            let vc = LogInViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        alertController.addAction(logOutAction)
+        alertController.addAction(cancelAction)
+        
+        
+        self.present(alertController, animated: true)
+    
+    
     
     
     }
@@ -35,16 +63,37 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func setGoalsButton() {
         
+        guard let name = profileView.nameTextField.text else  {
+            alert(message: "Please enter name first")
+            return
+        }
+
+        guard let weight = Int(profileView.weightTextField.text!) else {
+            alert(message: "Please enter your weight first")
+            return
+        }
         
-        let weight = Int(profileView.weightTextField.text!)!
-        let height = ((Float(profileView.heightFeetTextField.text!)! * 12) + (Float(profileView.heightInchesTextField.text!)!))
-        let name = profileView.nameTextField.text!
-        let gender = profileView.genderButton.currentTitle!
+        guard let feet = Float(profileView.heightFeetTextField.text!) else {
+            alert(message: "Please enter Feet")
+            return
+        }
+        
+        guard let inches = Float(profileView.heightInchesTextField.text!) else {
+            alert(message: "Please enter inches")
+            return
+        }
+        
+        let height = (feet * 12) + inches
+        
+        guard let gender = profileView.genderButton.currentTitle else {
+            alert(message: "Please select a gender.")
+            return
+        }
             
         let vc: GoalsViewController = GoalsViewController()
         
         vc.userEmail = userEmail
-        vc.userPassword = userPassword
+//        vc.userPassword = userPassword
         vc.name = name
         vc.gender = gender
         vc.height = height
@@ -100,17 +149,23 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileView.myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         profileView.myImageView.backgroundColor = UIColor.clear
         profileView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
-        var userImage = profileView.myImageView.image!
-    
-        FirebaseStoreageManager.upload(userImage: userImage, withUserID: self.uid) { (FirebaseResponse) in
+        let userImage = profileView.myImageView.image!
+        navigationController?.dismiss(animated: true, completion: nil)
+
+        FirebaseStoreageManager.upload(userImage: userImage, withUserID: self.uid) { (response) in
             
-           print("image upload complete")
-        
-        
+            switch response {
+            case let .successfulLogin(user):
+                print(user.uid)
+         
+            case let .failure(failString):
+                print(failString)
+                self.alert(message: failString)
+                
+            default:
+                print("Firebase login failure")
+            }
         }
-    
-        
-        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -126,13 +181,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
-//            self.gender = "Male"
+            self.gender = "Male"
             self.profileView.genderButton.setTitle("Male", for: .normal)
             
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
-//            self.gender = "Female"
+            self.gender = "Female"
             self.profileView.genderButton.setTitle("Female", for: .normal)
         }
         

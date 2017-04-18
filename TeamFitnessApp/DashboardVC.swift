@@ -8,17 +8,20 @@
 import UIKit
 import Firebase
 
-class DashboardVC: UIViewController {
+class DashboardVC: UIViewController, DashboardVCProtocol {
 
   var dashboadView: DashboardView!
   var user = FIRAuth.auth()!.currentUser
   var testUser: User!
   var challenges = [Challenge]()
   var goals = [Goal]()
+    
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+      
       navigationItem.title = "Fitness Baby"
       let button = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogout(_:)))
 
@@ -32,11 +35,18 @@ class DashboardVC: UIViewController {
       fetchUser()
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView
+       dashboadView.delegate = self
 
 
       dashboadView.tableView.delegate = self
       dashboadView.tableView.dataSource = self
 
+    }
+    
+    func pressChallengeButton () {
+        let vc = CreateChallengeVC()
+        print("challenge Button pressed")
+        self.present(vc, animated: true, completion: nil)
     }
 
 
@@ -94,7 +104,7 @@ class DashboardVC: UIViewController {
 
   func onProfile(_ sender: UIBarButtonItem) {
     let vc = ProfileUpdateVC()
-    vc.firUser = self.user
+//    vc.firUser = self.user
     navigationController?.pushViewController(vc, animated: true)
   }
 

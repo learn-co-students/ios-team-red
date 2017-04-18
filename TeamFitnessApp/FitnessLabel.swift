@@ -21,7 +21,9 @@ class FitnessLabel: UILabel {
     }
     
     func commonInit() {
-        self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
+//        self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
+        self.font = UIFont(name: "Fresca-Regular", size: 17.00)
+        self.addTextSpacing()
         self.textColor = UIColor.backgroundBlack
         self.textAlignment = .center
         self.backgroundColor = UIColor.foregroundOrange
@@ -35,7 +37,7 @@ class FitnessLabel: UILabel {
     }
     
     func changeFontSize(to newFontSize: CGFloat) {
-        self.font = UIFont(name: "Gurmukhi MN", size: newFontSize)
+        self.font = UIFont(name: "Fresca-Regular", size: newFontSize)
     }
     
     func setConstraints(toSuperView superView: UIView, belowView view: UIView) {
@@ -51,3 +53,14 @@ class FitnessLabel: UILabel {
     }
 
 }
+
+extension FitnessLabel {
+    func addTextSpacing() {
+        if let textString = text {
+            let attributedString = NSMutableAttributedString(string: textString)
+            attributedString.addAttribute(NSKernAttributeName, value: 1.15, range: NSRange(location: 0, length: attributedString.length - 1))
+            attributedText = attributedString
+        }
+    }
+}
+

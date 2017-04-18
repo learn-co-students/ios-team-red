@@ -79,6 +79,7 @@ class LogInView: FitnessView {
         emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 30).isActive = true
         emailTextField.placeholder = "email"
+        emailTextField.clearButtonMode = .whileEditing
         emailTextField.autocorrectionType = UITextAutocorrectionType.no
         emailTextField.autocapitalizationType = .none
         emailTextField.backgroundColor = UIColor.white
@@ -98,6 +99,7 @@ class LogInView: FitnessView {
         passwordTextField.autocorrectionType = UITextAutocorrectionType.no
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
+        emailTextField.clearButtonMode = .whileEditing
         passwordTextField.backgroundColor = UIColor.white
         
     }

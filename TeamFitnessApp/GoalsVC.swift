@@ -15,7 +15,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     var name: String = ""
     var userEmail: String = ""
-    var userPassword: String = ""
+//    var userPassword: String = ""
     var weight: Int = 0
     var gender: String!
     var height: Float = 0
@@ -75,7 +75,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
   
         print("Goals name \(name)")
         print("Goals email \(userEmail)")
-        print("Goals password \(userPassword)")
+//        print("Goals password \(userPassword)")
         print("Goals weight \(weight)")
         print("Goals gender \(gender)")
         print("Goals height \(height)")

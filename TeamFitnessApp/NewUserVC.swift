@@ -13,9 +13,9 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     
     var createNewUserView = NewUserView()
    
-    var userEmail: String = ""
-    var userPassword: String = ""
-    var confirmPassword: String = ""
+    var userEmail: String!
+    var userPassword: String!
+    var confirmPassword: String!
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     var thirdPartyLogin: Bool {
         print("USER ALREADY LOGGED IN \(FIRAuth.auth()?.currentUser?.uid)")
@@ -62,6 +62,11 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     
     }
     
+    func pressCancelCreate() {
+        let vc = LogInViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func checkPassword(userPassword: String, confirmPassword: String) -> Bool {
         return userPassword == confirmPassword
     }
@@ -84,17 +89,33 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         return false
     }
     
-    //??????
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        return true
-    }
+
     
     
     
    
     func pressProfileButton() {
         
+
+        guard let userEmail = createNewUserView.emailTextField.text else {
+            alert(message: "Please enter a valid email.")
+            return
+        }
+        
+        guard let userPassword = createNewUserView.passwordTextField.text else {
+            alert(message: "Please enter a password.")
+            return
+        }
+        
+        guard let confirmPassword = createNewUserView.confirmTextField.text else {
+            alert(message: "Please confirm password.")
+            return
+        }
+        
+        
+       
         if thirdPartyLogin {
+
             let vc: ProfileViewController = ProfileViewController()
             vc.userEmail = self.userEmail
             vc.uid = self.uid ?? ""
@@ -107,6 +128,9 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
                 
                     let vc: ProfileViewController = ProfileViewController()
                     vc.userEmail = userEmail
+
+//                    vc.userPassword = userPassword
+
                     vc.userPassword = userPassword
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)

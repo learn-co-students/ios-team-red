@@ -13,6 +13,7 @@ import Firebase
 
 protocol NewUserViewDelegate: class {
     func pressProfileButton()
+    func pressCancelCreate()
 }
 
 
@@ -24,6 +25,7 @@ class NewUserView: FitnessView {
     var emailTextField: UITextField!
     var passwordTextField: UITextField!
     var confirmTextField: UITextField!
+    var cancelCreateButton: FitnessButton!
     var completeCreation: FitnessLabel!
     var profileButton: FitnessButton!
     weak var delegate: NewUserViewDelegate?
@@ -39,6 +41,10 @@ class NewUserView: FitnessView {
     
     func pressProfileButton(sender: UIButton) {
         delegate?.pressProfileButton()
+    }
+    
+    func pressCancelCreate(sender: UIButton) {
+        delegate?.pressCancelCreate()
     }
 
     func loadUI() {
@@ -66,7 +72,8 @@ class NewUserView: FitnessView {
     emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
     emailTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    emailTextField.topAnchor.constraint(equalTo: newUser.bottomAnchor, constant: 50).isActive = true
+    emailTextField.topAnchor.constraint(equalTo: newUser.bottomAnchor, constant: 30).isActive = true
+    emailTextField.clearButtonMode = .whileEditing
     emailTextField.placeholder = "email"
     emailTextField.backgroundColor = UIColor.white
     
@@ -82,6 +89,7 @@ class NewUserView: FitnessView {
     passwordTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     passwordTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
+    passwordTextField.clearButtonMode = .whileEditing
     passwordTextField.placeholder = "password"
     passwordTextField.backgroundColor = UIColor.white
     
@@ -97,8 +105,20 @@ class NewUserView: FitnessView {
     confirmTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     confirmTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     confirmTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20).isActive = true
+    confirmTextField.clearButtonMode = .whileEditing
     confirmTextField.placeholder = "confirm password"
     confirmTextField.backgroundColor = UIColor.white
+        
+    cancelCreateButton = FitnessButton()
+    self.addSubview(cancelCreateButton)
+    cancelCreateButton.translatesAutoresizingMaskIntoConstraints = false
+    cancelCreateButton.setTitle("Cancel", for: .normal)
+    cancelCreateButton.changeFontSize(to: 15.0)
+    cancelCreateButton.topAnchor.constraint(equalTo: confirmTextField.bottomAnchor, constant: 10).isActive = true
+    cancelCreateButton.trailingAnchor.constraint(equalTo: confirmTextField.trailingAnchor, constant: 0).isActive = true
+    cancelCreateButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
+    cancelCreateButton.reverseColors()
+    cancelCreateButton.addTarget(self, action: #selector(pressCancelCreate), for: UIControlEvents.touchUpInside)
     
     completeCreation = FitnessLabel()
     self.addSubview(completeCreation)
@@ -110,7 +130,9 @@ class NewUserView: FitnessView {
     completeCreation.topAnchor.constraint(equalTo: confirmTextField.bottomAnchor, constant: 20).isActive = true
     completeCreation.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
     completeCreation.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
-    completeCreation.text = "A little more info to get started!"
+    completeCreation.text = "Let's set your profile"
+        
+        
     
     profileButton = FitnessButton()
     self.addSubview(profileButton)

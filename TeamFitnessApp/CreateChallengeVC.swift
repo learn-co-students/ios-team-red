@@ -167,7 +167,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
 
-                FirebaseManager.addNew(challenge: newChallenge, isPublic: newChallenge.isPublic, completion: { (challengeID) in
+                FirebaseManager.addNew(challenge: newChallenge, completion: { (challengeID) in
                     guard let userUID = user?.uid else {return}
 
                     if challengeIsPublic {//if challenge is public, add challenge to the challenges property of the user in Firebase. The userID will already have been stored in the users field of the public challenge

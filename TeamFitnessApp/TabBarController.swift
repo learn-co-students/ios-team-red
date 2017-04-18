@@ -19,19 +19,19 @@ class TabBarController: UITabBarController {
 
 
   func setup() {
-    self.tabBar.barTintColor = UIColor.white
-    self.tabBar.tintColor = UIColor.foregroundOrange
+        self.tabBar.barTintColor = UIColor.white
+        self.tabBar.tintColor = UIColor.foregroundOrange
 
-    let dashboardVC = NavigationController(rootViewController: DashboardVC())
-    dashboardVC.tabBarItem.title = "Dashboard"
-    dashboardVC.tabBarItem.image = #imageLiteral(resourceName: "dashboard")
-    let teamVC = NavigationController(rootViewController: TeamsVC())
-    teamVC.tabBarItem.title = "Teams"
-    teamVC.tabBarItem.image = #imageLiteral(resourceName: "people")
-    let trophyVC = NavigationController(rootViewController: TrophyVC())
-    trophyVC.tabBarItem.title = "Trophies"
-    trophyVC.tabBarItem.image = #imageLiteral(resourceName: "trophy")
-    self.setViewControllers([dashboardVC, teamVC, trophyVC], animated: false)
+        let dashboardVC = NavigationController(rootViewController: DashboardVC())
+        dashboardVC.tabBarItem.title = "Dashboard"
+        dashboardVC.tabBarItem.image = #imageLiteral(resourceName: "dashboard")
+        let teamVC = NavigationController(rootViewController: TeamsVC())
+        teamVC.tabBarItem.title = "Teams"
+        teamVC.tabBarItem.image = #imageLiteral(resourceName: "people")
+        let trophyVC = NavigationController(rootViewController: TrophyVC())
+        trophyVC.tabBarItem.title = "Trophies"
+        trophyVC.tabBarItem.image = #imageLiteral(resourceName: "trophy")
+        self.setViewControllers([dashboardVC, teamVC, trophyVC], animated: false)
     }
 
 

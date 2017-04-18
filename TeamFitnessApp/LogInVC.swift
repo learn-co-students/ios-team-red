@@ -155,6 +155,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
     
     //MARK: Facebook login delegate
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if result.isCancelled {
+            return
+        }
         if let error = error {
             print(error.localizedDescription)
             return

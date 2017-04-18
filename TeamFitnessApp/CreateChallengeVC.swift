@@ -156,6 +156,9 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                 print("Must select a team to add the challenge to, or set challenge to public")
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
                 return
+            } else if challengeNameField.text == "" {
+                challengeNameField.flashRed()
+                return
             }
             storeFirstFields()
             moveToSecondFields()

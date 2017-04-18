@@ -30,6 +30,36 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         print(userEmail)
     }
     
+    func pressCancelButton() {
+        
+        
+        let alertController = UIAlertController(title: "Log out", message: "Log out to finish setup later.", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
+            print("Cancel")
+        }
+        let logOutAction = UIAlertAction(title: "Log out", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+            print("OK")
+            
+            FirebaseManager.logoutUser(completion: { (response) in
+               print("logged out user")
+            })
+            
+            let vc = LogInViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+        alertController.addAction(logOutAction)
+        alertController.addAction(cancelAction)
+        
+        
+        self.present(alertController, animated: true)
+    
+    
+    
+    
+    }
+    
     
     func setGoalsButton() {
         

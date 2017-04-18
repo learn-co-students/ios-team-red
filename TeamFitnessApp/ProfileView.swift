@@ -12,6 +12,7 @@ protocol ProfileViewDelegate: class {
     func pressGenderButton()
     func displayImagePickerButtonTapped()
     func setGoalsButton()
+    func pressCancelButton()
 }
 
 class ProfileView: FitnessView {
@@ -19,6 +20,7 @@ class ProfileView: FitnessView {
     var profileLabel: FitnessLabel!
     var myImageView: UIImageView!
     var showImagePickerButton: UIButton!
+    var cancelButton: FitnessButton!
     var nameTextField: UITextField!
     var weightTextField: UITextField!
     var heightFeetTextField: UITextField!
@@ -47,6 +49,10 @@ class ProfileView: FitnessView {
     func pressSetGoals(sender:UIButton) {
         print("pressedSetGoals")
         delegate?.setGoalsButton()
+    }
+    
+    func pressCancelButton(sender:UIButton) {
+        delegate?.pressCancelButton()
     }
         
     
@@ -157,6 +163,19 @@ class ProfileView: FitnessView {
         setGoalsButton.widthAnchor.constraint(equalTo: genderButton.widthAnchor).isActive = true
         setGoalsButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         setGoalsButton.addTarget(self, action: #selector(pressSetGoals), for: UIControlEvents.touchUpInside)
+        
+        cancelButton = FitnessButton()
+        self.addSubview(cancelButton)
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.setTitle("Cancel", for: .normal)
+        cancelButton.reverseColors()
+        cancelButton.changeFontSize(to: 14.0)
+        cancelButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+        cancelButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        cancelButton.leadingAnchor.constraint(equalTo: setGoalsButton.trailingAnchor, constant: 10).isActive = true
+        cancelButton.topAnchor.constraint(equalTo: setGoalsButton.topAnchor, constant: 0).isActive = true
+        cancelButton.addTarget(self, action: #selector(pressCancelButton), for: UIControlEvents.touchUpInside)
+
 
     }
 

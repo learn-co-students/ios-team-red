@@ -44,7 +44,7 @@ extension TeamsVC { // Extension for setting up all views
         teamSearchBar.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         teamSearchBar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
         teamSearchBar.placeholder = "Find Teams by Name:"
-        teamSearchBar.backgroundColor = UIColor.foregroundOrange
+        teamSearchBar.searchBarStyle = .minimal
         
         view.addSubview(searchTableView)
         searchTableView.translatesAutoresizingMaskIntoConstraints = false

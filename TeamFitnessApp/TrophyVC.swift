@@ -19,19 +19,15 @@ class TrophyVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
       trophyView = TrophyView(frame: self.view.bounds)
       self.view = trophyView
-      navigationItem.title = "Fitness Baby"
-
+      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
+      titleLabel.set(text: "Fitness Baby")
+      titleLabel.textColor = UIColor.whitewash
+      navigationItem.titleView = titleLabel
 
       trophyView.tableView.delegate = self
       trophyView.tableView.dataSource = self
-
-
-
-
-
   }
 
   func fetchUser() {

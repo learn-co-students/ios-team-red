@@ -26,7 +26,11 @@ extension UIColor {
     open class var saltwater: UIColor {
         return UIColor(displayP3Red: 37/255, green: 121/255, blue: 133/255, alpha: 1)
     }
-    
+
+  open class var stormysea: UIColor {
+    return UIColor(displayP3Red: 47/255, green: 82/255, blue: 82/255, alpha: 1)
+  }
+
     open class var lagoon: UIColor {
         return UIColor(displayP3Red: 94/255, green: 168/255, blue: 167/255, alpha: 1)
     }
@@ -37,6 +41,9 @@ extension UIColor {
     
     open class var raspberry: UIColor {
         return UIColor(colorLiteralRed: 1, green: 68/255, blue: 71/255, alpha: 1)
+    }
+    open class var reallyLightGray: UIColor {
+      return UIColor(colorLiteralRed: 0.95, green: 0.95, blue: 0.95, alpha: 1)
     }
 }
 

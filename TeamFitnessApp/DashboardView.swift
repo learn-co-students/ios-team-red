@@ -21,8 +21,8 @@ class DashboardView: FitnessView {
   let healhKitManager = HealthKitManager.sharedInstance
   var user: User! {
     didSet {
-      pieOneLabel.text = user.goals[0].type.rawValue
-      pieTwoLabel.text = user.goals[1].type.rawValue
+      pieOneLabel.set(text: user.goals[0].type.rawValue)
+      pieTwoLabel.set(text: user.goals[1].type.rawValue)
       goalOne = user.goals[0].value
       goalTwo = user.goals[1].value
       grabHealtKit()

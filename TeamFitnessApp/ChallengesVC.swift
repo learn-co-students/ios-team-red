@@ -30,7 +30,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.title = "Challenges Baby"
+      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
+      titleLabel.set(text: "challenges Baby")
+      titleLabel.textColor = UIColor.whitewash
+      navigationItem.titleView = titleLabel
         setupSubViews()
         setupSearchBar()
         

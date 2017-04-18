@@ -57,16 +57,14 @@ class TrophyView: FitnessView {
 
   func comInit() {
 
-
-
     participationLabel = FitnessLabel(frame: CGRect.zero)
-    participationLabel.text = "Challenege Participation Count"
+    participationLabel.set(text: "Challenege Participation Count")
 
     completionLabel = FitnessLabel(frame: CGRect.zero)
-    completionLabel.text = "Successful Completion Count"
+    completionLabel.set(text: "Successful Completion Count")
 
     trophyLabel = FitnessLabel(frame: CGRect.zero)
-    trophyLabel.text = "Tropies"
+    trophyLabel.set(text: "Tropies")
 
 
     participationCountLabel = CountLabel()
@@ -80,7 +78,7 @@ class TrophyView: FitnessView {
     thirdPlaceImageView = UIImageView(image: #imageLiteral(resourceName: "bronze"))
 
     archeiveLabel = FitnessLabel(frame: CGRect.zero)
-    archeiveLabel.text = "Challenge Archieve"
+    archeiveLabel.set(text: "Challenge Archieve")
 
     tableView = UITableView()
     tableView.backgroundColor = UIColor.clear
@@ -100,7 +98,6 @@ class TrophyView: FitnessView {
     participationLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     participationLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
 
-
     participationCountLabel.topAnchor.constraint(equalTo: participationLabel.bottomAnchor, constant: 5).isActive = true
     participationCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
     participationCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
@@ -119,7 +116,6 @@ class TrophyView: FitnessView {
     trophyLabel.topAnchor.constraint(equalTo: completionCountLabel.bottomAnchor, constant: 20).isActive = true
     trophyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     trophyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-
 
     firstPlaceImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     firstPlaceImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true

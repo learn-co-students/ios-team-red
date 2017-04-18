@@ -23,16 +23,16 @@ class FitnessLabel: UILabel {
     func commonInit() {
 //        self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
         self.font = UIFont(name: "Fresca-Regular", size: 17.00)
-        self.addTextSpacing()
         self.textColor = UIColor.backgroundBlack
         self.textAlignment = .center
+
         self.backgroundColor = UIColor.foregroundOrange
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 5
     }
      
     func reverseColors() {
-        self.textColor = UIColor.foregroundOrange
+        self.textColor = UIColor.stormysea
         self.backgroundColor = UIColor.clear
     }
     
@@ -49,18 +49,17 @@ class FitnessLabel: UILabel {
     }
     
     func set(text: String) {
-        self.text = text
+      let attributes: NSDictionary = [
+        NSKernAttributeName:CGFloat(3.0)
+
+      ]
+      let attributedTitle = NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
+
+      self.attributedText = attributedTitle
+      self.reverseColors()
     }
 
 }
 
-extension FitnessLabel {
-    func addTextSpacing() {
-        if let textString = text {
-            let attributedString = NSMutableAttributedString(string: textString)
-            attributedString.addAttribute(NSKernAttributeName, value: 1.15, range: NSRange(location: 0, length: attributedString.length - 1))
-            attributedText = attributedString
-        }
-    }
-}
+
 

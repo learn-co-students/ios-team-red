@@ -27,7 +27,11 @@ class LogInView: FitnessView {
     var googleButton: GIDSignInButton!
     var facebookButton: FBSDKLoginButton!
     var forgotButton: FitnessButton!
+    var imageViewDude: UIImageView!
+    var imageViewLady: UIImageView!
+
     weak var delegate: LoginViewDelegate?
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -48,21 +52,30 @@ class LogInView: FitnessView {
     }
     
     private func loadUI() {
-        
+
+        imageViewDude = UIImageView(image: #imageLiteral(resourceName: "runner1"))
+        imageViewDude.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(imageViewDude)
+
+        imageViewLady = UIImageView(image: #imageLiteral(resourceName: "runner2"))
+        imageViewLady.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(imageViewLady)
+
+
         fitnessBabyLabel = FitnessLabel()
         self.addSubview(fitnessBabyLabel)
         fitnessBabyLabel.translatesAutoresizingMaskIntoConstraints = false
         fitnessBabyLabel.textAlignment = NSTextAlignment.center
         fitnessBabyLabel.reverseColors()
         fitnessBabyLabel.changeFontSize(to: 32.0)
-        fitnessBabyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        fitnessBabyLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        fitnessBabyLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
-        fitnessBabyLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        fitnessBabyLabel.text = "Fitness Baby"
-        
+        fitnessBabyLabel.set(text: "Fitness Baby")
+
+
+
+
         setupTextFields()
         setupFitnessButtons()
+        setConstaints()
     }
     
     private func setupTextFields() {
@@ -74,15 +87,11 @@ class LogInView: FitnessView {
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
         emailTextField.textAlignment = NSTextAlignment.center
-        emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
-        emailTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 30).isActive = true
-        emailTextField.placeholder = "email"
+        emailTextField.placeholder = "EMAIL"
         emailTextField.clearButtonMode = .whileEditing
         emailTextField.autocorrectionType = UITextAutocorrectionType.no
         emailTextField.autocapitalizationType = .none
-        emailTextField.backgroundColor = UIColor.white
+        emailTextField.backgroundColor = UIColor.reallyLightGray
         
         passwordTextField = UITextField()
         self.addSubview(passwordTextField)
@@ -91,16 +100,14 @@ class LogInView: FitnessView {
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.layer.cornerRadius = 5
         passwordTextField.textAlignment = NSTextAlignment.center
-        passwordTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
-        passwordTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        passwordTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
-        passwordTextField.placeholder = "password"
+        passwordTextField.placeholder = "PASSWORD"
         passwordTextField.autocorrectionType = UITextAutocorrectionType.no
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
         emailTextField.clearButtonMode = .whileEditing
-        passwordTextField.backgroundColor = UIColor.white
+        passwordTextField.backgroundColor = UIColor.reallyLightGray
+
+
         
     }
     
@@ -110,61 +117,91 @@ class LogInView: FitnessView {
         self.addSubview(forgotButton)
         forgotButton.translatesAutoresizingMaskIntoConstraints = false
         forgotButton.reverseColors()
-        forgotButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 0).isActive = true
-        forgotButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
-
-        forgotButton.setTitle("Forgot Password?", for: .normal)
-        forgotButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: 0).isActive = true
-        
-        
-        
-        
+        forgotButton.setReversed(text: "forgot password?")
         
         loginButton = FitnessButton()
         self.addSubview(loginButton)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
-        loginButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 50).isActive = true
         loginButton.isEnabled = true
-        loginButton.setTitle("Login", for: .normal)
+        loginButton.set(text: "login")
         loginButton.addTarget(self, action: #selector(pressLogin), for: .touchUpInside)
 
         
         newUserButton = FitnessButton()
         self.addSubview(newUserButton)
         newUserButton.translatesAutoresizingMaskIntoConstraints = false
-        newUserButton.setTitle("New User", for: .normal)
+        newUserButton.set(text: "create")
         newUserButton.changeFontSize(to: 20.0)
-        newUserButton.reverseColors()
-        newUserButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
-        newUserButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        newUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        newUserButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20).isActive = true
         newUserButton.isEnabled = true
         newUserButton.addTarget(self, action: #selector(pressNewUser), for: .touchUpInside)
         
         googleButton = GIDSignInButton()
         self.addSubview(googleButton)
+        googleButton.style = .wide
+        googleButton.colorScheme = .dark
         googleButton.translatesAutoresizingMaskIntoConstraints = false
-        googleButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
-        googleButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
+
         
         facebookButton = FBSDKLoginButton()
         self.addSubview(facebookButton)
         facebookButton.translatesAutoresizingMaskIntoConstraints = false
-        //facebookButton.setTitle("Facebook", for: .normal)
-        facebookButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
-        facebookButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
+
         
     }
-    
-    
+
+
+  func setConstaints() {
+
+    imageViewDude.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -20).isActive = true
+    imageViewDude.heightAnchor.constraint(equalToConstant: 163).isActive = true
+    imageViewDude.widthAnchor.constraint(equalToConstant: 105).isActive = true
+    imageViewDude.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+
+    imageViewLady.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50).isActive = true
+    imageViewLady.heightAnchor.constraint(equalToConstant: 117).isActive = true
+    imageViewLady.widthAnchor.constraint(equalToConstant: 132).isActive = true
+    imageViewLady.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+
+    fitnessBabyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    fitnessBabyLabel.topAnchor.constraint(equalTo: imageViewDude.bottomAnchor, constant: 20).isActive = true
+
+    emailTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
+    emailTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    emailTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    emailTextField.topAnchor.constraint(equalTo: fitnessBabyLabel.bottomAnchor, constant: 20).isActive = true
+
+    passwordTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
+    passwordTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+    passwordTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
+
+    forgotButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 0).isActive = true
+    forgotButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+    forgotButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: 0).isActive = true
+
+    loginButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    loginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -75).isActive = true
+    loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
+
+    newUserButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    newUserButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    newUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 75).isActive = true
+    newUserButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
+
+//    googleButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//    googleButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    googleButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    googleButton.topAnchor.constraint(equalTo: newUserButton.bottomAnchor, constant: 20).isActive = true
+
+//    facebookButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+//    facebookButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    facebookButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    facebookButton.topAnchor.constraint(equalTo: googleButton.bottomAnchor, constant: 20).isActive = true
+
+  }
+
+
 
 
 }

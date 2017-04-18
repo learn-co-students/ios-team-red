@@ -29,7 +29,10 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Teams"
+      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
+      titleLabel.set(text: "fitness baby")
+      titleLabel.textColor = UIColor.whitewash
+      navigationItem.titleView = titleLabel
         setupSubViews()
         setupSearchBar()
         

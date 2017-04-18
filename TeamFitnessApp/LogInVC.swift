@@ -25,6 +25,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         logInView.emailTextField.tag = 0
         logInView.passwordTextField.delegate = self
         logInView.passwordTextField.tag = 1
+        logInView.passwordTextField.returnKeyType = .go
         
         
         self.hideKeyboardWhenTappedAround()
@@ -51,12 +52,19 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         if let nextField = logInView.emailTextField.superview?.viewWithTag(logInView.emailTextField.tag + 1) as? UITextField {
             
             nextField.becomeFirstResponder()
+          
+
             
         } else {
             
             logInView.resignFirstResponder()
-            
+
         }
+
+      if textField == logInView.passwordTextField {
+        pressLogin()
+
+      }
         return false
     }
     

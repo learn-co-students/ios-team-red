@@ -19,8 +19,8 @@ class TabBarController: UITabBarController {
 
 
   func setup() {
-    self.tabBar.barTintColor = UIColor.white
-    self.tabBar.tintColor = UIColor.foregroundOrange
+    self.tabBar.barTintColor = UIColor.lagoon
+    self.tabBar.tintColor = UIColor.whitewash
 
     let dashboardVC = NavigationController(rootViewController: DashboardVC())
     dashboardVC.tabBarItem.title = "Dashboard"

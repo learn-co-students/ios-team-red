@@ -21,8 +21,10 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
-      navigationItem.title = "Fitness Baby"
+      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
+      titleLabel.set(text: "Fitness baby")
+      titleLabel.textColor = UIColor.whitewash
+      navigationItem.titleView = titleLabel
       let button = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogout(_:)))
 
       navigationItem.setLeftBarButton(button, animated: false)
@@ -82,6 +84,7 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
 
   func getChallenges() {
     if testUser.challengeIDs.count > 0 {
+      self.challenges = []
       for challenge in testUser.challengeIDs {
         FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
           DispatchQueue.main.async {

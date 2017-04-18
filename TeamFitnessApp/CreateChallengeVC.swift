@@ -79,7 +79,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         self.view.addSubview(teamSearchBar)
         teamSearchBar.constrainVertically(belowView: teamIndicator, widthMultiplier: 0.5, heightMultiplier: 0.05)
         teamSearchBar.placeholder = "Find team"
-        teamSearchBar.backgroundColor = UIColor.foregroundOrange
+        teamSearchBar.searchBarStyle = .minimal
         
         self.view.addSubview(publicButton)
         publicButton.setConstraints(nextToView: teamSearchBar)

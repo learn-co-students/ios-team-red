@@ -13,8 +13,6 @@ class LoginNavVC: UINavigationController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationBar.isHidden = true
-    self.navigationBar.barTintColor = UIColor.white
-    self.navigationBar.tintColor = UIColor.foregroundOrange
     self.setViewControllers([LogInViewController()], animated: false)
   }
 

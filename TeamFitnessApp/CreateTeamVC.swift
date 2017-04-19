@@ -33,6 +33,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         setupLabels()
         setUpTextFields()
         setupButtons()
+        self.hideKeyboardWhenTappedAround()
     }
     
     func setupLabels() {

@@ -40,11 +40,11 @@ class CustomPieChartView: PieChartView {
     var values = [PieChartDataEntry]()
 
     if current > goal {
-      values.append(PieChartDataEntry(value: abs(goal-current).rounded(), label: "over goal"))
-      values.append(PieChartDataEntry(value: goal.rounded(), label: "goal"))
+      values.append(PieChartDataEntry(value: abs(goal-current).rounded(), label: "OVER GOAL"))
+      values.append(PieChartDataEntry(value: goal.rounded(), label: "GOAL"))
     } else {
-      values.append(PieChartDataEntry(value: (goal-current).rounded(), label: "left"))
-      values.append(PieChartDataEntry(value: current.rounded(), label: "you"))
+      values.append(PieChartDataEntry(value: (goal-current).rounded(), label: "TO GO"))
+      values.append(PieChartDataEntry(value: current.rounded(), label: "YOU"))
     }
 
 
@@ -52,7 +52,7 @@ class CustomPieChartView: PieChartView {
 
     dataSet.sliceSpace = 2.0
 
-    let colors = ChartColorTemplates.colorful()
+    let colors = [UIColor.raspberry, UIColor.lagoon]
 
     dataSet.colors = colors
 
@@ -62,9 +62,9 @@ class CustomPieChartView: PieChartView {
     pFormatter.numberStyle = .none
     pFormatter.maximumFractionDigits = 1;
     pFormatter.multiplier = 1
-    let descript = UIFontDescriptor(name: "HelveticaNeue-Light", size: 11)
+    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 12)
     data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-    data.setValueFont(NSUIFont(descriptor:descript, size:11))
+    data.setValueFont(NSUIFont(descriptor:descript, size:12))
     data.setValueTextColor(UIColor.white)
 
     self.data = data;

@@ -20,8 +20,8 @@ class LogInView: FitnessView {
 
     let healthKitManager = HealthKitManager.sharedInstance
     var fitnessBabyLabel: FitnessLabel!
-    var emailTextField: UITextField!
-    var passwordTextField: UITextField!
+    var emailTextField: FitnessField!
+    var passwordTextField: FitnessField!
     var loginButton: FitnessButton!
     var newUserButton: FitnessButton!
     var googleButton: GIDSignInButton!
@@ -80,32 +80,26 @@ class LogInView: FitnessView {
     
     private func setupTextFields() {
         
-        emailTextField = UITextField()
+        emailTextField = FitnessField()
         self.addSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
-        emailTextField.layer.cornerRadius = 5
         emailTextField.autocapitalizationType = .none
         emailTextField.autocorrectionType = .no
-        emailTextField.textAlignment = NSTextAlignment.center
-        emailTextField.placeholder = "EMAIL"
+        emailTextField.setPlaceholder(text: "email")
         emailTextField.clearButtonMode = .whileEditing
         emailTextField.autocorrectionType = UITextAutocorrectionType.no
         emailTextField.autocapitalizationType = .none
-        emailTextField.backgroundColor = UIColor.reallyLightGray
-        
-        passwordTextField = UITextField()
+
+        passwordTextField = FitnessField()
         self.addSubview(passwordTextField)
         passwordTextField.autocorrectionType = .no
         passwordTextField.autocapitalizationType = .none
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-        passwordTextField.layer.cornerRadius = 5
-        passwordTextField.textAlignment = NSTextAlignment.center
-        passwordTextField.placeholder = "PASSWORD"
+        passwordTextField.setPlaceholder(text: "password")
         passwordTextField.autocorrectionType = UITextAutocorrectionType.no
         passwordTextField.autocapitalizationType = .none
         passwordTextField.isSecureTextEntry = true
         emailTextField.clearButtonMode = .whileEditing
-        passwordTextField.backgroundColor = UIColor.reallyLightGray
 
 
         

@@ -39,9 +39,9 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
       view = dashboadView
        dashboadView.delegate = self
 
-
-      dashboadView.tableView.delegate = self
-      dashboadView.tableView.dataSource = self
+//
+//      dashboadView.tableView.delegate = self
+//      dashboadView.tableView.dataSource = self
 
     }
     
@@ -64,7 +64,7 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
         DispatchQueue.main.async {
           self.testUser = user
           self.dashboadView.user = user
-          self.getChallenges()
+//          self.getChallenges()
         }
       }
     }
@@ -82,19 +82,19 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
   }
 
 
-  func getChallenges() {
-    if testUser.challengeIDs.count > 0 {
-      self.challenges = []
-      for challenge in testUser.challengeIDs {
-        FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
-          DispatchQueue.main.async {
-            self.challenges.append(challenge)
-            self.dashboadView.tableView.reloadData()
-          }
-        })
-      }
-    }
-  }
+//  func getChallenges() {
+//    if testUser.challengeIDs.count > 0 {
+//      self.challenges = []
+//      for challenge in testUser.challengeIDs {
+//        FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
+//          DispatchQueue.main.async {
+//            self.challenges.append(challenge)
+//            self.dashboadView.tableView.reloadData()
+//          }
+//        })
+//      }
+//    }
+//  }
 
   func onLogout(_ sender: UIBarButtonItem) {
     FirebaseManager.logoutUser { (response) in
@@ -114,27 +114,27 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
   
 }
 
-extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return challenges.count
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = challenges[indexPath.row].name
-    cell.backgroundColor = UIColor.clear
-    cell.textLabel?.textColor = UIColor.foregroundOrange
-    return cell
-  }
-
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let challengeDetailVC = ChallengeDetailVC()
-    challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
-    navigationController?.pushViewController(challengeDetailVC, animated: true)
-    tableView.deselectRow(at: indexPath, animated: true)
-  }
-  
-
-
-}
+//extension DashboardVC: UITableViewDelegate, UITableViewDataSource {
+//
+//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    return challenges.count
+//  }
+//
+//  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//    cell.textLabel?.text = challenges[indexPath.row].name
+//    cell.backgroundColor = UIColor.clear
+//    cell.textLabel?.textColor = UIColor.foregroundOrange
+//    return cell
+//  }
+//
+//  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    let challengeDetailVC = ChallengeDetailVC()
+//    challengeDetailVC.setChallenge(challenge: challenges[indexPath.row])
+//    navigationController?.pushViewController(challengeDetailVC, animated: true)
+//    tableView.deselectRow(at: indexPath, animated: true)
+//  }
+//  
+//
+//
+//}

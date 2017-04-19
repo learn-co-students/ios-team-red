@@ -21,10 +21,10 @@ class ProfileView: FitnessView {
     var myImageView: UIImageView!
     var showImagePickerButton: FitnessButton!
     var cancelButton: FitnessButton!
-    var nameTextField: UITextField!
-    var weightTextField: UITextField!
-    var heightFeetTextField: UITextField!
-    var heightInchesTextField: UITextField!
+    var nameTextField: FitnessField!
+    var weightTextField: FitnessField!
+    var heightFeetTextField: FitnessField!
+    var heightInchesTextField: FitnessField!
     var genderButton: UIButton!
     var setGoalsButton: FitnessButton!
     weak var delegate: ProfileViewDelegate?
@@ -80,31 +80,18 @@ class ProfileView: FitnessView {
         showImagePickerButton.addTarget(self, action: #selector(displayImagePickerButtonTapped), for: .touchUpInside)
         
         
-        nameTextField = UITextField()
+        nameTextField = FitnessField()
         self.addSubview(nameTextField)
         nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameTextField.layer.cornerRadius = 5
-        nameTextField.textAlignment = NSTextAlignment.center
         nameTextField.clearButtonMode = .whileEditing
-        nameTextField.placeholder = "NAME"
-        nameTextField.backgroundColor = UIColor.reallyLightGray
-        
-        weightTextField = UITextField()
+        nameTextField.autocorrectionType = .no
+        nameTextField.setPlaceholder(text: "name")
+
+        weightTextField = FitnessField()
         self.addSubview(weightTextField)
         weightTextField.translatesAutoresizingMaskIntoConstraints = false
-        weightTextField.layer.cornerRadius = 5
-        weightTextField.textAlignment = NSTextAlignment.center
-        weightTextField.placeholder = "WEIGHT"
-        weightTextField.backgroundColor = UIColor.reallyLightGray
+        weightTextField.setPlaceholder(text: "weight")
         weightTextField.keyboardType = UIKeyboardType.numberPad
-        
-//        genderButton = FitnessButton()
-//        self.addSubview(genderButton)
-//        genderButton.translatesAutoresizingMaskIntoConstraints = false
-//        genderButton.set(text: "gender")
-//        genderButton.changeFontSize(to: 16.0)
-//        genderButton.addTarget(self, action: #selector(pressGenderButton), for: UIControlEvents.touchUpInside)
-
 
         genderButton = UIButton(type: .custom)
         self.addSubview(genderButton)
@@ -112,30 +99,29 @@ class ProfileView: FitnessView {
         genderButton.backgroundColor = UIColor.reallyLightGray
         genderButton.setTitleColor(UIColor.lightGray, for: .normal)
         genderButton.layer.cornerRadius = 5
-        genderButton.setTitle("GENDER", for: .normal)
         genderButton.addTarget(self, action: #selector(pressGenderButton), for: UIControlEvents.touchUpInside)
 
+        let genderText = "gender"
+        let attributes: NSDictionary = [
+          NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+          NSKernAttributeName:CGFloat(3.0),
+          NSForegroundColorAttributeName:UIColor.lightGray,
+          ]
+        let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
 
-
-
+        genderButton.setAttributedTitle(attributedTitle, for: .normal)
 
         
-        heightFeetTextField = UITextField()
+        heightFeetTextField = FitnessField()
         self.addSubview(heightFeetTextField)
         heightFeetTextField.translatesAutoresizingMaskIntoConstraints = false
-        heightFeetTextField.layer.cornerRadius = 5
-        heightFeetTextField.textAlignment = NSTextAlignment.center
-        heightFeetTextField.placeholder = "FEET"
-        heightFeetTextField.backgroundColor = UIColor.reallyLightGray
+        heightFeetTextField.setPlaceholder(text: "feet")
         heightFeetTextField.keyboardType = UIKeyboardType.numberPad
         
-        heightInchesTextField = UITextField()
+        heightInchesTextField = FitnessField()
         self.addSubview(heightInchesTextField)
         heightInchesTextField.translatesAutoresizingMaskIntoConstraints = false
-        heightInchesTextField.layer.cornerRadius = 5
-        heightInchesTextField.textAlignment = NSTextAlignment.center
-        heightInchesTextField.placeholder = "INCHES"
-        heightInchesTextField.backgroundColor = UIColor.reallyLightGray
+        heightInchesTextField.setPlaceholder(text: "inches")
         heightInchesTextField.keyboardType = UIKeyboardType.numberPad
         
         setGoalsButton = FitnessButton()

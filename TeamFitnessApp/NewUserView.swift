@@ -22,9 +22,9 @@ class NewUserView: FitnessView {
     
 
     var newUser: FitnessLabel!
-    var emailTextField: UITextField!
-    var passwordTextField: UITextField!
-    var confirmTextField: UITextField!
+    var emailTextField: FitnessField!
+    var passwordTextField: FitnessField!
+    var confirmTextField: FitnessField!
     var cancelCreateButton: FitnessButton!
     var completeCreation: FitnessLabel!
     var profileButton: FitnessButton!
@@ -59,41 +59,32 @@ class NewUserView: FitnessView {
     newUser.changeFontSize(to: 20.0)
 
 
-    emailTextField = UITextField()
+    emailTextField = FitnessField()
     self.addSubview(emailTextField)
     emailTextField.translatesAutoresizingMaskIntoConstraints = false
     emailTextField.autocorrectionType = .no
     emailTextField.autocapitalizationType = .none
-    emailTextField.layer.cornerRadius = 5
-    emailTextField.textAlignment = NSTextAlignment.center
     emailTextField.clearButtonMode = .whileEditing
-    emailTextField.placeholder = "EMAIL"
-    emailTextField.backgroundColor = UIColor.reallyLightGray
-    
-    passwordTextField = UITextField()
+    emailTextField.setPlaceholder(text: "email")
+
+    passwordTextField = FitnessField()
     self.addSubview(passwordTextField)
     passwordTextField.autocorrectionType = .no
     passwordTextField.autocapitalizationType = .none
     passwordTextField.isSecureTextEntry = true
     passwordTextField.translatesAutoresizingMaskIntoConstraints = false
-    passwordTextField.layer.cornerRadius = 5
-    passwordTextField.textAlignment = NSTextAlignment.center
     passwordTextField.clearButtonMode = .whileEditing
-    passwordTextField.placeholder = "PASSWORD"
-    passwordTextField.backgroundColor = UIColor.reallyLightGray
-    
-    confirmTextField = UITextField()
+    passwordTextField.setPlaceholder(text: "password")
+
+    confirmTextField = FitnessField()
     self.addSubview(confirmTextField)
     confirmTextField.autocorrectionType = .no
     confirmTextField.autocapitalizationType = .none
     confirmTextField.isSecureTextEntry = true
     confirmTextField.translatesAutoresizingMaskIntoConstraints = false
-    confirmTextField.layer.cornerRadius = 5
-    confirmTextField.textAlignment = NSTextAlignment.center
     confirmTextField.clearButtonMode = .whileEditing
-    confirmTextField.placeholder = "CONFIRM PASSWORD"
-    confirmTextField.backgroundColor = UIColor.reallyLightGray
-        
+    confirmTextField.setPlaceholder(text: "confirm password")
+
     cancelCreateButton = FitnessButton()
     self.addSubview(cancelCreateButton)
     cancelCreateButton.translatesAutoresizingMaskIntoConstraints = false

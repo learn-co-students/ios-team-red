@@ -76,14 +76,14 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         var cell = FitnessCell()
         
         if tableView == myChallengesView {
-            cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+            cell = myChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
             cell.setLabels(forChallenge: myChallenges[indexPath.row])
-        } else if tableView == publicChallengesView {
+        } else if tableView == self.publicChallengesView {
             if searchActive {
-                cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+                cell = publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
                 cell.setLabels(forChallenge: filteredChallenges[indexPath.row])
             } else {
-                cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+                cell = publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
                 cell.setLabels(forChallenge: publicChallenges[indexPath.row])
             }
         }
@@ -132,6 +132,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         FirebaseManager.fetchAllChallenges { (challenges) in
             self.publicChallenges.removeAll()
             self.publicChallenges = challenges.filter{$0.isPublic}
+            self.filteredChallenges = self.publicChallenges
             completion()
         }
     }

@@ -82,13 +82,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             alert(message: "Please enter inches")
             return
         }
-        
+
+      guard let gender = self.gender else {
+        alert(message: "Please select gender")
+        return
+      }
+
         let height = (feet * 12) + inches
-        
-        guard let gender = profileView.genderButton.currentTitle else {
-            alert(message: "Please select a gender.")
-            return
-        }
+
             
         let vc: GoalsViewController = GoalsViewController()
         
@@ -181,22 +182,43 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("OK")
             self.gender = "Male"
-            self.profileView.genderButton.setTitle("Male", for: .normal)
-            self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+            let genderText = "male"
+            let attributes: NSDictionary = [
+              NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+              NSKernAttributeName:CGFloat(3.0),
+              NSForegroundColorAttributeName:UIColor.black,
+              ]
+            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+
+            self.profileView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
 
         }
         let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
             print("ok")
             self.gender = "Female"
-            self.profileView.genderButton.setTitle("Female", for: .normal)
-            self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+            let genderText = "female"
+            let attributes: NSDictionary = [
+              NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+              NSKernAttributeName:CGFloat(3.0),
+              NSForegroundColorAttributeName:UIColor.black,
+              ]
+            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+
+            self.profileView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
 
         }
         let unspecifiedAction = UIAlertAction(title: "Unspecified", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
           print("ok")
           self.gender = "Unspecified"
-          self.profileView.genderButton.setTitle("Unspecified", for: .normal)
-          self.profileView.genderButton.setTitleColor(UIColor.black, for: .normal)
+          let genderText = "unspecified"
+          let attributes: NSDictionary = [
+            NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+            NSKernAttributeName:CGFloat(3.0),
+            NSForegroundColorAttributeName:UIColor.black,
+            ]
+          let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+
+          self.profileView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
 
 
         }

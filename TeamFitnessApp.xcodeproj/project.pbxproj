@@ -57,6 +57,7 @@
 		EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */; };
 		EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */; };
 		EC9D94471E9AA77800E33362 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94461E9AA77800E33362 /* TitleLabel.swift */; };
+		ECCE22F01EA7F79F006691D8 /* ChallengeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
@@ -157,6 +158,7 @@
 		EC9D94421E994B3400E33362 /* FirebaseStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseStorageManager.swift; sourceTree = "<group>"; };
 		EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailVC.swift; sourceTree = "<group>"; };
 		EC9D94461E9AA77800E33362 /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailView.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
 				EC4BD1CC1EA068B70076B4D0 /* SubmitButton.swift */,
+				ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */,
 				FE6086171EA7DEAF006AE52B /* TeamsView.swift */,
 			);
 			name = Views;
@@ -721,6 +724,7 @@
 				EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */,
 				FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */,
 				AAFD13081E9ACF1F00154522 /* CustomHorizontalBarChart.swift in Sources */,
+				ECCE22F01EA7F79F006691D8 /* ChallengeDetailView.swift in Sources */,
 				AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */,
 				AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */,
 				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,

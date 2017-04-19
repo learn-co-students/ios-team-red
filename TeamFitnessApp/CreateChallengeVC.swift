@@ -61,6 +61,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
 //MARK = setup view constraints
     func setupViews() {
+        self.hideKeyboardWhenTappedAround()
+        
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view, andViewController: self)
         titleLabel.setText(toString: "New Challenge")

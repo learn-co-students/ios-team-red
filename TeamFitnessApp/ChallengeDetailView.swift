@@ -13,7 +13,6 @@ class ChallengeDetailView: FitnessView {
     let topLabel = FitnessLabel()
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
-    let leadersTable = UITableView()
     let joinButton = FitnessButton()
     
     let goalPieChart = CustomPieChartView()
@@ -21,30 +20,42 @@ class ChallengeDetailView: FitnessView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        loadUI()
+        setConstraints()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        loadUI()
         setConstraints()
+    }
+    
+    func loadUI() {
+        self.addSubview(topLabel)
+        topLabel.text = "Challenge Info"
+        
+        self.addSubview(goalPieChart)
+        
+        self.addSubview(leadersChart)
+        
+        self.addSubview(joinButton)
+        joinButton.isHidden = true
     }
     
     func setConstraints() {
         
-        self.addSubview(topLabel)
+        topLabel.translatesAutoresizingMaskIntoConstraints = false
         topLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        topLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        topLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
         topLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         topLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
-        topLabel.text = "Challenge Info"
         
-        self.addSubview(goalPieChart)
         goalPieChart.translatesAutoresizingMaskIntoConstraints = false
         goalPieChart.topAnchor.constraint(equalTo: topLabel.bottomAnchor).isActive = true
         goalPieChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
         
-        self.addSubview(leadersChart)
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
         leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
         leadersChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -53,12 +64,13 @@ class ChallengeDetailView: FitnessView {
     }
     
     func displayJoinButton() {
-        self.addSubview(joinButton)
+        
         joinButton.translatesAutoresizingMaskIntoConstraints = false
-        joinButton.bottomAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        joinButton.topAnchor.constraint(equalTo: leadersChart.bottomAnchor).isActive = true
         joinButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
         joinButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
         joinButton.setTitle("Join Challenge", for: .normal)
+        joinButton.isHidden = false
     }
 }

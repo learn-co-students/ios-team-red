@@ -131,5 +131,5 @@ class TeamDetailView: FitnessView {
 
   }
 
->>>>>>> 314c1739ab9cb6eab2197d203020533bbec3f560
+
 }

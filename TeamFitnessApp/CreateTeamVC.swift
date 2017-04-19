@@ -54,7 +54,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         
         self.view.addSubview(submitButton)
         submitButton.setConstraints(toView: self.view, andViewConroller: self)
-        submitButton.addTarget(self, action: #selector(createNewTeam), for: .touchUpInside)
+        submitButton.addTarget(self, action: #selector(createTeamButtonPressed), for: .touchUpInside)
         
         self.view.addSubview(imageButton)
         imageButton.translatesAutoresizingMaskIntoConstraints = false
@@ -73,21 +73,27 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         teamImage.bottomAnchor.constraint(equalTo: imageButton.bottomAnchor).isActive = true
     }
     
-    func createNewTeam() {
+    func createTeamButtonPressed() {
+        createNewTeam {
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func createNewTeam(completion: () -> Void) {
         if let userID = userID {
             guard teamNameField.text != "" else {
                 teamNameField.flashRed()
                 return
             }
             if let teamName = teamNameField.text {
-                var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], imageURL: "NO IMAGE", name: teamName)
+                var team = Team(userUIDs: [userID], captainID: userID, challengeIDs: [], name: teamName)
                 FirebaseManager.addNew(team: team, completion: { (teamID) in
                     team.id = teamID
                     if let uid = self.user?.uid {
                         FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
-                            DispatchQueue.main.async {
-                                self.navigationController?.popViewController(animated: true)
-                            }
+                            completion()
                         }
                     }
                 })

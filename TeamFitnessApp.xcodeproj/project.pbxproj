@@ -67,7 +67,6 @@
 		FE4446201EA52B7E0063C138 /* fontTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE44461F1EA52B7E0063C138 /* fontTestViewController.swift */; };
 		FE4BB1F91EA4FA8C004BA4C9 /* Fresca-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FE4BB1F81EA4FA6B004BA4C9 /* Fresca-Regular.ttf */; };
 		FE6086181EA7DEAF006AE52B /* TeamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6086171EA7DEAF006AE52B /* TeamsView.swift */; };
-		FE60861A1EA7FB6D006AE52B /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6086191EA7FB6D006AE52B /* TeamDetailView.swift */; };
 		FE9586411E9BD15E009C3BFE /* NewUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586401E9BD15E009C3BFE /* NewUserView.swift */; };
 		FE9586431E9BFA5F009C3BFE /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586421E9BFA5F009C3BFE /* ProfileView.swift */; };
 		FE9586451E9C0D0A009C3BFE /* GoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9586441E9C0D0A009C3BFE /* GoalsView.swift */; };
@@ -169,7 +168,6 @@
 		FE44461F1EA52B7E0063C138 /* fontTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fontTestViewController.swift; sourceTree = "<group>"; };
 		FE4BB1F81EA4FA6B004BA4C9 /* Fresca-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Fresca-Regular.ttf"; sourceTree = "<group>"; };
 		FE6086171EA7DEAF006AE52B /* TeamsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsView.swift; sourceTree = "<group>"; };
-		FE6086191EA7FB6D006AE52B /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		FE9586401E9BD15E009C3BFE /* NewUserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUserView.swift; sourceTree = "<group>"; };
 		FE9586421E9BFA5F009C3BFE /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		FE9586441E9C0D0A009C3BFE /* GoalsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalsView.swift; sourceTree = "<group>"; };
@@ -317,11 +315,7 @@
 		EC859EA71E96AD83009664F5 /* Controller Extensions */ = {
 			isa = PBXGroup;
 			children = (
-
-
 				AAE3531D1EA7D17800362C4D /* KeyboardVCExtension.swift */,
-				EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */,
-
 			);
 			name = "Controller Extensions";
 			sourceTree = "<group>";
@@ -380,7 +374,6 @@
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
 				EC4BD1CC1EA068B70076B4D0 /* SubmitButton.swift */,
 				FE6086171EA7DEAF006AE52B /* TeamsView.swift */,
-				FE6086191EA7FB6D006AE52B /* TeamDetailView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -717,7 +710,6 @@
 				EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */,
 				FE1C67B71E9FCC4D00FE0C54 /* ProfileUpdateView.swift in Sources */,
 				EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */,
-				FE60861A1EA7FB6D006AE52B /* TeamDetailView.swift in Sources */,
 				EC4F0A531E9EF401006A74E9 /* PublicButton.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
 				AAE353201EA7D70A00362C4D /* ChallengesView.swift in Sources */,

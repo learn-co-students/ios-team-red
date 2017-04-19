@@ -1,4 +1,4 @@
-//
+ //
 //  TeamDetailVC.swift
 //  TeamFitnessApp
 //
@@ -11,22 +11,14 @@ import Firebase
 
 class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+
+    var teamDetailView: TeamDetailView!
     var team: Team?
-    let teamNameLabel = TitleLabel()
-    let captainLabel = FitnessLabel()
-    let membersLabel = FitnessLabel()
-    let challengesLabel = FitnessLabel()
-    let inviteMembersButton = FitnessButton()
-    let createChallengeButton = FitnessButton()
-    let teamImageView = UIImageView()
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     
     var teamUsers = [User]()
     var teamChallenges = [Challenge]()
-    
-    let membersView = UITableView()
-    let challengesView = UITableView()
-    let joinButton = FitnessButton()
+
     
     var userIsTeamMember: Bool {
         var test = false
@@ -41,23 +33,74 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        membersView.delegate = self
-        membersView.dataSource = self
-        
-        challengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        challengesView.delegate = self
-        challengesView.dataSource = self
 
-        setupViews()
+        teamDetailView = TeamDetailView(frame: view.frame)
+        self.view = teamDetailView
         
+        teamDetailView.membersView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        teamDetailView.membersView.delegate = self
+        teamDetailView.membersView.dataSource = self
+        
+        teamDetailView.challengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        teamDetailView.challengesView.delegate = self
+        teamDetailView.challengesView.dataSource = self
+
+        teamDetailView.joinButton.isHidden = true
+        teamDetailView.joinButton.isEnabled = false
+        teamDetailView.joinButton.addTarget(self, action: #selector(joinTeam), for: .touchUpInside)
+
+        teamDetailView.teamNameLabel.text = self.team?.name
+
+
+
+        if !userIsTeamMember {
+          teamDetailView.joinButton.isHidden = false
+          teamDetailView.joinButton.isEnabled = true
+        }
+
+        teamDetailView.createChallengeButton.isHidden = true
+        teamDetailView.createChallengeButton.isEnabled = false
+        teamDetailView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
+
+        if userIsCaptain {
+          teamDetailView.createChallengeButton.isHidden = false
+          teamDetailView.createChallengeButton.isEnabled = true
+        }
+
+
+
+      if let team = self.team {
+        FirebaseStoreageManager.downloadImage(forTeam: team) { (response) in //download image for team and set it = to teamImageView
+          switch response {
+          case let .successfulDownload(teamImage):
+            DispatchQueue.main.async {
+              self.teamDetailView.teamImageView.image = teamImage
+            }
+          case let .failure(failString):
+            print(failString)
+            self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
+          default:
+            print("Invalid Firebase response")
+          }
+        }
+      } else {
+        self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
+      }
+
+      if let captain = team?.captainID { //get the captain and set their name to the captain label
+        FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
+          self.teamDetailView.captainLabel.text = "Captain: \(captain.name)"
+        })
+      }
+      
+
         observeTeamData() {}
     }
-    
+
+
+
     func setTeam(team: Team) {
         self.team = team
-        teamNameLabel.text = team.name
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -67,9 +110,9 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows: Int = 0
         
-        if tableView == membersView {
+        if tableView == teamDetailView.membersView {
             rows = teamUsers.count
-        } else if tableView == challengesView {
+        } else if tableView == teamDetailView.challengesView {
             rows = teamChallenges.count
         }
         return rows
@@ -77,11 +120,11 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = FitnessCell()
-        if tableView == membersView {
-            cell = membersView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell //TODO set default cell layout
+        if tableView == teamDetailView.membersView {
+            cell = teamDetailView.membersView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell //TODO set default cell layout
             cell.setLabels(forUser: teamUsers[indexPath.row])
-        } else if tableView == challengesView {
-            cell = challengesView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+        } else if tableView == teamDetailView.challengesView {
+            cell = teamDetailView.challengesView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
             cell.setLabels(forChallenge: teamChallenges[indexPath.row])
         }
         return cell
@@ -89,7 +132,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let challengeDetailVC = ChallengeDetailVC()
-        if tableView == challengesView {
+        if tableView == teamDetailView.challengesView {
             challengeDetailVC.setChallenge(challenge: teamChallenges[indexPath.row])
             navigationController?.pushViewController(challengeDetailVC, animated: true)
         }
@@ -104,12 +147,12 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.team = team
             self.fetchChallenges(forTeam: team) {
                 DispatchQueue.main.async {
-                    self.challengesView.reloadData()
+                    self.teamDetailView.challengesView.reloadData()
                 }
             }
             self.fetchUsers(forTeam: team) {
                 DispatchQueue.main.async {
-                    self.membersView.reloadData()
+                    self.teamDetailView.membersView.reloadData()
                 }
             }
             
@@ -147,12 +190,12 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.teamChallenges.removeAll()
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
                 DispatchQueue.main.async {
-                    self.membersView.reloadData()
-                    self.challengesView.reloadData()
+                    self.teamDetailView.membersView.reloadData()
+                    self.teamDetailView.challengesView.reloadData()
                 }
             }
         }
-        joinButton.isHidden = true
+        teamDetailView.joinButton.isHidden = true
     }
     
     func segueCreateChallenge() {

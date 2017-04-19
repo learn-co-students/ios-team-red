@@ -2,6 +2,7 @@
 //  TeamDetailView.swift
 //  TeamFitnessApp
 //
+
 //  Created by Alessandro Musto on 4/19/17.
 //  Copyright © 2017 Patrick O'Leary. All rights reserved.
 //
@@ -9,6 +10,7 @@
 import UIKit
 
 class TeamDetailView: FitnessView {
+
 
   var teamNameLabel: TitleLabel!
   var captainLabel: FitnessLabel!
@@ -129,4 +131,5 @@ class TeamDetailView: FitnessView {
 
   }
 
+>>>>>>> 314c1739ab9cb6eab2197d203020533bbec3f560
 }

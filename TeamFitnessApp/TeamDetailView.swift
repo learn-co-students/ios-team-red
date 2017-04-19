@@ -130,6 +130,4 @@ class TeamDetailView: FitnessView {
     createChallengeButton.bottomAnchor.constraint(equalTo: challengesLabel.bottomAnchor).isActive = true
 
   }
-
-
 }

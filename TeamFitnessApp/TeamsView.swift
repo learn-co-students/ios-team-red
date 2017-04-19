@@ -31,7 +31,7 @@ class TeamsView: FitnessView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         comInit()
-        setConstaints()
+        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -75,7 +75,7 @@ class TeamsView: FitnessView {
         createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
     }
     
-    func setConstaints() {
+    func setConstraints() {
         
         myTeamsLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
         myTeamsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true

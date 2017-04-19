@@ -84,6 +84,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func nextButtonPressed() {
+        print("NEXT BUTTON PRESSED")
         if viewState == .first { //if the user is on the first screen of the CreateChallengeView, store the values in the text/search/picker fields, and move to the next screen
             if !challengeIsPublic && team == nil {
                 print("Must select a team to add the challenge to, or set challenge to public")
@@ -118,7 +119,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                         })
                     }
                 })
-                self.dismiss(animated: true, completion: nil)
+                navigationController?.popViewController(animated: true)
             } else {
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
             }
@@ -147,7 +148,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func previousButtonPressed() {
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 //MARK: - Search bar delegate
     
@@ -261,7 +262,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         filteredTeams.removeAll()
         let teamList = user.teamIDs
         for teamID in teamList {
-            FirebaseManager.fetchTeam(withTeamID: teamID, completion: { (team) in
+            FirebaseManager.fetchTeamOnce(withTeamID: teamID, completion: { (team) in
                 if team.captainID == user.uid {
                     self.myTeams.append(team)
                     completion()

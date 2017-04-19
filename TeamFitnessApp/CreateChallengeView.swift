@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateChallengeView: UIView {
+class CreateChallengeView: FitnessView {
     
     let challengeTitleLabel = FitnessLabel()
     let challengeNameField = FitnessTextField()
@@ -36,6 +36,7 @@ class CreateChallengeView: UIView {
     
     func loadUI() {
         self.addSubview(challengeTitleLabel)
+        
         challengeTitleLabel.text = "New Challenge"
         
         self.addSubview(challengeNameField)
@@ -79,10 +80,11 @@ class CreateChallengeView: UIView {
     
     func setConstraints() {
         
+        challengeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         challengeTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        challengeTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 0).isActive = true
         challengeTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
-        challengeTitleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        challengeTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        challengeTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         
         challengeNameField.setConstraints(toSuperview: self, belowView: challengeTitleLabel)
         

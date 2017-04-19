@@ -82,6 +82,7 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
     
     
     //MARK: - search bar
+    
     func setupSearchBar() {
         challengeSearchBar.delegate = self
         print("is user enabled?\(challengeSearchBar.isUserInteractionEnabled)")
@@ -115,14 +116,12 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range != nil
         })
-        if challengeSearchBar.text == nil {
+        if challengeSearchBar.text == nil || challengeSearchBar.text == "" {
             searchActive = false
-        }
-        if(filteredChallenges.count == 0){
-            searchActive = true;//TODO: make sure this change works
         } else {
-            searchActive = true;
+            searchActive = true
         }
+
         publicChallengesView.reloadData()
     }
 }

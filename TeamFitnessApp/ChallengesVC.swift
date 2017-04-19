@@ -52,6 +52,8 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         
+        self.hideKeyboardWhenTappedAround()
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

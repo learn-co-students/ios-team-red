@@ -50,6 +50,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 self.myTeamsView.reloadData()
             }
         }
+        self.hideKeyboardWhenTappedAround()
     }
     
 // MARK: - Delegate and Data Source

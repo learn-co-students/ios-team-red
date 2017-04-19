@@ -190,8 +190,8 @@ struct FirebaseManager {
     }
     
     static func fetchAllChallenges(completion: @escaping ([Challenge]) -> Void) { //fetches all challenges and returns them in an array through a completion
-        var challenges = [Challenge]()
         dataRef.child("challenges").observe(.value, with: { (snapshot) in
+            var challenges = [Challenge]()
             let challengesDict = snapshot.value as? [String: Any]
             if let challengesDict = challengesDict {
                 for challenge in challengesDict {

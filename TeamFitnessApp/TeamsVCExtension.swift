@@ -115,7 +115,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
         print("Did begin editing")
     }
     
@@ -143,11 +143,12 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
             return range != nil
         })
         
-        if(filteredTeams.count == 0){
-            searchActive = false;
+        if teamSearchBar.text == nil || teamSearchBar.text == "" {
+            searchActive = false
         } else {
-            searchActive = true;
+            searchActive = true
         }
+        
         searchTableView.reloadData()
     }
 }

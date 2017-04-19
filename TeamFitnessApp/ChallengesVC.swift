@@ -42,13 +42,15 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
 
-
+        setupSearchBar()
         getMyChallenges()
         getPublicChallenges() {
             DispatchQueue.main.async {
                 self.challengeView.publicChallengesView.reloadData()
             }
         }
+        
+        self.hideKeyboardWhenTappedAround()
         
     }
     
@@ -77,11 +79,12 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
             cell.setLabels(forChallenge: myChallenges[indexPath.row])
         } else if tableView == challengeView.publicChallengesView {
+
             if searchActive {
-                cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+                cell = challengeView.publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
                 cell.setLabels(forChallenge: filteredChallenges[indexPath.row])
             } else {
-                cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+                cell = challengeView.publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
                 cell.setLabels(forChallenge: publicChallenges[indexPath.row])
             }
         }
@@ -135,6 +138,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         FirebaseManager.fetchAllChallenges { (challenges) in
             self.publicChallenges.removeAll()
             self.publicChallenges = challenges.filter{$0.isPublic}
+            self.filteredChallenges = self.publicChallenges
             completion()
         }
     }
@@ -143,41 +147,42 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 extension ChallengesVC: UISearchBarDelegate {//controls functionality for search bar
 
     //MARK: - search bar
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-      searchActive = true;
-      print("Did begin editing")
+  func setupSearchBar() {
+    challengeView.challengeSearchBar.delegate = self
+  }
+
+  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    searchActive = false;
+  }
+
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    searchActive = false;
+  }
+
+  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    searchActive = false;
+  }
+
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchActive = false;
+
+  }
+
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+
+    filteredChallenges = publicChallenges.filter({ (challenge) -> Bool in
+      let temp: String = challenge.name
+      let range = temp.range(of: searchText, options: .caseInsensitive)
+      return range != nil
+    })
+    if challengeView.challengeSearchBar.text == nil || challengeView.challengeSearchBar.text == "" {
+      self.searchActive = false
+    } else {
+      self.searchActive = true
     }
 
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-      searchActive = false;
-      print("Did end editing")
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-      searchActive = false;
-      print("Clicked cacel button")
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-      searchActive = false;
-      print("Search button clicked")
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-      print("text did change")
-
-      filteredChallenges = publicChallenges.filter({ (challenge) -> Bool in
-        let temp: String = challenge.name
-        let range = temp.range(of: searchText, options: .caseInsensitive)
-        return range != nil
-      })
-
-      if(filteredChallenges.count == 0){
-        searchActive = false;
-      } else {
-        searchActive = true;
-      }
-      challengeView.publicChallengesView.reloadData()
+    challengeView.publicChallengesView.reloadData()
   }
 }
 

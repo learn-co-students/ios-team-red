@@ -94,7 +94,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
         view.addSubview(teamsTableView)
         teamsTableView.constrainVertically(belowView: teamSearchBar, widthMultiplier: 0.8, heightMultiplier: 0.25)
         teamsTableView.backgroundColor = UIColor.clear
-        teamsTableView.alpha = 0
+        teamsTableView.isHidden = true
         teamsTableView.delegate = self
         teamsTableView.dataSource = self
         teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")

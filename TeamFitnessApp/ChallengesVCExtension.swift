@@ -88,7 +88,7 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
+        searchActive = false;
         print("Did begin editing")
     }
     
@@ -115,9 +115,11 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range != nil
         })
-        
+        if challengeSearchBar.text == nil {
+            searchActive = false
+        }
         if(filteredChallenges.count == 0){
-            searchActive = false;
+            searchActive = true;//TODO: make sure this change works
         } else {
             searchActive = true;
         }

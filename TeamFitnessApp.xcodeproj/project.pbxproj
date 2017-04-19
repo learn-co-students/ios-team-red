@@ -10,6 +10,7 @@
 		0E29E1F24550661DB0F2A05D /* Pods_TeamFitnessApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */; };
 		33533B74E3413B25BF5E93C5 /* Pods_TeamFitnessAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFFD9E8D7960E6ED65315B8 /* Pods_TeamFitnessAppUITests.framework */; };
 		6AAC8699E3FC030B9FBE87D8 /* Pods_TeamFitnessAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */; };
+		AA2F64C31EA7EB230032545E /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F64C21EA7EB230032545E /* TeamDetailView.swift */; };
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
 		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
@@ -20,6 +21,8 @@
 		AABBFB231E9FBFBB0001BF7E /* CountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBFB221E9FBFBB0001BF7E /* CountLabel.swift */; };
 		AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */; };
 		AAE3531C1EA78ADF00362C4D /* FitnessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3531B1EA78ADF00362C4D /* FitnessField.swift */; };
+		AAE3531E1EA7D17800362C4D /* KeyboardVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3531D1EA7D17800362C4D /* KeyboardVCExtension.swift */; };
+		AAE353201EA7D70A00362C4D /* ChallengesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */; };
 		AAED5D671E9D4BFD002C0F4A /* TrophyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */; };
 		AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D681E9D4D75002C0F4A /* TabBarController.swift */; };
 		AAED5D6B1E9D614A002C0F4A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */; };
@@ -32,7 +35,6 @@
 		EC4F0A491E9D0B79006A74E9 /* GoalPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */; };
 		EC4F0A4B1E9E79C6006A74E9 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4A1E9E79C6006A74E9 /* DataType.swift */; };
 		EC4F0A4D1E9EA631006A74E9 /* ChallengesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */; };
-		EC4F0A4F1E9EA7FD006A74E9 /* ChallengesVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A4E1E9EA7FD006A74E9 /* ChallengesVCExtension.swift */; };
 		EC4F0A511E9EEF73006A74E9 /* FitnessTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */; };
 		EC4F0A531E9EF401006A74E9 /* PublicButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC4F0A521E9EF401006A74E9 /* PublicButton.swift */; };
 		EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */; };
@@ -48,7 +50,6 @@
 		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
 		EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */; };
 		EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */; };
-		EC9D94331E97C52500E33362 /* TeamDetailVCExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */; };
 		EC9D94351E97CEAF00E33362 /* FitnessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94341E97CEAF00E33362 /* FitnessCell.swift */; };
 		EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94361E97EF4B00E33362 /* ProfileVC.swift */; };
 		EC9D94391E97EF8200E33362 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94381E97EF8200E33362 /* LogInVC.swift */; };
@@ -102,6 +103,7 @@
 		400E5015EFC2F2D0786F05DE /* Pods_TeamFitnessApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamFitnessApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B2D5318F33B4B43C01826E5 /* Pods-TeamFitnessAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		88ADC239E33D8EFDE8ADF02D /* Pods-TeamFitnessAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA2F64C21EA7EB230032545E /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
 		AA89B0691E93E905007E55AC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
 		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -113,6 +115,8 @@
 		AABBFB221E9FBFBB0001BF7E /* CountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountLabel.swift; sourceTree = "<group>"; };
 		AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNavVC.swift; sourceTree = "<group>"; };
 		AAE3531B1EA78ADF00362C4D /* FitnessField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessField.swift; sourceTree = "<group>"; };
+		AAE3531D1EA7D17800362C4D /* KeyboardVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardVCExtension.swift; sourceTree = "<group>"; };
+		AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesView.swift; sourceTree = "<group>"; };
 		AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyVC.swift; sourceTree = "<group>"; };
 		AAED5D681E9D4D75002C0F4A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -126,7 +130,6 @@
 		EC4F0A481E9D0B79006A74E9 /* GoalPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoalPickerView.swift; sourceTree = "<group>"; };
 		EC4F0A4A1E9E79C6006A74E9 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 		EC4F0A4C1E9EA631006A74E9 /* ChallengesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesVC.swift; sourceTree = "<group>"; };
-		EC4F0A4E1E9EA7FD006A74E9 /* ChallengesVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengesVCExtension.swift; sourceTree = "<group>"; };
 		EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessTextField.swift; sourceTree = "<group>"; };
 		EC4F0A521E9EF401006A74E9 /* PublicButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublicButton.swift; sourceTree = "<group>"; };
 		EC5DBD801E9BF25D00CECA34 /* DateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensions.swift; path = TeamFitnessAppTests/DateExtensions.swift; sourceTree = SOURCE_ROOT; };
@@ -147,7 +150,6 @@
 		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
 		EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVCExtension.swift; sourceTree = "<group>"; };
 		EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
-		EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVCExtension.swift; sourceTree = "<group>"; };
 		EC9D94341E97CEAF00E33362 /* FitnessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessCell.swift; sourceTree = "<group>"; };
 		EC9D94361E97EF4B00E33362 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		EC9D94381E97EF8200E33362 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
@@ -313,9 +315,8 @@
 		EC859EA71E96AD83009664F5 /* Controller Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				EC9D94321E97C52500E33362 /* TeamDetailVCExtension.swift */,
+				AAE3531D1EA7D17800362C4D /* KeyboardVCExtension.swift */,
 				EC859EA81E96ADA8009664F5 /* TeamsVCExtension.swift */,
-				EC4F0A4E1E9EA7FD006A74E9 /* ChallengesVCExtension.swift */,
 			);
 			name = "Controller Extensions";
 			sourceTree = "<group>";
@@ -365,8 +366,10 @@
 				FE1F1D731E9816E100CB1E5F /* LogInView.swift */,
 				FE9586401E9BD15E009C3BFE /* NewUserView.swift */,
 				FE9586421E9BFA5F009C3BFE /* ProfileView.swift */,
+				AA2F64C21EA7EB230032545E /* TeamDetailView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
 				AABBFB201E9FB7F80001BF7E /* TrophyView.swift */,
+				AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */,
 				FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */,
 				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
@@ -710,6 +713,8 @@
 				EC859EA91E96ADA8009664F5 /* TeamsVCExtension.swift in Sources */,
 				EC4F0A531E9EF401006A74E9 /* PublicButton.swift in Sources */,
 				EC9D943F1E98130400E33362 /* CreateTeamVC.swift in Sources */,
+				AAE353201EA7D70A00362C4D /* ChallengesView.swift in Sources */,
+				AA2F64C31EA7EB230032545E /* TeamDetailView.swift in Sources */,
 				EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */,
 				AAEE30AE1E96887F001AF51C /* DashboardVC.swift in Sources */,
 				AAED5D671E9D4BFD002C0F4A /* TrophyVC.swift in Sources */,
@@ -730,6 +735,7 @@
 				FE4446201EA52B7E0063C138 /* fontTestViewController.swift in Sources */,
 				AAE3531C1EA78ADF00362C4D /* FitnessField.swift in Sources */,
 				FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */,
+				AAE3531E1EA7D17800362C4D /* KeyboardVCExtension.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,
 				AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */,
@@ -742,7 +748,6 @@
 				FE9586471E9C0D3A009C3BFE /* GoalsVC.swift in Sources */,
 				FE9586411E9BD15E009C3BFE /* NewUserView.swift in Sources */,
 				EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */,
-				EC4F0A4F1E9EA7FD006A74E9 /* ChallengesVCExtension.swift in Sources */,
 				EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */,
 				ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */,
 				EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */,
@@ -755,7 +760,6 @@
 				AABBFB211E9FB7F80001BF7E /* TrophyView.swift in Sources */,
 				AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */,
 				AAFD130A1E9ACF2700154522 /* CustomPieChart.swift in Sources */,
-				EC9D94331E97C52500E33362 /* TeamDetailVCExtension.swift in Sources */,
 				ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */,
 				FE9586451E9C0D0A009C3BFE /* GoalsView.swift in Sources */,
 			);

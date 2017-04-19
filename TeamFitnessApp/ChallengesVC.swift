@@ -10,21 +10,13 @@ import UIKit
 import Firebase
 
 class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    let mainView = FitnessView()
+
+    var challengeView: ChallengesView!
     let uid = FIRAuth.auth()?.currentUser?.uid
-    let myChallengesLabel = FitnessLabel()
-    let publicChallengesLabel = FitnessLabel()
-    
-    let challengeSearchBar = UISearchBar()
-    
-    let myChallengesView = UITableView()
-    let publicChallengesView = UITableView()
-    
     var myChallenges = [Challenge]()
     var publicChallenges = [Challenge]()
     var filteredChallenges = [Challenge]()
-    let createChallengeButton = FitnessButton()
+
     var searchActive: Bool = false
     
     override func viewDidLoad() {
@@ -34,21 +26,27 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
       titleLabel.set(text: "challenges Baby")
       titleLabel.textColor = UIColor.whitewash
       navigationItem.titleView = titleLabel
-        setupSubViews()
-        setupSearchBar()
+
+
+        challengeView = ChallengesView(frame: view.frame)
+        self.view = challengeView
+        challengeView.challengeSearchBar.delegate = self
         
-        myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        myChallengesView.delegate = self
-        myChallengesView.dataSource = self
+        challengeView.myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        challengeView.myChallengesView.delegate = self
+        challengeView.myChallengesView.dataSource = self
         
-        publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        publicChallengesView.delegate = self
-        publicChallengesView.dataSource = self
-        
+        challengeView.publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+        challengeView.publicChallengesView.delegate = self
+        challengeView.publicChallengesView.dataSource = self
+
+        challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
+
+
         getMyChallenges()
         getPublicChallenges() {
             DispatchQueue.main.async {
-                self.publicChallengesView.reloadData()
+                self.challengeView.publicChallengesView.reloadData()
             }
         }
         
@@ -60,9 +58,9 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var rows = 0
-        if tableView == myChallengesView {
+        if tableView == challengeView.myChallengesView {
             rows = myChallenges.count
-        } else if tableView == publicChallengesView {
+        } else if tableView == challengeView.publicChallengesView {
             if searchActive {
                 rows = filteredChallenges.count
             } else {
@@ -75,10 +73,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = FitnessCell()
         
-        if tableView == myChallengesView {
+        if tableView == challengeView.myChallengesView {
             cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
             cell.setLabels(forChallenge: myChallenges[indexPath.row])
-        } else if tableView == publicChallengesView {
+        } else if tableView == challengeView.publicChallengesView {
             if searchActive {
                 cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
                 cell.setLabels(forChallenge: filteredChallenges[indexPath.row])
@@ -91,12 +89,12 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == myChallengesView {
+        if tableView == challengeView.myChallengesView {
             let challengeDetailVC = ChallengeDetailVC()
             challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
             present(challengeDetailVC, animated: true, completion: nil)
             //navigationController?.pushViewController(challengeDetailVC, animated: true)
-        } else if tableView == publicChallengesView {
+        } else if tableView == challengeView.publicChallengesView {
             if searchActive {
                 let challengeDetailVC = ChallengeDetailVC()
                 challengeDetailVC.setChallenge(challenge: filteredChallenges[indexPath.row])
@@ -112,6 +110,11 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+  func segueCreateChallenge() {
+    let createChallengeVC = CreateChallengeVC()
+    self.navigationController?.pushViewController(createChallengeVC, animated: true)
+  }
+
 //MARK: Firebase calls
     func getMyChallenges() {
         guard let uid = self.uid else {return}
@@ -121,7 +124,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
                     self.myChallenges.append(challenge)
                     DispatchQueue.main.async {
-                        self.myChallengesView.reloadData()
+                        self.challengeView.myChallengesView.reloadData()
                     }
                 })
             }
@@ -136,3 +139,45 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
     }
 }
+
+extension ChallengesVC: UISearchBarDelegate {//controls functionality for search bar
+
+    //MARK: - search bar
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+      searchActive = true;
+      print("Did begin editing")
+    }
+
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+      searchActive = false;
+      print("Did end editing")
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+      searchActive = false;
+      print("Clicked cacel button")
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+      searchActive = false;
+      print("Search button clicked")
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+      print("text did change")
+
+      filteredChallenges = publicChallenges.filter({ (challenge) -> Bool in
+        let temp: String = challenge.name
+        let range = temp.range(of: searchText, options: .caseInsensitive)
+        return range != nil
+      })
+
+      if(filteredChallenges.count == 0){
+        searchActive = false;
+      } else {
+        searchActive = true;
+      }
+      challengeView.publicChallengesView.reloadData()
+  }
+}
+

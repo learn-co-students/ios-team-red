@@ -189,6 +189,21 @@ struct FirebaseManager {
         })
     }
     
+    static func fetchAllTeamsOnce(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
+        dataRef.child("teams").observeSingleEvent(of: .value, with: { (snapshot) in
+            var teams = [Team]()
+            let teamDict = snapshot.value as? [String: Any]
+            if let teamDict = teamDict {
+                for team in teamDict {
+                    let teamValues = team.value as? [String: Any] ?? [:]
+                    let team = Team(id: team.key, dict: teamValues)
+                    teams.append(team)
+                }
+            }
+            completion(teams)
+        })
+    }
+    
     static func fetchAllChallenges(completion: @escaping ([Challenge]) -> Void) { //fetches all challenges and returns them in an array through a completion
         dataRef.child("challenges").observe(.value, with: { (snapshot) in
             var challenges = [Challenge]()

@@ -21,18 +21,42 @@ class FitnessButton: UIButton {
     }
 
     func commonInit() {
-        self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: 17.0)
-        self.setTitleColor(UIColor.backgroundBlack, for: .normal)
-        self.backgroundColor = UIColor.foregroundOrange
+        self.titleLabel?.font = UIFont(name: "Fresca-Regular", size: 17.0)
+        self.setTitleColor(UIColor.whitewash, for: .normal)
+        self.backgroundColor = UIColor.lagoon
         self.layer.cornerRadius = 5
     }
     
     func reverseColors() {
-        self.setTitleColor(UIColor.foregroundOrange, for: .normal)
+        self.setTitleColor(UIColor.lagoon, for: .normal)
         self.backgroundColor = UIColor.clear
     }
     
     func changeFontSize(to newFontSize: CGFloat) {
-        self.titleLabel?.font = UIFont(name: "Gurmukhi MN", size: newFontSize)
+        self.titleLabel?.font = UIFont(name: "Fresca-Regular", size: newFontSize)
     }
+
+  func set(text: String) {
+    let attributes: NSDictionary = [
+      NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+      NSKernAttributeName:CGFloat(3.0),
+      NSForegroundColorAttributeName:UIColor.whitewash,
+    ]
+    let attributedTitle = NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
+
+    self.setAttributedTitle(attributedTitle, for: .normal)
+  }
+
+  func setReversed(text: String) {
+    let attributes: NSDictionary = [
+      NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 13)!,
+      NSKernAttributeName:CGFloat(3.0),
+      NSForegroundColorAttributeName:UIColor.lagoon,
+      NSBackgroundColorAttributeName:UIColor.clear
+
+    ]
+    let attributedTitle = NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
+
+    self.setAttributedTitle(attributedTitle, for: .normal)
+  }
 }

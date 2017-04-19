@@ -19,6 +19,7 @@
 		AABBFB211E9FB7F80001BF7E /* TrophyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBFB201E9FB7F80001BF7E /* TrophyView.swift */; };
 		AABBFB231E9FBFBB0001BF7E /* CountLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBFB221E9FBFBB0001BF7E /* CountLabel.swift */; };
 		AABD08701E9EF43D002AF842 /* LoginNavVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */; };
+		AAE3531C1EA78ADF00362C4D /* FitnessField.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3531B1EA78ADF00362C4D /* FitnessField.swift */; };
 		AAED5D671E9D4BFD002C0F4A /* TrophyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */; };
 		AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D681E9D4D75002C0F4A /* TabBarController.swift */; };
 		AAED5D6B1E9D614A002C0F4A /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */; };
@@ -111,6 +112,7 @@
 		AABBFB201E9FB7F80001BF7E /* TrophyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyView.swift; sourceTree = "<group>"; };
 		AABBFB221E9FBFBB0001BF7E /* CountLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountLabel.swift; sourceTree = "<group>"; };
 		AABD086F1E9EF43D002AF842 /* LoginNavVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginNavVC.swift; sourceTree = "<group>"; };
+		AAE3531B1EA78ADF00362C4D /* FitnessField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessField.swift; sourceTree = "<group>"; };
 		AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrophyVC.swift; sourceTree = "<group>"; };
 		AAED5D681E9D4D75002C0F4A /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		AAED5D6A1E9D614A002C0F4A /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				AAFD130B1E9AD23D00154522 /* DashboardView.swift */,
 				AAFD13091E9ACF2700154522 /* CustomPieChart.swift */,
 				ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */,
+				AAE3531B1EA78ADF00362C4D /* FitnessField.swift */,
 				ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */,
 				ECE3F5AF1E940C70001230CC /* FitnessView.swift */,
 				EC9D94341E97CEAF00E33362 /* FitnessCell.swift */,
@@ -725,6 +728,7 @@
 				FE1C67B51E9FCC1B00FE0C54 /* ProfileUpdateVC.swift in Sources */,
 				EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */,
 				FE4446201EA52B7E0063C138 /* fontTestViewController.swift in Sources */,
+				AAE3531C1EA78ADF00362C4D /* FitnessField.swift in Sources */,
 				FE1F1D741E9816E100CB1E5F /* LogInView.swift in Sources */,
 				FEC839A41E93FA0F0014B6FA /* Challenge.swift in Sources */,
 				FEC839A61E93FA3D0014B6FA /* Team.swift in Sources */,

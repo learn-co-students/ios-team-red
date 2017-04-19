@@ -75,14 +75,9 @@ class ChallengeDetailVC: UIViewController {
     }
     
     func joinChallenge() {
-        guard let challengeID = self.challenge?.id, let challengeIsPublic = self.challenge?.isPublic, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
-        if challengeIsPublic {
-            FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .publicChallenges, childDataType: .users) {}
-            FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .publicChallenges) {}
-        } else {
-            FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) { }
-            FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
-        }
+        guard let challengeID = self.challenge?.id, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
+        FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) {}
+        FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
         joinButton.isHidden = true
     }
     

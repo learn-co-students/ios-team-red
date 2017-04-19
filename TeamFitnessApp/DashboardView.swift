@@ -21,8 +21,10 @@ class DashboardView: FitnessView {
   let healhKitManager = HealthKitManager.sharedInstance
   var user: User! {
     didSet {
-      pieOneLabel.text = user.goals[0].type.rawValue
-      pieTwoLabel.text = user.goals[1].type.rawValue
+//      pieOneLabel.set(text: user.goals[0].type.rawValue)
+//      pieTwoLabel.set(text: user.goals[1].type.rawValue)
+      pieOneLabel.set(text: "exercise time")
+      pieTwoLabel.set(text: "calories burned")
       goalOne = user.goals[0].value
       goalTwo = user.goals[1].value
       grabHealtKit()
@@ -34,8 +36,8 @@ class DashboardView: FitnessView {
   var pieOneLabel: FitnessLabel!
   var pieChartView2: CustomPieChartView!
   var pieTwoLabel: FitnessLabel!
-  var tableView: UITableView!
-  var challengeButton: FitnessButton!
+//  var tableView: UITableView!
+//  var challengeButton: FitnessButton!
   weak var delegate: DashboardVCProtocol?
 
 
@@ -51,9 +53,9 @@ class DashboardView: FitnessView {
     setConstraints()
   }
     
-  func pressChallengeButton(sender: UIButton) {
-        delegate?.pressChallengeButton()
-  }
+//  func pressChallengeButton(sender: UIButton) {
+//        delegate?.pressChallengeButton()
+//  }
 
 
 
@@ -66,11 +68,11 @@ class DashboardView: FitnessView {
     pieOneLabel = FitnessLabel(frame: CGRect.zero)
     pieOneLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieOneLabel)
-    
-    challengeButton = FitnessButton(frame: CGRect.zero)
-    challengeButton.translatesAutoresizingMaskIntoConstraints = false
-    self .addSubview(challengeButton)
-    
+//    
+//    challengeButton = FitnessButton(frame: CGRect.zero)
+//    challengeButton.translatesAutoresizingMaskIntoConstraints = false
+//    self .addSubview(challengeButton)
+
     
     pieChartView2 = CustomPieChartView(frame: CGRect.zero)
     pieChartView2.backgroundColor = UIColor.clear
@@ -81,11 +83,11 @@ class DashboardView: FitnessView {
     pieTwoLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieTwoLabel)
 
-    tableView = UITableView()
-    tableView.backgroundColor = UIColor.clear
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-    tableView.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(tableView)
+//    tableView = UITableView()
+//    tableView.backgroundColor = UIColor.clear
+//    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+//    tableView.translatesAutoresizingMaskIntoConstraints = false
+//    self.addSubview(tableView)
   }
 
   func setConstraints() {
@@ -94,14 +96,14 @@ class DashboardView: FitnessView {
     pieOneLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     pieOneLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
-    challengeButton.topAnchor.constraint(equalTo: pieOneLabel.topAnchor, constant: 0).isActive = true
-    challengeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
-    challengeButton.leadingAnchor.constraint(equalTo: pieOneLabel.trailingAnchor, constant: 10).isActive = true
-    challengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2)
-    challengeButton.setTitle("New Challenge", for: .normal)
-    challengeButton.isEnabled = true
-    challengeButton.addTarget(self, action: #selector(pressChallengeButton), for: .touchUpInside)
-    
+//    challengeButton.topAnchor.constraint(equalTo: pieOneLabel.topAnchor, constant: 0).isActive = true
+//    challengeButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 20).isActive = true
+//    challengeButton.leadingAnchor.constraint(equalTo: pieOneLabel.trailingAnchor, constant: 10).isActive = true
+//    challengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2)
+//    challengeButton.setTitle("New Challenge", for: .normal)
+//    challengeButton.isEnabled = true
+//    challengeButton.addTarget(self, action: #selector(pressChallengeButton), for: .touchUpInside)
+
     pieChartView1.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: 5).isActive = true
     pieChartView1.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView1.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
@@ -118,10 +120,10 @@ class DashboardView: FitnessView {
     pieChartView2.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
     pieChartView2.heightAnchor.constraint(equalToConstant: 175).isActive = true
 
-    tableView.topAnchor.constraint(equalTo: pieChartView2.bottomAnchor, constant: 10).isActive = true
-    tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    tableView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    tableView.heightAnchor.constraint(equalToConstant: 400).isActive = true
+//    tableView.topAnchor.constraint(equalTo: pieChartView2.bottomAnchor, constant: 10).isActive = true
+//    tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//    tableView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+//    tableView.heightAnchor.constraint(equalToConstant: 400).isActive = true
 
 
   }

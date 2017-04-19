@@ -12,7 +12,7 @@ class FitnessView: UIView {
 
     var images = [UIImage]()
     var titleLabel = FitnessLabel()
-    let sportImageView = UIImageView()
+//    let sportImageView = UIImageView()
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -25,22 +25,22 @@ class FitnessView: UIView {
     }
     
     func commonInit() {
-        self.backgroundColor = UIColor.backgroundBlack
+        self.backgroundColor = UIColor.whitewash
         //sportImageView.contentMode = .scaleAspectFit
         setupImage()
         
     }
     
     func setupImage() {
-        self.addSubview(sportImageView)
-        sportImageView.translatesAutoresizingMaskIntoConstraints = false
-        sportImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        sportImageView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-        sportImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        sportImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        images = [#imageLiteral(resourceName: "runner1"), #imageLiteral(resourceName: "runner2"), #imageLiteral(resourceName: "soccer")]
-        let randomNum = Int(arc4random_uniform(2))
-        let image = images[randomNum]
-        sportImageView.image = image
+//        self.addSubview(sportImageView)
+//        sportImageView.translatesAutoresizingMaskIntoConstraints = false
+//        sportImageView.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+//        sportImageView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
+//        sportImageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+//        sportImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+//        images = [#imageLiteral(resourceName: "runner1"), #imageLiteral(resourceName: "runner2"), #imageLiteral(resourceName: "soccer")]
+//        let randomNum = Int(arc4random_uniform(2))
+//        let image = images[randomNum]
+//        sportImageView.image = image
     }
 }

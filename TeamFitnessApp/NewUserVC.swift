@@ -12,10 +12,8 @@ import Firebase
 class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
     
     var createNewUserView = NewUserView()
-   
-    var userEmail: String!
-    var userPassword: String!
-    var confirmPassword: String!
+
+
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     var thirdPartyLogin: Bool {
         print("USER ALREADY LOGGED IN \(FIRAuth.auth()?.currentUser?.uid)")
@@ -40,20 +38,21 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.passwordTextField.tag = 1
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
+        createNewUserView.confirmTextField.returnKeyType = .go
         
         print("CREATE NEW USER CHECK FOR AUTHORIZATION ALREADY EXISTING")
         if thirdPartyLogin {//if someone has logged in via facebook or google or already created an email Firebase auth
             print("SOMEONE HAS LOGGED IN WITH A PREVIOUS EMAIL OR GOOGLE/FACEBOOK")
             createNewUserView.passwordTextField.isHidden = true //remove password text fields
             createNewUserView.confirmTextField.isHidden = true
-            if FIRAuth.auth()?.currentUser?.email != "" { //check if facebook or google provided a valid email
+            if FIRAuth.auth()?.currentUser?.email != nil { //check if facebook or google provided a valid email
                 print("VALID EMAIL, SHOULD PUSH TO PROFILE VIEW CONTROLLER")
                 createNewUserView.emailTextField.text = FIRAuth.auth()?.currentUser?.email//if so, fill out email field and remove user interaction
                 createNewUserView.emailTextField.isUserInteractionEnabled = false
                 createNewUserView.emailTextField.alpha = 0.5
                 let vc: ProfileViewController = ProfileViewController() //then push to the next VC
-                vc.userEmail = userEmail
-                vc.userPassword = userPassword
+                vc.userEmail = createNewUserView.emailTextField.text
+                vc.userPassword = ""
                 vc.uid = uid
                 print("PUSH TO PROFILE VIEW CONTROLLER********************************")
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -63,8 +62,19 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     }
     
     func pressCancelCreate() {
-        let vc = LogInViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.navigationController?.popViewController(animated: true)
+        if FIRAuth.auth()?.currentUser != nil {
+            FirebaseManager.logoutUser(completion: { (response) in
+                switch response {
+                case .successfulLogout(let logString):
+                    print(logString)
+                case .failure(let failString):
+                    print(failString)
+                default:
+                    print("invalid FirebaseManager response")
+                }
+            })
+        }
     }
     
     func checkPassword(userPassword: String, confirmPassword: String) -> Bool {
@@ -81,10 +91,19 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         
         if let nextField = createNewUserView.emailTextField.superview?.viewWithTag(createNewUserView.emailTextField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
-            
         } else {
             createNewUserView.resignFirstResponder()
         }
+
+      if textField == createNewUserView.passwordTextField {
+        if let nextField = createNewUserView.passwordTextField.superview?.viewWithTag(createNewUserView.passwordTextField.tag + 1) as? UITextField {
+          nextField.becomeFirstResponder()
+        }
+      }
+
+      if textField == createNewUserView.confirmTextField {
+        pressProfileButton()
+      }
 
         return false
     }
@@ -117,21 +136,16 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         if thirdPartyLogin {
 
             let vc: ProfileViewController = ProfileViewController()
-            vc.userEmail = self.userEmail
+            vc.userEmail = userEmail
             vc.uid = self.uid ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         } else if checkPassword(userPassword: userPassword, confirmPassword: confirmPassword) {
-            guard let userEmail = createNewUserView.emailTextField.text, let userPassword = createNewUserView.passwordTextField.text, let _ = createNewUserView.confirmTextField.text else {return}
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {
                 case let .successfulNewUser(uid):
                 
                     let vc: ProfileViewController = ProfileViewController()
                     vc.userEmail = userEmail
-
-//                    vc.userPassword = userPassword
-
-                    vc.userPassword = userPassword
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)
                    

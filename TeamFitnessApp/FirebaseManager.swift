@@ -204,20 +204,20 @@ struct FirebaseManager {
         })
     }
     
-    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
-        var challenges = [Challenge]()
-        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
-            let challengesDict = snapshot.value as? [String: Any]
-            if let challengesDict = challengesDict {
-                for challenge in challengesDict {
-                    let challengeValues = challenge.value as? [String: Any] ?? [:]
-                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
-                    challenges.append(challenge)
-                }
-            }
-            completion(challenges)
-        })
-    }
+//    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
+//        var challenges = [Challenge]()
+//        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
+//            let challengesDict = snapshot.value as? [String: Any]
+//            if let challengesDict = challengesDict {
+//                for challenge in challengesDict {
+//                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+//                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+//                    challenges.append(challenge)
+//                }
+//            }
+//            completion(challenges)
+//        })
+//    }
     
     static func fetchChallengeProgress(forChallengeID challengeID: String, andForUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
         let ref: FIRDatabaseReference
@@ -253,15 +253,8 @@ struct FirebaseManager {
         completion(teamID)
     }
     
-    static func addNew(challenge: Challenge, isPublic: Bool, completion: (String) -> Void) {
-        let challengeRef: FIRDatabaseReference
-        
-        if isPublic {
-            print("set post reference to public challenges")
-            challengeRef = dataRef.child("publicChallenges").childByAutoId()
-        } else {
-            challengeRef = dataRef.child("challenges").childByAutoId()
-        }
+    static func addNew(challenge: Challenge, completion: (String) -> Void) {
+        let challengeRef: FIRDatabaseReference = dataRef.child("challenges").childByAutoId()
         
         let challengeID = challengeRef.key
         

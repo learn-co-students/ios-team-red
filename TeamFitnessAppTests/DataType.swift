@@ -10,6 +10,6 @@ import Foundation
 
 enum DataType: String {
     
-    case challenges, publicChallenges, users, teams, team
+    case challenges, users, teams, team
     
 }

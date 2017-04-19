@@ -14,6 +14,8 @@ class ChallengesView: FitnessView {
   var myChallengesLabel: FitnessLabel!
   var publicChallengesLabel: FitnessLabel!
   var createChallengeButton: FitnessButton!
+  var findPublicLabel: FitnessLabel!
+  
 
   var challengeSearchBar: UISearchBar!
 

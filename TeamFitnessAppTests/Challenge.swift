@@ -25,6 +25,7 @@ struct Challenge {
         self.name = dict["name"] as? String ?? "No Name"
         self.creator = dict["creator"] as? String ?? nil
         self.isPublic = dict["isPublic"] as? Bool ?? false
+        print("CHallenge found with public value: \(self.isPublic)")
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
         

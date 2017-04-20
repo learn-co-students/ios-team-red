@@ -11,8 +11,8 @@ import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, TeamsViewDelegate {
     
-    let teamsView = TeamsView()
-    
+    var teamsView: TeamsView!
+
     let uid = FIRAuth.auth()?.currentUser?.uid
     var user: User? = nil
     
@@ -23,7 +23,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        teamsView = TeamsView()
         self.view = teamsView
         
         teamsView.delegate = self
@@ -96,7 +97,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
-                
                 cell.setLabels(forTeam: publicTeams[indexPath.row])
             }
         }
@@ -128,9 +128,6 @@ extension TeamsVC {
     
     // MARK: - calls to Firebase
     func fetchData(completion: @escaping () -> Void) {
-        self.myTeams.removeAll()
-        self.publicTeams.removeAll()
-        self.filteredTeams.removeAll()
         guard let uid = uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
             self.user = user

@@ -370,12 +370,12 @@
 				AA2F64C21EA7EB230032545E /* TeamDetailView.swift */,
 				FE9586441E9C0D0A009C3BFE /* GoalsView.swift */,
 				AABBFB201E9FB7F80001BF7E /* TrophyView.swift */,
-				AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */,
 				FE1C67B61E9FCC4D00FE0C54 /* ProfileUpdateView.swift */,
 				EC4F0A501E9EEF73006A74E9 /* FitnessTextField.swift */,
 				EC4F0A521E9EF401006A74E9 /* PublicButton.swift */,
 				EC4BD1CC1EA068B70076B4D0 /* SubmitButton.swift */,
 				ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */,
+				AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */,
 				FE6086171EA7DEAF006AE52B /* TeamsView.swift */,
 			);
 			name = Views;

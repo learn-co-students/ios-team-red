@@ -40,6 +40,7 @@ class CustomHorizontalBarChart: HorizontalBarChartView {
     yAxis.axisLineColor = UIColor.raspberry
     yAxis.labelTextColor = UIColor.raspberry
     yAxis.gridColor = UIColor.raspberry
+    yAxis.axisMinimum = 0
 
 
 

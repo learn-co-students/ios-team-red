@@ -48,6 +48,7 @@ class ChallengeDetailVC: UIViewController {
         FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) {}
         FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
         challengeDetailView?.joinButton.isHidden = true
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setChallenge(challenge: Challenge) {

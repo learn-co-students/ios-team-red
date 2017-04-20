@@ -184,6 +184,19 @@ struct FirebaseManager {
         })
     }
 
+    static func fetchOldChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
+        dataRef.child("oldChallenges").child(challengeID).observe(.value, with: {(snapshot) in
+            if let challengeDict = snapshot.value as? [String: Any] {
+                let challenge = Challenge(id: challengeID, dict: challengeDict)
+                completion(challenge)
+            } else {
+                print("not in completion")
+            }
+        })
+    }
+
+
+
     
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         dataRef.child("teams").observe(.value, with: { (snapshot) in

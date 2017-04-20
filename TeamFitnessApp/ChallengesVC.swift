@@ -116,7 +116,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
   func segueCreateChallenge() {
     let createChallengeVC = CreateChallengeVC()
     let navVC = NavigationController(rootViewController: createChallengeVC)
-    createChallengeVC.challengeIsPublic = false
+    createChallengeVC.challengeIsPublic = true
     createChallengeVC.modalPresentationStyle = .fullScreen
     self.present(navVC, animated: true, completion: nil)
   }

@@ -9,15 +9,10 @@
 import UIKit
 import Firebase
 
-class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     
     var challengeIsPublic: Bool = false
-    var searchActive: Bool = false
-    var team: Team? = nil {
-        didSet {
-            createChallengeView?.teamIndicator.text = team?.name
-        }
-    }
+    var team: Team? = nil
     var challenge: Challenge? = nil
     var user: User? = nil
     
@@ -44,62 +39,40 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     override func viewDidLoad() {
+
+
+        self.navigationController?.navigationBar.barTintColor = UIColor.lagoon
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel(_:)))
+
         super.viewDidLoad()
         createChallengeView = CreateChallengeView(frame: view.frame)
         self.view = createChallengeView
         setupViews()
-        getData()
+
         
     }
 //MARK = setup view constraints
     func setupViews() {
         self.hideKeyboardWhenTappedAround()
-        
-        createChallengeView?.previousButton.addTarget(self, action: #selector(previousButtonPressed), for: .touchUpInside)
-        createChallengeView?.publicButton.addTarget(self, action: #selector(publicButtonPressed), for: .touchUpInside)
-        createChallengeView?.teamSearchBar.delegate = self
-        createChallengeView?.teamsTableView.delegate = self
-        createChallengeView?.teamsTableView.dataSource = self
-        createChallengeView?.teamsTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         createChallengeView?.nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
         
     }
 
 // MARK: - button functions
-    func publicButtonPressed() { //switch the 'public button' to on or off. If public button is on, turn off the search bar, and vice versa
-        if challengeIsPublic {
-            createChallengeView?.publicButton.reverseColors()
-            createChallengeView?.teamSearchBar.isUserInteractionEnabled = true
-            createChallengeView?.teamSearchBar.alpha = 1.0
-            createChallengeView?.teamIndicator.text = "Find team to add new challenge:"
-            self.challengeIsPublic = false
-        } else {
-            createChallengeView?.publicButton.backgroundColor = UIColor.foregroundOrange
-            createChallengeView?.publicButton.setTitleColor(UIColor.backgroundBlack, for: .normal)
-            createChallengeView?.teamSearchBar.isUserInteractionEnabled = false
-            createChallengeView?.teamSearchBar.alpha = 0.5
-            createChallengeView?.teamIndicator.text = "Public Challenge"
-            self.challengeIsPublic = true
-        }
-    }
-    
+
     func nextButtonPressed() {
-        print("NEXT BUTTON PRESSED")
         if viewState == .first { //if the user is on the first screen of the CreateChallengeView, store the values in the text/search/picker fields, and move to the next screen
-            if !challengeIsPublic && team == nil {
-                print("Must select a team to add the challenge to, or set challenge to public")
-                //TODO: - if user has not entered all information needed to create challenge, indicate that to them
-                return
-            } else if createChallengeView?.challengeNameField.text == "" {
-                createChallengeView?.challengeNameField.flashRed()
-                return
-            }
+          if createChallengeView?.challengeNameField.text == "" {
+            createChallengeView?.challengeNameField.flashRed()
+          } else {
             storeFirstFields()
             moveToSecondFields()
-            
-        } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
-            print("save new challenge")
-            storeSecondFields()
+          }
+
+
+
+          } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
+              storeSecondFields()
             
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
@@ -119,7 +92,7 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                         })
                     }
                 })
-                navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
             } else {
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
             }
@@ -128,17 +101,17 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     
     private func storeFirstFields() {
         challengeName = createChallengeView?.challengeNameField.text
+        createChallengeView?.challengeNameField.isHidden = true
+        createChallengeView?.challengeTitleLabel.isHidden = true
         challengeGoal = createChallengeView?.goalPicker.goal
         challengeTeamID = team?.id
     }
     
     private func moveToSecondFields() {
-        createChallengeView?.publicButton.hide()
-        createChallengeView?.teamSearchBar.hide()
         createChallengeView?.goalPicker.hide()
         createChallengeView?.startDatePicker.show()
         createChallengeView?.endDatePicker.show()
-        createChallengeView?.nextButton.setTitle("Submit", for: .normal)
+        createChallengeView?.nextButton.set(text: "create")
         viewState = .second
     }
     
@@ -150,104 +123,8 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
     func previousButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
-//MARK: - Search bar delegate
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchActive = true;
-        print("Did begin editing")
-        createChallengeView?.goalPicker.isHidden = true
-        createChallengeView?.teamsTableView.isHidden = false
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
-        createChallengeView?.goalPicker.isHidden = false
-        print("Did end editing")
-        createChallengeView?.teamsTableView.isHidden = true
-        filteredTeams = myTeams
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        print("Clicked cacel button")
-        createChallengeView?.goalPicker.isHidden = false
-        createChallengeView?.teamsTableView.isHidden = true
-        filteredTeams = myTeams
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false;
-        print("Search button clicked")
-        createChallengeView?.goalPicker.isHidden = false
-        createChallengeView?.teamsTableView.isHidden = true
-        filteredTeams = myTeams
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("text did change")
-        
-        filteredTeams = myTeams.filter({ (team) -> Bool in
-            let temp: String = team.name
-            let range = temp.range(of: searchText, options: .caseInsensitive)
-            return range != nil
-        })
-        
-        if(filteredTeams.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
-        }
-        createChallengeView?.teamsTableView.reloadData()
-    }
-//MARK: - Table view data source and delegate
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchActive {
-            return filteredTeams.count
-        } else {
-            return myTeams.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
-        
-        if searchActive {
-            cell.setLabels(forTeam: filteredTeams[indexPath.row])
-        } else {
-            cell.setLabels(forTeam: myTeams[indexPath.row])
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if searchActive {
-            let selectedTeam = filteredTeams[indexPath.row]
-            createChallengeView?.teamIndicator.text = selectedTeam.name
-            self.team = selectedTeam
-        } else {
-            let selectedTeam = myTeams[indexPath.row]
-            self.team = selectedTeam
-        }
-        tableView.isHidden = true
-        createChallengeView?.goalPicker.isHidden = false
-    }
-    
+
 //MARK: - Firebase calls
-    func getData() {
-        getUser { (user) in
-            self.getTeams(forUser: user, completion: {
-                self.filteredTeams = self.myTeams
-                DispatchQueue.main.async {
-                    self.createChallengeView?.teamsTableView.reloadData()
-                }
-            })
-        }
-    }
     
     func getUser(completion: @escaping (User) -> Void) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
@@ -269,6 +146,10 @@ class CreateChallengeVC: UIViewController, UITableViewDelegate, UITableViewDataS
                 }
             })
         }
+    }
+
+    func onCancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

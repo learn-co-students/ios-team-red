@@ -26,10 +26,10 @@ class CountLabel: UILabel {
     self.backgroundColor = UIColor.white
     self.layer.cornerRadius = 8
     self.layer.borderWidth = 2
-    self.layer.borderColor = UIColor.black.cgColor
+    self.layer.borderColor = UIColor.raspberry.cgColor
     self.layer.masksToBounds = true
     self.textAlignment = .center
-    self.font = UIFont(name: "Gurmukhi MN", size: 17.0)
+    self.font = UIFont(name: "Fresca-Regular", size: 15.0)
   }
 
 

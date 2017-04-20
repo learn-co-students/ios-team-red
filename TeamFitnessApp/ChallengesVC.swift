@@ -115,7 +115,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
   func segueCreateChallenge() {
     let createChallengeVC = CreateChallengeVC()
-    self.navigationController?.pushViewController(createChallengeVC, animated: true)
+    let navVC = NavigationController(rootViewController: createChallengeVC)
+    createChallengeVC.challengeIsPublic = false
+    createChallengeVC.modalPresentationStyle = .fullScreen
+    self.present(navVC, animated: true, completion: nil)
   }
 
 //MARK: Firebase calls

@@ -22,10 +22,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
-      titleLabel.set(text: "challenges Baby")
-      titleLabel.textColor = UIColor.whitewash
-      navigationItem.titleView = titleLabel
+        self.navigationItem.setTitle(text: "group challenges")
+
+        let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
+        navigationItem.setRightBarButton(profileButton, animated: false)
 
 
         challengeView = ChallengesView(frame: view.frame)
@@ -95,19 +95,19 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == challengeView.myChallengesView {
             let challengeDetailVC = ChallengeDetailVC()
             challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
-            present(challengeDetailVC, animated: true, completion: nil)
-            //navigationController?.pushViewController(challengeDetailVC, animated: true)
+//            present(challengeDetailVC, animated: true, completion: nil)
+            navigationController?.pushViewController(challengeDetailVC, animated: true)
         } else if tableView == challengeView.publicChallengesView {
             if searchActive {
                 let challengeDetailVC = ChallengeDetailVC()
                 challengeDetailVC.setChallenge(challenge: filteredChallenges[indexPath.row])
-                present(challengeDetailVC, animated: true, completion: nil)
-                //navigationController?.pushViewController(challengeDetailVC, animated: true)
+//                present(challengeDetailVC, animated: true, completion: nil)
+                navigationController?.pushViewController(challengeDetailVC, animated: true)
             } else {
                 let challengeDetailVC = ChallengeDetailVC()
                 challengeDetailVC.setChallenge(challenge: publicChallenges[indexPath.row])
-                present(challengeDetailVC, animated: true, completion: nil)
-                //navigationController?.pushViewController(challengeDetailVC, animated: true)
+//                present(challengeDetailVC, animated: true, completion: nil)
+                navigationController?.pushViewController(challengeDetailVC, animated: true)
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -115,7 +115,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
   func segueCreateChallenge() {
     let createChallengeVC = CreateChallengeVC()
-    self.navigationController?.pushViewController(createChallengeVC, animated: true)
+    let navVC = NavigationController(rootViewController: createChallengeVC)
+    createChallengeVC.challengeIsPublic = true
+    createChallengeVC.modalPresentationStyle = .fullScreen
+    self.present(navVC, animated: true, completion: nil)
   }
 
 //MARK: Firebase calls
@@ -184,5 +187,10 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
 
     challengeView.publicChallengesView.reloadData()
   }
+
+    func onProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileUpdateVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

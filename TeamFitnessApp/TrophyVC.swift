@@ -21,10 +21,11 @@ class TrophyVC: UIViewController {
 
       trophyView = TrophyView(frame: self.view.bounds)
       self.view = trophyView
-      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
-      titleLabel.set(text: "Fitness Baby")
-      titleLabel.textColor = UIColor.whitewash
-      navigationItem.titleView = titleLabel
+
+    self.navigationItem.setTitle(text: "trophies")
+
+        let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
+        navigationItem.setRightBarButton(profileButton, animated: false)
 
       trophyView.tableView.delegate = self
       trophyView.tableView.dataSource = self
@@ -75,6 +76,11 @@ extension TrophyVC: UITableViewDelegate, UITableViewDataSource {
     challengeDetailVC.setChallenge(challenge: oldChallenges[indexPath.row])
     navigationController?.pushViewController(challengeDetailVC, animated: true)
   }
+
+    func onProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileUpdateVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
   
   
   

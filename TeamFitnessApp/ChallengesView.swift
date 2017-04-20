@@ -71,7 +71,11 @@ class ChallengesView: FitnessView {
     challengeSearchBar = UISearchBar()
     self.addSubview(challengeSearchBar)
     challengeSearchBar.translatesAutoresizingMaskIntoConstraints = false
-    challengeSearchBar.placeholder = "Find Challenge by Name"
+
+
+    challengeSearchBar.placeholder = "find challenge by name"
+    challengeSearchBar.setPlaceholderAttributes()
+    challengeSearchBar.setTextAttributes()
     challengeSearchBar.searchBarStyle = .minimal
 
     publicChallengesView = UITableView()
@@ -105,8 +109,8 @@ class ChallengesView: FitnessView {
 
     challengeSearchBar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     challengeSearchBar.topAnchor.constraint(equalTo: findPublicLabel.bottomAnchor, constant: 3).isActive = true
-    challengeSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-    challengeSearchBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
+    challengeSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10).isActive = true
+    challengeSearchBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
 
     publicChallengesView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     publicChallengesView.topAnchor.constraint(equalTo: challengeSearchBar.bottomAnchor, constant: 25).isActive = true

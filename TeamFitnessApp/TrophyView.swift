@@ -59,12 +59,15 @@ class TrophyView: FitnessView {
 
     participationLabel = FitnessLabel(frame: CGRect.zero)
     participationLabel.set(text: "Challenege Participation Count")
+    participationLabel.changeFontSize(to: 20)
 
     completionLabel = FitnessLabel(frame: CGRect.zero)
     completionLabel.set(text: "Successful Completion Count")
+    completionLabel.changeFontSize(to: 20)
 
     trophyLabel = FitnessLabel(frame: CGRect.zero)
     trophyLabel.set(text: "Tropies")
+    trophyLabel.changeFontSize(to: 20)
 
 
     participationCountLabel = CountLabel()
@@ -79,10 +82,11 @@ class TrophyView: FitnessView {
 
     archeiveLabel = FitnessLabel(frame: CGRect.zero)
     archeiveLabel.set(text: "Challenge Archieve")
+    archeiveLabel.changeFontSize(to: 20)
 
     tableView = UITableView()
     tableView.backgroundColor = UIColor.clear
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    tableView.register(FitnessCell.self, forCellReuseIdentifier: "cell")
 
     let views: [UIView] = [participationLabel, participationCountLabel, completionLabel, completionCountLabel, trophyLabel, firstPlaceImageView, firstPlaceLabel, secondPlaceImageView, secondPlaceLabel, thirdPlaceImageView, thirdPlaceLabel, archeiveLabel, tableView]
 
@@ -96,24 +100,24 @@ class TrophyView: FitnessView {
   func setConstraints() {
     participationLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
     participationLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    participationLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+    participationLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10).isActive = true
 
     participationCountLabel.topAnchor.constraint(equalTo: participationLabel.bottomAnchor, constant: 5).isActive = true
     participationCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
     participationCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
     participationCountLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-    completionLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 10).isActive = true
-    completionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    completionLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//    completionLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 10).isActive = true
+//    completionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//    completionLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//
+//
+//    completionCountLabel.topAnchor.constraint(equalTo: completionLabel.bottomAnchor, constant: 5).isActive = true
+//    completionCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+//    completionCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
+//    completionCountLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-
-    completionCountLabel.topAnchor.constraint(equalTo: completionLabel.bottomAnchor, constant: 5).isActive = true
-    completionCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    completionCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    completionCountLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
-    trophyLabel.topAnchor.constraint(equalTo: completionCountLabel.bottomAnchor, constant: 20).isActive = true
+    trophyLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 20).isActive = true
     trophyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     trophyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
@@ -149,7 +153,7 @@ class TrophyView: FitnessView {
 
     archeiveLabel.topAnchor.constraint(equalTo: thirdPlaceImageView.bottomAnchor, constant: 20).isActive = true
     archeiveLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    archeiveLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    archeiveLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10).isActive = true
 
     tableView.topAnchor.constraint(equalTo: archeiveLabel.bottomAnchor, constant: 10).isActive = true
     tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

@@ -22,7 +22,10 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.delegate = self
+        
+        self.navigationItem.setTitle(text: "create team")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel(_:)))
+
 
         if let userID = userID {
             FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
@@ -33,15 +36,14 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         setupLabels()
         setUpTextFields()
         setupButtons()
-      self.hideKeyboardWhenTappedAround()
-
+        self.hideKeyboardWhenTappedAround()
     }
 
     func setupLabels() {
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view, andViewController: self)
-        titleLabel.setText(toString: "New Team")
-        titleLabel.text = "New Team"
+        titleLabel.set(text: "new team")
+        titleLabel.changeFontSize(to: 23)
     }
     
     func setUpTextFields() {
@@ -62,7 +64,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         imageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         imageButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        imageButton.setTitle("+ Team Image", for: .normal)
+        imageButton.set(text: "+ team image")
         imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
         
         imageButton.addSubview(teamImage)
@@ -76,7 +78,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func createTeamButtonPressed() {
         createNewTeam {
             DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.popViewController(animated: true)
+                self.navigationController?.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -136,6 +139,10 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+
+    func onCancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
 }

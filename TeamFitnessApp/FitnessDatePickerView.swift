@@ -26,7 +26,7 @@ class FitnessDatePickerView: UIView {
     
     func commonInit() {
         
-        self.backgroundColor = UIColor.foregroundOrange
+        self.backgroundColor = UIColor.raspberry
         self.layer.cornerRadius = 5
         self.addSubview(titleLabel)
         self.addSubview(datePicker)
@@ -43,7 +43,8 @@ class FitnessDatePickerView: UIView {
         datePicker.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         datePicker.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         datePicker.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        datePicker.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.75)
+        datePicker.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+//        datePicker.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.5).isActive = true
         datePicker.minimumDate = Date()
         datePicker.addTarget(self, action: #selector(changeDate(sender:)), for: .valueChanged)
     }
@@ -60,7 +61,7 @@ class FitnessDatePickerView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
         self.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 50).isActive = true
-        self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.25).isActive = true
-        self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.8).isActive = true
+        self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.20).isActive = true
+        self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.7).isActive = true
     }
 }

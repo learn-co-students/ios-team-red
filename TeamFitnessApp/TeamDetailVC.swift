@@ -182,14 +182,6 @@
         for uid in team.userUIDs {
             FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
                 self.teamUsers.append(user)
-                if self.teamUsers.isEmpty {
-                    guard let teamID = team.id else {return}
-                    FirebaseManager.delete(teamID: teamID, completion: {
-                        DispatchQueue.main.async {
-                            self.navigationController?.popViewController(animated: true)
-                        }
-                    })
-                }
                 completion()
             })
         }
@@ -231,6 +223,21 @@
             teamDetailView.leaveTeamButton.isHidden = true
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true
+            checkIfTeamIsEmpty()
+            
+        }
+    }
+    
+    private func checkIfTeamIsEmpty() {
+        guard let teamID = team?.id else {return}
+        FirebaseManager.hasUsers(inTeamID: teamID) { (teamHasUsers) in
+            if !teamHasUsers {
+                FirebaseManager.delete(teamID: teamID, completion: {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
+            }
         }
     }
     

@@ -390,5 +390,15 @@ struct FirebaseManager {
         dataRef.child("teams").child(teamID).removeValue()
         completion()
     }
+    
+    static func hasUsers(inTeamID teamID: String, completion: @escaping (Bool) -> Void){
+        dataRef.child("teams").child(teamID).child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: Any] {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
 
 }

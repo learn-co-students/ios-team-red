@@ -11,7 +11,7 @@ import Foundation
 
 
 enum GoalType: String {
-    case distance, stepCount, caloriesBurned, exerciseTime
+    case miles, stepCount, caloriesBurned, exerciseMinutes
 }
 
 
@@ -26,14 +26,14 @@ struct Goal {
     
     mutating func setType(from str: String) {
         switch str {
-            case "distance":
-            self.type = .distance
+            case "miles":
+            self.type = .miles
             case "stepCount":
             self.type = .stepCount
             case "caloriesBurned":
             self.type = .caloriesBurned
-            case "exerciseTime":
-            self.type = .exerciseTime
+            case "exerciseMinutes":
+            self.type = .exerciseMinutes
         default:
             print("Could not get goal type from String") //TODO: - come up with a better way to handle this error
         }

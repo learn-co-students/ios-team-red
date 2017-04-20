@@ -37,9 +37,9 @@ class CustomHorizontalBarChart: HorizontalBarChartView {
     self.doubleTapToZoomEnabled = false
 
     let yAxis = self.rightAxis
-    yAxis.axisLineColor = UIColor.foregroundOrange
-    yAxis.labelTextColor = UIColor.foregroundOrange
-    yAxis.gridColor = UIColor.foregroundOrange
+    yAxis.axisLineColor = UIColor.raspberry
+    yAxis.labelTextColor = UIColor.raspberry
+    yAxis.gridColor = UIColor.raspberry
 
 
 
@@ -48,11 +48,11 @@ class CustomHorizontalBarChart: HorizontalBarChartView {
     xAxis.enabled = true
     xAxis.drawAxisLineEnabled = true
     xAxis.drawGridLinesEnabled = false
-    xAxis.axisLineColor = UIColor.foregroundOrange
-    xAxis.labelTextColor = UIColor.foregroundOrange
+    xAxis.axisLineColor = UIColor.raspberry
+    xAxis.labelTextColor = UIColor.raspberry
     xAxis.labelPosition = .bottom
     xAxis.granularity = 1
-    xAxis.labelFont = UIFont(name: "Avenir-Medium", size: 12.0)!
+    xAxis.labelFont = UIFont(name: "Fresca-Regular", size: 15.0)!
 
     let leftAxis = self.leftAxis
     leftAxis.enabled = false
@@ -107,8 +107,8 @@ extension CustomHorizontalBarChart {
 
     let chartDataSet = BarChartDataSet(values: dataEntries, label: label)
     let chartData = BarChartData(dataSet: chartDataSet)
-    chartDataSet.colors = [UIColor.foregroundOrange]
-    chartDataSet.valueColors = [UIColor.foregroundOrange]
+    chartDataSet.colors = [UIColor.raspberry]
+    chartDataSet.valueColors = [UIColor.raspberry]
 
     let chartFormatter = BarChartFormatter(labels: xValues)
     let xAxis = XAxis()

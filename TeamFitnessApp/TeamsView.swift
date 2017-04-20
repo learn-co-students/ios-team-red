@@ -64,6 +64,8 @@ class TeamsView: FitnessView {
         self.addSubview(teamSearchBar)
         teamSearchBar.translatesAutoresizingMaskIntoConstraints = false
         teamSearchBar.placeholder = "Find Teams by Name"
+        teamSearchBar.setPlaceholderAttributes()
+        teamSearchBar.setTextAttributes()
         teamSearchBar.searchBarStyle = .minimal
         
         searchTableView = UITableView()
@@ -99,8 +101,8 @@ class TeamsView: FitnessView {
         findTeamsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
 
         teamSearchBar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        teamSearchBar.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        teamSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        teamSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10).isActive = true
+        teamSearchBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         teamSearchBar.topAnchor.constraint(equalTo: findTeamsLabel.bottomAnchor, constant: 3).isActive = true
         
         searchTableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

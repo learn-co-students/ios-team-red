@@ -52,3 +52,45 @@ class FitnessField: UITextField {
   }
 
 }
+
+
+extension UISearchBar {
+
+    private func getViewElement<T>(type: T.Type) -> T? {
+
+        let svs = subviews.flatMap { $0.subviews }
+        guard let element = (svs.filter { $0 is T }).first as? T else { return nil }
+        return element
+    }
+
+    func getSearchBarTextField() -> UITextField? {
+
+        return getViewElement(type: UITextField.self)
+    }
+
+    func setTextAttributes() {
+        let attributes: NSDictionary = [
+            NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 15)!,
+            NSKernAttributeName:CGFloat(3.0),
+            NSForegroundColorAttributeName:UIColor.black,
+            ]
+        if let textField = getSearchBarTextField() {
+            textField.defaultTextAttributes = attributes as! [String: Any]
+        }
+
+    }
+
+
+    func setPlaceholderAttributes() {
+        let attributes: NSDictionary = [
+            NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 15)!,
+            NSKernAttributeName:CGFloat(3.0),
+            NSForegroundColorAttributeName:UIColor.lightGray,
+            ]
+
+        if let textField = getSearchBarTextField() {
+            textField.attributedPlaceholder = NSAttributedString(string: self.placeholder != nil ? self.placeholder!.uppercased() : "", attributes:attributes as? [String : AnyObject])
+        }
+    }
+}
+

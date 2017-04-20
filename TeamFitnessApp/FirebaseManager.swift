@@ -400,5 +400,19 @@ struct FirebaseManager {
             }
         })
     }
+    
+//MARK: Flag for offense
+    
+    static func flag(team: Team, completion: () -> Void) {
+        guard let teamID = team.id else {return}
+        dataRef.child("teams").child(teamID).child("flagged").setValue(true)
+    }
+    
+    static func checkForFlag(onTeam team: Team, completion: (Bool) -> Void) {
+        guard let teamID = team.id else {return}
+        dataRef.child("teams").child(teamID).child("flagged").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+        })
+    }
 
 }

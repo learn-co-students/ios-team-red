@@ -58,10 +58,6 @@ class TeamDetailView: FitnessView {
         reportButton = ReportButton()
         self.addSubview(reportButton)
         reportButton.translatesAutoresizingMaskIntoConstraints = false
-        reportButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
-        reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
-        reportButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor).isActive = true
-        reportButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
 
         leaveTeamButton = FitnessButton()
         self.addSubview(leaveTeamButton)
@@ -128,6 +124,11 @@ class TeamDetailView: FitnessView {
         teamImageView.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
         teamImageView.widthAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
+        
+        reportButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
+        reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
+        reportButton.rightAnchor.constraint(equalTo: teamImageView.leftAnchor).isActive = true
+        reportButton.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         
         captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
         

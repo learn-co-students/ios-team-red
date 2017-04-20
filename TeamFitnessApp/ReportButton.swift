@@ -9,6 +9,10 @@
 import UIKit
 
 class ReportButton: FitnessButton {
+    
+    enum isMonitoring {
+        case team, user
+    }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

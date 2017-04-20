@@ -55,6 +55,8 @@
         teamDetailView.leaveTeamButton.isEnabled = true
         teamDetailView.leaveTeamButton.addTarget(self, action: #selector(leaveTeam), for: .touchUpInside)
         
+        teamDetailView.reportButton.addTarget(self, action: #selector(reportTeam), for: .touchUpInside)
+        
         
         
         if !userIsTeamMember {
@@ -225,6 +227,10 @@
             checkIfTeamIsEmpty()
             
         }
+    }
+    
+    func reportTeam() {
+        teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
     }
     
     private func checkIfTeamIsEmpty() {

@@ -230,6 +230,21 @@ struct FirebaseManager {
         })
     }
     
+    static func fetchAllChallengesOnce(completion: @escaping ([Challenge]) -> Void) { //fetches all challenges and returns them in an array through a completion
+        dataRef.child("challenges").observeSingleEvent(of: .value, with: { (snapshot) in
+            var challenges = [Challenge]()
+            let challengesDict = snapshot.value as? [String: Any]
+            if let challengesDict = challengesDict {
+                for challenge in challengesDict {
+                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+                    challenges.append(challenge)
+                }
+            }
+            completion(challenges)
+        })
+    }
+    
 //    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
 //        var challenges = [Challenge]()
 //        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in

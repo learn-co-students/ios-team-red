@@ -43,11 +43,15 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
 
         setupSearchBar()
-        getMyChallenges()
-        getPublicChallenges() {
-            DispatchQueue.main.async {
-                self.challengeView.publicChallengesView.reloadData()
-            }
+//        getMyChallenges()
+//        getPublicChallenges() {
+//            DispatchQueue.main.async {
+//                self.challengeView.publicChallengesView.reloadData()
+//            }
+//        }
+        getAllChallenges {
+            self.challengeView.publicChallengesView.reloadData()
+            self.challengeView.myChallengesView.reloadData()
         }
         
         self.hideKeyboardWhenTappedAround()
@@ -144,6 +148,28 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             self.filteredChallenges = self.publicChallenges
             completion()
         }
+    }
+    
+    func getAllChallenges(completion: @escaping () -> Void) {
+        guard let uid = self.uid else {return}
+        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+            FirebaseManager.fetchAllChallengesOnce { (challenges) in
+                self.publicChallenges.removeAll()
+                self.myChallenges.removeAll()
+                self.filteredChallenges.removeAll()
+                self.publicChallenges = challenges.filter{$0.isPublic}
+                self.filteredChallenges = self.publicChallenges
+                self.myChallenges = challenges.filter({ (challenge) -> Bool in
+                    if let challengeID = challenge.id {
+                        return user.challengeIDs.contains(challengeID)
+                    } else {
+                        return false
+                    }
+                })
+                completion()
+            }
+        }
+        
     }
 }
 

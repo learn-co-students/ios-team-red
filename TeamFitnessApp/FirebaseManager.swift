@@ -414,4 +414,16 @@ struct FirebaseManager {
         })
     }
 
+    //MARK: - reset password
+
+    static func resetPassword(forEmail email: String, completion: @escaping (Bool, Error?) -> ()) {
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email) { (error) in
+            if error == nil {
+                completion(true, nil)
+            } else {
+                completion(false, error)
+            }
+        }
+    }
+
 }

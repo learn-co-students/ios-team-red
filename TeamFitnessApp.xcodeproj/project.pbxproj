@@ -11,6 +11,7 @@
 		33533B74E3413B25BF5E93C5 /* Pods_TeamFitnessAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AFFD9E8D7960E6ED65315B8 /* Pods_TeamFitnessAppUITests.framework */; };
 		6AAC8699E3FC030B9FBE87D8 /* Pods_TeamFitnessAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11E4C3F86B33FDA8EC68C009 /* Pods_TeamFitnessAppTests.framework */; };
 		AA2F64C31EA7EB230032545E /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F64C21EA7EB230032545E /* TeamDetailView.swift */; };
+		AA599A9D1EA964D100C12AC3 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA599A9C1EA964D100C12AC3 /* ForgotPasswordVC.swift */; };
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
 		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
@@ -106,6 +107,7 @@
 		7B2D5318F33B4B43C01826E5 /* Pods-TeamFitnessAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppTests/Pods-TeamFitnessAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		88ADC239E33D8EFDE8ADF02D /* Pods-TeamFitnessAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamFitnessAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TeamFitnessAppUITests/Pods-TeamFitnessAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA2F64C21EA7EB230032545E /* TeamDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailView.swift; sourceTree = "<group>"; };
+		AA599A9C1EA964D100C12AC3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		AA89B0691E93E905007E55AC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
 		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 		ECE3F5A91E93E8AD001230CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AA599A9C1EA964D100C12AC3 /* ForgotPasswordVC.swift */,
 				EC6A3D301E92EDC800F5E717 /* AppDelegate.swift */,
 				AABA90981E9C0CD100EC6703 /* AppController.swift */,
 				AAED5D681E9D4D75002C0F4A /* TabBarController.swift */,
@@ -748,6 +751,7 @@
 				FEC839A81E93FA4E0014B6FA /* User.swift in Sources */,
 				EC5DBD841E9C0A9B00CECA34 /* CreateChallengeVC.swift in Sources */,
 				ECE3F5BC1E944583001230CC /* FirebaseResponse.swift in Sources */,
+				AA599A9D1EA964D100C12AC3 /* ForgotPasswordVC.swift in Sources */,
 				EC4BD1CB1EA050700076B4D0 /* UIViewExtensions.swift in Sources */,
 				AABBFB231E9FBFBB0001BF7E /* CountLabel.swift in Sources */,
 				ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */,

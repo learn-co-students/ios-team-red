@@ -11,8 +11,7 @@ import UIKit
 
 class TeamDetailView: FitnessView {
     
-    
-    var teamNameLabel: TitleLabel!
+
     var captainLabel: FitnessLabel!
     var membersLabel: FitnessLabel!
     var challengesLabel: FitnessLabel!
@@ -39,11 +38,7 @@ class TeamDetailView: FitnessView {
     }
     
     func comInit() {
-        
-        
-        teamNameLabel = TitleLabel()
-        teamNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(teamNameLabel)
+
         
         teamImageView = UIImageView()
         self.addSubview(teamImageView)
@@ -53,7 +48,7 @@ class TeamDetailView: FitnessView {
         leaveTeamButton = FitnessButton()
         self.addSubview(leaveTeamButton)
         leaveTeamButton.translatesAutoresizingMaskIntoConstraints = false
-        leaveTeamButton.setTitle("Leave team", for: .normal)
+        leaveTeamButton.set(text: "leave")
         
         captainLabel = FitnessLabel()
         self.addSubview(captainLabel)
@@ -64,17 +59,18 @@ class TeamDetailView: FitnessView {
         
         joinButton = FitnessButton()
         self.addSubview(joinButton)
-        joinButton.setTitle("Join Team", for: .normal)
+        joinButton.set(text: "join")
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         
         membersLabel = FitnessLabel()
         membersLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(membersLabel)
         membersLabel.textAlignment = .center
-        membersLabel.changeFontSize(to: 18)
         membersLabel.reverseColors()
-        membersLabel.text = "Members:"
-        
+        membersLabel.set(text: "team members")
+        membersLabel.changeFontSize(to: 20)
+
+
         membersView = UITableView()
         self.addSubview(membersView)
         membersView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,11 +79,12 @@ class TeamDetailView: FitnessView {
         challengesLabel = FitnessLabel()
         challengesLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(challengesLabel)
-        challengesLabel.changeFontSize(to: 18)
         challengesLabel.textAlignment = .center
         challengesLabel.reverseColors()
-        challengesLabel.text = "Challenges:"
-        
+        challengesLabel.set(text: "team challenges")
+        challengesLabel.changeFontSize(to: 20)
+
+
         challengesView = UITableView()
         challengesView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(challengesView)
@@ -98,29 +95,24 @@ class TeamDetailView: FitnessView {
         createChallengeButton.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(createChallengeButton)
         createChallengeButton.translatesAutoresizingMaskIntoConstraints = false
-        createChallengeButton.setTitle("+", for: .normal)
+        createChallengeButton.set(text: "create team challenge")
         
     }
     
     
     func setConstrains() {
         
-        teamNameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        teamNameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: 0).isActive = true
-        teamNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
-        teamNameLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
         teamImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        teamImageView.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
-        teamImageView.widthAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
+        teamImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
+        teamImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
         
         captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
         
         joinButton.leftAnchor.constraint(equalTo: captainLabel.rightAnchor).isActive = true
-        joinButton.topAnchor.constraint(equalTo: captainLabel.topAnchor).isActive = true
+        joinButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
-        joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
+        joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor, multiplier: 0.4).isActive = true
         
         leaveTeamButton.centerYAnchor.constraint(equalTo: joinButton.centerYAnchor).isActive = true
         leaveTeamButton.centerXAnchor.constraint(equalTo: joinButton.centerXAnchor).isActive = true
@@ -130,15 +122,16 @@ class TeamDetailView: FitnessView {
         membersLabel.constrainVertically(belowView: captainLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         
         membersView.constrainVertically(belowView: membersLabel, widthMultiplier: 0.8, heightMultiplier: 0.25)
-        
+
+        createChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        createChallengeButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        createChallengeButton.topAnchor.constraint(equalTo: challengesView.bottomAnchor, constant: 5).isActive = true
+        createChallengeButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+
         challengesLabel.constrainVertically(belowView: membersView, widthMultiplier: 0.8, heightMultiplier: 0.05)
         
-        challengesView.constrainVertically(belowView: challengesLabel, widthMultiplier: 0.8, heightMultiplier: 0.25)
-        
-        createChallengeButton.leftAnchor.constraint(equalTo: challengesLabel.rightAnchor).isActive = true
-        createChallengeButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        createChallengeButton.topAnchor.constraint(equalTo: challengesLabel.topAnchor).isActive = true
-        createChallengeButton.bottomAnchor.constraint(equalTo: challengesLabel.bottomAnchor).isActive = true
+        challengesView.constrainVertically(belowView: challengesLabel, widthMultiplier: 0.8, heightMultiplier: 0.15)
+
         
     }
 }

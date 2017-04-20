@@ -24,6 +24,7 @@ class FitnessField: UITextField {
 
 
   func commonInit() {
+    
 
     let attributes: NSDictionary = [
       NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
@@ -36,6 +37,9 @@ class FitnessField: UITextField {
     self.backgroundColor = UIColor.reallyLightGray
     self.layer.cornerRadius = 5
     self.textAlignment = NSTextAlignment.center
+    self.autocorrectionType = .no
+
+
 
   }
 

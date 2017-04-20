@@ -33,6 +33,9 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.setTitle(text: (self.team?.name)!)
+        
         
         teamDetailView = TeamDetailView(frame: view.frame)
         self.view = teamDetailView
@@ -48,8 +51,6 @@
         teamDetailView.joinButton.isHidden = true
         teamDetailView.joinButton.isEnabled = false
         teamDetailView.joinButton.addTarget(self, action: #selector(joinTeam), for: .touchUpInside)
-        
-        teamDetailView.teamNameLabel.text = self.team?.name
         
         teamDetailView.leaveTeamButton.isHidden = false
         teamDetailView.leaveTeamButton.isEnabled = true
@@ -95,7 +96,7 @@
         
         if let captain = team?.captainID { //get the captain and set their name to the captain label
             FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
-                self.teamDetailView.captainLabel.text = "Captain: \(captain.name)"
+                self.teamDetailView.captainLabel.set(text: "Captain: \(captain.name)")
             })
         }
         
@@ -151,14 +152,12 @@
         guard let teamID = self.team?.id else {return}
         FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
             self.team = team
-            print("team user IDS updated: \(team.userUIDs)")
             self.fetchChallenges(forTeam: team) {
                 DispatchQueue.main.async {
                     self.teamDetailView.challengesView.reloadData()
                 }
             }
             self.fetchUsers(forTeam: team) {
-                print("team user array : \(self.teamUsers)*****")
                     DispatchQueue.main.async {
                         self.teamDetailView.membersView.reloadData()
                 }
@@ -212,14 +211,13 @@
         let createChallengeVC = CreateChallengeVC()
         createChallengeVC.team = self.team
         createChallengeVC.challengeIsPublic = false
-        present(createChallengeVC, animated: true, completion: nil)
+        let navVC = NavigationController(rootViewController: createChallengeVC)
+        present(navVC, animated: true, completion: nil)
     }
     
     func leaveTeam() {
         guard let teamID = team?.id, let uid = self.uid else {return}
-        print("call to firebase to remove user: \(uid) from team: \(teamID)")
         FirebaseManager.remove(teamID: teamID, fromUID: uid) {
-            print("firebase call to leave team has returned")
             teamDetailView.leaveTeamButton.isHidden = true
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true

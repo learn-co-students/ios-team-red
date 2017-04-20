@@ -60,7 +60,7 @@ class FitnessDatePickerView: UIView {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerXAnchor.constraint(equalTo: superView.centerXAnchor).isActive = true
         self.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 50).isActive = true
-        self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.25).isActive = true
-        self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.8).isActive = true
+        self.heightAnchor.constraint(equalTo: superView.heightAnchor, multiplier: 0.20).isActive = true
+        self.widthAnchor.constraint(equalTo: superView.widthAnchor, multiplier: 0.7).isActive = true
     }
 }

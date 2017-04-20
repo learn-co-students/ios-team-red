@@ -58,6 +58,7 @@
 		EC9D94451E9AA6D100E33362 /* ChallengeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */; };
 		EC9D94471E9AA77800E33362 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94461E9AA77800E33362 /* TitleLabel.swift */; };
 		ECCE22F01EA7F79F006691D8 /* ChallengeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */; };
+		ECCE22F21EA80540006691D8 /* CreateChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECCE22F11EA80540006691D8 /* CreateChallengeView.swift */; };
 		ECE3F5A81E93E8A9001230CC /* FitnessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */; };
 		ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AF1E940C70001230CC /* FitnessView.swift */; };
 		ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5B91E94441A001230CC /* FirebaseManager.swift */; };
@@ -159,6 +160,7 @@
 		EC9D94441E9AA6D100E33362 /* ChallengeDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailVC.swift; sourceTree = "<group>"; };
 		EC9D94461E9AA77800E33362 /* TitleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeDetailView.swift; sourceTree = "<group>"; };
+		ECCE22F11EA80540006691D8 /* CreateChallengeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateChallengeView.swift; sourceTree = "<group>"; };
 		ECE3F5A71E93E8A9001230CC /* FitnessButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessButton.swift; sourceTree = "<group>"; };
 		ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessLabel.swift; sourceTree = "<group>"; };
 		ECE3F5AF1E940C70001230CC /* FitnessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessView.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				EC4BD1CC1EA068B70076B4D0 /* SubmitButton.swift */,
 				ECCE22EF1EA7F79F006691D8 /* ChallengeDetailView.swift */,
 				AAE3531F1EA7D70A00362C4D /* ChallengesView.swift */,
+				ECCE22F11EA80540006691D8 /* CreateChallengeView.swift */,
 				FE6086171EA7DEAF006AE52B /* TeamsView.swift */,
 			);
 			name = Views;
@@ -765,6 +768,7 @@
 				AAED5D691E9D4D75002C0F4A /* TabBarController.swift in Sources */,
 				AAFD130A1E9ACF2700154522 /* CustomPieChart.swift in Sources */,
 				ECE3F5B01E940C70001230CC /* FitnessView.swift in Sources */,
+				ECCE22F21EA80540006691D8 /* CreateChallengeView.swift in Sources */,
 				FE9586451E9C0D0A009C3BFE /* GoalsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

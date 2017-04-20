@@ -25,13 +25,13 @@ extension UIView {
         UIView.animateKeyframes(withDuration: 0.8, delay: 0, options: .calculationModeLinear, animations: {
             let holdColor = self.backgroundColor
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.2, animations: {
-                self.backgroundColor = UIColor.red
+                self.backgroundColor = UIColor.raspberry
             })
             UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 0.2, animations: {
                 self.backgroundColor = holdColor
             })
             UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.2, animations: {
-                self.backgroundColor = UIColor.red
+                self.backgroundColor = UIColor.raspberry
             })
             UIView.addKeyframe(withRelativeStartTime: 0.6, relativeDuration: 0.2, animations: {
                 self.backgroundColor = holdColor

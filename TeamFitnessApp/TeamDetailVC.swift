@@ -201,7 +201,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func segueCreateChallenge() {
         let createChallengeVC = CreateChallengeVC()
         createChallengeVC.team = self.team
-        createChallengeVC.challengeIsPublic = true
+        createChallengeVC.challengeIsPublic = false
         present(createChallengeVC, animated: true, completion: nil)
     }
 }

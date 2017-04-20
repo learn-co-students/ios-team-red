@@ -403,5 +403,11 @@ struct FirebaseManager {
         dataRef.child("teams").child(teamID).child("users").child(uid).removeValue()
         completion()
     }
+    
+    static func delete(teamID: String, completion: () -> Void) {
+        print("LOOKING TO DELETE TEAMID :\(teamID)")
+        dataRef.child("teams").child(teamID).removeValue()
+        completion()
+    }
 
 }

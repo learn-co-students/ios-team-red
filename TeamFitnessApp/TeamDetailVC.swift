@@ -53,7 +53,7 @@
         
         teamDetailView.leaveTeamButton.isHidden = false
         teamDetailView.leaveTeamButton.isEnabled = true
-        teamDetailView.leaveTeamButton.addTarget(self, action: #selector(leaveTeam), for: .touchUpInside)
+        teamDetailView.leaveTeamButton.addTarget(self, action: #selector(leaveTeamPressed), for: .touchUpInside)
         
         
         
@@ -151,6 +151,7 @@
         guard let teamID = self.team?.id else {return}
         FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
             self.team = team
+            print("team user IDS updated: \(team.userUIDs)")
             self.fetchChallenges(forTeam: team) {
                 DispatchQueue.main.async {
                     self.teamDetailView.challengesView.reloadData()
@@ -158,11 +159,7 @@
             }
             self.fetchUsers(forTeam: team) {
                 DispatchQueue.main.async {
-                    if self.teamUsers.count == 0 {
-                        //delete team from database and then return to previous view
-                    } else {
                         self.teamDetailView.membersView.reloadData()
-                    }
                 }
             }
             
@@ -180,6 +177,7 @@
     }
     
     private func fetchUsers(forTeam team: Team, completion: @escaping () -> Void) {
+        print("fetch users for team")
         self.teamUsers.removeAll()
         for uid in team.userUIDs {
             FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
@@ -217,7 +215,22 @@
         present(createChallengeVC, animated: true, completion: nil)
     }
     
-    func leaveTeam() {
+    func leaveTeamPressed() {
+        leaveTeam {
+            guard let team = self.team else {return}
+            self.fetchUsers(forTeam: team, completion: {
+                guard let teamUserCount = self.team?.userUIDs.count else {return}
+                if teamUserCount <= 0 {
+                    guard let teamID = team.id else {return}
+                    FirebaseManager.delete(teamID: teamID, completion: {
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+            })
+        }
+    }
+    
+    func leaveTeam(completion: () -> Void) {
         guard let teamID = team?.id, let uid = self.uid else {return}
         print("call to firebase to remove user: \(uid) from team: \(teamID)")
         FirebaseManager.remove(teamID: teamID, fromUID: uid) {
@@ -225,6 +238,7 @@
             teamDetailView.leaveTeamButton.isHidden = true
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true
+            completion()
         }
     }
     

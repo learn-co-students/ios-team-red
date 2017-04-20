@@ -18,6 +18,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     var teamUsers = [User]()
     var teamChallenges = [Challenge]()
+    
 
     
     var userIsTeamMember: Bool {
@@ -96,6 +97,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
         observeTeamData() {}
     }
+    
 
 
 

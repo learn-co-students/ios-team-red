@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ReportButton: UIButton {
+class ReportButton: FitnessButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -16,6 +16,17 @@ class ReportButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    override func commonInit() {
+        self.set(text: "Report offensive image")
+        self.changeFontSize(to: 18)
+        self.backgroundColor = UIColor.raspberry
+        self.addTarget(self, action: #selector(reportOffense), for: .touchUpInside)
+    }
+    
+    func reportOffense () {
+        print("Hey! That's offensive!")
     }
     
 }

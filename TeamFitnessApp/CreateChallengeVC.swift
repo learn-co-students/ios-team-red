@@ -89,11 +89,15 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
                         })
                     } else { //if the challenge is not public, add the challenge to the challenges property of the user and team in Firebase. The user and team IDs have already been stored in the challenge directory in Firebase
                         print("ADDED team challenge to user \(userUID)")
-                        guard let userUID = user?.uid else {return}
+                        guard let userUID = self.uid else {return}
                         FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
                         })
+                        print("CHECKING TO MAKE SURE TEAM ID IS NOT NIL")
+                        print(team?.id)
                         guard let teamID = team?.id else {return}
+                        print("CHECK FOR TEAM ID PASSED, ADDING CHALLENGE TO TEAM IN FIREBASE")
                         FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
+                            print("CHALLENGE SHOULD BE ADDED TO TEAM ID IN FIREBASE")
                         })
                     }
                 })

@@ -15,7 +15,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     let valueLabel = FitnessLabel()
     let stepper = UIStepper()
     
-    var goal = Goal(type: .distance, value: 0)
+    var goal = Goal(type: .miles, value: 0)
 
     var stepMultiplier: Int = 1
     var goalTag: String = ""
@@ -121,7 +121,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         stepper.value = 0
         switch row {
         case 0:
-            goal.type = .distance
+            goal.type = .miles
             goalTag = "Miles"
             stepMultiplier = 1
         case 1:
@@ -133,7 +133,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
             goalTag = "Calories Burned"
             stepMultiplier = 1000
         case 3:
-            goal.type = .exerciseTime
+            goal.type = .exerciseMinutes
             goalTag = "Exercise Minutes"
             stepMultiplier = 5
         default:

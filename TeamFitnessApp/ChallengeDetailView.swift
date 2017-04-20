@@ -14,6 +14,19 @@ class ChallengeDetailView: FitnessView {
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
     let joinButton = FitnessButton()
+    var challenge: Challenge! {
+        didSet {
+            let startDate = challenge.startDate!
+            let endDate = challenge.endDate!
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MMM-dd-yy"
+
+            let startDateString = formatter.string(from: startDate)
+            let endDateString = formatter.string(from: endDate)
+
+            topLabel.set(text: "\(challenge.name) Challenge Info\nGoes from \(startDateString) to \(endDateString)\nGoal: \(challenge.goal!.value!) \(challenge.goal!.type.rawValue)")
+        }
+    }
     
     let goalPieChart = CustomPieChartView()
     let leadersChart = CustomHorizontalBarChart()
@@ -32,8 +45,8 @@ class ChallengeDetailView: FitnessView {
     
     func loadUI() {
         self.addSubview(topLabel)
-        topLabel.text = "Challenge Info"
-        
+        topLabel.numberOfLines = 3
+
         self.addSubview(goalPieChart)
         
         self.addSubview(leadersChart)
@@ -47,9 +60,8 @@ class ChallengeDetailView: FitnessView {
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         topLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         topLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
-        topLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-        topLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
-        
+        topLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.95).isActive = true
+
         goalPieChart.translatesAutoresizingMaskIntoConstraints = false
         goalPieChart.topAnchor.constraint(equalTo: topLabel.bottomAnchor).isActive = true
         goalPieChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

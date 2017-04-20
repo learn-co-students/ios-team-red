@@ -19,7 +19,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     var weight: Int = 0
     var gender: String!
     var height: Float = 0
-    var firstGoal = Goal(type: .exerciseTime, value: 0)
+    var firstGoal = Goal(type: .exerciseMinutes, value: 0)
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
     var uid: String = ""
     

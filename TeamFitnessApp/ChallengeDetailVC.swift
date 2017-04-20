@@ -10,19 +10,20 @@ import UIKit
 import Firebase
 
 class ChallengeDetailVC: UIViewController {
-    
+
+    var challengeDetailView: ChallengeDetailView!
     var challenge: Challenge? = nil {
         didSet {
             guard let challenge = self.challenge else {return}
+
             if let uid = FIRAuth.auth()?.currentUser?.uid {
-                if challenge.userUIDs.contains(uid) {
+                if challenge.userUIDs[uid] != nil {
                     userIsChallengeMember = true
                 }
             }
         }
     }
     
-    var challengeDetailView: ChallengeDetailView? = nil
     let leaders = [User]()
     var userScores = [(String, Double)]()
     var userIsChallengeMember: Bool = false
@@ -31,8 +32,11 @@ class ChallengeDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.setTitle(text: "group challenges")
         challengeDetailView = ChallengeDetailView(frame: view.frame)
         self.view = challengeDetailView
+        challengeDetailView.challenge = challenge
         if !userIsChallengeMember {
             challengeDetailView?.displayJoinButton()
             challengeDetailView?.joinButton.addTarget(self, action: #selector(joinChallenge), for: .touchUpInside)
@@ -51,11 +55,7 @@ class ChallengeDetailVC: UIViewController {
         getChartData()
         challengeDetailView?.topLabel.text = "\(challenge.name)"
         
-        getLeaders {
-            DispatchQueue.main.async {
-                self.displayLeaders()
-            }
-        }
+        setChartWithLeaders()
     }
     
     func getChartData() {
@@ -69,7 +69,7 @@ class ChallengeDetailVC: UIViewController {
                     }
                 }
             })
-        case.distance:
+        case.miles:
             HealthKitManager.sharedInstance.getDistance(fromDate: startDate, toDate: Date(), completion: { (distance, error) in
                 if let distance = distance {
                     DispatchQueue.main.async {
@@ -77,7 +77,7 @@ class ChallengeDetailVC: UIViewController {
                     }
                 }
             })
-        case.exerciseTime:
+        case.exerciseMinutes:
             HealthKitManager.sharedInstance.getExerciseTime(fromDate: startDate, toDate: Date(), completion: { (time, error) in
                 if let time = time {
                     DispatchQueue.main.async {
@@ -96,38 +96,33 @@ class ChallengeDetailVC: UIViewController {
         }
     }
     
-    func getLeaders(completion: @escaping () -> Void) {
-        guard let uids = challenge?.userUIDs, let challengeID = challenge?.id else {return} //TODO: - handle this error mo bettah - set leaderboard to default image
-        for uid in uids {
-            FirebaseManager.fetchUser(withFirebaseUID: uid, completion: { (user) in
-                guard let uid = user.uid, let challenge = self.challenge else {return}
-                FirebaseManager.fetchChallengeProgress(forChallengeID: challengeID, andForUID: uid, challengeIsPublic: challenge.isPublic, completion: { (response) in
-                    self.userScores.removeAll()
-                    switch response {
-                    case .successfulData(let data):
-                        let userScore: (String, Double) = (user.name, data)
-                        self.userScores.append(userScore)
-                    case .failure(let failString):
-                        print(failString)
-                    default:
-                        print("FirebaseManager returned an invalid response")
-                    }
-                    completion()
-                })
+
+    func getUserValues(completion: @escaping ([(String, Double)]) -> ()) {
+        var leaderArray = [(String, Double)]()
+        for (userID, value) in (challenge?.userUIDs)! {
+            FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
+                leaderArray.append((user.name, value))
+                if leaderArray.count == (self.challenge?.userUIDs)!.count {
+                    completion(leaderArray)
+                }
             })
         }
+
+
     }
-    
-    fileprivate func displayLeaders() {
-        guard !userScores.isEmpty else {return} //TODO: - something to set default image for chart if no data exists
-        var leaderScores = [(String, Double)]()
-        userScores.sort { $0.1 > $1.1} //sort userScores from highest score to lowest score
-        
-        let num: Int = (userScores.count >= 5 ? 4 : userScores.count - 1)
-        
-        for i in 0...num {
-            leaderScores.append(userScores[i])
+
+    func setChartWithLeaders() {
+        getUserValues { (userList) in
+            if userList.count > 5 {
+                let newArray = [userList[0], userList[1], userList[2], userList[3], userList[4]]
+                DispatchQueue.main.async {
+                    self.challengeDetailView.leadersChart.setData(group: newArray)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.challengeDetailView.leadersChart.setData(group: userList)
+                }
+            }
         }
-        challengeDetailView?.leadersChart.setData(group: leaderScores)
     }
 }

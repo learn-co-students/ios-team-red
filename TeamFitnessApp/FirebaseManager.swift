@@ -399,8 +399,9 @@ struct FirebaseManager {
 //MARK: remove functions
     
     static func remove(teamID: String, fromUID uid: String, completion: () -> Void) {
-        dataRef.child("users").child(uid).child(teamID).removeValue()
-        dataRef.child("teams").child(teamID).child(uid).removeValue()
+        dataRef.child("users").child(uid).child("teams").child(teamID).removeValue()
+        dataRef.child("teams").child(teamID).child("users").child(uid).removeValue()
+        completion()
     }
 
 }

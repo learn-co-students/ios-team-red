@@ -87,7 +87,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         var cell = FitnessCell()
 
         if tableView == teamsView.myTeamsView {
-            cell = teamsView.myTeamsView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell//TODO create a default intialized cell
+            cell = teamsView.myTeamsView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+            guard myTeams.count > 0 else {return cell} //TODO: disable user interactivity with table view. Maybe display a default image?
             cell.setLabels(forTeam: myTeams[indexPath.row])
         }
         
@@ -97,7 +98,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
-                guard publicTeams.count > 0 else {return cell}
+                guard publicTeams.count > 0 else {return cell} //TODO: disable user interactivity with table view. Maybe display a default image?
                 cell.setLabels(forTeam: publicTeams[indexPath.row])
             }
         }

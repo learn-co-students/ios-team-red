@@ -219,8 +219,9 @@
     
     func leaveTeam() {
         guard let teamID = team?.id, let uid = self.uid else {return}
-        print("call to firebase to leave team")
+        print("call to firebase to remove user: \(uid) from team: \(teamID)")
         FirebaseManager.remove(teamID: teamID, fromUID: uid) {
+            print("firebase call to leave team has returned")
             teamDetailView.leaveTeamButton.isHidden = true
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true

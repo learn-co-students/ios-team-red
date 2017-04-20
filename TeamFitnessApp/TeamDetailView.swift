@@ -22,7 +22,7 @@ class TeamDetailView: FitnessView {
     var challengesView: UITableView!
     var joinButton: FitnessButton!
     var teamImageView: UIImageView!
-    var leaveTeamButton: FitnessButton?
+    var leaveTeamButton: FitnessButton!
     
     
     
@@ -50,6 +50,10 @@ class TeamDetailView: FitnessView {
         teamImageView.translatesAutoresizingMaskIntoConstraints = false
         teamImageView.backgroundColor = UIColor.clear
         
+        leaveTeamButton = FitnessButton()
+        self.addSubview(leaveTeamButton)
+        leaveTeamButton.translatesAutoresizingMaskIntoConstraints = false
+        leaveTeamButton.setTitle("Leave team", for: .normal)
         
         captainLabel = FitnessLabel()
         self.addSubview(captainLabel)
@@ -110,6 +114,11 @@ class TeamDetailView: FitnessView {
         teamImageView.topAnchor.constraint(equalTo: teamNameLabel.bottomAnchor).isActive = true
         teamImageView.widthAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
+        
+        leaveTeamButton.centerYAnchor.constraint(equalTo: teamImageView.centerYAnchor).isActive = true
+        leaveTeamButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor, constant: 50).isActive = true
+        leaveTeamButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.5).isActive = true
+        leaveTeamButton.widthAnchor.constraint(equalTo: teamImageView.widthAnchor, multiplier: 0.5).isActive = true
         
         captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
         

@@ -97,6 +97,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+                guard publicTeams.count > 0 else {return cell}
                 cell.setLabels(forTeam: publicTeams[indexPath.row])
             }
         }

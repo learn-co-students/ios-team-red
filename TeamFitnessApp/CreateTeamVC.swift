@@ -78,7 +78,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func createTeamButtonPressed() {
         createNewTeam {
             DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.popViewController(animated: true)
+                navigationController?.dismiss(animated: true, completion: nil)
             }
         }
     }

@@ -10,13 +10,13 @@ import UIKit
 import Firebase
 
 class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     let ref = FIRDatabase.database().reference()
     let profileUpdateView = updateProfileView()
     var firUser = FIRAuth.auth()!.currentUser
-    var user: User!
+    var user: User?
     var myImage: UIImage!
-
+    
     
     override func loadView() {
         
@@ -26,32 +26,37 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
+        
         fetchUser {
-                self.populateView()
-            
+            self.populateView()
+//            print(self.user?.name)
         }
+        
+        
         
         profileUpdateView.delegate = self
         self.hideKeyboardWhenTappedAround()
     }
     
     func populateView () {
-
-        FirebaseStoreageManager.downloadImage(forUser: user) { (response) in
+        
+        FirebaseStoreageManager.downloadImage(forUser: user!) { (response) in
             
-         // handle errors
+            // handle errors
             switch response {
             case let .successfulDownload(userImage):
-              self.profileUpdateView.myImageView.image = userImage                //                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                self.profileUpdateView.myImageView.image = userImage                //                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                 
             case let .failure(failString):
-                print(failString)
-                self.alert(message: failString)
+
+                 self.profileUpdateView.myImageView.image = #imageLiteral(resourceName: "runner2")
+
+//                print(failString)
+//                self.alert(message: failString)
             default:
                 print("Firebase login failure")
             }
-
+            
         }
         
         let userHeightInt = Int(self.user!.height)
@@ -59,46 +64,77 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         let userHeightInches = userHeightInt % 12
         
         
-        profileUpdateView.heightFeetTextField.text? = String(userHeightFeet)
-        profileUpdateView.heightInchesTextField.text? = String(userHeightInches)
-        profileUpdateView.nameTextField.text = self.user!.name
-        profileUpdateView.weightTextField.text = String(describing: self.user!.weight)
-        profileUpdateView.genderButton.setTitle((self.user!.sex), for: .normal)
-   
+//        profileUpdateView.heightFeetTextField.text? = String(userHeightFeet)
+//        profileUpdateView.heightInchesTextField.text? = String(userHeightInches)
+        
+        if let user = user {
+            
+            profileUpdateView.nameTextField.text = user.name
+            profileUpdateView.weightTextField.text = String(describing: user.weight)
+//            profileUpdateView.genderButton.setTitle("Johann", for: .normal)
+            
+//            let genderText = user.sex
+//            let attributes: NSDictionary = [
+//                NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+//                NSKernAttributeName:CGFloat(3.0),
+//                NSForegroundColorAttributeName:UIColor.lightGray,
+//                ]
+//            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+//            
+//            profileUpdateView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
+           
+//            print(profileUpdateView.genderButton.state)
+//            print(user.sex)
+        }
     }
     
     func pressSaveButton() {
       
-        guard let userHeightFeet = profileUpdateView.heightFeetTextField.text else {
-            alert(message: "Please enter feet")
-            return
-        }
         
-        guard let userHeightInches = profileUpdateView.heightInchesTextField.text else{
-            alert(message: "Please enter inches")
-            return
-        }
+//        guard let userHeightFeet = profileUpdateView.heightFeetTextField.text else {
+//            alert(message: "Please enter feet")
+//            return
+//        }
+//        
+//        guard let userHeightInches = profileUpdateView.heightInchesTextField.text else{
+//            alert(message: "Please enter inches")
+//            return
+//        }
         
         
-        let height = Float(userHeightFeet)! + Float(userHeightInches)!
+//        let height = (Float(userHeightFeet)! * 12) + Float(userHeightInches)!
+        
+//        print("Hey", "- \(profileUpdateView.nameTextField.text!)")
         
         guard let name = profileUpdateView.nameTextField.text else {
-            alert(message: "Please enter a name.")
+//            print("Im failing")
+            alert(message: "Please enter a name")
+            return
+        }
+        
+        
+        guard profileUpdateView.nameTextField.text != "" else {
+//            print("also failing")
+            alert(message: "Please enter a name")
             return
         }
         
         guard let weightString = profileUpdateView.weightTextField.text else {
+            
             alert(message: "Please enter a weight")
             return
         }
-        let weight = Int(weightString)
-       
-        guard let sex = profileUpdateView.genderButton.currentTitle else {
-            alert(message: "Please enter a gender")
+        guard let weight = Int(weightString) else {
+            alert(message: "Please enter a weight")
             return
         }
-
-        self.user?.update(name: name, weight: weight!, height: height, sex: sex)
+        
+//        guard let sex = profileUpdateView.genderButton.attributedTitle(for: .normal) else {
+//            alert(message: "Please enter a gender")
+//            return
+//        }
+        
+        self.user?.update(name: name, weight: weight)
         
         if let user = self.user {
             FirebaseManager.save(user: user) { (success) in
@@ -111,21 +147,21 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         }
     }
     
-  
+    
     
     func fetchUser(completion: @escaping ()->()) {
-       
+        
         if let uid = firUser?.uid {
             FirebaseManager.fetchUser(withFirebaseUID: uid) { (returnUser) in
                 
                 self.user = returnUser
                 completion()
-
+                
             }
         }
         
     }
-
+    
     
     func displayImagePickerButtonTapped() {
         
@@ -171,44 +207,75 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
             
             print("image upload complete")
             self.dismiss(animated: true, completion: nil)
-
             
         }
         
         navigationController?.dismiss(animated: true, completion: nil)
-
-
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func pressGenderButton () {
-        
-        let alertController = UIAlertController(title: "Gender", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
-            print("Cancel")
-        }
-        let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("OK")
-            self.profileUpdateView.genderButton.setTitle("Male", for: .normal)
-            self.user?.sex = "Male"
-
-        }
-        let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("ok")
-            self.profileUpdateView.genderButton.setTitle("Female", for: .normal)
-            self.user?.sex = "Female"
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(maleAction)
-        alertController.addAction(femaleAction)
-        
-        
-        self.present(alertController, animated: true)
-        
-    }
-}
+//    func pressGenderButton () {
+//        
+//        let alertController = UIAlertController(title: "Gender", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+//        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
+//            print("Cancel")
+//        }
+//        let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//            print("OK")
+//            //            user.gender = "Male"
+//            let genderText = "male"
+//            let attributes: NSDictionary = [
+//                NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+//                NSKernAttributeName:CGFloat(3.0),
+//                NSForegroundColorAttributeName:UIColor.black,
+//                ]
+//            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+//            
+//            self.profileUpdateView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
+//            
+//        }
+//        let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//            print("ok")
+//            //            self.gender = "Female"
+//            let genderText = "female"
+//            let attributes: NSDictionary = [
+//                NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+//                NSKernAttributeName:CGFloat(3.0),
+//                NSForegroundColorAttributeName:UIColor.black,
+//                ]
+//            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+//            
+//            self.profileUpdateView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
+//            
+//        }
+//        let unspecifiedAction = UIAlertAction(title: "Unspecified", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
+//            print("ok")
+//            //            self.gender = "Unspecified"
+//            let genderText = "unspecified"
+//            let attributes: NSDictionary = [
+//                NSFontAttributeName:UIFont(name: "Fresca-Regular", size: 17)!,
+//                NSKernAttributeName:CGFloat(3.0),
+//                NSForegroundColorAttributeName:UIColor.black,
+//                ]
+//            let attributedTitle = NSAttributedString(string: genderText.uppercased(), attributes:attributes as? [String : AnyObject])
+//            
+//            self.profileUpdateView.genderButton.setAttributedTitle(attributedTitle, for: .normal)
+//            
+//            
+//        }
+//        
+//        alertController.addAction(cancelAction)
+//        alertController.addAction(maleAction)
+//        alertController.addAction(femaleAction)
+//        alertController.addAction(unspecifiedAction)
+//        
+//        
+//        self.present(alertController, animated: true)
+//        
+//    }
+  }

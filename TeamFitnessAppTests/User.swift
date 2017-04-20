@@ -78,10 +78,9 @@ struct User {
     }
     
     
-    mutating func update(name: String, weight: Int, height: Float, sex:String) {
+    mutating func update(name: String, weight: Int) {
         self.name = name
         self.weight = weight
-        self.height = height
-        self.sex = sex
+    
     }
 }

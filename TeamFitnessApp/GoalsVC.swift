@@ -13,15 +13,14 @@ import UIKit
 class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     
-    var name: String = ""
-    var userEmail: String = ""
-//    var userPassword: String = ""
-    var weight: Int = 0
+    var name: String!
+    var userEmail: String!
+    var weight: Int!
     var gender: String!
-    var height: Float = 0
+    var height: Float!
     var firstGoal = Goal(type: .exerciseTime, value: 0)
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
-    var uid: String = ""
+    var uid: String!
     
     let goalsView = GoalsView()
     let healthKitManager = HealthKitManager.sharedInstance
@@ -38,14 +37,13 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         self.view = goalsView
         self.hideKeyboardWhenTappedAround()
         
-//        
-//        print("Goals name \(name)")
-//        print("Goals email \(userEmail)")
-//        print("Goals password \(userPassword)")
-//        print("Goals weight \(weight)")
-//        print("Goals gender \(gender)")
-//        print("Goals height \(height)")
-//        print("Goals uid \(uid)")
+        
+        print("Goals name \(name)")
+        print("Goals email \(userEmail)")
+        print("Goals weight \(weight)")
+        print("Goals gender \(gender)")
+        print("Goals height \(height)")
+        print("Goals uid \(uid)")
 
     
     }
@@ -54,15 +52,18 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     func pressCreateUserButton() {
         
+        //guard
         let tempGoal = Double(goalsView.activityMinutesADay.text!)
         firstGoal.setValue(from: tempGoal!)
       
-        
+        // guard
         let tempGoal2 = Double(goalsView.caloriesADay.text!)
         secondGoal.setValue(from: tempGoal2!)
       
         print("saving gender \(gender)")
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)
+        
+        print(user.name)
         
         
         FirebaseManager.save(user: user) { (success) in
@@ -70,6 +71,8 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
               self.presentAlert()
             }
         }
+        
+      
         
         
   

@@ -38,6 +38,9 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
       dashboadView = DashboardView(frame: view.frame)
       view = dashboadView
        dashboadView.delegate = self
+//        
+//        print(testUser.sex)
+//        print(testUser.name)
 
 //
 //      dashboadView.tableView.delegate = self

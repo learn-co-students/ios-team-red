@@ -27,8 +27,8 @@ class DashboardView: FitnessView {
         pieOneLabel.changeFontSize(to: 20)
       pieTwoLabel.set(text: "calories burned")
         pieTwoLabel.changeFontSize(to: 20)
-      goalOne = user.goals[0].value
-      goalTwo = user.goals[1].value
+      goalOne = user.goals[1].value
+      goalTwo = user.goals[0].value
       grabHealtKit()
     }
   }
@@ -152,4 +152,5 @@ class DashboardView: FitnessView {
   }
 }
 
-
+//goalOne = user.goals[0].value
+//goalTwo = user.goals[1].value

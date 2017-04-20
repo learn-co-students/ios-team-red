@@ -79,7 +79,7 @@ struct FirebaseStoreageManager {
         }
         let userRef = userImageRef.child("\(userID).png")
         print("Downloading image at \(userID).png")
-        userRef.data(withMaxSize: 5000000000) { (data, error) in
+        userRef.data(withMaxSize: 5000000000) { (data, error) in //TODO: adjust this file size
             DispatchQueue.main.async {
                 if let data = data {
                     if let userImage = UIImage(data: data) {

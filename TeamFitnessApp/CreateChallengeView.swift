@@ -59,7 +59,7 @@ class CreateChallengeView: FitnessView {
         
         challengeTitleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         challengeTitleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
-        challengeTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        challengeTitleLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.9).isActive = true
         challengeTitleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         
         challengeNameField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

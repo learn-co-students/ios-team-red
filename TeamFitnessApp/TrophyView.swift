@@ -59,12 +59,15 @@ class TrophyView: FitnessView {
 
     participationLabel = FitnessLabel(frame: CGRect.zero)
     participationLabel.set(text: "Challenege Participation Count")
+    participationLabel.changeFontSize(to: 20)
 
     completionLabel = FitnessLabel(frame: CGRect.zero)
     completionLabel.set(text: "Successful Completion Count")
+    completionLabel.changeFontSize(to: 20)
 
     trophyLabel = FitnessLabel(frame: CGRect.zero)
     trophyLabel.set(text: "Tropies")
+    trophyLabel.changeFontSize(to: 20)
 
 
     participationCountLabel = CountLabel()
@@ -79,6 +82,7 @@ class TrophyView: FitnessView {
 
     archeiveLabel = FitnessLabel(frame: CGRect.zero)
     archeiveLabel.set(text: "Challenge Archieve")
+    archeiveLabel.changeFontSize(to: 20)
 
     tableView = UITableView()
     tableView.backgroundColor = UIColor.clear
@@ -149,7 +153,7 @@ class TrophyView: FitnessView {
 
     archeiveLabel.topAnchor.constraint(equalTo: thirdPlaceImageView.bottomAnchor, constant: 20).isActive = true
     archeiveLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    archeiveLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    archeiveLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10).isActive = true
 
     tableView.topAnchor.constraint(equalTo: archeiveLabel.bottomAnchor, constant: 10).isActive = true
     tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

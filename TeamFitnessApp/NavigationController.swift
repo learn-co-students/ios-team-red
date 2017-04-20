@@ -16,9 +16,15 @@ class NavigationController: UINavigationController {
       self.navigationBar.tintColor = UIColor.whitewash
     }
 
+}
 
 
+extension UINavigationItem {
 
-
-
+    func setTitle(text: String) {
+        let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
+        titleLabel.set(text: text)
+        titleLabel.textColor = UIColor.whitewash
+        self.titleView = titleLabel
+    }
 }

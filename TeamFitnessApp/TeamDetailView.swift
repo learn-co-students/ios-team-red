@@ -22,7 +22,11 @@ class TeamDetailView: FitnessView {
     var challengesView: UITableView!
     var joinButton: FitnessButton!
     var teamImageView: UIImageView!
+
     var reportButton: ReportButton!
+
+    var leaveTeamButton: FitnessButton!
+
     
     
     
@@ -50,6 +54,7 @@ class TeamDetailView: FitnessView {
         teamImageView.translatesAutoresizingMaskIntoConstraints = false
         teamImageView.backgroundColor = UIColor.clear
         
+
         reportButton = ReportButton()
         self.addSubview(reportButton)
         reportButton.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +62,12 @@ class TeamDetailView: FitnessView {
         reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
         reportButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor).isActive = true
         reportButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+
+        leaveTeamButton = FitnessButton()
+        self.addSubview(leaveTeamButton)
+        leaveTeamButton.translatesAutoresizingMaskIntoConstraints = false
+        leaveTeamButton.setTitle("Leave team", for: .normal)
+
         
         captainLabel = FitnessLabel()
         self.addSubview(captainLabel)
@@ -125,6 +136,13 @@ class TeamDetailView: FitnessView {
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
         joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
         
+
+        leaveTeamButton.centerYAnchor.constraint(equalTo: joinButton.centerYAnchor).isActive = true
+        leaveTeamButton.centerXAnchor.constraint(equalTo: joinButton.centerXAnchor).isActive = true
+        leaveTeamButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor).isActive = true
+        leaveTeamButton.widthAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
+        
+
         membersLabel.constrainVertically(belowView: captainLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         
         membersView.constrainVertically(belowView: membersLabel, widthMultiplier: 0.8, heightMultiplier: 0.25)

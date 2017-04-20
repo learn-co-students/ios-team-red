@@ -1,17 +1,17 @@
  //
-//  TeamDetailVC.swift
-//  TeamFitnessApp
-//
-//  Created by Patrick O'Leary on 4/6/17.
-//  Copyright © 2017 Patrick O'Leary. All rights reserved.
-//
-
-import UIKit
-import Firebase
-
-class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-
+ //  TeamDetailVC.swift
+ //  TeamFitnessApp
+ //
+ //  Created by Patrick O'Leary on 4/6/17.
+ //  Copyright © 2017 Patrick O'Leary. All rights reserved.
+ //
+ 
+ import UIKit
+ import Firebase
+ 
+ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
     var teamDetailView: TeamDetailView!
     var team: Team?
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
@@ -19,7 +19,6 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var teamUsers = [User]()
     var teamChallenges = [Challenge]()
     
-
     
     var userIsTeamMember: Bool {
         var test = false
@@ -31,10 +30,10 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var userIsCaptain: Bool {
         return team?.captainID == FIRAuth.auth()?.currentUser?.uid
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         teamDetailView = TeamDetailView(frame: view.frame)
         self.view = teamDetailView
         
@@ -45,61 +44,65 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         teamDetailView.challengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         teamDetailView.challengesView.delegate = self
         teamDetailView.challengesView.dataSource = self
-
+        
         teamDetailView.joinButton.isHidden = true
         teamDetailView.joinButton.isEnabled = false
         teamDetailView.joinButton.addTarget(self, action: #selector(joinTeam), for: .touchUpInside)
-
+        
         teamDetailView.teamNameLabel.text = self.team?.name
-
-
-
+        
+        teamDetailView.leaveTeamButton.isHidden = false
+        teamDetailView.leaveTeamButton.isEnabled = true
+        teamDetailView.leaveTeamButton.addTarget(self, action: #selector(leaveTeam), for: .touchUpInside)
+        
+        
+        
         if !userIsTeamMember {
-          teamDetailView.joinButton.isHidden = false
-          teamDetailView.joinButton.isEnabled = true
+            teamDetailView.joinButton.isHidden = false
+            teamDetailView.joinButton.isEnabled = true
+            teamDetailView.leaveTeamButton.isHidden = true
+            teamDetailView.leaveTeamButton.isEnabled = false
         }
-
+        
         teamDetailView.createChallengeButton.isHidden = true
         teamDetailView.createChallengeButton.isEnabled = false
         teamDetailView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
-
+        
         if userIsCaptain {
-          teamDetailView.createChallengeButton.isHidden = false
-          teamDetailView.createChallengeButton.isEnabled = true
+            teamDetailView.createChallengeButton.isHidden = false
+            teamDetailView.createChallengeButton.isEnabled = true
         }
-
-
-
-      if let team = self.team {
-        FirebaseStoreageManager.downloadImage(forTeam: team) { (response) in //download image for team and set it = to teamImageView
-          switch response {
-          case let .successfulDownload(teamImage):
-            DispatchQueue.main.async {
-              self.teamDetailView.teamImageView.image = teamImage
+        
+        
+        
+        if let team = self.team {
+            FirebaseStoreageManager.downloadImage(forTeam: team) { (response) in //download image for team and set it = to teamImageView
+                switch response {
+                case let .successfulDownload(teamImage):
+                    DispatchQueue.main.async {
+                        self.teamDetailView.teamImageView.image = teamImage
+                    }
+                case let .failure(failString):
+                    print(failString)
+                    self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
+                default:
+                    print("Invalid Firebase response")
+                }
             }
-          case let .failure(failString):
-            print(failString)
+        } else {
             self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
-          default:
-            print("Invalid Firebase response")
-          }
         }
-      } else {
-        self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
-      }
-
-      if let captain = team?.captainID { //get the captain and set their name to the captain label
-        FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
-          self.teamDetailView.captainLabel.text = "Captain: \(captain.name)"
-        })
-      }
-      
-
+        
+        if let captain = team?.captainID { //get the captain and set their name to the captain label
+            FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
+                self.teamDetailView.captainLabel.text = "Captain: \(captain.name)"
+            })
+        }
+        
+        
         observeTeamData() {}
     }
     
-
-
 
     func setTeam(team: Team) {
         self.team = team
@@ -141,20 +144,22 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-// MARK: - calls to firebase
+    // MARK: - calls to firebase
     
     func observeTeamData(completion: @escaping () -> Void) {
         guard let teamID = self.team?.id else {return}
         FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
             self.team = team
+            print("team user IDS updated: \(team.userUIDs)")
             self.fetchChallenges(forTeam: team) {
                 DispatchQueue.main.async {
                     self.teamDetailView.challengesView.reloadData()
                 }
             }
             self.fetchUsers(forTeam: team) {
-                DispatchQueue.main.async {
-                    self.teamDetailView.membersView.reloadData()
+                print("team user array : \(self.teamUsers)*****")
+                    DispatchQueue.main.async {
+                        self.teamDetailView.membersView.reloadData()
                 }
             }
             
@@ -182,7 +187,7 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     
-//MARK: - Button functions
+    //MARK: - Button functions
     
     func joinTeam() {
         guard let uid = self.uid, let teamID = self.team?.id else {return} //TODO: handle this error better
@@ -198,6 +203,8 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
         teamDetailView.joinButton.isHidden = true
+        teamDetailView.leaveTeamButton.isEnabled = true
+        teamDetailView.leaveTeamButton.isHidden = false
     }
     
     func segueCreateChallenge() {
@@ -206,4 +213,31 @@ class TeamDetailVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         createChallengeVC.challengeIsPublic = false
         present(createChallengeVC, animated: true, completion: nil)
     }
-}
+    
+    func leaveTeam() {
+        guard let teamID = team?.id, let uid = self.uid else {return}
+        print("call to firebase to remove user: \(uid) from team: \(teamID)")
+        FirebaseManager.remove(teamID: teamID, fromUID: uid) {
+            print("firebase call to leave team has returned")
+            teamDetailView.leaveTeamButton.isHidden = true
+            teamDetailView.joinButton.isHidden = false
+            teamDetailView.joinButton.isEnabled = true
+            checkIfTeamIsEmpty()
+            
+        }
+    }
+    
+    private func checkIfTeamIsEmpty() {
+        guard let teamID = team?.id else {return}
+        FirebaseManager.hasUsers(inTeamID: teamID) { (teamHasUsers) in
+            if !teamHasUsers {
+                FirebaseManager.delete(teamID: teamID, completion: {
+                    DispatchQueue.main.async {
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                })
+            }
+        }
+    }
+    
+ }

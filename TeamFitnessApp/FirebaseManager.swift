@@ -244,26 +244,7 @@ struct FirebaseManager {
 //            completion(challenges)
 //        })
 //    }
-    
-    static func fetchChallengeProgress(forChallengeID challengeID: String, andForUID uid: String, challengeIsPublic: Bool, completion: @escaping (FirebaseResponse) -> Void) {
-        let ref: FIRDatabaseReference
-        if challengeIsPublic {
-            ref = dataRef.child("publicChallenges").child(challengeID).child("users").child(uid)
-        } else {
-           ref = dataRef.child("challenges").child(challengeID).child("users").child(uid)
 
-        }
-        
-        ref.observe(.value, with: { (snapshot) in
-            let data: Double? = snapshot.value as? Double ?? nil
-            if let dataUW = data {
-                completion(.successfulData(dataUW))
-            } else {
-                completion(.failure("Could not get progress value for UID"))
-            }
-        })
-
-    }
     
 // MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
@@ -322,7 +303,7 @@ struct FirebaseManager {
         var usersDict = [String: Bool]()
         var goalDict = [String: Double]()
         
-        for user in challenge.userUIDs {
+        for (user, _) in challenge.userUIDs {
             usersDict[user] = true
         }
         
@@ -394,6 +375,30 @@ struct FirebaseManager {
                 print("could not log user in")
             }
         }
+    }
+    
+//MARK: remove functions
+    
+    static func remove(teamID: String, fromUID uid: String, completion: () -> Void) {
+        dataRef.child("users").child(uid).child("teams").child(teamID).removeValue()
+        dataRef.child("teams").child(teamID).child("users").child(uid).removeValue()
+        completion()
+    }
+    
+    static func delete(teamID: String, completion: () -> Void) {
+        print("LOOKING TO DELETE TEAMID :\(teamID)")
+        dataRef.child("teams").child(teamID).removeValue()
+        completion()
+    }
+    
+    static func hasUsers(inTeamID teamID: String, completion: @escaping (Bool) -> Void){
+        dataRef.child("teams").child(teamID).child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let dictionary = snapshot.value as? [String: Any] {
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
     }
 
 }

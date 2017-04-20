@@ -31,12 +31,12 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         
         setupSearchBar()
         
-        let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
-        titleLabel.set(text: "fitness baby")
-        titleLabel.textColor = UIColor.whitewash
-        navigationItem.titleView = titleLabel
+        navigationItem.setTitle(text: "teams")
 
-        
+        let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
+        navigationItem.setRightBarButton(profileButton, animated: false)
+
+
         teamsView.myTeamsView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         teamsView.myTeamsView.delegate = self
         teamsView.myTeamsView.dataSource = self
@@ -56,7 +56,9 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
     
     func segueCreateTeam() {
         let createTeamVC = CreateTeamVC()
-        navigationController?.pushViewController(createTeamVC, animated: true)
+        let navVC = NavigationController(rootViewController: createTeamVC)
+        createTeamVC.modalPresentationStyle = .overFullScreen
+        self.present(navVC, animated: true, completion: nil)
     }
 
     
@@ -87,7 +89,8 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         var cell = FitnessCell()
 
         if tableView == teamsView.myTeamsView {
-            cell = teamsView.myTeamsView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell//TODO create a default intialized cell
+            cell = teamsView.myTeamsView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+            guard myTeams.count > 0 else {return cell} //TODO: disable user interactivity with table view. Maybe display a default image?
             cell.setLabels(forTeam: myTeams[indexPath.row])
         }
         
@@ -97,6 +100,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+                guard publicTeams.count > 0 else {return cell} //TODO: disable user interactivity with table view. Maybe display a default image?
                 cell.setLabels(forTeam: publicTeams[indexPath.row])
             }
         }
@@ -206,6 +210,11 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
             searchActive = true;
         }
         teamsView.searchTableView.reloadData()
+    }
+
+    func onProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileUpdateVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

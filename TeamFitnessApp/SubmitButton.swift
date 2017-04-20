@@ -22,10 +22,10 @@ class SubmitButton: FitnessButton {
     func setConstraints(toView view: UIView, andViewConroller viewController: UIViewController) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor).isActive = true
-        self.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15).isActive = true
+        self.bottomAnchor.constraint(equalTo: viewController.bottomLayoutGuide.topAnchor, constant: -50).isActive = true
+        self.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25).isActive = true
         self.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
-        self.setTitle("Submit", for: .normal)
+        self.set(text: "submit")
     }
     
 }

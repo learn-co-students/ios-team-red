@@ -32,7 +32,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     var challengeEndDate: Date? = nil
     var challengeGoal: Goal? = nil
     let challengeCreatorID = FIRAuth.auth()?.currentUser?.uid
-    var challengeUserIDs: [String?] = [(FIRAuth.auth()?.currentUser?.uid)]
+    var challengeUserIDs: [String:Double] = [(FIRAuth.auth()?.currentUser?.uid)!:0]
     var challengeTeamID: String?
     
     enum ViewState {
@@ -41,8 +41,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
 
-
-        self.navigationController?.navigationBar.barTintColor = UIColor.lagoon
+        self.navigationItem.setTitle(text: "create challenge")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel(_:)))
 
         super.viewDidLoad()
@@ -76,8 +75,8 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
               storeSecondFields()
             
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
-                let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs as? [String] ?? [], isPublic: challengeIsPublic, team: challengeTeamID)
-                
+                let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs, isPublic: challengeIsPublic, team: challengeTeamID)
+
                 FirebaseManager.addNew(challenge: newChallenge, completion: { (challengeID) in
                     print("FIREBASE MANAGER ADDED NEW CHALLENGE****************")
                     print(user?.uid)

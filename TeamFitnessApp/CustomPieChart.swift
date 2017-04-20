@@ -40,11 +40,11 @@ class CustomPieChartView: PieChartView {
     var values = [PieChartDataEntry]()
 
     if current > goal {
-      values.append(PieChartDataEntry(value: abs(goal-current).rounded(), label: "OVER GOAL"))
+      values.append(PieChartDataEntry(value: abs(goal-current), label: "OVER GOAL"))
       values.append(PieChartDataEntry(value: goal.rounded(), label: "GOAL"))
     } else {
-      values.append(PieChartDataEntry(value: (goal-current).rounded(), label: "TO GO"))
-      values.append(PieChartDataEntry(value: current.rounded(), label: "YOU"))
+      values.append(PieChartDataEntry(value: (goal-current), label: "TO GO"))
+      values.append(PieChartDataEntry(value: current, label: "YOU"))
     }
 
 
@@ -62,9 +62,9 @@ class CustomPieChartView: PieChartView {
     pFormatter.numberStyle = .none
     pFormatter.maximumFractionDigits = 1;
     pFormatter.multiplier = 1
-    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 12)
+    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 15)
     data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-    data.setValueFont(NSUIFont(descriptor:descript, size:12))
+    data.setValueFont(NSUIFont(descriptor:descript, size:15))
     data.setValueTextColor(UIColor.white)
 
     self.data = data;

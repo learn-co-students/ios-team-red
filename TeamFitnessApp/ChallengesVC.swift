@@ -22,10 +22,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
-      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
-      titleLabel.set(text: "challenges Baby")
-      titleLabel.textColor = UIColor.whitewash
-      navigationItem.titleView = titleLabel
+        self.navigationItem.setTitle(text: "group challenges")
+
+        let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
+        navigationItem.setRightBarButton(profileButton, animated: false)
 
 
         challengeView = ChallengesView(frame: view.frame)
@@ -187,5 +187,10 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
 
     challengeView.publicChallengesView.reloadData()
   }
+
+    func onProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileUpdateVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

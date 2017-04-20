@@ -15,7 +15,7 @@ struct Challenge {
     var endDate: Date?
     var goal: Goal?
     var creator: String?
-    var userUIDs = [String]()
+    var userUIDs = [String:Double]()
     var isPublic: Bool
     var teamID: String?
     var id: String?
@@ -38,13 +38,13 @@ struct Challenge {
 
         self.startDate = Date(timeIntervalSince1970: dict["startDate"] as? TimeInterval ?? 0)
         self.endDate = Date(timeIntervalSince1970: dict["endDate"] as? TimeInterval ?? 0)
-        let userDict = dict["users"] as? [String: Bool] ?? [:]
-        for (userID, _) in userDict {
-            self.userUIDs.append(userID)
+        let userDict = dict["users"] as? [String: Double] ?? [:]
+        for (userID, value) in userDict {
+            self.userUIDs[userID] = value
         }
     }
     
-    init(name: String = "", startDate: Date, endDate: Date, goal: Goal, creatorID: String, userUIDs: [String], isPublic: Bool, team: String?, id: String? = nil) {
+    init(name: String = "", startDate: Date, endDate: Date, goal: Goal, creatorID: String, userUIDs: [String:Double], isPublic: Bool, team: String?, id: String? = nil) {
         self.startDate = startDate
         self.endDate = endDate
         self.goal = goal

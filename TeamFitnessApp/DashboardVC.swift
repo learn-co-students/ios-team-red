@@ -21,10 +21,7 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      let titleLabel = FitnessLabel(frame: CGRect(x:0, y:0, width: 150, height: 45))
-      titleLabel.set(text: "Fitness baby")
-      titleLabel.textColor = UIColor.whitewash
-      navigationItem.titleView = titleLabel
+    self.navigationItem.setTitle(text: "fitness baby")
       let button = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(onLogout(_:)))
 
       navigationItem.setLeftBarButton(button, animated: false)
@@ -107,7 +104,6 @@ class DashboardVC: UIViewController, DashboardVCProtocol {
 
   func onProfile(_ sender: UIBarButtonItem) {
     let vc = ProfileUpdateVC()
-//    vc.firUser = self.user
     navigationController?.pushViewController(vc, animated: true)
   }
 

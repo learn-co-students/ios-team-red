@@ -38,7 +38,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         self.view = goalsView
         self.hideKeyboardWhenTappedAround()
         
-//        
+       
 //        print("Goals name \(name)")
 //        print("Goals email \(userEmail)")
 //        print("Goals password \(userPassword)")

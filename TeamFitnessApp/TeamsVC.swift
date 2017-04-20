@@ -50,6 +50,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
                 self.teamsView.myTeamsView.reloadData()
             }
         }
+        self.hideKeyboardWhenTappedAround()
     }
     
     func segueCreateTeam() {

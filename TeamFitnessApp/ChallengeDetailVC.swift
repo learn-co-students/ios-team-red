@@ -22,69 +22,34 @@ class ChallengeDetailVC: UIViewController {
         }
     }
     
-    let titleLabel = TitleLabel()
-    let startDateLabel = FitnessLabel()
-    let endDateLabel = FitnessLabel()
-    let leadersTable = UITableView()
-    let joinButton = FitnessButton()
-    
+    var challengeDetailView: ChallengeDetailView? = nil
     let leaders = [User]()
     var userScores = [(String, Double)]()
     var userIsChallengeMember: Bool = false
     
-    let goalPieChart = CustomPieChartView()
-    let leadersChart = CustomHorizontalBarChart()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view = FitnessView()
-        setupViews()
-        
-    }
-
-    func setupViews() {
-        self.view.addSubview(titleLabel)
-        titleLabel.setConstraints(toView: self.view, andViewController: self)
-        titleLabel.setText(toString: "Challenge Info")
-        
-        self.view.addSubview(goalPieChart)
-        goalPieChart.translatesAutoresizingMaskIntoConstraints = false
-        goalPieChart.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
-        goalPieChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        goalPieChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-        goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        
-        self.view.addSubview(leadersChart)
-        leadersChart.translatesAutoresizingMaskIntoConstraints = false
-        leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
-        leadersChart.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        leadersChart.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.8).isActive = true
-        leadersChart.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.4).isActive = true
-    
+        challengeDetailView = ChallengeDetailView(frame: view.frame)
+        self.view = challengeDetailView
         if !userIsChallengeMember {
-            self.view.addSubview(joinButton)
-            joinButton.translatesAutoresizingMaskIntoConstraints = false
-            joinButton.bottomAnchor.constraint(equalTo: self.bottomLayoutGuide.topAnchor).isActive = true
-            joinButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-            joinButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5).isActive = true
-            joinButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
-            joinButton.setTitle("Join Challenge", for: .normal)
-            joinButton.addTarget(self, action: #selector(joinChallenge), for: .touchUpInside)
+            challengeDetailView?.displayJoinButton()
+            challengeDetailView?.joinButton.addTarget(self, action: #selector(joinChallenge), for: .touchUpInside)
         }
-        
     }
     
     func joinChallenge() {
         guard let challengeID = self.challenge?.id, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
         FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) {}
         FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
-        joinButton.isHidden = true
+        challengeDetailView?.joinButton.isHidden = true
     }
     
     func setChallenge(challenge: Challenge) {
         self.challenge = challenge
         getChartData()
-        self.titleLabel.setText(toString: challenge.name)
+        challengeDetailView?.topLabel.text = "\(challenge.name)"
         
         getLeaders {
             DispatchQueue.main.async {
@@ -100,7 +65,7 @@ class ChallengeDetailVC: UIViewController {
             HealthKitManager.sharedInstance.getCalories(fromDate: startDate, toDate: Date(), completion: { (calories, error) in
                 if let calories = calories {
                     DispatchQueue.main.async {
-                        self.goalPieChart.setData(goal: goalValue, current: calories)
+                        self.challengeDetailView?.goalPieChart.setData(goal: goalValue, current: calories)
                     }
                 }
             })
@@ -108,7 +73,7 @@ class ChallengeDetailVC: UIViewController {
             HealthKitManager.sharedInstance.getDistance(fromDate: startDate, toDate: Date(), completion: { (distance, error) in
                 if let distance = distance {
                     DispatchQueue.main.async {
-                        self.goalPieChart.setData(goal: goalValue, current: distance)
+                        self.challengeDetailView?.goalPieChart.setData(goal: goalValue, current: distance)
                     }
                 }
             })
@@ -116,7 +81,7 @@ class ChallengeDetailVC: UIViewController {
             HealthKitManager.sharedInstance.getExerciseTime(fromDate: startDate, toDate: Date(), completion: { (time, error) in
                 if let time = time {
                     DispatchQueue.main.async {
-                        self.goalPieChart.setData(goal: goalValue, current: time)
+                        self.challengeDetailView?.goalPieChart.setData(goal: goalValue, current: time)
                     }
                 }
             })
@@ -124,7 +89,7 @@ class ChallengeDetailVC: UIViewController {
             HealthKitManager.sharedInstance.getSteps(fromDate: startDate, toDate: Date(), completion: { (steps, error) in
                 if let steps = steps {
                     DispatchQueue.main.async {
-                        self.goalPieChart.setData(goal: goalValue, current: steps)
+                        self.challengeDetailView?.goalPieChart.setData(goal: goalValue, current: steps)
                     }
                 }
             })
@@ -163,6 +128,6 @@ class ChallengeDetailVC: UIViewController {
         for i in 0...num {
             leaderScores.append(userScores[i])
         }
-        leadersChart.setData(group: leaderScores)
+        challengeDetailView?.leadersChart.setData(group: leaderScores)
     }
 }

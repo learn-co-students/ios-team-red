@@ -175,8 +175,8 @@ struct FirebaseManager {
 
     
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
-        var teams = [Team]()
         dataRef.child("teams").observe(.value, with: { (snapshot) in
+            var teams = [Team]()
             let teamDict = snapshot.value as? [String: Any]
             if let teamDict = teamDict {
                 for team in teamDict {
@@ -190,8 +190,8 @@ struct FirebaseManager {
     }
     
     static func fetchAllChallenges(completion: @escaping ([Challenge]) -> Void) { //fetches all challenges and returns them in an array through a completion
-        var challenges = [Challenge]()
         dataRef.child("challenges").observe(.value, with: { (snapshot) in
+            var challenges = [Challenge]()
             let challengesDict = snapshot.value as? [String: Any]
             if let challengesDict = challengesDict {
                 for challenge in challengesDict {

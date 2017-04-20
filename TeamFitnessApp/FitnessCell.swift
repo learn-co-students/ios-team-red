@@ -10,43 +10,46 @@ import UIKit
 
 class FitnessCell: UITableViewCell {
 
-    var nameLabel = FitnessLabel()
+  var nameLabel: FitnessLabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
+        setConstraints()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
-        
+        setConstraints()
+
     }
     
     private func commonInit() {
         self.backgroundColor = UIColor.clear
-        setupLabels()
+        nameLabel = FitnessLabel()
+        nameLabel.changeFontSize(to: 14)
+        self.contentView.addSubview(nameLabel)
     }
-    
-    func setupLabels() {
-        self.addSubview(nameLabel)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
-        nameLabel.heightAnchor.constraint(equalTo: self.contentView.heightAnchor).isActive = true
-        nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, multiplier: 0.5).isActive = true
-        nameLabel.reverseColors()
+
+
+    func setConstraints() {
+      nameLabel.translatesAutoresizingMaskIntoConstraints = false
+      nameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+      nameLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
+      nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+      nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
-    
+
     func setLabels(forTeam team: Team) {
-        self.nameLabel.text = team.name
+        self.nameLabel.set(text: team.name)
     }
     
     func setLabels(forChallenge challenge: Challenge) {
-        self.nameLabel.text = challenge.name
+        self.nameLabel.set(text: challenge.name)
     }
     
     func setLabels(forUser user: User) {
-        self.nameLabel.text = user.name
+        self.nameLabel.set(text: user.name)
     }
 }

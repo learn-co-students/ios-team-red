@@ -9,12 +9,12 @@
 import UIKit
 import Firebase
 
-class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     let titleLabel = TitleLabel()
     var user: User?
     var userID = FIRAuth.auth()?.currentUser?.uid
-    let teamNameField = UITextField()
+    let teamNameField = FitnessField()
     let submitButton = SubmitButton()
     let imageButton = FitnessButton()
     let teamImage = UIImageView()
@@ -23,7 +23,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.delegate = self
-        
+
         if let userID = userID {
             FirebaseManager.fetchUser(withFirebaseUID: userID, completion: { (user) in
                 self.user = user
@@ -33,8 +33,10 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         setupLabels()
         setUpTextFields()
         setupButtons()
+      self.hideKeyboardWhenTappedAround()
+
     }
-    
+
     func setupLabels() {
         self.view.addSubview(titleLabel)
         titleLabel.setConstraints(toView: self.view, andViewController: self)
@@ -45,9 +47,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func setUpTextFields() {
         self.view.addSubview(teamNameField)
         teamNameField.constrainVertically(belowView: titleLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
-        teamNameField.backgroundColor = UIColor.foregroundOrange
-        teamNameField.layer.cornerRadius = 5
-        teamNameField.placeholder = "Enter team name"
+        teamNameField.setPlaceholder(text: "enter team name")
     }
     
     func setupButtons() {

@@ -53,17 +53,27 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     
     func pressCreateUserButton() {
-    
-        guard let tempGoal = Double(goalsView.activityMinutesADay.text) else {
+        guard let text = goalsView.activityMinutesADay.text else {
             goalsView.activityMinutesADay.flashRed()
             return
         }
-
+        guard let tempGoal = Double(text) else {
+            goalsView.activityMinutesADay.flashRed()
+            return
+        }
+        
         firstGoal.setValue(from: tempGoal)
       
         
-        let tempGoal2 = Double(goalsView.caloriesADay.text)?
-        secondGoal.setValue(from: tempGoal2!)
+        guard let text2 = goalsView.caloriesADay.text else {
+            goalsView.caloriesADay.flashRed()
+            return
+        }
+        guard let tempGoal2 = Double(text2) else {
+            goalsView.caloriesADay.flashRed()
+            return
+        }
+        secondGoal.setValue(from: tempGoal2)
       
         print("saving gender \(gender)")
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)

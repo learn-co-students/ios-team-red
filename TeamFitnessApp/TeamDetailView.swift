@@ -115,17 +115,17 @@ class TeamDetailView: FitnessView {
         teamImageView.widthAnchor.constraint(equalTo: teamNameLabel.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
         
-        leaveTeamButton.centerYAnchor.constraint(equalTo: teamImageView.centerYAnchor).isActive = true
-        leaveTeamButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor, constant: 50).isActive = true
-        leaveTeamButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.5).isActive = true
-        leaveTeamButton.widthAnchor.constraint(equalTo: teamImageView.widthAnchor, multiplier: 0.5).isActive = true
-        
         captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
         
         joinButton.leftAnchor.constraint(equalTo: captainLabel.rightAnchor).isActive = true
         joinButton.topAnchor.constraint(equalTo: captainLabel.topAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
         joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
+        
+        leaveTeamButton.centerYAnchor.constraint(equalTo: joinButton.centerYAnchor).isActive = true
+        leaveTeamButton.centerXAnchor.constraint(equalTo: joinButton.centerXAnchor).isActive = true
+        leaveTeamButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor).isActive = true
+        leaveTeamButton.widthAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
         
         membersLabel.constrainVertically(belowView: captainLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         

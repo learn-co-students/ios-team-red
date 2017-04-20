@@ -58,7 +58,6 @@ struct User {
     }
     
 
-    
     init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], goals: [Goal], email: String? = nil, uid: String? = nil) {
 
         self.name = name
@@ -78,10 +77,10 @@ struct User {
     }
     
     
-    mutating func update(name: String, weight: Int, height: Float, sex:String) {
+    mutating func update(name: String, weight: Int, goals: [Goal]) {
         self.name = name
         self.weight = weight
-        self.height = height
-        self.sex = sex
+        self.goals = goals
+    
     }
 }

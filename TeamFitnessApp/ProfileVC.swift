@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         alert(message: "Please select gender")
         return
       }
+        print(gender)
 
         let height = (feet * 12) + inches
 

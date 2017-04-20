@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 
 protocol UpdateProfileViewDelegate: class {
-    func pressGenderButton()
+
     func displayImagePickerButtonTapped()
     func pressSaveButton()
+    func pressLogOutButton()
 }
 
 
@@ -21,23 +22,24 @@ class updateProfileView: FitnessView {
     
     var profileLabel: FitnessLabel!
     var myImageView: UIImageView!
-    var showImagePickerButton: UIButton!
-    var nameTextField: UITextField!
-    var weightTextField: UITextField!
-    var heightFeetTextField: UITextField!
-    var heightInchesTextField: UITextField!
-    var genderButton: FitnessButton!
+    var showImagePickerButton: FitnessButton!
+    var nameLabel: FitnessLabel!
+    var nameTextField: FitnessField!
+    var weightLabel: FitnessLabel!
+    var weightTextField: FitnessField!
+    var minuteLabel: FitnessLabel!
+    var activityMinutesADay: FitnessField!
+    var calorieLabel: FitnessLabel!
+    var caloriesADay: FitnessField!
     var saveButton: FitnessButton!
+    var logOutButton: FitnessButton!
     weak var delegate: UpdateProfileViewDelegate?
-    
-    
-
-    
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadProfileUpdateUI()
+        setConstraints()
     
     }
     
@@ -45,9 +47,7 @@ class updateProfileView: FitnessView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func pressGenderButton(sender: UIButton) {
-        delegate?.pressGenderButton()
-    }
+
     
     func displayImagePickerButtonTapped(sender: UIButton) {
         delegate?.displayImagePickerButtonTapped()
@@ -57,11 +57,12 @@ class updateProfileView: FitnessView {
         print("SaveButton")
         delegate?.pressSaveButton()
     }
+    
+    func pressLogOutButton(sender:UIButton) {
+        delegate?.pressLogOutButton()
+    }
 
   
-    
-    
-    
     func loadProfileUpdateUI () {
         
         profileLabel = FitnessLabel()
@@ -69,117 +70,168 @@ class updateProfileView: FitnessView {
         profileLabel.translatesAutoresizingMaskIntoConstraints = false
         profileLabel.textAlignment = NSTextAlignment.center
         profileLabel.reverseColors()
-        profileLabel.changeFontSize(to: 32.0)
-        profileLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
-        profileLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
-        profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        profileLabel.text = "Profile"
-        
+        profileLabel.changeFontSize(to: 20.0)
+        profileLabel.set(text: "Profile")
+
         myImageView = UIImageView()
         self.addSubview(myImageView)
         myImageView.image = #imageLiteral(resourceName: "runner2")
         myImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        showImagePickerButton = FitnessButton()
+        self.addSubview(showImagePickerButton)
+        showImagePickerButton.translatesAutoresizingMaskIntoConstraints = false
+        showImagePickerButton.set(text: "choose image")
+    //  showImagePickerButton.backgroundColor = UIColor.clear
+        showImagePickerButton.addTarget(self, action: #selector(displayImagePickerButtonTapped), for: .touchUpInside)
+        
+        nameLabel = FitnessLabel()
+        self.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.textAlignment = NSTextAlignment.center
+        nameLabel.numberOfLines = 3
+        nameLabel.reverseColors()
+        nameLabel.changeFontSize(to: 10.0)
+        nameLabel.set(text: "name")
+
+        nameTextField = FitnessField()
+        self.addSubview(nameTextField)
+        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.clearButtonMode = .whileEditing
+        nameTextField.autocorrectionType = .no
+        nameTextField.setPlaceholder(text: "name")
+        
+        weightLabel = FitnessLabel()
+        self.addSubview(weightLabel)
+        weightLabel.translatesAutoresizingMaskIntoConstraints = false
+        weightLabel.textAlignment = NSTextAlignment.center
+        weightLabel.numberOfLines = 3
+        weightLabel.reverseColors()
+        weightLabel.changeFontSize(to: 10.0)
+        weightLabel.set(text: "weight")
+        
+        weightTextField = FitnessField()
+        self.addSubview(weightTextField)
+        weightTextField.translatesAutoresizingMaskIntoConstraints = false
+        weightTextField.setPlaceholder(text: "weight")
+        weightTextField.keyboardType = UIKeyboardType.numberPad
+        
+        minuteLabel = FitnessLabel()
+        self.addSubview(minuteLabel)
+        minuteLabel.translatesAutoresizingMaskIntoConstraints = false
+        minuteLabel.textAlignment = NSTextAlignment.center
+        minuteLabel.numberOfLines = 3
+        minuteLabel.reverseColors()
+        minuteLabel.changeFontSize(to: 10.0)
+        minuteLabel.set(text: "set daily activity goal")
+        
+        activityMinutesADay = FitnessField()
+        self.addSubview(activityMinutesADay)
+        activityMinutesADay.translatesAutoresizingMaskIntoConstraints = false
+        activityMinutesADay.setPlaceholder(text: "active minutes")
+        
+        
+        calorieLabel = FitnessLabel()
+        self.addSubview(calorieLabel)
+        calorieLabel.translatesAutoresizingMaskIntoConstraints = false
+        calorieLabel.textAlignment = NSTextAlignment.center
+        calorieLabel.reverseColors()
+        calorieLabel.numberOfLines = 2
+        calorieLabel.changeFontSize(to: 10.0)
+        calorieLabel.set(text: "set daily calorie goal")
+        
+        
+        caloriesADay = FitnessField()
+        self.addSubview(caloriesADay)
+        caloriesADay.translatesAutoresizingMaskIntoConstraints = false
+        caloriesADay.setPlaceholder(text: "calories")
+
+        
+        saveButton = FitnessButton()
+        self.addSubview(saveButton)
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        saveButton.set(text: "update")
+        saveButton.addTarget(self, action: #selector(pressSaveButton), for: UIControlEvents.touchUpInside)
+        
+        logOutButton = FitnessButton()
+        self.addSubview(logOutButton)
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        logOutButton.set(text: "Log Out")
+        logOutButton.addTarget(self, action: #selector(pressLogOutButton), for: UIControlEvents.touchUpInside)
+
+
+        
+
+        
+    }
+    
+    func setConstraints() {
+        
+        profileLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        profileLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 40).isActive = true
+        profileLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
+        profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        
         myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         myImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
         myImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2, constant: 0).isActive = true
         myImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 0).isActive = true
         
-        
-        showImagePickerButton = UIButton()
-        self.addSubview(showImagePickerButton)
-        showImagePickerButton.translatesAutoresizingMaskIntoConstraints = false
         showImagePickerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
         showImagePickerButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
         showImagePickerButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05, constant: 0).isActive = true
         showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 50).isActive = true
-        showImagePickerButton.setTitle("Choose Image", for: UIControlState.normal)
-        showImagePickerButton.backgroundColor = UIColor.clear
-        showImagePickerButton.addTarget(self, action: #selector(displayImagePickerButtonTapped), for: .touchUpInside)
 
-        nameTextField = UITextField()
-        self.addSubview(nameTextField)
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
-        nameTextField.layer.cornerRadius = 5
-        nameTextField.textAlignment = NSTextAlignment.center
-        nameTextField.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 20).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
+//        nameLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+
+        
+        
+        nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 0).isActive = true
         nameTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         nameTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         nameTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        nameTextField.clearButtonMode = .whileEditing
-        nameTextField.backgroundColor = UIColor.white
         
-        weightTextField = UITextField()
-        self.addSubview(weightTextField)
-        weightTextField.translatesAutoresizingMaskIntoConstraints = false
-        weightTextField.layer.cornerRadius = 5
-        weightTextField.textAlignment = NSTextAlignment.center
+        weightLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
+        weightLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
+//        weightLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        weightLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+
+        
         weightTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
         weightTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         weightTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        weightTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10).isActive = true
-        weightTextField.placeholder = "Weight"
-        weightTextField.backgroundColor = UIColor.white
-        weightTextField.keyboardType = UIKeyboardType.numberPad
+        weightTextField.topAnchor.constraint(equalTo: weightLabel.bottomAnchor, constant: 0).isActive = true
         
-        genderButton = FitnessButton()
-        self.addSubview(genderButton)
-        genderButton.translatesAutoresizingMaskIntoConstraints = false
-        genderButton.setTitle("Gender", for: .normal)
-        genderButton.changeFontSize(to: 16.0)
-        genderButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
-        genderButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        genderButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        genderButton.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 10).isActive = true
-        genderButton.addTarget(self, action: #selector(pressGenderButton), for: UIControlEvents.touchUpInside)
+        minuteLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        minuteLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        minuteLabel.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 10).isActive = true
         
-        heightFeetTextField = UITextField()
-        self.addSubview(heightFeetTextField)
-        heightFeetTextField.translatesAutoresizingMaskIntoConstraints = false
-        heightFeetTextField.layer.cornerRadius = 5
-        heightFeetTextField.textAlignment = NSTextAlignment.center
-        heightFeetTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.12).isActive = true
-        heightFeetTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        heightFeetTextField.leadingAnchor.constraint(equalTo: weightTextField.leadingAnchor, constant: 0).isActive = true
-        heightFeetTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 50).isActive = true
-        heightFeetTextField.placeholder = "Feet"
-        heightFeetTextField.backgroundColor = UIColor.white
-        heightFeetTextField.keyboardType = UIKeyboardType.numberPad
+        activityMinutesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        activityMinutesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+        activityMinutesADay.topAnchor.constraint(equalTo: minuteLabel.bottomAnchor, constant: 0).isActive = true
+        activityMinutesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         
-        heightInchesTextField = UITextField()
-        self.addSubview(heightInchesTextField)
-        heightInchesTextField.translatesAutoresizingMaskIntoConstraints = false
-        heightInchesTextField.layer.cornerRadius = 5
-        heightInchesTextField.textAlignment = NSTextAlignment.center
-        heightInchesTextField.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.15).isActive = true
-        heightInchesTextField.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-        heightInchesTextField.trailingAnchor.constraint(equalTo: weightTextField.trailingAnchor, constant: 0).isActive = true
-        heightInchesTextField.topAnchor.constraint(equalTo: weightTextField.bottomAnchor, constant: 50).isActive = true
-        heightInchesTextField.placeholder = "Inches"
-        heightInchesTextField.backgroundColor = UIColor.white
-        heightInchesTextField.keyboardType = UIKeyboardType.numberPad
+        calorieLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        calorieLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        calorieLabel.topAnchor.constraint(equalTo: activityMinutesADay.bottomAnchor, constant: 10).isActive = true
         
-        saveButton = FitnessButton()
-        self.addSubview(saveButton)
-        saveButton.translatesAutoresizingMaskIntoConstraints = false
-        saveButton.setTitle("Save", for: UIControlState.normal)
-        saveButton.topAnchor.constraint(equalTo: heightFeetTextField.bottomAnchor, constant: 10).isActive = true
-        saveButton.widthAnchor.constraint(equalTo: genderButton.widthAnchor).isActive = true
-        saveButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        saveButton.addTarget(self, action: #selector(pressSaveButton), for: UIControlEvents.touchUpInside)
+        caloriesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        caloriesADay.topAnchor.constraint(equalTo: calorieLabel.bottomAnchor, constant: 0).isActive = true
+        caloriesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+        caloriesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
+        saveButton.topAnchor.constraint(equalTo: caloriesADay.bottomAnchor, constant: 10).isActive = true
+        saveButton.widthAnchor.constraint(equalTo: weightTextField.widthAnchor).isActive = true
+        saveButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+//        saveButton.addTarget(self, action: #selector(pressSaveButton), for: UIControlEvents.touchUpInside)
         
-        
-        
-    
-        
-    
-    
+        logOutButton.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 10).isActive = true
+        logOutButton.widthAnchor.constraint(equalTo: weightTextField.widthAnchor).isActive = true
+        logOutButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+      
     }
     
-    
-    
-
-
-
 }

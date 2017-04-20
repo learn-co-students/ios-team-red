@@ -152,4 +152,5 @@ class DashboardView: FitnessView {
   }
 }
 
-
+//goalOne = user.goals[0].value
+//goalTwo = user.goals[1].value

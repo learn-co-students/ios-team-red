@@ -132,38 +132,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
 
 extension TeamsVC {
     
-    // MARK: - calls to Firebase
-//    func fetchData(completion: @escaping () -> Void) {
-//        guard let uid = uid else {return}
-//        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-//            self.user = user
-//            self.getAllTeams(user: user) {
-//                completion()
-//            }
-//        }
-//    }
-//    
-//    private func getAllTeams(user: User, completion: @escaping () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
-//        
-//        FirebaseManager.fetchAllTeams { (teams) in
-//            self.myTeams.removeAll()
-//            self.publicTeams.removeAll()
-//            self.filteredTeams.removeAll()
-//            for team in teams {
-//                if let teamID = team.id  {
-//                    if user.teamIDs.contains(teamID) {
-//                        self.myTeams.append(team)
-//                    } else {
-//                        self.publicTeams.append(team)
-//                    }
-//                }
-//            }
-//            self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-//            self.publicTeams = self.publicTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-//            self.filteredTeams = self.publicTeams
-//            completion()
-//        }
-//    }
     
     func getAllTeams(completion: @escaping () -> Void) {
         self.myTeams.removeAll()

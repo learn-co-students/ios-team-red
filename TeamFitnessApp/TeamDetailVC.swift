@@ -159,34 +159,7 @@
     }
     
     // MARK: - calls to firebase
-    
-//    func observeTeamData(completion: @escaping () -> Void) {
-//        guard let teamID = self.team?.id else {return}
-//        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
-//            self.team = team
-//            self.fetchChallenges(forTeam: team) {
-//                DispatchQueue.main.async {
-//                    self.teamDetailView.challengesView.reloadData()
-//                }
-//            }
-//            self.fetchUsers(forTeam: team) {
-//                    DispatchQueue.main.async {
-//                        self.teamDetailView.membersView.reloadData()
-//                }
-//            }
-//            
-//        }
-//    }
-    
-//    private func fetchChallenges(forTeam team: Team, completion: @escaping () -> Void) {
-//        self.teamChallenges.removeAll()
-//        for challengeID in team.challengeIDs {
-//            FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
-//                self.teamChallenges.append(challenge)
-//                completion()
-//            })
-//        }
-//    }
+
     
     private func getTeamChallenges(completion: () -> Void) {
         self.teamChallenges.removeAll()
@@ -211,16 +184,6 @@
         }
     }
     
-//    private func fetchUsers(forTeam team: Team, completion: @escaping () -> Void) {
-//        self.teamUsers.removeAll()
-//        for uid in team.userUIDs {
-//            FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
-//                self.teamUsers.append(user)
-//                completion()
-//            })
-//        }
-//    }
-    
     
     //MARK: - Button functions
     
@@ -228,8 +191,6 @@
         guard let uid = self.uid, let teamID = self.team?.id else {return} //TODO: handle this error better
         
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
-            self.teamUsers.removeAll()
-            self.teamChallenges.removeAll()
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
                 DispatchQueue.main.async {
                     self.teamDetailView.membersView.reloadData()

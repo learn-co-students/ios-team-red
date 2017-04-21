@@ -36,7 +36,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengeView.myChallengesView.delegate = self
         challengeView.myChallengesView.dataSource = self
-<<<<<<< HEAD
+
         
         challengeView.publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengeView.publicChallengesView.delegate = self
@@ -49,7 +49,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         DataStore.sharedInstance.observeAllChallenges() {
             self.getAllChallenges()
         }
-=======
+
 
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
 
@@ -57,7 +57,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
 
         getMyChallenges()
->>>>>>> 250d670b9f314cedad7d5deb8008bee2b72c9e1f
+
         
         self.hideKeyboardWhenTappedAround()
         

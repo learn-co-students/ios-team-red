@@ -77,6 +77,9 @@ class updateProfileView: FitnessView {
         self.addSubview(myImageView)
         myImageView.image = #imageLiteral(resourceName: "runner2")
         myImageView.translatesAutoresizingMaskIntoConstraints = false
+        myImageView.layer.cornerRadius = 10
+        myImageView.layer.masksToBounds = true
+        
         
         showImagePickerButton = FitnessButton()
         self.addSubview(showImagePickerButton)
@@ -173,8 +176,8 @@ class updateProfileView: FitnessView {
         profileLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         
         myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        myImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
-        myImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2, constant: 0).isActive = true
+        myImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.35, constant: 0).isActive = true
+        myImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15, constant: 0).isActive = true
         myImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 0).isActive = true
         
         showImagePickerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true

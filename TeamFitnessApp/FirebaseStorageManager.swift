@@ -19,7 +19,7 @@ struct FirebaseStoreageManager {
     
     //MARK: - Upload functions
     static func upload(teamImage: UIImage, withTeamID teamID: String, completion: @escaping (FirebaseResponse) -> Void) {
-        if let imageData: Data = UIImagePNGRepresentation(teamImage) {
+        if let imageData: Data = UIImageJPEGRepresentation(teamImage, 1) {
             let imageRef = teamImagesRef.child("\(teamID).png")
             _ = imageRef.put(imageData, metadata: nil, completion: { (metadata, error) in
                 if metadata != nil {
@@ -34,7 +34,8 @@ struct FirebaseStoreageManager {
     }
     
     static func upload(userImage: UIImage, withUserID userID: String, completion: @escaping (FirebaseResponse) -> Void) {
-        if let imageData: Data = UIImagePNGRepresentation(userImage) {
+        if let imageData: Data = UIImageJPEGRepresentation(userImage, 1)
+        {
             let imageRef = userImageRef.child("\(userID).png")
             _ = imageRef.put(imageData, metadata: nil, completion: { (metadata, error) in
                 if metadata != nil {

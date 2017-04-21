@@ -101,7 +101,17 @@
         }
         
         
-        observeTeamData() {}
+        DataStore.sharedInstance.observeAllUsers() {
+            self.getTeamMembers {
+                self.teamDetailView.membersView.reloadData()
+            }
+        }
+        
+        DataStore.sharedInstance.observeAllChallenges { 
+            self.getTeamChallenges {
+                self.teamDetailView.challengesView.reloadData()
+            }
+        }
     }
     
     
@@ -129,9 +139,11 @@
         var cell = FitnessCell()
         if tableView == teamDetailView.membersView {
             cell = teamDetailView.membersView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell //TODO set default cell layout
+            guard teamUsers.count > 0 else {return cell}
             cell.setLabels(forUser: teamUsers[indexPath.row])
         } else if tableView == teamDetailView.challengesView {
             cell = teamDetailView.challengesView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+            guard teamChallenges.count > 0 else {return cell}
             cell.setLabels(forChallenge: teamChallenges[indexPath.row])
         }
         return cell
@@ -148,43 +160,66 @@
     
     // MARK: - calls to firebase
     
-    func observeTeamData(completion: @escaping () -> Void) {
-        guard let teamID = self.team?.id else {return}
-        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
-            self.team = team
-            self.fetchChallenges(forTeam: team) {
-                DispatchQueue.main.async {
-                    self.teamDetailView.challengesView.reloadData()
-                }
-            }
-            self.fetchUsers(forTeam: team) {
-                    DispatchQueue.main.async {
-                        self.teamDetailView.membersView.reloadData()
-                }
-            }
-            
-        }
-    }
+//    func observeTeamData(completion: @escaping () -> Void) {
+//        guard let teamID = self.team?.id else {return}
+//        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
+//            self.team = team
+//            self.fetchChallenges(forTeam: team) {
+//                DispatchQueue.main.async {
+//                    self.teamDetailView.challengesView.reloadData()
+//                }
+//            }
+//            self.fetchUsers(forTeam: team) {
+//                    DispatchQueue.main.async {
+//                        self.teamDetailView.membersView.reloadData()
+//                }
+//            }
+//            
+//        }
+//    }
     
-    private func fetchChallenges(forTeam team: Team, completion: @escaping () -> Void) {
+//    private func fetchChallenges(forTeam team: Team, completion: @escaping () -> Void) {
+//        self.teamChallenges.removeAll()
+//        for challengeID in team.challengeIDs {
+//            FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
+//                self.teamChallenges.append(challenge)
+//                completion()
+//            })
+//        }
+//    }
+    
+    private func getTeamChallenges(completion: () -> Void) {
         self.teamChallenges.removeAll()
-        for challengeID in team.challengeIDs {
-            FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
+        for challenge in DataStore.sharedInstance.allChallenges {
+            if challenge.teamID == self.team?.id {
                 self.teamChallenges.append(challenge)
-                completion()
-            })
+            }
+        }
+        completion()
+    }
+    
+    private func getTeamMembers(completion: @escaping () -> Void) {
+        if let team = self.team {
+            self.teamUsers.removeAll()
+            for user in DataStore.sharedInstance.allUsers {
+                guard let uid = user.uid else {return}
+                if team.userUIDs.contains(uid) {
+                    self.teamUsers.append(user)
+                }
+            }
+            completion()
         }
     }
     
-    private func fetchUsers(forTeam team: Team, completion: @escaping () -> Void) {
-        self.teamUsers.removeAll()
-        for uid in team.userUIDs {
-            FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
-                self.teamUsers.append(user)
-                completion()
-            })
-        }
-    }
+//    private func fetchUsers(forTeam team: Team, completion: @escaping () -> Void) {
+//        self.teamUsers.removeAll()
+//        for uid in team.userUIDs {
+//            FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
+//                self.teamUsers.append(user)
+//                completion()
+//            })
+//        }
+//    }
     
     
     //MARK: - Button functions

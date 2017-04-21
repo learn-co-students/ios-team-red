@@ -114,9 +114,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     
     func getMyChallenges(completion: @escaping () -> Void) {
-        
+        guard let uid = self.uid else {return}
+        self.myChallenges.removeAll()
         for challenge in DataStore.sharedInstance.allChallenges {
-            if challenge.creator == self.uid {
+            if challenge.userUIDs.keys.contains(uid) {
                 self.myChallenges.append(challenge)
             }
         }

@@ -16,9 +16,7 @@ class DataStore {
     var allChallenges = [Challenge]()
     var allTeams = [Team]()
     
-    private init() {
-        observeAllTeams()
-    }
+    private init() {}
     
     func observeAllTeams() {
         FirebaseManager.fetchAllTeams { (teams) in
@@ -32,6 +30,12 @@ class DataStore {
         }
     }
     
+    func observeAllChallenges(completion: @escaping () -> Void) {
+        FirebaseManager.fetchAllChallenges { (challenges) in
+            self.allChallenges = challenges
+            completion()
+        }
+    }
     
     
     

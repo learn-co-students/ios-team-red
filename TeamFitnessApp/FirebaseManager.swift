@@ -12,18 +12,18 @@ import Firebase
 struct FirebaseManager {
     
     static var dataRef: FIRDatabaseReference = FIRDatabase.database().reference()
-
+    
     
     
     //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
-
     
-
-//MARK: - login functions
+    
+    
+    //MARK: - login functions
     //create a new firebase user with a given email in Firebase, and add that User to the Firebase database. Returns the User through a closure
-  static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
-
+    static func createNew(withEmail email: String, withPassword password: String, completion: @escaping (FirebaseResponse) -> Void) {
+        
         FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (firUser, error) in
             if let firUser = firUser {
                 completion(.successfulNewUser(firUser.uid))
@@ -44,7 +44,7 @@ struct FirebaseManager {
             }
         })
     }
-
+    
     //log out the current Firebase user. Returns a FirebaseResponse upon completion
     static func logoutUser(completion: (FirebaseResponse) -> Void) {
         do {
@@ -82,8 +82,8 @@ struct FirebaseManager {
             "teams": teamsDict,
             "goals": goalDict,
             "challenges": challengesDict,
-        ]
-
+            ]
+        
         
         key.updateChildValues(post)
         completion(true)
@@ -113,21 +113,21 @@ struct FirebaseManager {
     //fetches a user from Firebase given a user id string, and returns the user through a closure
     static func fetchUser(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {//TODO implement some better error handling
         dataRef.child("users").child(uid).observe(.value, with: { (snapshot) in
-                if let userDict = snapshot.value as? [String: Any] {
-                    let user = User(uid: uid, dict: userDict)
-                    completion(user)
-                }
+            if let userDict = snapshot.value as? [String: Any] {
+                let user = User(uid: uid, dict: userDict)
+                completion(user)
+            }
         })
     }
-
-  //fetch user trophies 
-  static func fetchUserTrophies(withFirebaseUID uid: String, completion: @escaping ([String:Int]) -> ()) {
-    dataRef.child("users").child(uid).child("trophies").observeSingleEvent(of: .value, with: { (snapshot) in
-      if let trophyDict = snapshot.value as? [String:Int] {
-        completion(trophyDict)
-      }
-    })
-  }
+    
+    //fetch user trophies
+    static func fetchUserTrophies(withFirebaseUID uid: String, completion: @escaping ([String:Int]) -> ()) {
+        dataRef.child("users").child(uid).child("trophies").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let trophyDict = snapshot.value as? [String:Int] {
+                completion(trophyDict)
+            }
+        })
+    }
     
     static func fetchUserOnce(withFirebaseUID uid: String, completion: @escaping (User) -> Void) {
         dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -172,7 +172,7 @@ struct FirebaseManager {
             }
         })
     }
-
+    
     static func fetchChallengeOnce(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
         dataRef.child("challenges").child(challengeID).observeSingleEvent(of: .value, with: { (snapshot) in
             if let challengeDict = snapshot.value as? [String: Any] {
@@ -183,7 +183,7 @@ struct FirebaseManager {
             }
         })
     }
-
+    
     static func fetchOldChallenge(withChallengeID challengeID: String, completion: @escaping (Challenge) -> Void) {
         dataRef.child("oldChallenges").child(challengeID).observe(.value, with: {(snapshot) in
             if let challengeDict = snapshot.value as? [String: Any] {
@@ -194,9 +194,9 @@ struct FirebaseManager {
             }
         })
     }
-
-
-
+    
+    
+    
     
     static func fetchAllTeams(completion: @escaping ([Team]) -> Void) { //fetches all teams and returns them in an array through a completion
         dataRef.child("teams").observe(.value, with: { (snapshot) in
@@ -274,23 +274,23 @@ struct FirebaseManager {
         
     }
     
-//    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
-//        var challenges = [Challenge]()
-//        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
-//            let challengesDict = snapshot.value as? [String: Any]
-//            if let challengesDict = challengesDict {
-//                for challenge in challengesDict {
-//                    let challengeValues = challenge.value as? [String: Any] ?? [:]
-//                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
-//                    challenges.append(challenge)
-//                }
-//            }
-//            completion(challenges)
-//        })
-//    }
-
+    //    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
+    //        var challenges = [Challenge]()
+    //        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in
+    //            let challengesDict = snapshot.value as? [String: Any]
+    //            if let challengesDict = challengesDict {
+    //                for challenge in challengesDict {
+    //                    let challengeValues = challenge.value as? [String: Any] ?? [:]
+    //                    let challenge = Challenge(id: challenge.key, dict: challengeValues)
+    //                    challenges.append(challenge)
+    //                }
+    //            }
+    //            completion(challenges)
+    //        })
+    //    }
     
-// MARK: - add new user/team/challenge functions
+    
+    // MARK: - add new user/team/challenge functions
     private static func addNew(user: FIRUser) { //adds a new user's UID and email to the Firebase database
         FirebaseManager.dataRef.child("users").child(user.uid).child("email").setValue(user.email)
     }
@@ -315,13 +315,13 @@ struct FirebaseManager {
         completion(challengeID)
     }
     
-//    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
-//        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
-//        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
-//        completion()
-//    }
+    //    static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
+    //        let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
+    //        parentRef.child(childDataType.rawValue).child(childID).setValue(true)
+    //        completion()
+    //    }
     
-// MARK: - private helper functions
+    // MARK: - private helper functions
     private static func makeDictionary(fromTeam team: Team) -> [String: Any]{
         var usersDict = [String: Bool]()
         var challengesDict = [String: Bool]()
@@ -371,7 +371,7 @@ struct FirebaseManager {
         return dict
         
     }
-
+    
     
     static func add(childID: String, toParentId parentID: String, parentDataType: DataType, childDataType: DataType, completion: () -> Void) {
         let parentRef = dataRef.child(parentDataType.rawValue).child(parentID)
@@ -380,7 +380,7 @@ struct FirebaseManager {
     }
     
     
-
+    
     static func checkForPrevious(uid: String, completion: @escaping (Bool) -> Void) {
         var check: Bool = false
         dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -391,7 +391,7 @@ struct FirebaseManager {
     }
     
     
-// MARK: test functions
+    // MARK: test functions
     static func generateTestUser() {
         //        var user = User(name: "Superman", sex: "Male", height: 80, weight: 200, teamIDs: [], challengeIDs: [])
         //        //var user = User(name: "Batman", sex: "Bat", height: 74, weight: 240, teamIDs: [], challengeIDs: [])
@@ -406,7 +406,7 @@ struct FirebaseManager {
         //
         //        }
     }
-
+    
     
     
     static func loginTestUser () {
@@ -420,7 +420,7 @@ struct FirebaseManager {
         }
     }
     
-//MARK: remove functions
+    //MARK: remove functions
     
     static func remove(teamID: String, fromUID uid: String, completion: () -> Void) {
         dataRef.child("users").child(uid).child("teams").child(teamID).removeValue()
@@ -435,7 +435,7 @@ struct FirebaseManager {
     
     static func hasUsers(inTeamID teamID: String, completion: @escaping (Bool) -> Void){
         dataRef.child("teams").child(teamID).child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let dictionary = snapshot.value as? [String: Any] {
+            if (snapshot.value as? [String: Any]) != nil {
                 completion(true)
             } else {
                 completion(false)
@@ -443,22 +443,53 @@ struct FirebaseManager {
         })
     }
     
-//MARK: Flag for offense
+    //MARK: Flag for offense
     
     static func flag(team: Team, completion: () -> Void) {
         guard let teamID = team.id else {return}
         dataRef.child("teams").child(teamID).child("flagged").setValue(true)
     }
     
-    static func checkForFlag(onTeam team: Team, completion: (Bool) -> Void) {
+    static func flag(user: User, completion: () -> Void) {
+        guard let userID = user.uid else {return}
+        dataRef.child("users").child(userID).child("flagged").setValue(true)
+    }
+    
+    static func checkForFlag(onTeam team: Team, completion: @escaping (Bool) -> Void) {
         guard let teamID = team.id else {return}
         dataRef.child("teams").child(teamID).child("flagged").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let flagged = snapshot.value as? Bool else {
+                
+                completion(false)
+                return
+            }
+            if flagged == true { //TODO: remove force unwrap with a default value
+                completion(true)
+            } else {
+                completion(false)
+            }
             
         })
     }
-
+    
+    static func checkForFlag(onUser user: User, completion: @escaping (Bool) -> Void) {
+        guard let userID = user.uid else {return}
+        dataRef.child("users").child(userID).child("flagged").observeSingleEvent(of: .value, with: { (snapshot) in
+            guard let flagged = snapshot.value as? Bool else {
+                
+                completion(false)
+                return
+            }
+            if flagged == true { //TODO: remove force unwrap with a default value
+                completion(true)
+            } else {
+                completion(false)
+            }
+        })
+    }
+    
     //MARK: - reset password
-
+    
     static func resetPassword(forEmail email: String, completion: @escaping (Bool, Error?) -> ()) {
         FIRAuth.auth()?.sendPasswordReset(withEmail: email) { (error) in
             if error == nil {
@@ -468,5 +499,5 @@ struct FirebaseManager {
             }
         }
     }
-
+    
 }

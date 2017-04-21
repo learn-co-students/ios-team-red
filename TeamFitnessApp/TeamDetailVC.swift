@@ -228,6 +228,10 @@
     
     func reportTeam() {
         teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
+        guard let team = team else {return}
+        FirebaseManager.flag(team: team) {
+            print("TEAM FLAGGED!!!!!!!")
+        }
     }
     
     private func checkIfTeamIsEmpty() {

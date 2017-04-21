@@ -13,8 +13,8 @@ class TeamDetailView: FitnessView {
     
 
     var captainLabel: FitnessLabel!
-    var membersLabel: FitnessLabel!
-    var challengesLabel: FitnessLabel!
+    var membersLabel: TitleLabel!
+    var challengesLabel: TitleLabel!
     var inviteMembersButton: FitnessButton!
     var createChallengeButton: FitnessButton!
     var membersView: UITableView!
@@ -62,7 +62,7 @@ class TeamDetailView: FitnessView {
         joinButton.set(text: "join")
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         
-        membersLabel = FitnessLabel()
+        membersLabel = TitleLabel()
         membersLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(membersLabel)
         membersLabel.textAlignment = .center
@@ -76,7 +76,7 @@ class TeamDetailView: FitnessView {
         membersView.translatesAutoresizingMaskIntoConstraints = false
         membersView.backgroundColor = UIColor.clear
         
-        challengesLabel = FitnessLabel()
+        challengesLabel = TitleLabel()
         challengesLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(challengesLabel)
         challengesLabel.textAlignment = .center

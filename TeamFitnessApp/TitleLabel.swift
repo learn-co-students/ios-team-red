@@ -24,7 +24,18 @@ class TitleLabel: FitnessLabel {
         self.changeFontSize(to: 28)
         self.reverseColors()
     }
-    
+
+    override func set(text: String) {
+        let attributes: NSDictionary = [
+            NSKernAttributeName:CGFloat(3.0),
+            NSUnderlineStyleAttributeName:NSUnderlineStyle.styleThick.rawValue,
+            NSUnderlineColorAttributeName:UIColor.raspberry
+        ]
+        let attributedTitle = NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
+
+        self.attributedText = attributedTitle
+        self.reverseColors()
+    }
 }
 
 

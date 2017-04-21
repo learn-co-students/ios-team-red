@@ -50,7 +50,7 @@ class FitnessDatePickerView: UIView {
     }
     
     func setTitle(toString title: String) {
-        self.titleLabel.text = title
+        self.titleLabel.set(text: title)
     }
     
     func changeDate(sender: UIDatePicker!) {

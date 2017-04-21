@@ -44,15 +44,21 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         teamsView.searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         teamsView.searchTableView.delegate = self
         teamsView.searchTableView.dataSource = self
-        
+
+        self.hideKeyboardWhenTappedAround()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+
         DataStore.sharedInstance.observeAllTeams() {
             self.getAllTeams() {
                 self.teamsView.myTeamsView.reloadData()
                 self.teamsView.searchTableView.reloadData()
             }
         }
-        
-        self.hideKeyboardWhenTappedAround()
+
     }
     
     func segueCreateTeam() {

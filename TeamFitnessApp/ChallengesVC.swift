@@ -38,12 +38,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.myChallengesView.dataSource = self
         
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
-        
-        DataStore.sharedInstance.observeAllChallenges() {
-            self.getMyChallenges() {
-                self.challengeView.myChallengesView.reloadData()
-            }
-        }
 
 
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
@@ -55,6 +49,16 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.hideKeyboardWhenTappedAround()
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DataStore.sharedInstance.observeAllChallenges() {
+            self.getMyChallenges() {
+                self.challengeView.myChallengesView.reloadData()
+            }
+        }
     }
 
     func onProfile(_ sender: UIBarButtonItem) {

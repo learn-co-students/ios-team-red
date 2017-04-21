@@ -33,18 +33,18 @@ class TrophyView: FitnessView {
   }
 
   
-  var participationLabel: FitnessLabel!
+  var participationLabel: TitleLabel!
   var participationCountLabel: CountLabel!
-  var completionLabel: FitnessLabel!
+  var completionLabel: TitleLabel!
   var completionCountLabel: CountLabel!
-  var trophyLabel: FitnessLabel!
+  var trophyLabel: TitleLabel!
   var firstPlaceImageView: UIImageView!
   var firstPlaceLabel: CountLabel!
   var secondPlaceImageView: UIImageView!
   var secondPlaceLabel: CountLabel!
   var thirdPlaceImageView: UIImageView!
   var thirdPlaceLabel: CountLabel!
-  var archeiveLabel: FitnessLabel!
+  var archeiveLabel: TitleLabel!
   var tableView: UITableView!
 
 
@@ -63,15 +63,15 @@ class TrophyView: FitnessView {
 
   func comInit() {
 
-    participationLabel = FitnessLabel(frame: CGRect.zero)
+    participationLabel = TitleLabel(frame: CGRect.zero)
     participationLabel.set(text: "Challenege Participation Count")
     participationLabel.changeFontSize(to: 20)
 
-    completionLabel = FitnessLabel(frame: CGRect.zero)
+    completionLabel = TitleLabel(frame: CGRect.zero)
     completionLabel.set(text: "Successful Completion Count")
     completionLabel.changeFontSize(to: 20)
 
-    trophyLabel = FitnessLabel(frame: CGRect.zero)
+    trophyLabel = TitleLabel(frame: CGRect.zero)
     trophyLabel.set(text: "Tropies")
     trophyLabel.changeFontSize(to: 20)
 
@@ -86,8 +86,8 @@ class TrophyView: FitnessView {
     secondPlaceImageView = UIImageView(image: #imageLiteral(resourceName: "silver"))
     thirdPlaceImageView = UIImageView(image: #imageLiteral(resourceName: "bronze"))
 
-    archeiveLabel = FitnessLabel(frame: CGRect.zero)
-    archeiveLabel.set(text: "Challenge Archieve")
+    archeiveLabel = TitleLabel(frame: CGRect.zero)
+    archeiveLabel.set(text: "Challenge Archive")
     archeiveLabel.changeFontSize(to: 20)
 
     tableView = UITableView()

@@ -28,9 +28,9 @@ class DashboardView: FitnessView {
   var goalOne: Double!
   var goalTwo: Double!
   var pieChartView1: CustomPieChartView!
-  var pieOneLabel: FitnessLabel!
+  var pieOneLabel: TitleLabel!
   var pieChartView2: CustomPieChartView!
-  var pieTwoLabel: FitnessLabel!
+  var pieTwoLabel: TitleLabel!
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -52,7 +52,7 @@ class DashboardView: FitnessView {
     pieChartView1.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieChartView1)
 
-    pieOneLabel = FitnessLabel(frame: CGRect.zero)
+    pieOneLabel = TitleLabel(frame: CGRect.zero)
     pieOneLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieOneLabel)
 
@@ -62,7 +62,7 @@ class DashboardView: FitnessView {
     pieChartView2.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieChartView2)
 
-    pieTwoLabel = FitnessLabel(frame: CGRect.zero)
+    pieTwoLabel = TitleLabel(frame: CGRect.zero)
     pieTwoLabel.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieTwoLabel)
 

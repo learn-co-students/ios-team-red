@@ -83,7 +83,7 @@
                 switch response {
                 case let .successfulDownload(teamImage):
                     DispatchQueue.main.async {
-                        self.teamDetailView.teamImageView.image = teamImage
+                        self.teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
                     }
                 case let .failure(failString):
                     print(failString)

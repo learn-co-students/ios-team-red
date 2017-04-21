@@ -10,7 +10,7 @@ import UIKit
 
 class CreateChallengeView: FitnessView {
     
-    let challengeTitleLabel = FitnessLabel()
+    let challengeTitleLabel = TitleLabel()
     let challengeNameField = FitnessField()
     let startDatePicker = FitnessDatePickerView()
     let endDatePicker = FitnessDatePickerView()
@@ -50,7 +50,7 @@ class CreateChallengeView: FitnessView {
         endDatePicker.alpha = 0
         
         self.addSubview(nextButton)
-        nextButton.set(text: "now set duration")
+        nextButton.set(text: "set duration")
 
     }
     

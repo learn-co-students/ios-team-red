@@ -71,6 +71,8 @@ class ProfileView: FitnessView {
         self.addSubview(myImageView)
         myImageView.image = #imageLiteral(resourceName: "runner2")
         myImageView.translatesAutoresizingMaskIntoConstraints = false
+        myImageView.layer.cornerRadius = 10
+        myImageView.layer.masksToBounds = true
         
         
         showImagePickerButton = FitnessButton()

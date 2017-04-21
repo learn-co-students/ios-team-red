@@ -24,8 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
       FIRApp.configure()
         getData()
         
-
-
+   
       // initalize the window
       self.window = UIWindow(frame: UIScreen.main.bounds)
       //check for nill

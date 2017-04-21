@@ -21,7 +21,7 @@ class DashboardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    self.navigationItem.setTitle(text: "Groupfit")
+    self.navigationItem.setTitle(text: "FriendFit")
 
 
       let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))

@@ -16,13 +16,19 @@ class TrophyView: FitnessView {
       participationCountLabel.text = "\(user.oldChallengeIDs.count)"
       if let firstCount = user.trophies["gold"] {
         firstPlaceLabel.text = "\(firstCount)"
-      }
+      } else {
+        firstPlaceLabel.text = "0"
+        }
       if let secondCount = user.trophies["silver"] {
         secondPlaceLabel.text = "\(secondCount)"
-      }
+      } else {
+        secondPlaceLabel.text = "0"
+        }
       if let thirdCount = user.trophies["bronze"] {
         thirdPlaceLabel.text = "\(thirdCount)"
-      }
+      } else {
+        thirdPlaceLabel.text = "0"
+        }
     }
   }
 
@@ -86,7 +92,6 @@ class TrophyView: FitnessView {
 
     tableView = UITableView()
     tableView.backgroundColor = UIColor.clear
-    tableView.register(FitnessCell.self, forCellReuseIdentifier: "cell")
 
     let views: [UIView] = [participationLabel, participationCountLabel, completionLabel, completionCountLabel, trophyLabel, firstPlaceImageView, firstPlaceLabel, secondPlaceImageView, secondPlaceLabel, thirdPlaceImageView, thirdPlaceLabel, archeiveLabel, tableView]
 
@@ -158,9 +163,6 @@ class TrophyView: FitnessView {
     tableView.topAnchor.constraint(equalTo: archeiveLabel.bottomAnchor, constant: 10).isActive = true
     tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     tableView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    tableView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+    tableView.heightAnchor.constraint(equalToConstant: 175).isActive = true
   }
-
-
-
 }

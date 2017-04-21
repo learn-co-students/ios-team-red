@@ -92,7 +92,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
             let text = "distance"
             return NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
         case 1:
-            let text = "Sept Count"
+            let text = "Step Count"
             return  NSAttributedString(string: text.uppercased(), attributes:attributes as? [String : AnyObject])
         case 2:
             let text = "Calories Burned"

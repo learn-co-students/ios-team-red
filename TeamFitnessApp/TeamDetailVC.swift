@@ -4,7 +4,7 @@
  //
  //  Created by Patrick O'Leary on 4/6/17.
  //  Copyright © 2017 Patrick O'Leary. All rights reserved.
- //
+ 
  
  import UIKit
  import Firebase
@@ -33,6 +33,9 @@
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.setTitle(text: (self.team?.name)!)
+        
         
         teamDetailView = TeamDetailView(frame: view.frame)
         self.view = teamDetailView
@@ -48,8 +51,6 @@
         teamDetailView.joinButton.isHidden = true
         teamDetailView.joinButton.isEnabled = false
         teamDetailView.joinButton.addTarget(self, action: #selector(joinTeam), for: .touchUpInside)
-        
-        teamDetailView.teamNameLabel.text = self.team?.name
         
         teamDetailView.leaveTeamButton.isHidden = false
         teamDetailView.leaveTeamButton.isEnabled = true
@@ -97,12 +98,22 @@
         
         if let captain = team?.captainID { //get the captain and set their name to the captain label
             FirebaseManager.fetchUser(withFirebaseUID: captain, completion: { (captain) in
-                self.teamDetailView.captainLabel.text = "Captain: \(captain.name)"
+                self.teamDetailView.captainLabel.set(text: "Captain: \(captain.name)")
             })
         }
         
         
-        observeTeamData() {}
+        DataStore.sharedInstance.observeAllUsers() {
+            self.getTeamMembers {
+                self.teamDetailView.membersView.reloadData()
+            }
+        }
+        
+        DataStore.sharedInstance.observeAllChallenges { 
+            self.getTeamChallenges {
+                self.teamDetailView.challengesView.reloadData()
+            }
+        }
     }
     
 
@@ -129,9 +140,11 @@
         var cell = FitnessCell()
         if tableView == teamDetailView.membersView {
             cell = teamDetailView.membersView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell //TODO set default cell layout
+            guard teamUsers.count > 0 else {return cell}
             cell.setLabels(forUser: teamUsers[indexPath.row])
         } else if tableView == teamDetailView.challengesView {
             cell = teamDetailView.challengesView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+            guard teamChallenges.count > 0 else {return cell}
             cell.setLabels(forChallenge: teamChallenges[indexPath.row])
         }
         return cell
@@ -147,44 +160,28 @@
     }
     
     // MARK: - calls to firebase
+
     
-    func observeTeamData(completion: @escaping () -> Void) {
-        guard let teamID = self.team?.id else {return}
-        FirebaseManager.fetchTeam(withTeamID: teamID) { (team) in
-            self.team = team
-            print("team user IDS updated: \(team.userUIDs)")
-            self.fetchChallenges(forTeam: team) {
-                DispatchQueue.main.async {
-                    self.teamDetailView.challengesView.reloadData()
-                }
-            }
-            self.fetchUsers(forTeam: team) {
-                print("team user array : \(self.teamUsers)*****")
-                    DispatchQueue.main.async {
-                        self.teamDetailView.membersView.reloadData()
-                }
-            }
-            
-        }
-    }
-    
-    private func fetchChallenges(forTeam team: Team, completion: @escaping () -> Void) {
+    private func getTeamChallenges(completion: () -> Void) {
         self.teamChallenges.removeAll()
-        for challengeID in team.challengeIDs {
-            FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
+        for challenge in DataStore.sharedInstance.allChallenges {
+            if challenge.teamID == self.team?.id {
                 self.teamChallenges.append(challenge)
-                completion()
-            })
+            }
         }
+        completion()
     }
     
-    private func fetchUsers(forTeam team: Team, completion: @escaping () -> Void) {
-        self.teamUsers.removeAll()
-        for uid in team.userUIDs {
-            FirebaseManager.fetchUserOnce(withFirebaseUID: uid, completion: { (user) in
-                self.teamUsers.append(user)
-                completion()
-            })
+    private func getTeamMembers(completion: @escaping () -> Void) {
+        if let team = self.team {
+            self.teamUsers.removeAll()
+            for user in DataStore.sharedInstance.allUsers {
+                guard let uid = user.uid else {return}
+                if team.userUIDs.contains(uid) {
+                    self.teamUsers.append(user)
+                }
+            }
+            completion()
         }
     }
     
@@ -195,8 +192,6 @@
         guard let uid = self.uid, let teamID = self.team?.id else {return} //TODO: handle this error better
         
         FirebaseManager.add(childID: uid, toParentId: teamID, parentDataType: .teams, childDataType: .users) {
-            self.teamUsers.removeAll()
-            self.teamChallenges.removeAll()
             FirebaseManager.add(childID: teamID, toParentId: uid, parentDataType: .users, childDataType: .teams) {
                 DispatchQueue.main.async {
                     self.teamDetailView.membersView.reloadData()
@@ -213,19 +208,21 @@
         let createChallengeVC = CreateChallengeVC()
         createChallengeVC.team = self.team
         createChallengeVC.challengeIsPublic = false
-        present(createChallengeVC, animated: true, completion: nil)
+        let navVC = NavigationController(rootViewController: createChallengeVC)
+        present(navVC, animated: true, completion: nil)
     }
     
     func leaveTeam() {
         guard let teamID = team?.id, let uid = self.uid else {return}
-        print("call to firebase to remove user: \(uid) from team: \(teamID)")
         FirebaseManager.remove(teamID: teamID, fromUID: uid) {
-            print("firebase call to leave team has returned")
             teamDetailView.leaveTeamButton.isHidden = true
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true
             checkIfTeamIsEmpty()
-            
+            DispatchQueue.main.async {
+                self.teamDetailView.membersView.reloadData()
+                self.teamDetailView.challengesView.reloadData()
+            }
         }
     }
     

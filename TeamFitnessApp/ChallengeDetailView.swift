@@ -72,7 +72,7 @@ class ChallengeDetailView: FitnessView {
         leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
         leadersChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.4).isActive = true
+        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
     }
     
     func displayJoinButton() {

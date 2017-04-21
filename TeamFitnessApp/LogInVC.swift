@@ -145,7 +145,15 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             return
         }
     }
-    
+
+    func pressForgot() {
+        let vc = ForgotPasswordVC()
+        let navVC = NavigationController(rootViewController: vc)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(navVC, animated: true, completion: nil)
+
+    }
+
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         FirebaseManager.logoutUser { (response) in
             switch response {

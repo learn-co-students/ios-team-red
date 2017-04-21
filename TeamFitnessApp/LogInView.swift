@@ -13,6 +13,7 @@ import FBSDKLoginKit
 protocol LoginViewDelegate: class {
     func pressNewUser()
     func pressLogin()
+    func pressForgot()
 }
 
 
@@ -49,6 +50,10 @@ class LogInView: FitnessView {
     
     func pressLogin(sender: UIButton) {
         delegate?.pressLogin()
+    }
+
+    func pressForgot(sender: UIButton) {
+        delegate?.pressForgot()
     }
     
     private func loadUI() {
@@ -112,6 +117,7 @@ class LogInView: FitnessView {
         forgotButton.translatesAutoresizingMaskIntoConstraints = false
         forgotButton.reverseColors()
         forgotButton.setReversed(text: "forgot password?")
+        forgotButton.addTarget(self, action: #selector(pressForgot(sender:)), for: .touchUpInside)
         
         loginButton = FitnessButton()
         self.addSubview(loginButton)

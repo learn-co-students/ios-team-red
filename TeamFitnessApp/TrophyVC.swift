@@ -22,6 +22,8 @@ class TrophyVC: UIViewController {
       trophyView = TrophyView(frame: self.view.bounds)
       self.view = trophyView
 
+        fetchUser()
+
     self.navigationItem.setTitle(text: "trophies")
 
         let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
@@ -29,6 +31,8 @@ class TrophyVC: UIViewController {
 
       trophyView.tableView.delegate = self
       trophyView.tableView.dataSource = self
+        trophyView.tableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
+
   }
 
   func fetchUser() {
@@ -44,12 +48,15 @@ class TrophyVC: UIViewController {
   }
 
     func getOldChallenges() {
-      if user.challengeIDs.count > 0 {
+      if user.oldChallengeIDs.count > 0 {
         for challenge in user.oldChallengeIDs {
-          FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (oldChallenge) in
+          FirebaseManager.fetchOldChallenge(withChallengeID: challenge, completion: { (oldChallenge) in
             DispatchQueue.main.async {
               self.oldChallenges.append(oldChallenge)
-              self.trophyView.tableView.reloadData()
+                if self.oldChallenges.count == self.user.oldChallengeIDs.count {
+                     self.trophyView.tableView.reloadData()
+                }
+
             }
           })
         }
@@ -64,10 +71,9 @@ extension TrophyVC: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = oldChallenges[indexPath.row].name
-    cell.backgroundColor = UIColor.clear
-    cell.textLabel?.textColor = UIColor.foregroundOrange
+    var cell = FitnessCell()
+    cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
+    cell.setLabels(forChallenge: oldChallenges[indexPath.row])
     return cell
   }
 

@@ -16,6 +16,7 @@ class DataStore {
     var allChallenges = [Challenge]()
     var allTeams = [Team]()
     var teamUsers = [User]()
+    var userChallenges = [Challenge]()
     
     private init() {}
     
@@ -52,7 +53,21 @@ class DataStore {
                     }
                 })
             }
+        }
+    }
 
+    func getChallenges(forUser userID: String, completion: @escaping () -> ()) {
+        var userChallenges = [Challenge]()
+        FirebaseManager.fetchUser(withFirebaseUID: userID) { (user) in
+            for challenges in user.challengeIDs {
+                FirebaseManager.fetchChallengeOnce(withChallengeID: challenges, completion: { (challenge) in
+                    userChallenges.append(challenge)
+                    if userChallenges.count == user.challengeIDs.count {
+                        self.userChallenges = userChallenges
+                        completion()
+                    }
+                })
+            }
         }
     }
 }

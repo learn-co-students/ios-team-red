@@ -30,30 +30,27 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
         challengeView = ChallengesView(frame: view.frame)
         self.view = challengeView
-        challengeView.challengeSearchBar.delegate = self
-        
+
         challengeView.myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengeView.myChallengesView.delegate = self
         challengeView.myChallengesView.dataSource = self
-        
-        challengeView.publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        challengeView.publicChallengesView.delegate = self
-        challengeView.publicChallengesView.dataSource = self
 
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
 
-        setupSearchBar()
+        challengeView.findChallengeButton.addTarget(self, action: #selector(segueFindChallenge), for: .touchUpInside)
+
+
         getMyChallenges()
-        getPublicChallenges() {
-            DispatchQueue.main.async {
-                self.challengeView.publicChallengesView.reloadData()
-            }
-        }
         
         self.hideKeyboardWhenTappedAround()
         
     }
-    
+
+    func onProfile(_ sender: UIBarButtonItem) {
+        let vc = ProfileUpdateVC()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -62,12 +59,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         var rows = 0
         if tableView == challengeView.myChallengesView {
             rows = myChallenges.count
-        } else if tableView == challengeView.publicChallengesView {
-            if searchActive {
-                rows = filteredChallenges.count
-            } else {
-                rows = publicChallenges.count
-            }
         }
         return rows
     }
@@ -78,15 +69,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == challengeView.myChallengesView {
             cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
             cell.setLabels(forChallenge: myChallenges[indexPath.row])
-        } else if tableView == challengeView.publicChallengesView {
-
-            if searchActive {
-                cell = challengeView.publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
-                cell.setLabels(forChallenge: filteredChallenges[indexPath.row])
-            } else {
-                cell = challengeView.publicChallengesView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
-                cell.setLabels(forChallenge: publicChallenges[indexPath.row])
-            }
         }
         return cell
     }
@@ -97,18 +79,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
 //            present(challengeDetailVC, animated: true, completion: nil)
             navigationController?.pushViewController(challengeDetailVC, animated: true)
-        } else if tableView == challengeView.publicChallengesView {
-            if searchActive {
-                let challengeDetailVC = ChallengeDetailVC()
-                challengeDetailVC.setChallenge(challenge: filteredChallenges[indexPath.row])
-//                present(challengeDetailVC, animated: true, completion: nil)
-                navigationController?.pushViewController(challengeDetailVC, animated: true)
-            } else {
-                let challengeDetailVC = ChallengeDetailVC()
-                challengeDetailVC.setChallenge(challenge: publicChallenges[indexPath.row])
-//                present(challengeDetailVC, animated: true, completion: nil)
-                navigationController?.pushViewController(challengeDetailVC, animated: true)
-            }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -120,6 +90,14 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     createChallengeVC.modalPresentationStyle = .fullScreen
     self.present(navVC, animated: true, completion: nil)
   }
+
+    func segueFindChallenge() {
+
+        let vc = FindChallengesVC()
+        let navVC = NavigationController(rootViewController: vc)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true, completion: nil)
+    }
 
 //MARK: Firebase calls
     func getMyChallenges() {
@@ -136,61 +114,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
         }
     }
-    
-    func getPublicChallenges(completion: @escaping () -> Void) {
-        FirebaseManager.fetchAllChallenges { (challenges) in
-            self.publicChallenges.removeAll()
-            self.publicChallenges = challenges.filter{$0.isPublic}
-            self.filteredChallenges = self.publicChallenges
-            completion()
-        }
-    }
+
 }
 
-extension ChallengesVC: UISearchBarDelegate {//controls functionality for search bar
-
-    //MARK: - search bar
-  func setupSearchBar() {
-    challengeView.challengeSearchBar.delegate = self
-  }
-
-  func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-    searchActive = false;
-  }
-
-  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-    searchActive = false;
-  }
-
-  func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-    searchActive = false;
-  }
-
-  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-    searchActive = false;
-
-  }
-
-  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-
-    filteredChallenges = publicChallenges.filter({ (challenge) -> Bool in
-      let temp: String = challenge.name
-      let range = temp.range(of: searchText, options: .caseInsensitive)
-      return range != nil
-    })
-    if challengeView.challengeSearchBar.text == nil || challengeView.challengeSearchBar.text == "" {
-      self.searchActive = false
-    } else {
-      self.searchActive = true
-    }
-
-    challengeView.publicChallengesView.reloadData()
-  }
-
-    func onProfile(_ sender: UIBarButtonItem) {
-        let vc = ProfileUpdateVC()
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
 

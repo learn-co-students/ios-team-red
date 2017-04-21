@@ -56,7 +56,6 @@ struct FirebaseStoreageManager {
             return
         }
         let imageRef = teamImagesRef.child("\(teamID).png")
-        print("Downloading image at \(teamID).png")
         imageRef.data(withMaxSize: 5000000000) { (data, error) in
             if let data = data {
                 if let teamImage = UIImage(data: data) {
@@ -78,7 +77,6 @@ struct FirebaseStoreageManager {
             return
         }
         let userRef = userImageRef.child("\(userID).png")
-        print("Downloading image at \(userID).png")
         userRef.data(withMaxSize: 5000000000) { (data, error) in //TODO: adjust this file size
             DispatchQueue.main.async {
                 if let data = data {

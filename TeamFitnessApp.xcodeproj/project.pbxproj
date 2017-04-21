@@ -15,6 +15,9 @@
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
 		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
+		AAA0C4891EA998C100DFAF34 /* FindChallengesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C4881EA998C100DFAF34 /* FindChallengesVC.swift */; };
+		AAA0C48B1EA99A6400DFAF34 /* FindChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C48A1EA99A6400DFAF34 /* FindChallengeCell.swift */; };
+		AAA0C48F1EA9B74E00DFAF34 /* ChallengeTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C48E1EA9B74E00DFAF34 /* ChallengeTypeVC.swift */; };
 		AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90961E9C0CC800EC6703 /* LoginManager.swift */; };
 		AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90981E9C0CD100EC6703 /* AppController.swift */; };
 		AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */; };
@@ -112,6 +115,9 @@
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
 		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		AAA0C4881EA998C100DFAF34 /* FindChallengesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindChallengesVC.swift; sourceTree = "<group>"; };
+		AAA0C48A1EA99A6400DFAF34 /* FindChallengeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindChallengeCell.swift; sourceTree = "<group>"; };
+		AAA0C48E1EA9B74E00DFAF34 /* ChallengeTypeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTypeVC.swift; sourceTree = "<group>"; };
 		AABA90961E9C0CC800EC6703 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AABA90981E9C0CD100EC6703 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContollerCases.swift; sourceTree = "<group>"; };
@@ -338,6 +344,8 @@
 				AAED5D661E9D4BFC002C0F4A /* TrophyVC.swift */,
 				EC9D943A1E97EFA000E33362 /* NewUserVC.swift */,
 				EC9D94381E97EF8200E33362 /* LogInVC.swift */,
+				AAA0C4881EA998C100DFAF34 /* FindChallengesVC.swift */,
+				AAA0C48E1EA9B74E00DFAF34 /* ChallengeTypeVC.swift */,
 				EC9D94361E97EF4B00E33362 /* ProfileVC.swift */,
 				AAEE30AD1E96887F001AF51C /* DashboardVC.swift */,
 				EC859EA71E96AD83009664F5 /* Controller Extensions */,
@@ -358,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				AABBFB221E9FBFBB0001BF7E /* CountLabel.swift */,
+				AAA0C48A1EA99A6400DFAF34 /* FindChallengeCell.swift */,
 				AAFD13071E9ACF1F00154522 /* CustomHorizontalBarChart.swift */,
 				AAFD130B1E9AD23D00154522 /* DashboardView.swift */,
 				AAFD13091E9ACF2700154522 /* CustomPieChart.swift */,
@@ -736,6 +745,7 @@
 				AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */,
 				EC4F0A4B1E9E79C6006A74E9 /* DataType.swift in Sources */,
 				AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */,
+				AAA0C4891EA998C100DFAF34 /* FindChallengesVC.swift in Sources */,
 				EC4F0A4D1E9EA631006A74E9 /* ChallengesVC.swift in Sources */,
 				EC4BD1CD1EA068B70076B4D0 /* SubmitButton.swift in Sources */,
 				EC5DBD811E9BF25D00CECA34 /* DateExtensions.swift in Sources */,
@@ -757,6 +767,8 @@
 				ECE3F5BA1E94441A001230CC /* FirebaseManager.swift in Sources */,
 				FE9586471E9C0D3A009C3BFE /* GoalsVC.swift in Sources */,
 				FE6086181EA7DEAF006AE52B /* TeamsView.swift in Sources */,
+				AAA0C48B1EA99A6400DFAF34 /* FindChallengeCell.swift in Sources */,
+				AAA0C48F1EA9B74E00DFAF34 /* ChallengeTypeVC.swift in Sources */,
 				FE9586411E9BD15E009C3BFE /* NewUserView.swift in Sources */,
 				EC9D94431E994B3400E33362 /* FirebaseStorageManager.swift in Sources */,
 				EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */,

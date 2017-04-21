@@ -354,7 +354,6 @@ struct FirebaseManager {
         var check: Bool = false
         dataRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             let dictionary = snapshot.value as? [String: Any] ?? nil
-            print(dictionary)
             if dictionary != nil {check = true}
             completion(check)
         })
@@ -399,7 +398,6 @@ struct FirebaseManager {
     }
     
     static func delete(teamID: String, completion: () -> Void) {
-        print("LOOKING TO DELETE TEAMID :\(teamID)")
         dataRef.child("teams").child(teamID).removeValue()
         completion()
     }

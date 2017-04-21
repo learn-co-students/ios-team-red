@@ -22,6 +22,7 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         self.navigationItem.setTitle(text: "group challenges")
 
         let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
@@ -50,8 +51,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 //            }
 //        }
         getAllChallenges {
-            self.challengeView.publicChallengesView.reloadData()
-            self.challengeView.myChallengesView.reloadData()
+            DispatchQueue.main.async {
+                self.challengeView.publicChallengesView.reloadData()
+                self.challengeView.myChallengesView.reloadData()
+            }
         }
         
         self.hideKeyboardWhenTappedAround()
@@ -218,5 +221,6 @@ extension ChallengesVC: UISearchBarDelegate {//controls functionality for search
         let vc = ProfileUpdateVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+
 }
 

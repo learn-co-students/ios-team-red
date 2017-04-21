@@ -32,40 +32,40 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         challengeView = ChallengesView(frame: view.frame)
         self.view = challengeView
-
+        
         challengeView.myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengeView.myChallengesView.delegate = self
         challengeView.myChallengesView.dataSource = self
         
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
-
-
+        
+        
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
-
+        
         challengeView.findChallengeButton.addTarget(self, action: #selector(segueFindChallenge), for: .touchUpInside)
-
-
-
+        
+        
+        
         
         self.hideKeyboardWhenTappedAround()
         
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         DataStore.sharedInstance.observeAllChallenges() {
             self.getMyChallenges() {
                 self.challengeView.myChallengesView.reloadData()
             }
         }
     }
-
+    
     func onProfile(_ sender: UIBarButtonItem) {
         let vc = ProfileUpdateVC()
         navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -84,7 +84,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == challengeView.myChallengesView {
             cell = tableView.dequeueReusableCell(withIdentifier: "fitnessCell", for: indexPath) as! FitnessCell
             cell.setLabels(forChallenge: myChallenges[indexPath.row])
-
         }
         return cell
     }
@@ -95,27 +94,27 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             challengeDetailVC.setChallenge(challenge: myChallenges[indexPath.row])
             //            present(challengeDetailVC, animated: true, completion: nil)
             navigationController?.pushViewController(challengeDetailVC, animated: true)
-
+            
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
-  func segueCreateChallenge() {
-    let createChallengeVC = CreateChallengeVC()
-    let navVC = NavigationController(rootViewController: createChallengeVC)
-    createChallengeVC.challengeIsPublic = true
-    createChallengeVC.modalPresentationStyle = .fullScreen
-    self.present(navVC, animated: true, completion: nil)
-  }
-
+    
+    func segueCreateChallenge() {
+        let createChallengeVC = CreateChallengeVC()
+        let navVC = NavigationController(rootViewController: createChallengeVC)
+        createChallengeVC.challengeIsPublic = true
+        createChallengeVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true, completion: nil)
+    }
+    
     func segueFindChallenge() {
-
+        
         let vc = FindChallengesVC()
         let navVC = NavigationController(rootViewController: vc)
         vc.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true, completion: nil)
     }
-
+    
     
     func getMyChallenges(completion: @escaping () -> Void) {
         guard let uid = self.uid else {return}
@@ -132,8 +131,8 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         completion()
         
     }
-
-
+    
+    
 }
 
 

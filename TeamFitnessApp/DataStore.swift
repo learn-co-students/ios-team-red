@@ -17,7 +17,10 @@ class DataStore {
     var allTeams = [Team]()
     var teamUsers = [User]()
     
-    private init() {}
+    private init() {
+    
+    
+    }
     
     func observeAllTeams(completion: @escaping () -> Void) {
         FirebaseManager.fetchAllTeams { (teams) in

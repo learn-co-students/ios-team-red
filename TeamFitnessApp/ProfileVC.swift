@@ -149,6 +149,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         profileView.myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         
+        
+    
         profileView.myImageView.backgroundColor = UIColor.clear
         profileView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
         let userImage = profileView.myImageView.image!

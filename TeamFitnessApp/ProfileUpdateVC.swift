@@ -46,6 +46,13 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
             // handle errors
             switch response {
             case let .successfulDownload(userImage):
+                print("userImages orientation is", userImage.imageOrientation.rawValue)
+//                var image: UIImage
+//                if userImage.imageOrientation != .down {
+//                image = UIImage(cgImage: userImage.cgImage!, scale: userImage.scale, orientation: .down)
+//                } else {
+//                    image = userImage
+//                }
                 self.profileUpdateView.myImageView.image = userImage
                 
             case let .failure(failString):
@@ -57,10 +64,6 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
             }
             
         }
-        
-//        let userHeightInt = Int(self.user!.height)
-//        let userHeightFeet = userHeightInt / 12
-//        let userHeightInches = userHeightInt % 12
         
         if let user = user {
             
@@ -182,17 +185,15 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
     {
-        let userImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-        profileUpdateView.myImageView.image = userImage
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else { return }
+        
+        profileUpdateView.myImageView.image = image
         profileUpdateView.myImageView.backgroundColor = UIColor.clear
         profileUpdateView.myImageView.contentMode = UIViewContentMode.scaleAspectFit
-        
-        
-        FirebaseStoreageManager.upload(userImage: userImage!, withUserID: (self.user?.uid!)!) { (FirebaseResponse) in
-            
+    
+        FirebaseStoreageManager.upload(userImage: image, withUserID: (self.user?.uid!)!) { (FirebaseResponse) in
             print("image upload complete")
             self.dismiss(animated: true, completion: nil)
-            
         }
         
         navigationController?.dismiss(animated: true, completion: nil)

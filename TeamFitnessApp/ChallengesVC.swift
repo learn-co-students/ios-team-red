@@ -36,18 +36,13 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.myChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         challengeView.myChallengesView.delegate = self
         challengeView.myChallengesView.dataSource = self
-
-        
-        challengeView.publicChallengesView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
-        challengeView.publicChallengesView.delegate = self
-        challengeView.publicChallengesView.dataSource = self
         
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
         
-        setupSearchBar()
-        
         DataStore.sharedInstance.observeAllChallenges() {
-            self.getAllChallenges()
+            self.getMyChallenges() {
+                self.challengeView.myChallengesView.reloadData()
+            }
         }
 
 
@@ -56,7 +51,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.findChallengeButton.addTarget(self, action: #selector(segueFindChallenge), for: .touchUpInside)
 
 
-        getMyChallenges()
 
         
         self.hideKeyboardWhenTappedAround()
@@ -119,19 +113,30 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
 
 //MARK: Firebase calls
-    func getMyChallenges() {
-        guard let uid = self.uid else {return}
-        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-            self.myChallenges.removeAll()
-            for challengeID in user.challengeIDs {
-                FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
-                    self.myChallenges.append(challenge)
-                    DispatchQueue.main.async {
-                        self.challengeView.myChallengesView.reloadData()
-                    }
-                })
+//    func getMyChallenges() {
+//        guard let uid = self.uid else {return}
+//        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
+//            self.myChallenges.removeAll()
+//            for challengeID in user.challengeIDs {
+//                FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
+//                    self.myChallenges.append(challenge)
+//                    DispatchQueue.main.async {
+//                        self.challengeView.myChallengesView.reloadData()
+//                    }
+//                })
+//            }
+//        }
+//    }
+    
+    func getMyChallenges(completion: @escaping () -> Void) {
+        
+        for challenge in DataStore.sharedInstance.allChallenges {
+            if challenge.creator == self.uid {
+                self.myChallenges.append(challenge)
             }
         }
+        completion()
+        
     }
 
 

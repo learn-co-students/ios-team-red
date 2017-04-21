@@ -20,7 +20,6 @@ struct Team {
     
     init(id: String, dict: [String: Any]) {
         self.captainID = dict["captain"] as? String ?? ""
-        print("added team captain: \(self.captainID)")
         self.name = dict["name"] as? String ?? ""
         self.id = id
         

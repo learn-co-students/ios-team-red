@@ -17,6 +17,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
     var user: User? = nil
     
     var myTeams = [Team]()
+    var allTeams = [Team]()
     var publicTeams = [Team]()
     var filteredTeams = [Team]()
     var searchActive: Bool = false
@@ -28,6 +29,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         self.view = teamsView
         
         teamsView.delegate = self
+        DataStore.sharedInstance.delegate = self
         
         setupSearchBar()
         
@@ -46,18 +48,16 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         teamsView.searchTableView.dataSource = self
 
         self.hideKeyboardWhenTappedAround()
+        
+        self.allTeams = DataStore.sharedInstance.allTeams
+        self.getAllTeams {
+            self.teamsView.myTeamsView.reloadData()
+            self.teamsView.searchTableView.reloadData()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-
-        DataStore.sharedInstance.observeAllTeams() {
-            self.getAllTeams() {
-                self.teamsView.myTeamsView.reloadData()
-                self.teamsView.searchTableView.reloadData()
-            }
-        }
 
     }
     
@@ -144,7 +144,7 @@ extension TeamsVC {
         self.publicTeams.removeAll()
         self.filteredTeams.removeAll()
         guard let uid = self.uid else {return}
-        for team in DataStore.sharedInstance.allTeams {
+        for team in self.allTeams {
             if team.userUIDs.contains(uid) {
                 self.myTeams.append(team)
             } else {
@@ -154,7 +154,6 @@ extension TeamsVC {
         filteredTeams = publicTeams
         completion()
     }
-    
 }
 
 extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
@@ -211,6 +210,23 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
 }
 
+extension TeamsVC: DataStoreDelegate {
+    func updatedTeams() {
+        self.allTeams = DataStore.sharedInstance.allTeams
+        self.getAllTeams {
+            self.teamsView.myTeamsView.reloadData()
+            self.teamsView.searchTableView.reloadData()
+        }
+    }
+    
+    func updatedUsers() {
+        
+    }
+    
+    func updatedChallenges() {
+        
+    }
+}
 
 
 

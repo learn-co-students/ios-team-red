@@ -17,15 +17,26 @@ class DataStore {
     var allTeams = [Team]()
     var teamUsers = [User]()
     
+    var delegate: DataStoreDelegate?
+    
     private init() {
-    
-    
+        self.observeAllTeams { 
+            print("OBSERVING ALL TEAMS LIKE A MOFO *******************")
+        }
+        self.observeAllUsers {
+            
+        }
+        
+        self.observeAllChallenges {
+            
+        }
     }
     
     func observeAllTeams(completion: @escaping () -> Void) {
         FirebaseManager.fetchAllTeams { (teams) in
             self.allTeams = teams
             completion()
+            self.delegate?.updatedTeams()
         }
     }
     
@@ -33,6 +44,7 @@ class DataStore {
         FirebaseManager.fetchAllUsers() { (users) in
             self.allUsers = users
             completion()
+            self.delegate?.updatedUsers()
         }
     }
     
@@ -40,6 +52,7 @@ class DataStore {
         FirebaseManager.fetchAllChallenges { (challenges) in
             self.allChallenges = challenges
             completion()
+            self.delegate?.updatedChallenges()
         }
     }
 
@@ -58,4 +71,10 @@ class DataStore {
 
         }
     }
+}
+
+protocol DataStoreDelegate {
+    func updatedTeams()
+    func updatedChallenges()
+    func updatedUsers()
 }

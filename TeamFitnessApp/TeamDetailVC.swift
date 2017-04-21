@@ -36,6 +36,8 @@
 
         self.navigationItem.setTitle(text: (self.team?.name)!)
         
+        DataStore.sharedInstance.delegate = self
+        
         
         teamDetailView = TeamDetailView(frame: view.frame)
         self.view = teamDetailView
@@ -102,17 +104,18 @@
             })
         }
         
+        self.getTeamMembers {
+            self.teamDetailView.membersView.reloadData()
+        }
         
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DataStore.sharedInstance.observeAllUsers() {
-            self.getTeamMembers {
-                self.teamDetailView.membersView.reloadData()
-            }
-        }
+        
+        
+        
 
         DataStore.sharedInstance.observeAllChallenges {
             self.getTeamChallenges {
@@ -177,15 +180,17 @@
         completion()
     }
     
-    private func getTeamMembers(completion: @escaping () -> Void) {
+    func getTeamMembers(completion: @escaping () -> Void) {
+        self.teamUsers.removeAll()
         if let team = self.team {
-            DataStore.sharedInstance.getTeamUsers(forTeam: team.id!, completion: {
-                self.teamUsers = DataStore.sharedInstance.teamUsers
-                completion()
-            })
+            for user in DataStore.sharedInstance.allUsers {
+                    if let uid = user.uid {
+                    if team.userUIDs.contains(uid) {
+                        self.teamUsers.append(user)
+                    }
+                }
+            }
         }
-
-
     }
 
     
@@ -264,4 +269,22 @@
         }
     }
     
+ }
+ 
+ extension TeamDetailVC: DataStoreDelegate {
+    func updatedUsers() {
+        self.getTeamMembers {
+            DispatchQueue.main.async {
+                self.teamDetailView.membersView.reloadData()
+            }
+        }
+    }
+    
+    func updatedTeams() {
+        
+    }
+    
+    func updatedChallenges() {
+        
+    }
  }

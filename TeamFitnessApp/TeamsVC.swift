@@ -98,6 +98,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         if tableView == teamsView.searchTableView {
             if searchActive {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+                guard filteredTeams.count > 0 else {return cell}
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
@@ -131,38 +132,6 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
 
 extension TeamsVC {
     
-    // MARK: - calls to Firebase
-//    func fetchData(completion: @escaping () -> Void) {
-//        guard let uid = uid else {return}
-//        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-//            self.user = user
-//            self.getAllTeams(user: user) {
-//                completion()
-//            }
-//        }
-//    }
-//    
-//    private func getAllTeams(user: User, completion: @escaping () -> Void) { //Get all teams that exist in the data base, sort them alphabetically and then set them equal to the allTeams array available to TeamsVC
-//        
-//        FirebaseManager.fetchAllTeams { (teams) in
-//            self.myTeams.removeAll()
-//            self.publicTeams.removeAll()
-//            self.filteredTeams.removeAll()
-//            for team in teams {
-//                if let teamID = team.id  {
-//                    if user.teamIDs.contains(teamID) {
-//                        self.myTeams.append(team)
-//                    } else {
-//                        self.publicTeams.append(team)
-//                    }
-//                }
-//            }
-//            self.myTeams = self.myTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-//            self.publicTeams = self.publicTeams.sorted {$0.name.lowercased() < $1.name.lowercased()}
-//            self.filteredTeams = self.publicTeams
-//            completion()
-//        }
-//    }
     
     func getAllTeams(completion: @escaping () -> Void) {
         self.myTeams.removeAll()
@@ -198,7 +167,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = true;
         print("Did end editing")
     }
     
@@ -221,11 +190,12 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
             return range != nil
         })
         
-        if(filteredTeams.count == 0){
-            searchActive = false;
+        if searchBar.text == nil || searchBar.text == "" {
+            self.searchActive = false
         } else {
-            searchActive = true;
+            self.searchActive = true
         }
+        
         teamsView.searchTableView.reloadData()
     }
 

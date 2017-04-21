@@ -218,7 +218,10 @@
             teamDetailView.joinButton.isHidden = false
             teamDetailView.joinButton.isEnabled = true
             checkIfTeamIsEmpty()
-            
+            DispatchQueue.main.async {
+                self.teamDetailView.membersView.reloadData()
+                self.teamDetailView.challengesView.reloadData()
+            }
         }
     }
     

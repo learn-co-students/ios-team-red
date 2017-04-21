@@ -58,18 +58,17 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         submitButton.setConstraints(toView: self.view, andViewConroller: self)
         submitButton.addTarget(self, action: #selector(createTeamButtonPressed), for: .touchUpInside)
         
-//        self.view.addSubview(imageButton)
-//        imageButton.translatesAutoresizingMaskIntoConstraints = false
-//        imageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        imageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-//        imageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-//        imageButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
-//        imageButton.set(text: "+ team image")
-//        imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
+        self.view.addSubview(imageButton)
+        imageButton.translatesAutoresizingMaskIntoConstraints = false
+        imageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        imageButton.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        imageButton.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+        imageButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+        imageButton.set(text: "+ team image")
+        imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
 
         self.view.addSubview(teamImage)
         teamImage.translatesAutoresizingMaskIntoConstraints = false
-        teamImage.image = #imageLiteral(resourceName: "defaultTeam")
         teamImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         teamImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         teamImage.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
@@ -102,7 +101,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     }
                 })
 
-                chosenImage = #imageLiteral(resourceName: "defaultTeam")
+                
                 
                 guard let teamID = team.id, let chosenImage = chosenImage else {return} //TODO: - handle this error better
                     FirebaseStoreageManager.upload(teamImage: chosenImage, withTeamID: teamID, completion: { (response) in
@@ -123,26 +122,26 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         }
     }
     
-//    func getTeamImage() {
-//        let imagePicker  = UIImagePickerController()
-//        imagePicker.delegate = self
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .photoLibrary
-//        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-//        imagePicker.isModalInPopover = true
-//        imagePicker.modalPresentationStyle = .overCurrentContext
-//        navigationController?.present(imagePicker, animated: true, completion: nil)
-//    }
-//
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-//        self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
-//        teamImage.image = chosenImage
-//        navigationController?.dismiss(animated: true, completion: nil)
-//    }
-//    
-//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-//        navigationController?.dismiss(animated: true, completion: nil)
-//    }
+    func getTeamImage() {
+        let imagePicker  = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        imagePicker.isModalInPopover = true
+        imagePicker.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(imagePicker, animated: true, completion: nil)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
+        teamImage.image = chosenImage
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
 
     func onCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)

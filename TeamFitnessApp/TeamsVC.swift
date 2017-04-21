@@ -98,6 +98,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         if tableView == teamsView.searchTableView {
             if searchActive {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
+                guard filteredTeams.count > 0 else {return cell}
                 cell.setLabels(forTeam: filteredTeams[indexPath.row])
             } else {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
@@ -198,7 +199,7 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchActive = false;
+        searchActive = true;
         print("Did end editing")
     }
     
@@ -221,11 +222,12 @@ extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
             return range != nil
         })
         
-        if(filteredTeams.count == 0){
-            searchActive = false;
+        if searchBar.text == nil || searchBar.text == "" {
+            self.searchActive = false
         } else {
-            searchActive = true;
+            self.searchActive = true
         }
+        
         teamsView.searchTableView.reloadData()
     }
 

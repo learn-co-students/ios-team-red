@@ -121,6 +121,10 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 self.myChallenges.append(challenge)
             }
         }
+        myChallenges = myChallenges.sorted(by: { (challenge1, challenge2) -> Bool in
+            guard let date1 = challenge1.endDate, let date2 = challenge2.endDate else {return false}
+            return date1 < date2
+        })
         completion()
         
     }

@@ -39,6 +39,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         self.view = goalsView
         self.hideKeyboardWhenTappedAround()
         
+
         
         print("Goals name \(name)")
         print("Goals email \(userEmail)")
@@ -47,20 +48,36 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         print("Goals height \(height)")
         print("Goals uid \(uid)")
 
+
     
     }
     
     
     
     func pressCreateUserButton() {
+        guard let text = goalsView.activityMinutesADay.text else {
+            goalsView.activityMinutesADay.flashRed()
+            return
+        }
+        guard let tempGoal = Double(text) else {
+            goalsView.activityMinutesADay.flashRed()
+            return
+        }
         
-        //guard
-        let tempGoal = Double(goalsView.activityMinutesADay.text!)
-        firstGoal.setValue(from: tempGoal!)
+
+        firstGoal.setValue(from: tempGoal)
       
-        // guard
-        let tempGoal2 = Double(goalsView.caloriesADay.text!)
-        secondGoal.setValue(from: tempGoal2!)
+        
+        guard let text2 = goalsView.caloriesADay.text else {
+            goalsView.caloriesADay.flashRed()
+            return
+        }
+        guard let tempGoal2 = Double(text2) else {
+            goalsView.caloriesADay.flashRed()
+            return
+        }
+        secondGoal.setValue(from: tempGoal2)
+
       
         print("saving gender \(gender)")
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)

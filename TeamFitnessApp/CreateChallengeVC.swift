@@ -16,6 +16,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     var challenge: Challenge? = nil
     var user: User? = nil
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
+    let healthKitManager = HealthKitManager.sharedInstance
     
     var myTeams = [Team]()
     var filteredTeams = [Team]()
@@ -101,7 +102,9 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
                         FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
                         })
                     }
+                    
                 })
+                
                 self.dismiss(animated: true, completion: nil)
             } else {
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
@@ -161,5 +164,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     func onCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
 
 }

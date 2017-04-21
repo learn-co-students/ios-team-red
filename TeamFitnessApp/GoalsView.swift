@@ -23,8 +23,8 @@ class GoalsView: FitnessView {
     var introLabel: FitnessLabel!
     var minuteLabel: FitnessLabel!
     var calorieLabel: FitnessLabel!
-    var activityMinutesADay: FitnessField!
-    var caloriesADay: FitnessField!
+    var activityMinutesADay = FitnessField()
+    var caloriesADay = FitnessField()
     var createUserButton: FitnessButton!
     weak var delegate: GoalsViewDelegate?
     

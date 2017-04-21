@@ -45,10 +45,22 @@ class ChallengeDetailVC: UIViewController {
     
     func joinChallenge() {
         guard let challengeID = self.challenge?.id, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
-        FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) {}
-        FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {}
+
+        FirebaseManager.add(childID: challengeID, toParentId: uid, parentDataType: .users, childDataType: .challenges) {
+            FirebaseManager.add(childID: uid, toParentId: challengeID, parentDataType: .challenges, childDataType: .users) {
+
+                let alertVC = UIAlertController(title: "Challenge Joined!", message: "", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: uid, withData: 0) {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                })
+                alertVC.addAction(okAction)
+                self.present(alertVC, animated: true, completion: nil)
+            }
+        }
+
         challengeDetailView?.joinButton.isHidden = true
-        self.dismiss(animated: true, completion: nil)
     }
     
     func setChallenge(challenge: Challenge) {

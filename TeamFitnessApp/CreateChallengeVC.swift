@@ -82,30 +82,34 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
 
 
 
-          } else if viewState == .second { //if the user is on the second screen, store the new values for the start/end datePickerViews, and then create a new challenge in the Firebase database
+          } else if viewState == .second {
               storeSecondFields()
             
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
+
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs, isPublic: challengeIsPublic, team: challengeTeamID)
 
                 FirebaseManager.addNew(challenge: newChallenge, completion: { (challengeID) in
                     guard let userUID = self.uid else {return}
-                    if challengeIsPublic {//if challenge is public, add challenge to the challenges property of the user in Firebase. The userID will already have been stored in the users field of the public challenge
-                        print("Added public challenge to user \(userUID)")
-                        FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
+                    FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
+                        let alertVC = UIAlertController(title: "Challenge Created!", message: "", preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+                            FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUID, withData: 0) {
+                                self.dismiss(animated: true, completion: nil)
+                            }
                         })
-                    } else { //if the challenge is not public, add the challenge to the challenges property of the user and team in Firebase. The user and team IDs have already been stored in the challenge directory in Firebase
-                        guard let userUID = self.uid else {return}
-                        FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
-                        })
+                        alertVC.addAction(okAction)
+                        self.present(alertVC, animated: true, completion: nil)
+                    })
+                    if !challengeIsPublic {
                         guard let teamID = team?.id else {return}
                         FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
                         })
+
                     }
                     
                 })
                 
-                self.dismiss(animated: true, completion: nil)
             } else {
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
             }

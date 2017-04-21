@@ -94,25 +94,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                         case .miles:
                             self.healthKitManager.getDistance(fromDate: startDate, toDate: endDate, completion: { (count, error) in
                                 if let count = count {
-                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count) {}
                                 }
                             })
                         case .stepCount:
                             self.healthKitManager.getSteps(fromDate: startDate, toDate: endDate, completion: { (count, error) in
                                 if let count = count {
-                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count){}
                                 }
                             })
                         case .caloriesBurned:
                             self.healthKitManager.getCalories(fromDate: startDate, toDate: endDate, completion: { (count, error) in
                                 if let count = count {
-                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count){}
                                 }
                             })
                         case .exerciseMinutes:
                             self.healthKitManager.getExerciseTime(fromDate: startDate, toDate: endDate, completion: { (count, error) in
                                 if let count = count {
-                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count)
+                                    FirebaseManager.updateChallengeData(challengeID: challengeID, userID: userUid, withData: count){}
                                 }
                             })
                         }

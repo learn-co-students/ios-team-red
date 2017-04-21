@@ -91,17 +91,6 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
             }
         }
         
-      
-        
-        
-  
-        print("Goals name \(name)")
-        print("Goals email \(userEmail)")
-//        print("Goals password \(userPassword)")
-        print("Goals weight \(weight)")
-        print("Goals gender \(gender)")
-        print("Goals height \(height)")
-        print("Goals uid \(uid)")
     }
 
   func presentAlert() {

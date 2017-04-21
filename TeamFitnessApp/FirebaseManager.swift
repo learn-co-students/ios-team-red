@@ -245,6 +245,22 @@ struct FirebaseManager {
         })
     }
     
+    static func fetchAllUsers(completion: @escaping ([User]) -> Void) {
+        dataRef.child("users").observe(.value, with: { (snapshot) in
+            var users = [User]()
+            let userDict = snapshot.value as? [String: Any]
+            if let userDict = userDict {
+                for user in userDict {
+                    let userValues = user.value as? [String: Any] ?? [:]
+                    let user = User(uid: user.key, dict: userValues)
+                    users.append(user)
+                }
+            }
+            completion(users)
+        })
+        
+    }
+    
 //    static func fetchPublicChallenges(completion: @escaping ([Challenge]) -> Void) {//fetches all public challenges and returns them through a completion
 //        var challenges = [Challenge]()
 //        dataRef.child("publicChallenges").observe(.value, with: { (snapshot) in

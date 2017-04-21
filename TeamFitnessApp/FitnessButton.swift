@@ -25,8 +25,7 @@ class FitnessButton: UIButton {
         self.setTitleColor(UIColor.whitewash, for: .normal)
         self.backgroundColor = UIColor.lagoon
         self.layer.cornerRadius = 5
-        self.layer.borderWidth = 0.0
-        self.layer.shadowOpacity = 0.0
+        
 
         setShadow()
     }
@@ -47,6 +46,8 @@ class FitnessButton: UIButton {
     func reverseColors() {
         self.setTitleColor(UIColor.lagoon, for: .normal)
         self.backgroundColor = UIColor.clear
+        self.layer.borderWidth = 0.0
+        self.layer.shadowOpacity = 0.0
 
     }
     

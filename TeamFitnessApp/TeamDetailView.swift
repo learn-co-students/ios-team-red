@@ -22,7 +22,7 @@ class TeamDetailView: FitnessView {
     var joinButton: FitnessButton!
     var teamImageView: UIImageView!
 
-    var reportButton: ReportButton!
+    var reportButton: FitnessButton!
 
     var leaveTeamButton: FitnessButton!
 
@@ -50,9 +50,11 @@ class TeamDetailView: FitnessView {
         teamImageView.backgroundColor = UIColor.clear
         
 
-        reportButton = ReportButton()
+        reportButton = FitnessButton()
         self.addSubview(reportButton)
         reportButton.translatesAutoresizingMaskIntoConstraints = false
+        reportButton.setReversed(text: "Report Image")
+        reportButton.reverseColors()
 
         leaveTeamButton = FitnessButton()
         self.addSubview(leaveTeamButton)
@@ -118,14 +120,14 @@ class TeamDetailView: FitnessView {
         teamImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
         
-        reportButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
+        reportButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.1).isActive = true
         reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
-        reportButton.rightAnchor.constraint(equalTo: teamImageView.leftAnchor).isActive = true
-        reportButton.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        reportButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor).isActive = true
+        reportButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         
-        captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
+        captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.8, heightMultiplier: 0.05)
         
-        joinButton.leftAnchor.constraint(equalTo: captainLabel.rightAnchor).isActive = true
+        joinButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor, constant: 20).isActive = true
         joinButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
         joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor, multiplier: 0.4).isActive = true

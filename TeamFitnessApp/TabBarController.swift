@@ -27,7 +27,7 @@ class TabBarController: UITabBarController {
     dashboardVC.tabBarItem.badgeColor = UIColor.whitewash
     let challengesVC = NavigationController(rootViewController: ChallengesVC())
     challengesVC.tabBarItem.title = "GROUP CHALLENGES"
-    challengesVC.tabBarItem.image = #imageLiteral(resourceName: "peopleWhite")
+    challengesVC.tabBarItem.image = #imageLiteral(resourceName: "groups")
     let teamVC = NavigationController(rootViewController: TeamsVC())
     teamVC.tabBarItem.title = "TEAMS"
     teamVC.tabBarItem.image = #imageLiteral(resourceName: "peopleWhite")
@@ -37,7 +37,7 @@ class TabBarController: UITabBarController {
     self.setViewControllers([dashboardVC, challengesVC, teamVC, trophyVC], animated: false)
 
 
-    let imageArray = [#imageLiteral(resourceName: "dashboard"), #imageLiteral(resourceName: "peopleWhite"), #imageLiteral(resourceName: "peopleWhite"), #imageLiteral(resourceName: "trophyWhite")]
+    let imageArray = [#imageLiteral(resourceName: "dashboard"), #imageLiteral(resourceName: "groups"), #imageLiteral(resourceName: "peopleWhite"), #imageLiteral(resourceName: "trophyWhite")]
 
     if let count = self.tabBar.items?.count {
       for i in 0...(count-1) {

@@ -52,11 +52,8 @@
 		EC6A3D621E92F4D300F5E717 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC6A3D611E92F4D200F5E717 /* Formatting.swift */; };
 		EC859EA31E967ECB009664F5 /* TeamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC859EA21E967ECB009664F5 /* TeamsVC.swift */; };
 		EC859EA41E968577009664F5 /* FitnessLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECE3F5AA1E93EC59001230CC /* FitnessLabel.swift */; };
-
 		EC99AC971EA91862004C97A5 /* ReportButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99AC961EA91862004C97A5 /* ReportButton.swift */; };
-
 		EC99AC991EA99C32004C97A5 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC99AC981EA99C32004C97A5 /* DataStore.swift */; };
-
 		EC9D942F1E96E10C00E33362 /* TeamDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */; };
 		EC9D94351E97CEAF00E33362 /* FitnessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94341E97CEAF00E33362 /* FitnessCell.swift */; };
 		EC9D94371E97EF4B00E33362 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9D94361E97EF4B00E33362 /* ProfileVC.swift */; };
@@ -163,11 +160,8 @@
 		EC6A3D521E92EDC800F5E717 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EC6A3D611E92F4D200F5E717 /* Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		EC859EA21E967ECB009664F5 /* TeamsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamsVC.swift; sourceTree = "<group>"; };
-
 		EC99AC961EA91862004C97A5 /* ReportButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportButton.swift; sourceTree = "<group>"; };
-
 		EC99AC981EA99C32004C97A5 /* DataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-
 		EC9D942E1E96E10C00E33362 /* TeamDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailVC.swift; sourceTree = "<group>"; };
 		EC9D94341E97CEAF00E33362 /* FitnessCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FitnessCell.swift; sourceTree = "<group>"; };
 		EC9D94361E97EF4B00E33362 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };

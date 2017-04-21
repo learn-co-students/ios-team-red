@@ -10,13 +10,16 @@ import UIKit
 import Firebase
 
 class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     let ref = FIRDatabase.database().reference()
     let profileUpdateView = updateProfileView()
     var firUser = FIRAuth.auth()!.currentUser
-    var user: User!
+    var user: User?
     var myImage: UIImage!
-
+//    var firstGoal = Goal(type: .exerciseMinutes, value: 0)
+//    var secondGoal = Goal(type: .caloriesBurned, value: 0)
+//    var firstGoalValue: Double!
+    
     
     override func loadView() {
         
@@ -26,10 +29,10 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
+        
         fetchUser {
-                self.populateView()
-            
+            self.populateView()
+
         }
         
         profileUpdateView.delegate = self
@@ -37,68 +40,87 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     }
     
     func populateView () {
-
-        FirebaseStoreageManager.downloadImage(forUser: user) { (response) in
+        
+        FirebaseStoreageManager.downloadImage(forUser: user!) { (response) in
             
-         // handle errors
+            // handle errors
             switch response {
             case let .successfulDownload(userImage):
-              self.profileUpdateView.myImageView.image = userImage                //                NotificationCenter.default.post(name: .closeLoginVC, object: nil)
+                self.profileUpdateView.myImageView.image = userImage
                 
             case let .failure(failString):
-                print(failString)
-                self.alert(message: failString)
+
+                 self.profileUpdateView.myImageView.image = #imageLiteral(resourceName: "runner2")
+
             default:
                 print("Firebase login failure")
             }
-
+            
         }
         
-        let userHeightInt = Int(self.user!.height)
-        let userHeightFeet = userHeightInt / 12
-        let userHeightInches = userHeightInt % 12
+//        let userHeightInt = Int(self.user!.height)
+//        let userHeightFeet = userHeightInt / 12
+//        let userHeightInches = userHeightInt % 12
         
-        
-        profileUpdateView.heightFeetTextField.text? = String(userHeightFeet)
-        profileUpdateView.heightInchesTextField.text? = String(userHeightInches)
-        profileUpdateView.nameTextField.text = self.user!.name
-        profileUpdateView.weightTextField.text = String(describing: self.user!.weight)
-        profileUpdateView.genderButton.setTitle((self.user!.sex), for: .normal)
-   
+        if let user = user {
+            
+            profileUpdateView.nameTextField.text = user.name
+            profileUpdateView.weightTextField.text = String(describing: user.weight)
+            profileUpdateView.activityMinutesADay.text = String(Int(user.goals[1].value))
+            profileUpdateView.caloriesADay.text = String(Int(user.goals[0].value))
+        }
     }
     
+    
+    func pressLogOutButton() {
+    
+        FirebaseManager.logoutUser { (FirebaseResponse) in
+            print("LogOutButton")
+            NotificationCenter.default.post(name: .closeDashboardVC, object: nil)
+
+        }
+    
+    }
+  
+
+
     func pressSaveButton() {
       
-        guard let userHeightFeet = profileUpdateView.heightFeetTextField.text else {
-            alert(message: "Please enter feet")
-            return
-        }
-        
-        guard let userHeightInches = profileUpdateView.heightInchesTextField.text else{
-            alert(message: "Please enter inches")
-            return
-        }
-        
-        
-        let height = Float(userHeightFeet)! + Float(userHeightInches)!
-        
         guard let name = profileUpdateView.nameTextField.text else {
-            alert(message: "Please enter a name.")
+            alert(message: "Please enter a name")
+            return
+        }
+        
+        guard profileUpdateView.nameTextField.text != "" else {
+
+            alert(message: "Please enter a name")
             return
         }
         
         guard let weightString = profileUpdateView.weightTextField.text else {
+            
             alert(message: "Please enter a weight")
             return
         }
-        let weight = Int(weightString)
-       
-        guard let sex = profileUpdateView.genderButton.currentTitle else {
-            alert(message: "Please enter a gender")
+        guard let weight = Int(weightString) else {
+            alert(message: "Please enter a weight")
             return
         }
-
-        self.user?.update(name: name, weight: weight!, height: height, sex: sex)
+        
+        guard let firstGoalValue = Double(profileUpdateView.activityMinutesADay.text!) else {
+            alert(message: "Please set a daily activity goal")
+            return
+        }
+        
+        guard let secondGoalValue = Double(profileUpdateView.caloriesADay.text!) else {
+            alert(message: "Please set a daily calorie goal")
+            return
+        }
+        
+        let firstGoal = Goal(type: .exerciseMinutes, value: firstGoalValue)
+        let secondGoal = Goal(type: .caloriesBurned, value: secondGoalValue)
+        
+        self.user?.update(name: name, weight: weight, goals: [firstGoal, secondGoal])
         
         if let user = self.user {
             FirebaseManager.save(user: user) { (success) in
@@ -111,21 +133,20 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
         }
     }
     
-  
+    
     
     func fetchUser(completion: @escaping ()->()) {
-       
+        
         if let uid = firUser?.uid {
             FirebaseManager.fetchUser(withFirebaseUID: uid) { (returnUser) in
                 
                 self.user = returnUser
                 completion()
-
+                
             }
         }
-        
     }
-
+    
     
     func displayImagePickerButtonTapped() {
         
@@ -171,44 +192,16 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
             
             print("image upload complete")
             self.dismiss(animated: true, completion: nil)
-
             
         }
         
         navigationController?.dismiss(animated: true, completion: nil)
-
-
+        
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func pressGenderButton () {
-        
-        let alertController = UIAlertController(title: "Gender", message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel) { (result : UIAlertAction) -> Void in
-            print("Cancel")
-        }
-        let maleAction = UIAlertAction(title: "Male", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("OK")
-            self.profileUpdateView.genderButton.setTitle("Male", for: .normal)
-            self.user?.sex = "Male"
 
-        }
-        let femaleAction = UIAlertAction(title: "Female", style: UIAlertActionStyle.default) { (result : UIAlertAction) -> Void in
-            print("ok")
-            self.profileUpdateView.genderButton.setTitle("Female", for: .normal)
-            self.user?.sex = "Female"
-        }
-        
-        alertController.addAction(cancelAction)
-        alertController.addAction(maleAction)
-        alertController.addAction(femaleAction)
-        
-        
-        self.present(alertController, animated: true)
-        
-    }
-}
+  }

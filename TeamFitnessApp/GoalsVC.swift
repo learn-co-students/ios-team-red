@@ -13,15 +13,16 @@ import UIKit
 class GoalsViewController: UIViewController, GoalsViewDelegate {
     
     
-    var name: String = ""
-    var userEmail: String = ""
-//    var userPassword: String = ""
-    var weight: Int = 0
+    var name: String!
+    var userEmail: String!
+    var weight: Int!
     var gender: String!
+
     var height: Float = 0
     var firstGoal = Goal(type: .exerciseMinutes, value: 0)
+
     var secondGoal = Goal(type: .caloriesBurned, value: 0)
-    var uid: String = ""
+    var uid: String!
     
     let goalsView = GoalsView()
     let healthKitManager = HealthKitManager.sharedInstance
@@ -38,14 +39,15 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
         self.view = goalsView
         self.hideKeyboardWhenTappedAround()
         
-       
-//        print("Goals name \(name)")
-//        print("Goals email \(userEmail)")
-//        print("Goals password \(userPassword)")
-//        print("Goals weight \(weight)")
-//        print("Goals gender \(gender)")
-//        print("Goals height \(height)")
-//        print("Goals uid \(uid)")
+
+        
+        print("Goals name \(name)")
+        print("Goals email \(userEmail)")
+        print("Goals weight \(weight)")
+        print("Goals gender \(gender)")
+        print("Goals height \(height)")
+        print("Goals uid \(uid)")
+
 
     
     }
@@ -62,6 +64,7 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
             return
         }
         
+
         firstGoal.setValue(from: tempGoal)
       
         
@@ -74,9 +77,12 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
             return
         }
         secondGoal.setValue(from: tempGoal2)
+
       
         print("saving gender \(gender)")
         let user = User(name: name, sex: gender, height: height, weight: weight, teamIDs: [], challengeIDs: [], goals: [firstGoal, secondGoal], email: userEmail, uid: uid)
+        
+        print(user.name)
         
         
         FirebaseManager.save(user: user) { (success) in
@@ -84,6 +90,8 @@ class GoalsViewController: UIViewController, GoalsViewDelegate {
               self.presentAlert()
             }
         }
+        
+      
         
         
   

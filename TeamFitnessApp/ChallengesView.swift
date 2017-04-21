@@ -12,16 +12,11 @@ class ChallengesView: FitnessView {
 
 
   var myChallengesLabel: FitnessLabel!
-  var publicChallengesLabel: FitnessLabel!
   var createPublicChallengeLabel: FitnessLabel!
   var createChallengeButton: FitnessButton!
-  var findPublicLabel: FitnessLabel!
-  
-
-  var challengeSearchBar: UISearchBar!
+  var findChallengeButton: FitnessButton!
 
   var myChallengesView: UITableView!
-  var publicChallengesView: UITableView!
 
 
 
@@ -46,13 +41,12 @@ class ChallengesView: FitnessView {
     myChallengesLabel.reverseColors()
     myChallengesLabel.set(text: "my group challenges")
 
-    findPublicLabel = FitnessLabel()
-    self.addSubview(findPublicLabel)
-    findPublicLabel.translatesAutoresizingMaskIntoConstraints = false
-    findPublicLabel.textAlignment = .center
-    findPublicLabel.changeFontSize(to: 20)
-    findPublicLabel.reverseColors()
-    findPublicLabel.set(text: "find public challenges")
+    findChallengeButton = FitnessButton()
+    self.addSubview(findChallengeButton)
+    findChallengeButton.translatesAutoresizingMaskIntoConstraints = false
+    findChallengeButton.set(text: "find public challenges")
+    findChallengeButton.changeFontSize(to: 18)
+
 
     createPublicChallengeLabel = FitnessLabel()
     self.addSubview(createPublicChallengeLabel)
@@ -67,21 +61,6 @@ class ChallengesView: FitnessView {
     self.addSubview(myChallengesView)
     myChallengesView.translatesAutoresizingMaskIntoConstraints = false
     myChallengesView.backgroundColor = UIColor.clear
-
-    challengeSearchBar = UISearchBar()
-    self.addSubview(challengeSearchBar)
-    challengeSearchBar.translatesAutoresizingMaskIntoConstraints = false
-
-
-    challengeSearchBar.placeholder = "find challenge by name"
-    challengeSearchBar.setPlaceholderAttributes()
-    challengeSearchBar.setTextAttributes()
-    challengeSearchBar.searchBarStyle = .minimal
-
-    publicChallengesView = UITableView()
-    self.addSubview(publicChallengesView)
-    publicChallengesView.translatesAutoresizingMaskIntoConstraints = false
-    publicChallengesView.backgroundColor = UIColor.clear
 
     createChallengeButton = FitnessButton()
     self.addSubview(createChallengeButton)
@@ -101,25 +80,15 @@ class ChallengesView: FitnessView {
     myChallengesView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     myChallengesView.topAnchor.constraint(equalTo: myChallengesLabel.bottomAnchor, constant:8).isActive = true
     myChallengesView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-    myChallengesView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25 ).isActive = true
+    myChallengesView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.50).isActive = true
 
-    findPublicLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    findPublicLabel.topAnchor.constraint(equalTo: myChallengesView.bottomAnchor, constant: 10).isActive = true
-    findPublicLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.80).isActive = true
-
-    challengeSearchBar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    challengeSearchBar.topAnchor.constraint(equalTo: findPublicLabel.bottomAnchor, constant: 3).isActive = true
-    challengeSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10).isActive = true
-    challengeSearchBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
-
-    publicChallengesView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    publicChallengesView.topAnchor.constraint(equalTo: challengeSearchBar.bottomAnchor, constant: 25).isActive = true
-    publicChallengesView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-    publicChallengesView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.20).isActive = true
-
+    findChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    findChallengeButton.topAnchor.constraint(equalTo: myChallengesView.bottomAnchor, constant: 10).isActive = true
+    findChallengeButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+    findChallengeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
     createPublicChallengeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    createPublicChallengeLabel.topAnchor.constraint(equalTo: publicChallengesView.bottomAnchor, constant: 10).isActive = true
+    createPublicChallengeLabel.topAnchor.constraint(equalTo: findChallengeButton.bottomAnchor, constant: 10).isActive = true
     createPublicChallengeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
 
     createChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

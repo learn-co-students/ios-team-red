@@ -31,14 +31,13 @@ class CreateChallengeView: FitnessView {
     
     func loadUI() {
         self.addSubview(challengeTitleLabel)
-        challengeTitleLabel.set(text: "new public challenge")
-        challengeTitleLabel.changeFontSize(to: 20)
         challengeTitleLabel.translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(challengeNameField)
         challengeNameField.translatesAutoresizingMaskIntoConstraints = false
         challengeNameField.autocorrectionType = .no
         challengeNameField.setPlaceholder(text: "Name challenge")
+        
         
         self.addSubview(goalPicker)
         self.bringSubview(toFront: goalPicker.stepper)

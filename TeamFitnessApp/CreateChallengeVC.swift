@@ -50,7 +50,17 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
         self.view = createChallengeView
         setupViews()
 
-        
+
+        if challengeIsPublic {
+            createChallengeView?.challengeTitleLabel.set(text: "new public challenge")
+            createChallengeView?.challengeTitleLabel.changeFontSize(to: 20)
+        } else {
+            createChallengeView?.challengeTitleLabel.set(text: "new team challenge")
+            createChallengeView?.challengeTitleLabel.changeFontSize(to: 20)
+        }
+
+
+
     }
 //MARK = setup view constraints
     func setupViews() {
@@ -79,25 +89,17 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs, isPublic: challengeIsPublic, team: challengeTeamID)
 
                 FirebaseManager.addNew(challenge: newChallenge, completion: { (challengeID) in
-                    print("FIREBASE MANAGER ADDED NEW CHALLENGE****************")
-                    print(user?.uid)
                     guard let userUID = self.uid else {return}
-                    print("CHECKING IF NEW CHALLENGE IS PUBLIC *******************")
                     if challengeIsPublic {//if challenge is public, add challenge to the challenges property of the user in Firebase. The userID will already have been stored in the users field of the public challenge
                         print("Added public challenge to user \(userUID)")
                         FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
                         })
                     } else { //if the challenge is not public, add the challenge to the challenges property of the user and team in Firebase. The user and team IDs have already been stored in the challenge directory in Firebase
-                        print("ADDED team challenge to user \(userUID)")
                         guard let userUID = self.uid else {return}
                         FirebaseManager.add(childID: challengeID, toParentId: userUID, parentDataType: .users, childDataType: .challenges, completion: {
                         })
-                        print("CHECKING TO MAKE SURE TEAM ID IS NOT NIL")
-                        print(team?.id)
                         guard let teamID = team?.id else {return}
-                        print("CHECK FOR TEAM ID PASSED, ADDING CHALLENGE TO TEAM IN FIREBASE")
                         FirebaseManager.add(childID: challengeID, toParentId: teamID, parentDataType: .teams, childDataType: .challenges, completion: {
-                            print("CHALLENGE SHOULD BE ADDED TO TEAM ID IN FIREBASE")
                         })
                     }
                     

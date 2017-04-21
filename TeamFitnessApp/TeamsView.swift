@@ -17,9 +17,9 @@ protocol TeamsViewDelegate: class {
 
 class TeamsView: FitnessView {
 
-    var myTeamsLabel: FitnessLabel!
-    var findTeamsLabel: FitnessLabel!
-    var createTeamLabel: FitnessLabel!
+    var myTeamsLabel: TitleLabel!
+    var findTeamsLabel: TitleLabel!
+    var createTeamLabel: TitleLabel!
     var createTeamButton: FitnessButton!
     var teamSearchBar: UISearchBar!
     var myTeamsView: UITableView!
@@ -43,7 +43,7 @@ class TeamsView: FitnessView {
     }
 
     func comInit() {
-        myTeamsLabel = FitnessLabel()
+        myTeamsLabel = TitleLabel()
         self.addSubview(myTeamsLabel)
         myTeamsLabel.translatesAutoresizingMaskIntoConstraints = false
         myTeamsLabel.set(text: "My Teams")
@@ -54,7 +54,7 @@ class TeamsView: FitnessView {
         myTeamsView.translatesAutoresizingMaskIntoConstraints = false
         myTeamsView.backgroundColor = UIColor.clear
 
-        findTeamsLabel = FitnessLabel()
+        findTeamsLabel = TitleLabel()
         self.addSubview(findTeamsLabel)
         findTeamsLabel.translatesAutoresizingMaskIntoConstraints = false
         findTeamsLabel.set(text: "Find Teams")
@@ -73,7 +73,7 @@ class TeamsView: FitnessView {
         searchTableView.translatesAutoresizingMaskIntoConstraints = false
         searchTableView.backgroundColor = UIColor.clear
 
-        createTeamLabel = FitnessLabel()
+        createTeamLabel = TitleLabel()
         self.addSubview(createTeamLabel)
         createTeamLabel.translatesAutoresizingMaskIntoConstraints = false
         createTeamLabel.set(text: "...or...")

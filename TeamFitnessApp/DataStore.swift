@@ -18,15 +18,17 @@ class DataStore {
     
     private init() {}
     
-    func observeAllTeams() {
+    func observeAllTeams(completion: @escaping () -> Void) {
         FirebaseManager.fetchAllTeams { (teams) in
             self.allTeams = teams
+            completion()
         }
     }
     
-    func observeAllUsers() {
+    func observeAllUsers(completion: @escaping() -> Void) {
         FirebaseManager.fetchAllUsers() { (users) in
             self.allUsers = users
+            completion()
         }
     }
     

@@ -41,7 +41,7 @@ struct FirebaseStoreageManager {
                 if metadata != nil {
                     completion(.succesfulUpload("Uploaded team image to path userImages/\(userID).png"))
                 } else {
-//                    completion(.failure("Could not upload image to Firebase"))
+                    //                    completion(.failure("Could not upload image to Firebase"))
                     completion(.failure(error!.localizedDescription))
                 }
             })
@@ -56,20 +56,29 @@ struct FirebaseStoreageManager {
             completion(.failure("Invalid Team ID"))
             return
         }
-        let imageRef = teamImagesRef.child("\(teamID).png")
-        imageRef.data(withMaxSize: 5000000000) { (data, error) in
-            if let data = data {
-                if let teamImage = UIImage(data: data) {
-                    completion(.successfulDownload(teamImage))
-                } else {
-                    completion(.failure("Could not convert dowloaded data to UIImage"))
-                    
+        
+        FirebaseManager.checkForFlag(onTeam: team, completion: { (flagged) in
+            if !flagged {
+            
+                
+                let imageRef = teamImagesRef.child("\(teamID).png")
+                imageRef.data(withMaxSize: 5000000000) { (data, error) in
+                    if let data = data {
+                        if let teamImage = UIImage(data: data) {
+                            completion(.successfulDownload(teamImage))
+                        } else {
+                            completion(.failure("Could not convert dowloaded data to UIImage"))
+                            
+                        }
+                    } else {
+                        completion(.failure("Could not download Image"))
+                        print(error.debugDescription)
+                    }
                 }
             } else {
-                completion(.failure("Could not download Image"))
-                print(error.debugDescription)
+                completion(.failure("Can't download image, team was flagged for inappropriate content"))
             }
-        }
+        })
     }
     
     static func downloadImage(forUser user: User, completion: @escaping (FirebaseResponse) -> Void) {
@@ -77,22 +86,31 @@ struct FirebaseStoreageManager {
             completion(.failure("Invalid Team ID"))
             return
         }
-        let userRef = userImageRef.child("\(userID).png")
-        userRef.data(withMaxSize: 5000000000) { (data, error) in //TODO: adjust this file size
-            DispatchQueue.main.async {
-                if let data = data {
-                    if let userImage = UIImage(data: data) {
-                        completion(.successfulDownload(userImage))
-                    } else {
-//                        completion(.failure("Could not convert dowloaded data to UIImage"))
-                        completion(.failure(error!.localizedDescription))
-                        
+        FirebaseManager.checkForFlag(onUser: user) { (flagged) in
+            if !flagged {
+                let userRef = userImageRef.child("\(userID).png")
+                userRef.data(withMaxSize: 5000000000) { (data, error) in //TODO: adjust this file size
+                    DispatchQueue.main.async {
+                        if let data = data {
+                            if let userImage = UIImage(data: data) {
+                                completion(.successfulDownload(userImage))
+                            } else {
+                                //                        completion(.failure("Could not convert dowloaded data to UIImage"))
+                                completion(.failure(error!.localizedDescription))
+                                
+                            }
+                        } else {
+                            completion(.failure("Could not download Image"))
+                            print(error.debugDescription)
+                        }
                     }
-                } else {
-                    completion(.failure("Could not download Image"))
-                    print(error.debugDescription)
                 }
+                
+            } else {
+                completion(.failure("Can't download image, user was flagged for inappropraite content"))
             }
         }
+        
+        
     }
 }

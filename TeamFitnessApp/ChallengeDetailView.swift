@@ -10,7 +10,7 @@ import UIKit
 
 class ChallengeDetailView: FitnessView {
     
-    let topLabel = FitnessLabel()
+    let topLabel = TitleLabel()
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
     let joinButton = FitnessButton()

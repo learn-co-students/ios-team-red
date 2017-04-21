@@ -112,26 +112,12 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         self.present(navVC, animated: true, completion: nil)
     }
 
-//MARK: Firebase calls
-//    func getMyChallenges() {
-//        guard let uid = self.uid else {return}
-//        FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
-//            self.myChallenges.removeAll()
-//            for challengeID in user.challengeIDs {
-//                FirebaseManager.fetchChallengeOnce(withChallengeID: challengeID, completion: { (challenge) in
-//                    self.myChallenges.append(challenge)
-//                    DispatchQueue.main.async {
-//                        self.challengeView.myChallengesView.reloadData()
-//                    }
-//                })
-//            }
-//        }
-//    }
     
     func getMyChallenges(completion: @escaping () -> Void) {
-        
+        guard let uid = self.uid else {return}
+        self.myChallenges.removeAll()
         for challenge in DataStore.sharedInstance.allChallenges {
-            if challenge.creator == self.uid {
+            if challenge.userUIDs.keys.contains(uid) {
                 self.myChallenges.append(challenge)
             }
         }

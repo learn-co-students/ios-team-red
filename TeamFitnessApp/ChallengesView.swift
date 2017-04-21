@@ -11,8 +11,8 @@ import UIKit
 class ChallengesView: FitnessView {
 
 
-  var myChallengesLabel: FitnessLabel!
-  var createPublicChallengeLabel: FitnessLabel!
+  var myChallengesLabel: TitleLabel!
+  var createPublicChallengeLabel: TitleLabel!
   var createChallengeButton: FitnessButton!
   var findChallengeButton: FitnessButton!
 
@@ -33,7 +33,7 @@ class ChallengesView: FitnessView {
   }
 
   func comInit() {
-    myChallengesLabel = FitnessLabel()
+    myChallengesLabel = TitleLabel()
     self.addSubview(myChallengesLabel)
     myChallengesLabel.translatesAutoresizingMaskIntoConstraints = false
     myChallengesLabel.textAlignment = .center
@@ -48,7 +48,7 @@ class ChallengesView: FitnessView {
     findChallengeButton.changeFontSize(to: 18)
 
 
-    createPublicChallengeLabel = FitnessLabel()
+    createPublicChallengeLabel = TitleLabel()
     self.addSubview(createPublicChallengeLabel)
     createPublicChallengeLabel.translatesAutoresizingMaskIntoConstraints = false
     createPublicChallengeLabel.textAlignment = .center

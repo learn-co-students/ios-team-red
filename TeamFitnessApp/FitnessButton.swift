@@ -25,11 +25,30 @@ class FitnessButton: UIButton {
         self.setTitleColor(UIColor.whitewash, for: .normal)
         self.backgroundColor = UIColor.lagoon
         self.layer.cornerRadius = 5
+        
+
+        setShadow()
+    }
+
+    func setShadow() {
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor.raspberry.cgColor
+        self.layer.masksToBounds = true
+
+        self.layer.cornerRadius = 5.0
+        self.layer.shadowColor = UIColor.darkGray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+        self.layer.shadowRadius = 2.0
+        self.layer.shadowOpacity = 1.0
+
     }
     
     func reverseColors() {
         self.setTitleColor(UIColor.lagoon, for: .normal)
         self.backgroundColor = UIColor.clear
+        self.layer.borderWidth = 0.0
+        self.layer.shadowOpacity = 0.0
+
     }
     
     func changeFontSize(to newFontSize: CGFloat) {

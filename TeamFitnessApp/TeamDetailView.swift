@@ -13,15 +13,19 @@ class TeamDetailView: FitnessView {
     
 
     var captainLabel: FitnessLabel!
-    var membersLabel: FitnessLabel!
-    var challengesLabel: FitnessLabel!
+    var membersLabel: TitleLabel!
+    var challengesLabel: TitleLabel!
     var inviteMembersButton: FitnessButton!
     var createChallengeButton: FitnessButton!
     var membersView: UITableView!
     var challengesView: UITableView!
     var joinButton: FitnessButton!
     var teamImageView: UIImageView!
+
+    var reportButton: FitnessButton!
+
     var leaveTeamButton: FitnessButton!
+
     
     
     
@@ -45,10 +49,19 @@ class TeamDetailView: FitnessView {
         teamImageView.translatesAutoresizingMaskIntoConstraints = false
         teamImageView.backgroundColor = UIColor.clear
         
+
+        reportButton = FitnessButton()
+        self.addSubview(reportButton)
+        reportButton.translatesAutoresizingMaskIntoConstraints = false
+        reportButton.setReversed(text: "Report Image")
+        reportButton.reverseColors()
+
         leaveTeamButton = FitnessButton()
         self.addSubview(leaveTeamButton)
         leaveTeamButton.translatesAutoresizingMaskIntoConstraints = false
+
         leaveTeamButton.set(text: "leave")
+
         
         captainLabel = FitnessLabel()
         self.addSubview(captainLabel)
@@ -62,7 +75,7 @@ class TeamDetailView: FitnessView {
         joinButton.set(text: "join")
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         
-        membersLabel = FitnessLabel()
+        membersLabel = TitleLabel()
         membersLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(membersLabel)
         membersLabel.textAlignment = .center
@@ -76,7 +89,7 @@ class TeamDetailView: FitnessView {
         membersView.translatesAutoresizingMaskIntoConstraints = false
         membersView.backgroundColor = UIColor.clear
         
-        challengesLabel = FitnessLabel()
+        challengesLabel = TitleLabel()
         challengesLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(challengesLabel)
         challengesLabel.textAlignment = .center
@@ -107,18 +120,25 @@ class TeamDetailView: FitnessView {
         teamImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.35).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
         
-        captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.5, heightMultiplier: 0.05)
+        reportButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.1).isActive = true
+        reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
+        reportButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor).isActive = true
+        reportButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         
-        joinButton.leftAnchor.constraint(equalTo: captainLabel.rightAnchor).isActive = true
+        captainLabel.constrainVertically(belowView: teamImageView, widthMultiplier: 0.8, heightMultiplier: 0.05)
+        
+        joinButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor, constant: 20).isActive = true
         joinButton.topAnchor.constraint(equalTo: teamImageView.topAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.2).isActive = true
         joinButton.heightAnchor.constraint(equalTo: joinButton.widthAnchor, multiplier: 0.4).isActive = true
         
+
         leaveTeamButton.centerYAnchor.constraint(equalTo: joinButton.centerYAnchor).isActive = true
         leaveTeamButton.centerXAnchor.constraint(equalTo: joinButton.centerXAnchor).isActive = true
         leaveTeamButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor).isActive = true
         leaveTeamButton.widthAnchor.constraint(equalTo: joinButton.widthAnchor).isActive = true
         
+
         membersLabel.constrainVertically(belowView: captainLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         
         membersView.constrainVertically(belowView: membersLabel, widthMultiplier: 0.8, heightMultiplier: 0.25)

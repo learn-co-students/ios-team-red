@@ -27,7 +27,7 @@ exports.checkChallenges = functions.https.onRequest((req, res) => {
 
         //Check if there is a team for the challenge, if so remove it under the team "challenges" and add to "oldChallenges"
         let team = challengeObj['team'];
-        if (team == null) {
+        if (team == 'no team') {
         } else {
           admin.database().ref('/teams/'+ team + '/challenges/'+  item).set(null).then(snapshot => {});
           admin.database().ref('/teams/'+ team + '/oldChallenges/'+item).set(true).then(snapshot => {});

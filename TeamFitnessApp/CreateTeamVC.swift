@@ -66,13 +66,13 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imageButton.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         imageButton.set(text: "+ team image")
         imageButton.addTarget(self, action: #selector(getTeamImage), for: .touchUpInside)
-        
-        imageButton.addSubview(teamImage)
+
+        self.view.addSubview(teamImage)
         teamImage.translatesAutoresizingMaskIntoConstraints = false
-        teamImage.leftAnchor.constraint(equalTo: imageButton.leftAnchor).isActive = true
-        teamImage.rightAnchor.constraint(equalTo: imageButton.rightAnchor).isActive = true
-        teamImage.topAnchor.constraint(equalTo: imageButton.topAnchor).isActive = true
-        teamImage.bottomAnchor.constraint(equalTo: imageButton.bottomAnchor).isActive = true
+        teamImage.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        teamImage.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        teamImage.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
+        teamImage.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
     }
     
     func createTeamButtonPressed() {
@@ -100,6 +100,8 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                         }
                     }
                 })
+
+                
                 
                 guard let teamID = team.id, let chosenImage = chosenImage else {return} //TODO: - handle this error better
                     FirebaseStoreageManager.upload(teamImage: chosenImage, withTeamID: teamID, completion: { (response) in
@@ -130,7 +132,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         imagePicker.modalPresentationStyle = .overCurrentContext
         navigationController?.present(imagePicker, animated: true, completion: nil)
     }
-    
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage
         teamImage.image = chosenImage

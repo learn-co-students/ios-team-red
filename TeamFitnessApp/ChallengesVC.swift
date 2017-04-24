@@ -38,12 +38,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         challengeView.myChallengesView.dataSource = self
         
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
-        
-        DataStore.sharedInstance.observeAllChallenges() {
-            self.getMyChallenges() {
-                self.challengeView.myChallengesView.reloadData()
-            }
-        }
 
 
         challengeView.createChallengeButton.addTarget(self, action: #selector(segueCreateChallenge), for: .touchUpInside)
@@ -55,6 +49,18 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         self.hideKeyboardWhenTappedAround()
         
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DataStore.sharedInstance.getChallenges(forUser: uid!, completion: {
+            self.myChallenges = DataStore.sharedInstance.userChallenges
+            self.getMyChallenges {
+                self.challengeView.myChallengesView.reloadData()
+            }
+
+        })
     }
 
     func onProfile(_ sender: UIBarButtonItem) {
@@ -114,13 +120,6 @@ class ChallengesVC: UIViewController, UITableViewDelegate, UITableViewDataSource
 
     
     func getMyChallenges(completion: @escaping () -> Void) {
-        guard let uid = self.uid else {return}
-        self.myChallenges.removeAll()
-        for challenge in DataStore.sharedInstance.allChallenges {
-            if challenge.userUIDs.keys.contains(uid) {
-                self.myChallenges.append(challenge)
-            }
-        }
         myChallenges = myChallenges.sorted(by: { (challenge1, challenge2) -> Bool in
             guard let date1 = challenge1.endDate, let date2 = challenge2.endDate else {return false}
             return date1 < date2

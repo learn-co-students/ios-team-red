@@ -62,10 +62,10 @@ class CustomPieChartView: PieChartView {
     pFormatter.numberStyle = .none
     pFormatter.maximumFractionDigits = 1;
     pFormatter.multiplier = 1
-    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 15)
+    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 16)
     data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-    data.setValueFont(NSUIFont(descriptor:descript, size:15))
-    data.setValueTextColor(UIColor.white)
+    data.setValueFont(NSUIFont(descriptor:descript, size:16))
+    data.setValueTextColor(UIColor.black)
 
     self.data = data;
     

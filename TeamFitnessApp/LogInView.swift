@@ -73,7 +73,7 @@ class LogInView: FitnessView {
         fitnessBabyLabel.textAlignment = NSTextAlignment.center
         fitnessBabyLabel.reverseColors()
         fitnessBabyLabel.changeFontSize(to: 32.0)
-        fitnessBabyLabel.set(text: "Groupfit")
+        fitnessBabyLabel.set(text: "FriendFit")
 
 
 

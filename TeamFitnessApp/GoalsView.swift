@@ -69,6 +69,7 @@ class GoalsView: FitnessView {
         activityMinutesADay = FitnessField()
         self.addSubview(activityMinutesADay)
         activityMinutesADay.translatesAutoresizingMaskIntoConstraints = false
+        activityMinutesADay.keyboardType = UIKeyboardType.numberPad
         activityMinutesADay.setPlaceholder(text: "active minutes")
 
 
@@ -78,6 +79,7 @@ class GoalsView: FitnessView {
         calorieLabel.textAlignment = NSTextAlignment.center
         calorieLabel.reverseColors()
         calorieLabel.numberOfLines = 2
+
         calorieLabel.changeFontSize(to: 16.0)
         calorieLabel.set(text: "how many calories would you like to burn each day?")
 
@@ -85,6 +87,7 @@ class GoalsView: FitnessView {
         caloriesADay = FitnessField()
         self.addSubview(caloriesADay)
         caloriesADay.translatesAutoresizingMaskIntoConstraints = false
+        caloriesADay.keyboardType = UIKeyboardType.numberPad
         caloriesADay.setPlaceholder(text: "calories")
 
 

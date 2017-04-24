@@ -103,19 +103,24 @@
         }
         
         
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         DataStore.sharedInstance.observeAllUsers() {
             self.getTeamMembers {
                 self.teamDetailView.membersView.reloadData()
             }
         }
-        
-        DataStore.sharedInstance.observeAllChallenges { 
+
+        DataStore.sharedInstance.observeAllChallenges {
             self.getTeamChallenges {
                 self.teamDetailView.challengesView.reloadData()
             }
         }
     }
-    
+
 
     func setTeam(team: Team) {
         self.team = team
@@ -174,17 +179,15 @@
     
     private func getTeamMembers(completion: @escaping () -> Void) {
         if let team = self.team {
-            self.teamUsers.removeAll()
-            for user in DataStore.sharedInstance.allUsers {
-                guard let uid = user.uid else {return}
-                if team.userUIDs.contains(uid) {
-                    self.teamUsers.append(user)
-                }
-            }
-            completion()
+            DataStore.sharedInstance.getTeamUsers(forTeam: team.id!, completion: {
+                self.teamUsers = DataStore.sharedInstance.teamUsers
+                completion()
+            })
         }
+
+
     }
-    
+
     
     //MARK: - Button functions
     
@@ -196,14 +199,22 @@
                 DispatchQueue.main.async {
                     self.teamDetailView.membersView.reloadData()
                     self.teamDetailView.challengesView.reloadData()
+                        self.getTeamMembers {
+                            self.teamDetailView.membersView.reloadData()
+
+                    }
+
                 }
             }
         }
         teamDetailView.joinButton.isHidden = true
         teamDetailView.leaveTeamButton.isEnabled = true
         teamDetailView.leaveTeamButton.isHidden = false
+
+
+
     }
-    
+
     func segueCreateChallenge() {
         let createChallengeVC = CreateChallengeVC()
         createChallengeVC.team = self.team
@@ -222,10 +233,16 @@
             DispatchQueue.main.async {
                 self.teamDetailView.membersView.reloadData()
                 self.teamDetailView.challengesView.reloadData()
+                    self.getTeamMembers {
+                        self.teamDetailView.membersView.reloadData()
+
+                }
+
             }
         }
+
     }
-    
+
     func reportTeam() {
         teamDetailView.teamImageView.image = #imageLiteral(resourceName: "defaultTeam")
         guard let team = team else {return}

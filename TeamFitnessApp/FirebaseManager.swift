@@ -104,9 +104,10 @@ struct FirebaseManager {
         key.updateChildValues(post)
     }
     
-    static func updateChallengeData(challengeID: String, userID: String, withData data: Double) {
+    static func updateChallengeData(challengeID: String, userID: String, withData data: Double, completion: @escaping () -> ()) {
         let key = dataRef.child("challenges").child(challengeID).child("users")
         key.updateChildValues([userID:data])
+        completion()
     }
     // MARK: - Fetch functions
     

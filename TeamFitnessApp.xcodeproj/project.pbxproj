@@ -13,11 +13,11 @@
 		AA2F64C31EA7EB230032545E /* TeamDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2F64C21EA7EB230032545E /* TeamDetailView.swift */; };
 		AA599A9D1EA964D100C12AC3 /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA599A9C1EA964D100C12AC3 /* ForgotPasswordVC.swift */; };
 		AA89B06A1E93E905007E55AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA89B0691E93E905007E55AC /* HealthKit.framework */; };
-		AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */; };
 		AA89B06F1E9406F8007E55AC /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */; };
 		AAA0C4891EA998C100DFAF34 /* FindChallengesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C4881EA998C100DFAF34 /* FindChallengesVC.swift */; };
 		AAA0C48B1EA99A6400DFAF34 /* FindChallengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C48A1EA99A6400DFAF34 /* FindChallengeCell.swift */; };
 		AAA0C48F1EA9B74E00DFAF34 /* ChallengeTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0C48E1EA9B74E00DFAF34 /* ChallengeTypeVC.swift */; };
+		AAA0C4911EAAB9C800DFAF34 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAA0C4901EAAB9C800DFAF34 /* GoogleService-Info.plist */; };
 		AABA90971E9C0CC800EC6703 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90961E9C0CC800EC6703 /* LoginManager.swift */; };
 		AABA90991E9C0CD100EC6703 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA90981E9C0CD100EC6703 /* AppController.swift */; };
 		AABA909B1E9C0EAB00EC6703 /* ViewContollerCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */; };
@@ -115,11 +115,11 @@
 		AA599A9C1EA964D100C12AC3 /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
 		AA89B0691E93E905007E55AC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamFitnessApp.entitlements; sourceTree = "<group>"; };
-		AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AA89B06E1E9406F8007E55AC /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		AAA0C4881EA998C100DFAF34 /* FindChallengesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindChallengesVC.swift; sourceTree = "<group>"; };
 		AAA0C48A1EA99A6400DFAF34 /* FindChallengeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindChallengeCell.swift; sourceTree = "<group>"; };
 		AAA0C48E1EA9B74E00DFAF34 /* ChallengeTypeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChallengeTypeVC.swift; sourceTree = "<group>"; };
+		AAA0C4901EAAB9C800DFAF34 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AABA90961E9C0CC800EC6703 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		AABA90981E9C0CD100EC6703 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		AABA909A1E9C0EAB00EC6703 /* ViewContollerCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewContollerCases.swift; sourceTree = "<group>"; };
@@ -289,8 +289,8 @@
 				EC6A3D631E92F4F000F5E717 /* Utility */,
 				EC6A3D371E92EDC800F5E717 /* Assets.xcassets */,
 				AA89B06B1E93E905007E55AC /* TeamFitnessApp.entitlements */,
+				AAA0C4901EAAB9C800DFAF34 /* GoogleService-Info.plist */,
 				EC6A3D391E92EDC800F5E717 /* LaunchScreen.storyboard */,
-				AA89B06C1E93F1FB007E55AC /* GoogleService-Info.plist */,
 				EC6A3D3C1E92EDC800F5E717 /* Info.plist */,
 			);
 			path = TeamFitnessApp;
@@ -501,7 +501,7 @@
 				TargetAttributes = {
 					EC6A3D2C1E92EDC800F5E717 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 7X3B669663;
+						DevelopmentTeam = KXY9EDFTF5;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.HealthKit = {
@@ -548,8 +548,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA89B06D1E93F1FB007E55AC /* GoogleService-Info.plist in Resources */,
 				FE4BB1F91EA4FA8C004BA4C9 /* Fresca-Regular.ttf in Resources */,
+				AAA0C4911EAAB9C800DFAF34 /* GoogleService-Info.plist in Resources */,
 				EC6A3D3B1E92EDC800F5E717 /* LaunchScreen.storyboard in Resources */,
 				EC6A3D381E92EDC800F5E717 /* Assets.xcassets in Resources */,
 			);
@@ -941,14 +941,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TeamFitnessApp/TeamFitnessApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7X3B669663;
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessAppLPAF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -963,14 +963,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TeamFitnessApp/TeamFitnessApp.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 7X3B669663;
+				DEVELOPMENT_TEAM = KXY9EDFTF5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TeamFitnessApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Lmusto.TeamFitnessAppLPAF;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

@@ -75,25 +75,28 @@ class ChallengesView: FitnessView {
 
     myChallengesLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     myChallengesLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 70).isActive = true
-    myChallengesLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.80).isActive = true
+    myChallengesLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
+    myChallengesLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
     myChallengesView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     myChallengesView.topAnchor.constraint(equalTo: myChallengesLabel.bottomAnchor, constant:8).isActive = true
     myChallengesView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-    myChallengesView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.50).isActive = true
+    myChallengesView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.40).isActive = true
 
     findChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     findChallengeButton.topAnchor.constraint(equalTo: myChallengesView.bottomAnchor, constant: 10).isActive = true
-    findChallengeButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-    findChallengeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    findChallengeButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -30).isActive = true
+    findChallengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
     createPublicChallengeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    createPublicChallengeLabel.topAnchor.constraint(equalTo: findChallengeButton.bottomAnchor, constant: 10).isActive = true
-    createPublicChallengeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1).isActive = true
+    createPublicChallengeLabel.topAnchor.constraint(equalTo: findChallengeButton.bottomAnchor, constant:8).isActive = true
+
+    createPublicChallengeLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
+    createPublicChallengeLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
     createChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    createChallengeButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-    createChallengeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    createChallengeButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -30).isActive = true
+    createChallengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
     createChallengeButton.topAnchor.constraint(equalTo: createPublicChallengeLabel.bottomAnchor, constant: 10).isActive = true
 
 

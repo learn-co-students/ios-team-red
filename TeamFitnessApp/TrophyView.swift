@@ -66,6 +66,7 @@ class TrophyView: FitnessView {
     participationLabel = TitleLabel(frame: CGRect.zero)
     participationLabel.set(text: "Challenege Participation Count")
     participationLabel.changeFontSize(to: 20)
+    participationLabel.adjustsFontSizeToFitWidth = true
 
     completionLabel = TitleLabel(frame: CGRect.zero)
     completionLabel.set(text: "Successful Completion Count")
@@ -110,7 +111,7 @@ class TrophyView: FitnessView {
     participationCountLabel.topAnchor.constraint(equalTo: participationLabel.bottomAnchor, constant: 5).isActive = true
     participationCountLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
     participationCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    participationCountLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    participationCountLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
 //    completionLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 10).isActive = true
 //    completionLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -122,47 +123,47 @@ class TrophyView: FitnessView {
 //    completionCountLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
 //    completionCountLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
 
-    trophyLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 20).isActive = true
+    trophyLabel.topAnchor.constraint(equalTo: participationCountLabel.bottomAnchor, constant: 10).isActive = true
     trophyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     trophyLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
 
-    firstPlaceImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    firstPlaceImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+    firstPlaceImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.08).isActive = true
+    firstPlaceImageView.widthAnchor.constraint(equalTo: firstPlaceImageView.heightAnchor).isActive = true
     firstPlaceImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -120).isActive = true
     firstPlaceImageView.topAnchor.constraint(equalTo: trophyLabel.bottomAnchor, constant: 10).isActive = true
 
     firstPlaceLabel.topAnchor.constraint(equalTo: trophyLabel.bottomAnchor, constant: 20).isActive = true
     firstPlaceLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     firstPlaceLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    firstPlaceLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    firstPlaceLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
-    secondPlaceImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    secondPlaceImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+    secondPlaceImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.08).isActive = true
+    secondPlaceImageView.widthAnchor.constraint(equalTo: secondPlaceImageView.heightAnchor).isActive = true
     secondPlaceImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -120).isActive = true
     secondPlaceImageView.topAnchor.constraint(equalTo: firstPlaceImageView.bottomAnchor, constant: 10).isActive = true
 
     secondPlaceLabel.topAnchor.constraint(equalTo: firstPlaceImageView.bottomAnchor, constant: 20).isActive = true
     secondPlaceLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     secondPlaceLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    secondPlaceLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    secondPlaceLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
-    thirdPlaceImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-    thirdPlaceImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+    thirdPlaceImageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.08).isActive = true
+    thirdPlaceImageView.widthAnchor.constraint(equalTo: thirdPlaceImageView.heightAnchor).isActive = true
     thirdPlaceImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -120).isActive = true
     thirdPlaceImageView.topAnchor.constraint(equalTo: secondPlaceImageView.bottomAnchor, constant: 10).isActive = true
 
     thirdPlaceLabel.topAnchor.constraint(equalTo: secondPlaceImageView.bottomAnchor, constant: 20).isActive = true
     thirdPlaceLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     thirdPlaceLabel.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    thirdPlaceLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    thirdPlaceLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
-    archeiveLabel.topAnchor.constraint(equalTo: thirdPlaceImageView.bottomAnchor, constant: 20).isActive = true
+    archeiveLabel.topAnchor.constraint(equalTo: thirdPlaceImageView.bottomAnchor, constant: 10).isActive = true
     archeiveLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     archeiveLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -10).isActive = true
 
-    tableView.topAnchor.constraint(equalTo: archeiveLabel.bottomAnchor, constant: 10).isActive = true
+    tableView.topAnchor.constraint(equalTo: archeiveLabel.bottomAnchor, constant: 2).isActive = true
     tableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     tableView.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    tableView.heightAnchor.constraint(equalToConstant: 175).isActive = true
+    tableView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true
   }
 }

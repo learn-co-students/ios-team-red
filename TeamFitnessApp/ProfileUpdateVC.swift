@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 
 class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    
     
     let ref = FIRDatabase.database().reference()
     let profileUpdateView = updateProfileView()
@@ -28,6 +30,8 @@ class ProfileUpdateVC: UIViewController, UpdateProfileViewDelegate, UIImagePicke
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.navigationItem.setTitle(text: "Profile")
         
         
         fetchUser {

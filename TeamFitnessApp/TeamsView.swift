@@ -79,6 +79,7 @@ class TeamsView: FitnessView {
         createTeamLabel.set(text: "...or...")
         createTeamLabel.changeFontSize(to: 20)
 
+
         createTeamButton = FitnessButton()
         self.addSubview(createTeamButton)
         createTeamButton.translatesAutoresizingMaskIntoConstraints = false
@@ -89,16 +90,18 @@ class TeamsView: FitnessView {
     func setConstraints() {
         myTeamsLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 70).isActive = true
         myTeamsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        myTeamsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+        myTeamsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+        myTeamsLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.03).isActive = true
 
         myTeamsView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        myTeamsView.topAnchor.constraint(equalTo: myTeamsLabel.bottomAnchor, constant: 8).isActive = true
+        myTeamsView.topAnchor.constraint(equalTo: myTeamsLabel.bottomAnchor, constant: 2).isActive = true
         myTeamsView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-        myTeamsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.25).isActive = true
+        myTeamsView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.20).isActive = true
 
         findTeamsLabel.topAnchor.constraint(equalTo: myTeamsView.bottomAnchor, constant: 10).isActive = true
         findTeamsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        findTeamsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        findTeamsLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+        findTeamsLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.03).isActive = true
 
         teamSearchBar.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         teamSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10).isActive = true
@@ -106,17 +109,18 @@ class TeamsView: FitnessView {
         teamSearchBar.topAnchor.constraint(equalTo: findTeamsLabel.bottomAnchor, constant: 3).isActive = true
         
         searchTableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        searchTableView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 25).isActive = true
-        searchTableView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.2).isActive = true
+        searchTableView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 5).isActive = true
+        searchTableView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true
         searchTableView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
 
         createTeamLabel.topAnchor.constraint(equalTo: searchTableView.bottomAnchor, constant: 10).isActive = true
         createTeamLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-        createTeamLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.3).isActive = true
+        createTeamLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
+        createTeamLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.07).isActive = true
 
         createTeamButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        createTeamButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        createTeamButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        createTeamButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        createTeamButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         createTeamButton.topAnchor.constraint(equalTo: createTeamLabel.bottomAnchor, constant: 10).isActive = true
     }
 }

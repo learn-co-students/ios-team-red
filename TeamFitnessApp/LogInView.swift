@@ -152,14 +152,17 @@ class LogInView: FitnessView {
 
   func setConstaints() {
 
+    //imageDude 163 height, 105 width
+    //imageLady 117 height, 132 width
+
     imageViewDude.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -20).isActive = true
-    imageViewDude.heightAnchor.constraint(equalToConstant: 163).isActive = true
-    imageViewDude.widthAnchor.constraint(equalToConstant: 105).isActive = true
+    imageViewDude.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.217).isActive = true
+    imageViewDude.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.28).isActive = true
     imageViewDude.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
 
     imageViewLady.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50).isActive = true
-    imageViewLady.heightAnchor.constraint(equalToConstant: 117).isActive = true
-    imageViewLady.widthAnchor.constraint(equalToConstant: 132).isActive = true
+    imageViewLady.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.156).isActive = true
+    imageViewLady.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.352).isActive = true
     imageViewLady.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
 
     fitnessBabyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
@@ -176,16 +179,16 @@ class LogInView: FitnessView {
     passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20).isActive = true
 
     forgotButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 0).isActive = true
-    forgotButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+    forgotButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
     forgotButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: 0).isActive = true
 
     loginButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-    loginButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    loginButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     loginButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -75).isActive = true
     loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
 
     newUserButton.widthAnchor.constraint(equalToConstant: 100).isActive = true
-    newUserButton.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    newUserButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
     newUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 75).isActive = true
     newUserButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40).isActive = true
 

@@ -71,6 +71,7 @@ class GoalsView: FitnessView {
         activityMinutesADay.translatesAutoresizingMaskIntoConstraints = false
         activityMinutesADay.keyboardType = UIKeyboardType.numberPad
         activityMinutesADay.setPlaceholder(text: "active minutes")
+        activityMinutesADay.adjustsFontSizeToFitWidth = true
 
 
         calorieLabel = FitnessLabel()
@@ -113,7 +114,7 @@ class GoalsView: FitnessView {
     minuteLabel.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 50).isActive = true
 
     activityMinutesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    activityMinutesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+    activityMinutesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
     activityMinutesADay.topAnchor.constraint(equalTo: minuteLabel.bottomAnchor, constant: 10).isActive = true
     activityMinutesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
@@ -123,7 +124,7 @@ class GoalsView: FitnessView {
 
     caloriesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
     caloriesADay.topAnchor.constraint(equalTo: calorieLabel.bottomAnchor, constant: 10).isActive = true
-    caloriesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4).isActive = true
+    caloriesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
     caloriesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
 

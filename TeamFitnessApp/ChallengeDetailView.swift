@@ -45,7 +45,7 @@ class ChallengeDetailView: FitnessView {
     
     func loadUI() {
         self.addSubview(topLabel)
-        topLabel.numberOfLines = 3
+        topLabel.numberOfLines = 4
 
         self.addSubview(goalPieChart)
         
@@ -65,14 +65,14 @@ class ChallengeDetailView: FitnessView {
         goalPieChart.translatesAutoresizingMaskIntoConstraints = false
         goalPieChart.topAnchor.constraint(equalTo: topLabel.bottomAnchor).isActive = true
         goalPieChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.45).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
         
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
         leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
         leadersChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
+        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.28).isActive = true
     }
     
     func displayJoinButton() {
@@ -81,7 +81,7 @@ class ChallengeDetailView: FitnessView {
         joinButton.topAnchor.constraint(equalTo: leadersChart.bottomAnchor).isActive = true
         joinButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         joinButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-        joinButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
+        joinButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
         joinButton.setTitle("Join Challenge", for: .normal)
         joinButton.isHidden = false
     }

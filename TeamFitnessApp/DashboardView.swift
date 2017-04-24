@@ -71,24 +71,24 @@ class DashboardView: FitnessView {
   func setConstraints() {
     pieOneLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
     pieOneLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    pieOneLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    pieOneLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    pieOneLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
+    pieOneLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
     pieChartView1.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: 5).isActive = true
     pieChartView1.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView1.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    pieChartView1.heightAnchor.constraint(equalToConstant: 175).isActive = true
+    pieChartView1.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.26, constant: 0).isActive = true
 
 
     pieTwoLabel.topAnchor.constraint(equalTo: pieChartView1.bottomAnchor, constant: 20).isActive = true
     pieTwoLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    pieTwoLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    pieTwoLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    pieTwoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
+    pieTwoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
     pieChartView2.topAnchor.constraint(equalTo: pieTwoLabel.bottomAnchor, constant: 5).isActive = true
     pieChartView2.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView2.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    pieChartView2.heightAnchor.constraint(equalToConstant: 175).isActive = true
+    pieChartView2.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.26, constant: 0).isActive = true
 
   }
 

@@ -84,11 +84,11 @@ class FindChallengesVC: UIViewController {
         challengeSearchBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 75).isActive = true
         challengeSearchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         challengeSearchBar.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.05).isActive = true
-        challengeSearchBar.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.75).isActive = true
+        challengeSearchBar.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.80).isActive = true
 
-        collectionView.topAnchor.constraint(equalTo: challengeSearchBar.bottomAnchor, constant: 20).isActive = true
+        collectionView.topAnchor.constraint(equalTo: challengeSearchBar.bottomAnchor, constant: 10).isActive = true
         collectionView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant: -75).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: self.view.heightAnchor, constant: -100).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
 
         tableView.topAnchor.constraint(equalTo: challengeSearchBar.bottomAnchor).isActive = true

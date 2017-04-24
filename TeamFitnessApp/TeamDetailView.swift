@@ -47,6 +47,8 @@ class TeamDetailView: FitnessView {
         teamImageView = UIImageView()
         self.addSubview(teamImageView)
         teamImageView.translatesAutoresizingMaskIntoConstraints = false
+        teamImageView.layer.cornerRadius = 10
+        teamImageView.layer.masksToBounds = true
         teamImageView.backgroundColor = UIColor.clear
         
 
@@ -117,10 +119,10 @@ class TeamDetailView: FitnessView {
         
         teamImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         teamImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
-        teamImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.35).isActive = true
+        teamImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.20).isActive = true
         teamImageView.heightAnchor.constraint(equalTo: teamImageView.widthAnchor).isActive = true
         
-        reportButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.1).isActive = true
+        reportButton.heightAnchor.constraint(equalTo: teamImageView.heightAnchor, multiplier: 0.15).isActive = true
         reportButton.bottomAnchor.constraint(equalTo: teamImageView.bottomAnchor).isActive = true
         reportButton.leftAnchor.constraint(equalTo: teamImageView.rightAnchor).isActive = true
         reportButton.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
@@ -145,12 +147,12 @@ class TeamDetailView: FitnessView {
 
         createChallengeButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         createChallengeButton.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        createChallengeButton.topAnchor.constraint(equalTo: challengesView.bottomAnchor, constant: 5).isActive = true
-        createChallengeButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        createChallengeButton.topAnchor.constraint(equalTo: challengesView.bottomAnchor, constant: 6).isActive = true
+        createChallengeButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
-        challengesLabel.constrainVertically(belowView: membersView, widthMultiplier: 0.8, heightMultiplier: 0.05)
+        challengesLabel.constrainVertically(belowView: membersView, widthMultiplier: 0.8, heightMultiplier: 0.04)
         
-        challengesView.constrainVertically(belowView: challengesLabel, widthMultiplier: 0.8, heightMultiplier: 0.15)
+        challengesView.constrainVertically(belowView: challengesLabel, widthMultiplier: 0.8, heightMultiplier: 0.10)
 
         
     }

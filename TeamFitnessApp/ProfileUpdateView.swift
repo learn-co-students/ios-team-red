@@ -183,7 +183,7 @@ class updateProfileView: FitnessView {
         showImagePickerButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
         showImagePickerButton.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.4, constant: 0).isActive = true
         showImagePickerButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05, constant: 0).isActive = true
-        showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 50).isActive = true
+        showImagePickerButton.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 30).isActive = true
 
         nameLabel.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 0).isActive = true
         nameLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true

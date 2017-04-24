@@ -14,6 +14,7 @@ class FindChallengeCell: UICollectionViewCell {
         didSet {
             goalTypeLabel.set(text: goal.type.rawValue)
             goalTypeLabel.changeFontSize(to: 14)
+            goalTypeLabel.adjustsFontSizeToFitWidth = true
             goalTypeLabel.textColor = UIColor.whitewash
         }
     }
@@ -58,6 +59,7 @@ class FindChallengeCell: UICollectionViewCell {
     func setConstraints() {
         goalTypeLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
         goalTypeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        goalTypeLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -10).isActive = true
 
 
         

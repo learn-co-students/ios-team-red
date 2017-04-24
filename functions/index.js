@@ -16,10 +16,14 @@ exports.checkChallenges = functions.https.onRequest((req, res) => {
       //for each challenge get the time and check if it's less than currnet date
       const challengeObj = challengeDict[item]
       let epochDate = challengeObj.endDate
-      let endDate = new Date(epochDate);
+      console.log('epoch date is ' + epochDate);
+      let d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+      d.setUTCSeconds(epochDate);
+      let endDate = d;
       let timeNow = new Date();
+      console.log('time now is ' + timeNow);
+      console.log('time of challenge is '+ endDate);
       if (timeNow > endDate) {
-
         //move challenge to oldChallenges
         var dictRef = admin.database().ref('/oldChallenges/'+item);
         dictRef.set(challengeObj).then(snapshot => {

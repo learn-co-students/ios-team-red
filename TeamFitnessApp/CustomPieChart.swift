@@ -44,7 +44,7 @@ class CustomPieChartView: PieChartView {
       values.append(PieChartDataEntry(value: goal.rounded(), label: "GOAL"))
     } else {
       values.append(PieChartDataEntry(value: (goal-current), label: "TO GO"))
-      values.append(PieChartDataEntry(value: current, label: "YOU"))
+      values.append(PieChartDataEntry(value: current, label: "DOWN"))
     }
 
 

@@ -22,9 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
       FIRApp.configure()
+
         getData()
-        
-   
+
       // initalize the window
       self.window = UIWindow(frame: UIScreen.main.bounds)
       //check for nill
@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         getData()
+
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -82,9 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     func getData() {
         if let userUid = FIRAuth.auth()?.currentUser?.uid {
-            FirebaseManager.fetchUser(withFirebaseUID: userUid) { (user) in
+            FirebaseManager.fetchUserOnce(withFirebaseUID: userUid) { (user) in
                 for challenge in user.challengeIDs {
-                    FirebaseManager.fetchChallenge(withChallengeID: challenge, completion: { (challenge) in
+                    FirebaseManager.fetchChallengeOnce(withChallengeID: challenge, completion: { (challenge) in
                         let startDate = challenge.startDate!
                         let endDate = challenge.endDate!
                         let challengeID = challenge.id!

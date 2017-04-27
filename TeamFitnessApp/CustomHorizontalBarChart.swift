@@ -61,7 +61,7 @@ class CustomHorizontalBarChart: HorizontalBarChartView {
 
     self.fitBars = true
 
-    self.animate(yAxisDuration: 2.5)
+    self.animate(yAxisDuration: 1.5)
   }
 
   func setData(group: [(String, Double)]) {

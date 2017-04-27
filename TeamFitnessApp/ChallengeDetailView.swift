@@ -24,7 +24,7 @@ class ChallengeDetailView: FitnessView {
             let startDateString = formatter.string(from: startDate)
             let endDateString = formatter.string(from: endDate)
 
-            topLabel.set(text: "\(challenge.name) Challenge Info\nGoes from \(startDateString) to \(endDateString)\nGoal: \(challenge.goal!.value!) \(challenge.goal!.type.rawValue)")
+            topLabel.set(text: "\(challenge.name)\nGoes from \(startDateString) to \(endDateString)\nGoal: \(challenge.goal!.value!) \(challenge.goal!.type.rawValue)")
         }
     }
     
@@ -65,14 +65,14 @@ class ChallengeDetailView: FitnessView {
         goalPieChart.translatesAutoresizingMaskIntoConstraints = false
         goalPieChart.topAnchor.constraint(equalTo: topLabel.bottomAnchor).isActive = true
         goalPieChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.45).isActive = true
+        goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
         
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
         leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
         leadersChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
-        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.28).isActive = true
+        leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.33).isActive = true
     }
     
     func displayJoinButton() {

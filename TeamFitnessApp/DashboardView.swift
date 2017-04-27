@@ -52,15 +52,15 @@ class DashboardView: FitnessView {
     pieChartView1.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieChartView1)
 
-    pieOneLabel = TitleLabel(frame: CGRect.zero)
-    pieOneLabel.translatesAutoresizingMaskIntoConstraints = false
-    self.addSubview(pieOneLabel)
-
     
     pieChartView2 = CustomPieChartView(frame: CGRect.zero)
     pieChartView2.backgroundColor = UIColor.clear
     pieChartView2.translatesAutoresizingMaskIntoConstraints = false
     self.addSubview(pieChartView2)
+
+    pieOneLabel = TitleLabel(frame: CGRect.zero)
+    pieOneLabel.translatesAutoresizingMaskIntoConstraints = false
+    self.addSubview(pieOneLabel)
 
     pieTwoLabel = TitleLabel(frame: CGRect.zero)
     pieTwoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -72,23 +72,23 @@ class DashboardView: FitnessView {
     pieOneLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
     pieOneLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieOneLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
-    pieOneLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
+    pieOneLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.043, constant: 0).isActive = true
 
-    pieChartView1.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: 5).isActive = true
+    pieChartView1.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: -3).isActive = true
     pieChartView1.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView1.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    pieChartView1.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.26, constant: 0).isActive = true
+    pieChartView1.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.38, constant: 0).isActive = true
 
 
-    pieTwoLabel.topAnchor.constraint(equalTo: pieChartView1.bottomAnchor, constant: 20).isActive = true
+    pieTwoLabel.topAnchor.constraint(equalTo: pieOneLabel.bottomAnchor, constant: 245).isActive = true
     pieTwoLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieTwoLabel.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1, constant: -20).isActive = true
     pieTwoLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.053, constant: 0).isActive = true
 
-    pieChartView2.topAnchor.constraint(equalTo: pieTwoLabel.bottomAnchor, constant: 5).isActive = true
+    pieChartView2.topAnchor.constraint(equalTo: pieTwoLabel.bottomAnchor, constant: -3).isActive = true
     pieChartView2.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     pieChartView2.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    pieChartView2.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.26, constant: 0).isActive = true
+    pieChartView2.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.38, constant: 0).isActive = true
 
   }
 

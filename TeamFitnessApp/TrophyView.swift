@@ -64,7 +64,7 @@ class TrophyView: FitnessView {
   func comInit() {
 
     participationLabel = TitleLabel(frame: CGRect.zero)
-    participationLabel.set(text: "Challenege Participation Count")
+    participationLabel.set(text: "Challenge Participation Count")
     participationLabel.changeFontSize(to: 20)
     participationLabel.adjustsFontSizeToFitWidth = true
 

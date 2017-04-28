@@ -101,23 +101,23 @@ class FindChallengesVC: UIViewController {
 
 extension FindChallengesVC: UICollectionViewDelegate, UICollectionViewDataSource  {
 
-     func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return goals.count
     }
 
 
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "fChallengeCell", for: indexPath) as! FindChallengeCell
         cell.goal = goals[indexPath.item]
         return cell
     }
 
-     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = ChallengeTypeVC()
         vc.goal = goals[indexPath.item]
         vc.challenges = challenges
@@ -136,7 +136,7 @@ extension FindChallengesVC: UICollectionViewDelegateFlowLayout {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let width = availableWidth / itemsPerRow
-        let height = width 
+        let height = width
         return CGSize(width: width, height: height)
     }
 
@@ -247,5 +247,5 @@ extension FindChallengesVC {
             }
         }
     }
-
+    
 }

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldDelegate {
-    
+
     var createNewUserView = NewUserView()
 
 
@@ -21,17 +21,17 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
     }
 
     override func loadView() {
-        
+
         self.view = createNewUserView
         createNewUserView.delegate = self
         self.hideKeyboardWhenTappedAround()
-        
-        
+
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         createNewUserView.emailTextField.delegate = self
         createNewUserView.emailTextField.tag = 0
         createNewUserView.passwordTextField.delegate = self
@@ -39,7 +39,7 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
         createNewUserView.confirmTextField.delegate = self
         createNewUserView.confirmTextField.tag = 2
         createNewUserView.confirmTextField.returnKeyType = .go
-        
+
         print("CREATE NEW USER CHECK FOR AUTHORIZATION ALREADY EXISTING")
         if thirdPartyLogin {//if someone has logged in via facebook or google or already created an email Firebase auth
             print("SOMEONE HAS LOGGED IN WITH A PREVIOUS EMAIL OR GOOGLE/FACEBOOK")
@@ -58,9 +58,9 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
                 self.navigationController?.pushViewController(vc, animated: true)
             }
         }
-    
+
     }
-    
+
     func pressCancelCreate() {
         self.navigationController?.popViewController(animated: true)
         if FIRAuth.auth()?.currentUser != nil {
@@ -76,63 +76,63 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
             })
         }
     }
-    
+
     func checkPassword(userPassword: String, confirmPassword: String) -> Bool {
         return userPassword == confirmPassword
     }
-    
-    
+
+
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("textfielddidendediting")
     }
-    
+
     //fix not working for retype password
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         if let nextField = createNewUserView.emailTextField.superview?.viewWithTag(createNewUserView.emailTextField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
             createNewUserView.resignFirstResponder()
         }
 
-      if textField == createNewUserView.passwordTextField {
-        if let nextField = createNewUserView.passwordTextField.superview?.viewWithTag(createNewUserView.passwordTextField.tag + 1) as? UITextField {
-          nextField.becomeFirstResponder()
+        if textField == createNewUserView.passwordTextField {
+            if let nextField = createNewUserView.passwordTextField.superview?.viewWithTag(createNewUserView.passwordTextField.tag + 1) as? UITextField {
+                nextField.becomeFirstResponder()
+            }
         }
-      }
 
-      if textField == createNewUserView.confirmTextField {
-        pressProfileButton()
-      }
+        if textField == createNewUserView.confirmTextField {
+            pressProfileButton()
+        }
 
         return false
     }
-    
 
-    
-    
-    
-   
+
+
+
+
+
     func pressProfileButton() {
-        
+
 
         guard let userEmail = createNewUserView.emailTextField.text else {
             alert(message: "Please enter a valid email.")
             return
         }
-        
+
         guard let userPassword = createNewUserView.passwordTextField.text else {
             alert(message: "Please enter a password.")
             return
         }
-        
+
         guard let confirmPassword = createNewUserView.confirmTextField.text else {
             alert(message: "Please confirm password.")
             return
         }
-        
-        
-       
+
+
+
         if thirdPartyLogin {
 
             let vc: ProfileViewController = ProfileViewController()
@@ -143,23 +143,23 @@ class NewUserViewController: UIViewController, NewUserViewDelegate, UITextFieldD
             FirebaseManager.createNew(withEmail: userEmail, withPassword: userPassword, completion: { (response) in
                 switch response {
                 case let .successfulNewUser(uid):
-                
+
                     let vc: ProfileViewController = ProfileViewController()
                     vc.userEmail = userEmail
                     vc.uid = uid
                     self.navigationController?.pushViewController(vc, animated: true)
-                   
+
                 case let .failure(error):
                     self.alert(message: error)
                 default:
                     print("default")
-                        
-            }
-        })
-  
+
+                }
+            })
+
             print("New User's email\(userEmail)")
             print("New User's password\(userPassword)")
-            
+
         } else {
             
             self.alert(message: "Passwords Don't Match")

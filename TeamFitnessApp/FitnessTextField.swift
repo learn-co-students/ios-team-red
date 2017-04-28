@@ -20,9 +20,9 @@ class FitnessTextField: UITextField {
         self.textColor = UIColor.backgroundBlack
         self.layer.cornerRadius = 5
     }
-    
+
     func setPlaceholder(toText text: String) {
         self.placeholder = text
     }
-
+    
 }

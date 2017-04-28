@@ -13,11 +13,11 @@ import GoogleSignIn
 
 final class AppController: UIViewController {
 
-    
+
     var containerView: UIView!
     var actingVC: UIViewController!
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         containerView = UIView(frame: view.frame)
@@ -33,7 +33,7 @@ extension AppController {
     func addNotifcationObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeLoginVC, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchViewController(with:)), name: .closeDashboardVC, object: nil)
-        
+
     }
 }
 
@@ -48,7 +48,7 @@ extension AppController {
             self.add(viewController: self.actingVC, animated: true)
             return
         }
-        
+
         FirebaseManager.checkForPrevious(uid: uid) { (userExistsInDB) in
             if userExistsInDB {//If there is a current user, and they have created a profile, go to the dashboard
                 let vc = TabBarController()
@@ -57,19 +57,18 @@ extension AppController {
             } else { //if there is a current user, but they have not created a profile, go to the create user screen(to check for email) and then create profile
                 let vc = LogInViewController()
                 self.actingVC = vc
-                print("SHOULD GO TO NEW USER view******************************")
                 self.add(viewController: self.actingVC, animated: true)
                 NotificationCenter.default.post(name: .closeLoginVC, object: nil)
                 let newUserVC = NewUserViewController()
                 self.navigationController?.pushViewController(newUserVC, animated: true)
             }
-            
+
         }
     }
 }
 
 extension AppController {
-    
+
     func add(viewController: UIViewController, animated: Bool = false) {
         self.addChildViewController(viewController)
         containerView.addSubview(viewController.view)
@@ -77,14 +76,14 @@ extension AppController {
         viewController.view.frame = containerView.bounds
         viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         viewController.didMove(toParentViewController: self)
-        
+
         guard animated else { containerView.alpha = 1.0; return }
-        
+
         UIView.transition(with: containerView, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.containerView.alpha = 1.0
         }) { _ in }
     }
-    
+
     func switchViewController(with notification: Notification) {
         switch notification.name {
         case Notification.Name.closeLoginVC:
@@ -94,27 +93,27 @@ extension AppController {
         default:
             fatalError("\(#function) - Unable to match notficiation name.")
         }
-        
+
     }
-    
+
     private func switchToViewController(with vc: UIViewController) {
         let existingVC = actingVC
         existingVC?.willMove(toParentViewController: nil)
         actingVC = vc
         add(viewController: actingVC)
         actingVC.view.alpha = 0.0
-        
+
         UIView.animate(withDuration: 0.8, animations: {
             self.actingVC.view.alpha = 1.0
             existingVC?.view.alpha = 0.0
         }) {
 
-          success in
+            success in
             existingVC?.view.removeFromSuperview()
             existingVC?.removeFromParentViewController()
             self.actingVC.didMove(toParentViewController: self)
         }
-        
+
     }
 
 }
@@ -127,7 +126,7 @@ extension Notification.Name {
 }
 
 extension UIView {
-    
+
     func constrainEdges(to view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -135,6 +134,6 @@ extension UIView {
         bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
-
+    
     
 }

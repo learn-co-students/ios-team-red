@@ -11,7 +11,7 @@ import Firebase
 import UIKit
 
 enum FirebaseResponse {
-    
+
     case successfulLogin(FIRUser)
     case successfulNewUser(String)
     case successfulLogout(String)
@@ -20,5 +20,5 @@ enum FirebaseResponse {
     case successfulData(Double)
     case failure(String)
 
-    
+
 }

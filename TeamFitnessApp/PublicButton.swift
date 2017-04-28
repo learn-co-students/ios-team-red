@@ -19,5 +19,5 @@ class PublicButton: FitnessButton {
         self.reverseColors()
         self.setTitle("Public?", for: .normal)
     }
-
+    
 }

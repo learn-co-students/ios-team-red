@@ -25,17 +25,17 @@ class TeamsView: FitnessView {
     var myTeamsView: UITableView!
     var searchTableView: UITableView!
     weak var delegate: TeamsViewDelegate?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         comInit()
         setConstraints()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-      comInit()
-      setConstraints()
+        super.init(coder: aDecoder)
+        comInit()
+        setConstraints()
     }
 
     func segueCreateTeam(sender: UIButton) {
@@ -67,7 +67,7 @@ class TeamsView: FitnessView {
         teamSearchBar.setPlaceholderAttributes()
         teamSearchBar.setTextAttributes()
         teamSearchBar.searchBarStyle = .minimal
-        
+
         searchTableView = UITableView()
         self.addSubview(searchTableView)
         searchTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +86,7 @@ class TeamsView: FitnessView {
         createTeamButton.set(text: "create team")
         createTeamButton.addTarget(self, action: #selector(segueCreateTeam), for: .touchUpInside)
     }
-    
+
     func setConstraints() {
         myTeamsLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 70).isActive = true
         myTeamsLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
@@ -107,7 +107,7 @@ class TeamsView: FitnessView {
         teamSearchBar.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.10).isActive = true
         teamSearchBar.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.7).isActive = true
         teamSearchBar.topAnchor.constraint(equalTo: findTeamsLabel.bottomAnchor, constant: 3).isActive = true
-        
+
         searchTableView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         searchTableView.topAnchor.constraint(equalTo: teamSearchBar.bottomAnchor, constant: 5).isActive = true
         searchTableView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true

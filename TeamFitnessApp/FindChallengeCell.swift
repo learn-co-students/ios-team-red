@@ -60,8 +60,8 @@ class FindChallengeCell: UICollectionViewCell {
         goalTypeLabel.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
         goalTypeLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
         goalTypeLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -10).isActive = true
-
-
+        
+        
         
     }
     

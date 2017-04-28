@@ -21,23 +21,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-      FIRApp.configure()
+        FIRApp.configure()
 
         getData()
 
-      // initalize the window
-      self.window = UIWindow(frame: UIScreen.main.bounds)
-      //check for nill
-      guard let window = self.window else { fatalError("no window") }
+        // initalize the window
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        //check for nill
+        guard let window = self.window else { fatalError("no window") }
 
-      //set the root view controller
-      window.rootViewController = AppController()
+        //set the root view controller
+        window.rootViewController = AppController()
 
-      //make the window visible
-      window.makeKeyAndVisible()
+        //make the window visible
+        window.makeKeyAndVisible()
 
 
-      return true
+        return true
 
     }
 
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        
+
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        
+
     }
 
     func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
@@ -69,14 +69,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             if FBSDKApplicationDelegate.sharedInstance().application(application, open: url, options: options) {
                 return true
             } else if GIDSignIn.sharedInstance().handle(url,
-                                                     sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
-                                                     annotation: [:]) {
+                                                        sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                        annotation: [:]) {
                 return true
             } else {
                 return false
             }
     }
-    
+
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }

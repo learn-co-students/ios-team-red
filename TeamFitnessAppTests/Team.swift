@@ -10,34 +10,34 @@ import Foundation
 
 
 struct Team {
-    
+
     var userUIDs = [String]()
     var captainID: String
     var challengeIDs = [String]()
     var id: String?
     var name: String
     var oldChallengeIDs = [String]()
-    
+
     init(id: String, dict: [String: Any]) {
         self.captainID = dict["captain"] as? String ?? ""
         print("added team captain: \(self.captainID)")
         self.name = dict["name"] as? String ?? ""
         self.id = id
-        
+
         let userDict = dict["users"] as? [String: Bool] ?? [:]
         for (userID, _) in userDict {
             self.userUIDs.append(userID)
         }
-        
+
         let challengeDict = dict["challenges"] as? [String: Bool] ?? [:]
         for (challengeID, _) in challengeDict {
             self.challengeIDs.append(challengeID)
         }
 
-      let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
-      for (challengeID, _) in oldChallengeDict {
-        self.oldChallengeIDs.append(challengeID)
-      }
+        let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
+        for (challengeID, _) in oldChallengeDict {
+            self.oldChallengeIDs.append(challengeID)
+        }
     }
 
     init(userUIDs: [String], captainID: String, challengeIDs: [String], id: String? = nil, name: String) {
@@ -47,7 +47,7 @@ struct Team {
         self.id = id
         self.name = name
     }
-
+    
 }
 
 

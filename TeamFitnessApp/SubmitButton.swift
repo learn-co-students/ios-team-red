@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class SubmitButton: FitnessButton {
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-    
+
     func setConstraints(toView view: UIView, andViewConroller viewController: UIViewController) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -27,5 +27,5 @@ class SubmitButton: FitnessButton {
         self.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.05).isActive = true
         self.set(text: "submit")
     }
-    
+
 }

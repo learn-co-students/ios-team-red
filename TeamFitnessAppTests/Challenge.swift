@@ -10,7 +10,7 @@ import Foundation
 
 
 struct Challenge {
-    
+
     var startDate: Date?
     var endDate: Date?
     var goal: Goal?
@@ -20,20 +20,20 @@ struct Challenge {
     var teamID: String?
     var id: String?
     var name: String
-    
+
     init(id: String, dict: [String: Any]) {
         self.name = dict["name"] as? String ?? "No Name"
         self.creator = dict["creator"] as? String ?? nil
         self.isPublic = dict["isPublic"] as? Bool ?? false
         self.teamID = dict["team"] as? String ?? nil
         self.id = id
-        
-        let goalDict = dict["goal"] as? [String: Double] ?? [:] 
+
+        let goalDict = dict["goal"] as? [String: Double] ?? [:]
         for (key, value) in goalDict {
-          if let goalType = GoalType(rawValue: key) {
-            let goal = Goal(type: goalType, value: value)
-            self.goal = goal
-          }
+            if let goalType = GoalType(rawValue: key) {
+                let goal = Goal(type: goalType, value: value)
+                self.goal = goal
+            }
         }
 
         self.startDate = Date(timeIntervalSince1970: dict["startDate"] as? TimeInterval ?? 0)
@@ -43,7 +43,7 @@ struct Challenge {
             self.userUIDs[userID] = value
         }
     }
-    
+
     init(name: String = "", startDate: Date, endDate: Date, goal: Goal, creatorID: String, userUIDs: [String:Double], isPublic: Bool, team: String?, id: String? = nil) {
         self.startDate = startDate
         self.endDate = endDate

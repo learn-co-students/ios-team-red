@@ -10,27 +10,27 @@ import UIKit
 import Firebase
 
 class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, TeamsViewDelegate {
-    
+
     var teamsView: TeamsView!
 
     let uid = FIRAuth.auth()?.currentUser?.uid
     var user: User? = nil
-    
+
     var myTeams = [Team]()
     var publicTeams = [Team]()
     var filteredTeams = [Team]()
     var searchActive: Bool = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         teamsView = TeamsView()
         self.view = teamsView
-        
+
         teamsView.delegate = self
-        
+
         setupSearchBar()
-        
+
         navigationItem.setTitle(text: "teams")
 
         let profileButton = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_person"), style: .plain, target: self, action: #selector(onProfile(_:)))
@@ -40,7 +40,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         teamsView.myTeamsView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         teamsView.myTeamsView.delegate = self
         teamsView.myTeamsView.dataSource = self
-        
+
         teamsView.searchTableView.register(FitnessCell.self, forCellReuseIdentifier: "fitnessCell")
         teamsView.searchTableView.delegate = self
         teamsView.searchTableView.dataSource = self
@@ -60,7 +60,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         }
 
     }
-    
+
     func segueCreateTeam() {
         let createTeamVC = CreateTeamVC()
         let navVC = NavigationController(rootViewController: createTeamVC)
@@ -68,20 +68,20 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         self.present(navVC, animated: true, completion: nil)
     }
 
-    
-    
-// MARK: - Delegate and Data Source
-    
+
+
+    // MARK: - Delegate and Data Source
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 0
         if tableView == teamsView.myTeamsView {
             return myTeams.count
         }
-        
+
         if tableView == teamsView.searchTableView {
             if searchActive {
                 count = filteredTeams.count
@@ -91,7 +91,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         }
         return count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = FitnessCell()
 
@@ -100,7 +100,7 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
             guard myTeams.count > 0 else {return cell} //TODO: disable user interactivity with table view. Maybe display a default image?
             cell.setLabels(forTeam: myTeams[indexPath.row])
         }
-        
+
         if tableView == teamsView.searchTableView {
             if searchActive {
                 cell = teamsView.searchTableView.dequeueReusableCell(withIdentifier: "fitnessCell") as! FitnessCell
@@ -114,31 +114,31 @@ class TeamsVC: UIViewController, UITableViewDelegate, UITableViewDataSource, Tea
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let teamDetailVC = TeamDetailVC()
-        
+
         if tableView == teamsView.myTeamsView {
             teamDetailVC.setTeam(team: myTeams[indexPath.row])
             navigationController?.pushViewController(teamDetailVC, animated: true)
         } else if tableView == teamsView.searchTableView {
             if searchActive {
                 teamDetailVC.setTeam(team: filteredTeams[indexPath.row])
-              navigationController?.pushViewController(teamDetailVC, animated: true)
+                navigationController?.pushViewController(teamDetailVC, animated: true)
             } else {
                 teamDetailVC.setTeam(team: publicTeams[indexPath.row])
-              navigationController?.pushViewController(teamDetailVC, animated: true)
+                navigationController?.pushViewController(teamDetailVC, animated: true)
             }
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    
+
+
 }
 
 extension TeamsVC {
-    
-    
+
+
     func getAllTeams(completion: @escaping () -> Void) {
         self.myTeams.removeAll()
         self.publicTeams.removeAll()
@@ -154,54 +154,54 @@ extension TeamsVC {
         filteredTeams = publicTeams
         completion()
     }
-    
+
 }
 
 extension TeamsVC: UISearchBarDelegate {//controls functionality for search bar
-    
-    
-    
+
+
+
     //MARK: - search bar
     func setupSearchBar() {
         teamsView.teamSearchBar.delegate = self
         print("is user enabled?\(teamsView.teamSearchBar.isUserInteractionEnabled)")
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
         print("Did begin editing")
     }
-    
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = true;
         print("Did end editing")
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Clicked cacel button")
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false;
         print("Search button clicked")
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print("text did change")
-        
+
         filteredTeams = publicTeams.filter({ (team) -> Bool in
             let temp: String = team.name
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range != nil
         })
-        
+
         if searchBar.text == nil || searchBar.text == "" {
             self.searchActive = false
         } else {
             self.searchActive = true
         }
-        
+
         teamsView.searchTableView.reloadData()
     }
 

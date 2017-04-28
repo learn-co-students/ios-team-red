@@ -10,14 +10,14 @@ import UIKit
 
 class LoginNavVC: UINavigationController {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.navigationBar.isHidden = true
-    self.setViewControllers([LogInViewController()], animated: false)
-  }
-
-
-
-
-
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationBar.isHidden = true
+        self.setViewControllers([LogInViewController()], animated: false)
+    }
+    
+    
+    
+    
+    
 }

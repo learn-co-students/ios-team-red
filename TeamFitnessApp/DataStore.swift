@@ -10,30 +10,30 @@ import Foundation
 import Firebase
 
 class DataStore {
-    
+
     static let sharedInstance = DataStore()
     var allUsers = [User]()
     var allChallenges = [Challenge]()
     var allTeams = [Team]()
     var teamUsers = [User]()
     var userChallenges = [Challenge]()
-    
+
     private init() {}
-    
+
     func observeAllTeams(completion: @escaping () -> Void) {
         FirebaseManager.fetchAllTeams { (teams) in
             self.allTeams = teams
             completion()
         }
     }
-    
+
     func observeAllUsers(completion: @escaping() -> Void) {
         FirebaseManager.fetchAllUsers() { (users) in
             self.allUsers = users
             completion()
         }
     }
-    
+
     func observeAllChallenges(completion: @escaping () -> Void) {
         FirebaseManager.fetchAllChallenges { (challenges) in
             self.allChallenges = challenges
@@ -71,18 +71,18 @@ class DataStore {
         }
     }
 
-//    func getChallenges(forTeam userID: String, completion: @escaping () -> ()) {
-//        var userChallenges = [Challenge]()
-//        FirebaseManager.fetchUser(withFirebaseUID: userID) { (user) in
-//            for challenges in user.challengeIDs {
-//                FirebaseManager.fetchChallengeOnce(withChallengeID: challenges, completion: { (challenge) in
-//                    userChallenges.append(challenge)
-//                    if userChallenges.count == user.challengeIDs.count {
-//                        self.userChallenges = userChallenges
-//                        completion()
-//                    }
-//                })
-//            }
-//        }
-//    }
+    //    func getChallenges(forTeam userID: String, completion: @escaping () -> ()) {
+    //        var userChallenges = [Challenge]()
+    //        FirebaseManager.fetchUser(withFirebaseUID: userID) { (user) in
+    //            for challenges in user.challengeIDs {
+    //                FirebaseManager.fetchChallengeOnce(withChallengeID: challenges, completion: { (challenge) in
+    //                    userChallenges.append(challenge)
+    //                    if userChallenges.count == user.challengeIDs.count {
+    //                        self.userChallenges = userChallenges
+    //                        completion()
+    //                    }
+    //                })
+    //            }
+    //        }
+    //    }
 }

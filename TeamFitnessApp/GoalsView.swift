@@ -18,7 +18,7 @@ protocol GoalsViewDelegate: class {
 
 
 class GoalsView: FitnessView {
-    
+
 
     var introLabel: FitnessLabel!
     var minuteLabel: FitnessLabel!
@@ -27,25 +27,25 @@ class GoalsView: FitnessView {
     var caloriesADay = FitnessField()
     var createUserButton: FitnessButton!
     weak var delegate: GoalsViewDelegate?
-    
+
     override init(frame: CGRect) {
-      super.init(frame: frame)
-      loadGoalsViewUI()
-      setConstraints()
+        super.init(frame: frame)
+        loadGoalsViewUI()
+        setConstraints()
 
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
-      super.init(coder: aDecoder)
-      loadGoalsViewUI()
-      setConstraints()
+        super.init(coder: aDecoder)
+        loadGoalsViewUI()
+        setConstraints()
     }
-    
+
     func pressCreateUserButton(sender: UIButton) {
         delegate?.pressCreateUserButton()
     }
 
-    
+
     func loadGoalsViewUI() {
 
         introLabel = FitnessLabel()
@@ -92,7 +92,7 @@ class GoalsView: FitnessView {
         caloriesADay.setPlaceholder(text: "calories")
 
 
-        
+
         createUserButton = FitnessButton()
         self.addSubview(createUserButton)
         createUserButton.translatesAutoresizingMaskIntoConstraints = false
@@ -101,38 +101,38 @@ class GoalsView: FitnessView {
 
     }
 
-  func setConstraints() {
+    func setConstraints() {
 
 
 
-    introLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    introLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    introLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
+        introLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        introLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        introLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 50).isActive = true
 
-    minuteLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    minuteLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    minuteLabel.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 50).isActive = true
+        minuteLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        minuteLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        minuteLabel.topAnchor.constraint(equalTo: introLabel.bottomAnchor, constant: 50).isActive = true
 
-    activityMinutesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    activityMinutesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-    activityMinutesADay.topAnchor.constraint(equalTo: minuteLabel.bottomAnchor, constant: 10).isActive = true
-    activityMinutesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
+        activityMinutesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        activityMinutesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        activityMinutesADay.topAnchor.constraint(equalTo: minuteLabel.bottomAnchor, constant: 10).isActive = true
+        activityMinutesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
-    calorieLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    calorieLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-    calorieLabel.topAnchor.constraint(equalTo: activityMinutesADay.bottomAnchor, constant: 20).isActive = true
+        calorieLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        calorieLabel.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        calorieLabel.topAnchor.constraint(equalTo: activityMinutesADay.bottomAnchor, constant: 20).isActive = true
 
-    caloriesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    caloriesADay.topAnchor.constraint(equalTo: calorieLabel.bottomAnchor, constant: 10).isActive = true
-    caloriesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
-    caloriesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
-
-
-    createUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
-    createUserButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
-    createUserButton.topAnchor.constraint(equalTo: caloriesADay.bottomAnchor, constant: 30).isActive = true
-
-  }
+        caloriesADay.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        caloriesADay.topAnchor.constraint(equalTo: calorieLabel.bottomAnchor, constant: 10).isActive = true
+        caloriesADay.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.5).isActive = true
+        caloriesADay.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.05).isActive = true
 
 
+        createUserButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+        createUserButton.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        createUserButton.topAnchor.constraint(equalTo: caloriesADay.bottomAnchor, constant: 30).isActive = true
+        
+    }
+    
+    
 }

@@ -11,27 +11,27 @@ import UIKit
 
 extension UIViewController {
 
-  func hideKeyboardWhenTappedAround() {
+    func hideKeyboardWhenTappedAround() {
 
-    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-    tap.cancelsTouchesInView = false
-    view.addGestureRecognizer(tap)
-  }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
 
-  func dismissKeyboard() {
-    view.endEditing(true)
-  }
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension UIViewController {
 
-  func alert(message: String, title: String = "") {
+    func alert(message: String, title: String = "") {
 
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-    let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-    alertController.addAction(OKAction)
-    self.present(alertController, animated: true, completion: nil)
-
-  }
-
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
 }

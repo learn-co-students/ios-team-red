@@ -23,12 +23,12 @@ class ChallengeDetailVC: UIViewController {
             }
         }
     }
-    
+
     let leaders = [User]()
     var userScores = [(String, Double)]()
     var userIsChallengeMember: Bool = false
-    
-    
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class ChallengeDetailVC: UIViewController {
             challengeDetailView?.joinButton.addTarget(self, action: #selector(joinChallenge), for: .touchUpInside)
         }
     }
-    
+
     func joinChallenge() {
         guard let challengeID = self.challenge?.id, let uid = FIRAuth.auth()?.currentUser?.uid else {return}
 
@@ -62,15 +62,15 @@ class ChallengeDetailVC: UIViewController {
 
         challengeDetailView?.joinButton.isHidden = true
     }
-    
+
     func setChallenge(challenge: Challenge) {
         self.challenge = challenge
         getChartData()
         challengeDetailView?.topLabel.text = "\(challenge.name)"
-        
+
         setChartWithLeaders()
     }
-    
+
     func getChartData() {
         guard let goalType = challenge?.goal?.type, let startDate = challenge?.startDate, let goalValue = challenge?.goal?.value else {return}
         switch goalType {
@@ -108,7 +108,7 @@ class ChallengeDetailVC: UIViewController {
             })
         }
     }
-    
+
 
     func getUserValues(completion: @escaping ([(String, Double)]) -> ()) {
         var leaderArray = [(String, Double)]()

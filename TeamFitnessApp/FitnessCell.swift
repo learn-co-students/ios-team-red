@@ -10,21 +10,21 @@ import UIKit
 
 class FitnessCell: UITableViewCell {
 
-  var nameLabel: FitnessLabel!
-    
+    var nameLabel: FitnessLabel!
+
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
         setConstraints()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
         setConstraints()
 
     }
-    
+
     private func commonInit() {
         self.backgroundColor = UIColor.clear
         nameLabel = FitnessLabel()
@@ -34,21 +34,21 @@ class FitnessCell: UITableViewCell {
 
 
     func setConstraints() {
-      nameLabel.translatesAutoresizingMaskIntoConstraints = false
-      nameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-      nameLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
-      nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
-      nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: self.contentView.leftAnchor).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        nameLabel.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
 
     func setLabels(forTeam team: Team) {
         self.nameLabel.set(text: team.name)
     }
-    
+
     func setLabels(forChallenge challenge: Challenge) {
         self.nameLabel.set(text: challenge.name)
     }
-    
+
     func setLabels(forUser user: User) {
         self.nameLabel.set(text: user.name)
     }

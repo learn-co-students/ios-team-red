@@ -16,32 +16,32 @@ enum GoalType: String {
 
 
 struct Goal {
-  var type: GoalType!
-  var value: Double!
+    var type: GoalType!
+    var value: Double!
 
-  init(type: GoalType, value: Double) {
-    self.type = type
-    self.value = value
-  }
-    
+    init(type: GoalType, value: Double) {
+        self.type = type
+        self.value = value
+    }
+
     mutating func setType(from str: String) {
         switch str {
-            case "miles":
+        case "miles":
             self.type = .miles
-            case "stepCount":
+        case "stepCount":
             self.type = .stepCount
-            case "caloriesBurned":
+        case "caloriesBurned":
             self.type = .caloriesBurned
-            case "exerciseMinutes":
+        case "exerciseMinutes":
             self.type = .exerciseMinutes
         default:
             print("Could not get goal type from String") //TODO: - come up with a better way to handle this error
         }
     }
-    
+
     mutating func setValue(from num: Double) {
         self.value = num
     }
-
+    
 }
 

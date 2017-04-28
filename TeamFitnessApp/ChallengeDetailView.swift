@@ -9,7 +9,7 @@
 import UIKit
 
 class ChallengeDetailView: FitnessView {
-    
+
     let topLabel = TitleLabel()
     let startDateLabel = FitnessLabel()
     let endDateLabel = FitnessLabel()
@@ -27,7 +27,7 @@ class ChallengeDetailView: FitnessView {
             topLabel.set(text: "\(challenge.name)\nGoes from \(startDateString) to \(endDateString)\nGoal: \(challenge.goal!.value!) \(challenge.goal!.type.rawValue)")
         }
     }
-    
+
     let goalPieChart = CustomPieChartView()
     let leadersChart = CustomHorizontalBarChart()
 
@@ -36,27 +36,27 @@ class ChallengeDetailView: FitnessView {
         loadUI()
         setConstraints()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadUI()
         setConstraints()
     }
-    
+
     func loadUI() {
         self.addSubview(topLabel)
         topLabel.numberOfLines = 4
 
         self.addSubview(goalPieChart)
-        
+
         self.addSubview(leadersChart)
-        
+
         self.addSubview(joinButton)
         joinButton.isHidden = true
     }
-    
+
     func setConstraints() {
-        
+
         topLabel.translatesAutoresizingMaskIntoConstraints = false
         topLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         topLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 75).isActive = true
@@ -67,16 +67,16 @@ class ChallengeDetailView: FitnessView {
         goalPieChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         goalPieChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.6).isActive = true
         goalPieChart.heightAnchor.constraint(equalTo: goalPieChart.widthAnchor).isActive = true
-        
+
         leadersChart.translatesAutoresizingMaskIntoConstraints = false
         leadersChart.topAnchor.constraint(equalTo: goalPieChart.bottomAnchor).isActive = true
         leadersChart.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         leadersChart.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.8).isActive = true
         leadersChart.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.33).isActive = true
     }
-    
+
     func displayJoinButton() {
-        
+
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         joinButton.topAnchor.constraint(equalTo: leadersChart.bottomAnchor).isActive = true
         joinButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true

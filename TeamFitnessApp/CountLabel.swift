@@ -11,27 +11,27 @@ import UIKit
 class CountLabel: UILabel {
 
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    commonInit()
-  }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
 
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    commonInit()
-  }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
 
-  func commonInit() {
-    self.textColor = UIColor.black
-    self.backgroundColor = UIColor.white
-    self.layer.cornerRadius = 8
-    self.layer.borderWidth = 2
-    self.layer.borderColor = UIColor.raspberry.cgColor
-    self.layer.masksToBounds = true
-    self.textAlignment = .center
-    self.font = UIFont(name: "Fresca-Regular", size: 15.0)
-  }
-
-
-
+    func commonInit() {
+        self.textColor = UIColor.black
+        self.backgroundColor = UIColor.white
+        self.layer.cornerRadius = 8
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.raspberry.cgColor
+        self.layer.masksToBounds = true
+        self.textAlignment = .center
+        self.font = UIFont(name: "Fresca-Regular", size: 15.0)
+    }
+    
+    
+    
 }

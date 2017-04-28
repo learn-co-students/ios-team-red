@@ -9,11 +9,11 @@
 import UIKit
 
 class TitleLabel: FitnessLabel {
-    
+
     func setText(toString text: String) {
         self.text = text
     }
-    
+
     func setConstraints(toView view: UIView, andViewController viewController: UIViewController) {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

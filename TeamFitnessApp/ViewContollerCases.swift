@@ -10,6 +10,6 @@ import UIKit
 
 
 enum ViewControllerCase {
-  case loginVC(LogInViewController)
-  case dashboardVC(DashboardVC)
+    case loginVC(LogInViewController)
+    case dashboardVC(DashboardVC)
 }

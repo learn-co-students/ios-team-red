@@ -10,7 +10,7 @@ import Foundation
 
 
 struct User {
-    
+
     var name: String
     var sex: String
     var height: Float
@@ -30,33 +30,33 @@ struct User {
         self.height = dict["height"] as? Float ?? 0.0
         self.weight = dict["weight"] as? Int ?? 0
         self.email = dict["email"] as? String ?? ""
-        
+
         let challengeDict = dict["challenges"] as? [String: Bool] ?? [:]
         for (challengeID, _) in challengeDict {
             self.challengeIDs.append(challengeID)
         }
 
-      let goalDict = dict["goals"] as? [String:Double] ?? [:]
+        let goalDict = dict["goals"] as? [String:Double] ?? [:]
         for (key, value) in goalDict {
-          if let goalType = GoalType(rawValue: key) {
-            let goal = Goal(type: goalType, value: value)
-            goals.append(goal)
-          }
+            if let goalType = GoalType(rawValue: key) {
+                let goal = Goal(type: goalType, value: value)
+                goals.append(goal)
+            }
         }
 
-       self.trophies = dict["trophies"] as? [String:Int] ?? [:]
+        self.trophies = dict["trophies"] as? [String:Int] ?? [:]
 
-      let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
-      for (challengeID, _) in oldChallengeDict {
-        self.oldChallengeIDs.append(challengeID)
-      }
+        let oldChallengeDict = dict["oldChallenges"] as? [String: Bool] ?? [:]
+        for (challengeID, _) in oldChallengeDict {
+            self.oldChallengeIDs.append(challengeID)
+        }
 
         let teamDict = dict["teams"] as? [String: Bool] ?? [:]
         for (teamID, _) in teamDict {
             self.teamIDs.append(teamID)
         }
     }
-    
+
 
     init(name: String, sex: String, height: Float, weight: Int, teamIDs: [String], challengeIDs: [String], goals: [Goal], email: String? = nil, uid: String? = nil) {
 
@@ -69,18 +69,18 @@ struct User {
         self.goals = goals
         self.email = email
         self.uid = uid
-        
+
     }
-    
+
     mutating func set(UID uid: String) {
         self.uid = uid
     }
-    
-    
+
+
     mutating func update(name: String, weight: Int, goals: [Goal]) {
         self.name = name
         self.weight = weight
         self.goals = goals
-    
+        
     }
 }

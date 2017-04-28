@@ -14,22 +14,22 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     let goalPicker = UIPickerView()
     let valueLabel = FitnessLabel()
     let stepper = UIStepper()
-    
+
     var goal = Goal(type: .miles, value: 0)
 
     var stepMultiplier: Int = 1
     var goalTag: String = ""
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     func commonInit() {
         self.backgroundColor = UIColor.clear
         self.layer.cornerRadius = 5
@@ -37,7 +37,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         self.addSubview(goalPicker)
         self.addSubview(valueLabel)
         self.addSubview(stepper)
-        
+
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -45,7 +45,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.15).isActive = true
         titleLabel.reverseColors()
         titleLabel.set(text: "Set Challenge Goal")
-        
+
         goalPicker.translatesAutoresizingMaskIntoConstraints = false
         goalPicker.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         goalPicker.topAnchor.constraint(equalTo: titleLabel.bottomAnchor).isActive = true
@@ -56,7 +56,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         goalPicker.layer.cornerRadius = 5
         goalPicker.tintColor = UIColor.whitewash
         goalPicker.backgroundColor = UIColor.raspberry
-        
+
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         valueLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         valueLabel.topAnchor.constraint(equalTo: goalPicker.bottomAnchor).isActive = true
@@ -65,7 +65,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         valueLabel.text = "\(stepper.value) \(goalTag)"
         valueLabel.reverseColors()
         valueLabel.changeFontSize(to: 24)
-        
+
         stepper.translatesAutoresizingMaskIntoConstraints = false
         stepper.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -8).isActive = true
         stepper.topAnchor.constraint(equalTo: valueLabel.bottomAnchor).isActive = true
@@ -76,7 +76,7 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         stepper.backgroundColor = UIColor.raspberry
         stepper.addTarget(self, action: #selector(stepperChanged(sender:)), for: .valueChanged)
     }
-// MARK: - picker view data source
+    // MARK: - picker view data source
 
 
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
@@ -110,13 +110,13 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return 4
     }
 
-//MARK: - picker view delegate
-    
+    //MARK: - picker view delegate
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         stepper.value = 0
         switch row {
@@ -142,9 +142,9 @@ class GoalPickerView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         goal.setValue(from: stepper.value * Double(stepMultiplier))
         valueLabel.text = "\(Int(stepper.value) * stepMultiplier) \(goalTag)"
     }
-    
-//MARK: - Stepper functions
-    
+
+    //MARK: - Stepper functions
+
     func stepperChanged(sender: UIStepper!) {
         print("Stepper changed called")
         print(sender.value)

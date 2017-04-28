@@ -10,23 +10,23 @@ import UIKit
 import Firebase
 
 class CreateChallengeVC: UIViewController, UISearchBarDelegate {
-    
+
     var challengeIsPublic: Bool = false
     var team: Team? = nil
     var challenge: Challenge? = nil
     var user: User? = nil
     var uid: String? = FIRAuth.auth()?.currentUser?.uid
     let healthKitManager = HealthKitManager.sharedInstance
-    
+
     var myTeams = [Team]()
     var filteredTeams = [Team]()
-    
+
     var createChallengeView: CreateChallengeView?
-    
+
     //MARK: Subviews
-    
+
     var viewState: ViewState = .first
-    
+
     //MARK: - properties being stored to create challenge instance:
     var challengeName: String? = nil
     var challengeStartDate: Date? = nil
@@ -35,11 +35,11 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
     let challengeCreatorID = FIRAuth.auth()?.currentUser?.uid
     var challengeUserIDs: [String:Double] = [(FIRAuth.auth()?.currentUser?.uid)!:0]
     var challengeTeamID: String?
-    
+
     enum ViewState {
         case first, second
     }
-    
+
     override func viewDidLoad() {
 
         self.navigationItem.setTitle(text: "create challenge")
@@ -62,29 +62,29 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
 
 
     }
-//MARK = setup view constraints
+    //MARK = setup view constraints
     func setupViews() {
         self.hideKeyboardWhenTappedAround()
         createChallengeView?.nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
-        
+
     }
 
-// MARK: - button functions
+    // MARK: - button functions
 
     func nextButtonPressed() {
         if viewState == .first { //if the user is on the first screen of the CreateChallengeView, store the values in the text/search/picker fields, and move to the next screen
-          if createChallengeView?.challengeNameField.text == "" {
-            createChallengeView?.challengeNameField.flashRed()
-          } else {
-            storeFirstFields()
-            moveToSecondFields()
-          }
+            if createChallengeView?.challengeNameField.text == "" {
+                createChallengeView?.challengeNameField.flashRed()
+            } else {
+                storeFirstFields()
+                moveToSecondFields()
+            }
 
 
 
-          } else if viewState == .second {
-              storeSecondFields()
-            
+        } else if viewState == .second {
+            storeSecondFields()
+
             if let challengeName = challengeName, let challengeStartDate = challengeStartDate, let challengeEndDate = challengeEndDate, let challengeGoal = challengeGoal, let challengeCreatorID = challengeCreatorID {
 
                 let newChallenge = Challenge(name: challengeName, startDate: challengeStartDate, endDate: challengeEndDate, goal: challengeGoal, creatorID: challengeCreatorID, userUIDs: challengeUserIDs, isPublic: challengeIsPublic, team: challengeTeamID)
@@ -107,15 +107,15 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
                         })
 
                     }
-                    
+
                 })
-                
+
             } else {
                 //TODO: - if user has not entered all information needed to create challenge, indicate that to them
             }
         }
     }
-    
+
     private func storeFirstFields() {
         challengeName = createChallengeView?.challengeNameField.text
         createChallengeView?.challengeNameField.isHidden = true
@@ -123,7 +123,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
         challengeGoal = createChallengeView?.goalPicker.goal
         challengeTeamID = team?.id
     }
-    
+
     private func moveToSecondFields() {
         createChallengeView?.goalPicker.hide()
         createChallengeView?.startDatePicker.show()
@@ -131,18 +131,18 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
         createChallengeView?.nextButton.set(text: "create")
         viewState = .second
     }
-    
+
     private func storeSecondFields() {
         challengeStartDate = createChallengeView?.startDatePicker.date
         challengeEndDate = createChallengeView?.endDatePicker.date
     }
-    
+
     func previousButtonPressed() {
         navigationController?.popViewController(animated: true)
     }
 
-//MARK: - Firebase calls
-    
+    //MARK: - Firebase calls
+
     func getUser(completion: @escaping (User) -> Void) {
         guard let uid = FIRAuth.auth()?.currentUser?.uid else {return}
         FirebaseManager.fetchUser(withFirebaseUID: uid) { (user) in
@@ -150,7 +150,7 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
             completion(user)
         }
     }
-    
+
     private func getTeams(forUser user: User, completion: @escaping () -> Void) {
         myTeams.removeAll()
         filteredTeams.removeAll()
@@ -164,11 +164,11 @@ class CreateChallengeVC: UIViewController, UISearchBarDelegate {
             })
         }
     }
-
+    
     func onCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
     
     
-
+    
 }

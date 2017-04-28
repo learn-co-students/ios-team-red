@@ -13,63 +13,62 @@ import Charts
 class CustomPieChartView: PieChartView {
 
 
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    commonInit()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
 
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-    commonInit()
-  }
+    }
 
-  func commonInit() {
-    self.chartDescription?.text = ""
-    self.legend.enabled = false
-    self.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-    self.rotationEnabled = false
-    self.highlightPerTapEnabled = false
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
 
-  }
+    func commonInit() {
+        self.chartDescription?.text = ""
+        self.legend.enabled = false
+        self.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        self.rotationEnabled = false
+        self.highlightPerTapEnabled = false
 
-
-  func setData(goal: Double, current: Double) {
-
-
-    var values = [PieChartDataEntry]()
-
-    if current > goal {
-      values.append(PieChartDataEntry(value: abs(goal-current), label: "OVER GOAL"))
-      values.append(PieChartDataEntry(value: goal.rounded(), label: "GOAL"))
-    } else {
-      values.append(PieChartDataEntry(value: (goal-current), label: "TO GO"))
-      values.append(PieChartDataEntry(value: current, label: "DOWN"))
     }
 
 
-    let dataSet = PieChartDataSet(values: values, label: "")
+    func setData(goal: Double, current: Double) {
 
-    dataSet.sliceSpace = 2.0
+        var values = [PieChartDataEntry]()
 
-    let colors = [UIColor.raspberry, UIColor.lagoon]
+        if current > goal {
+            values.append(PieChartDataEntry(value: abs(goal-current), label: "OVER GOAL"))
+            values.append(PieChartDataEntry(value: goal.rounded(), label: "GOAL"))
+        } else {
+            values.append(PieChartDataEntry(value: (goal-current), label: "TO GO"))
+            values.append(PieChartDataEntry(value: current, label: "DOWN"))
+        }
 
-    dataSet.colors = colors
 
-    let data = PieChartData(dataSet: dataSet)
+        let dataSet = PieChartDataSet(values: values, label: "")
 
-    let pFormatter = NumberFormatter()
-    pFormatter.numberStyle = .none
-    pFormatter.maximumFractionDigits = 1;
-    pFormatter.multiplier = 1
-    let descript = UIFontDescriptor(name: "Fresca-Regular", size: 16)
-    data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
-    data.setValueFont(NSUIFont(descriptor:descript, size:16))
-    data.setValueTextColor(UIColor.black)
+        dataSet.sliceSpace = 2.0
 
-    self.data = data;
-    
-  }
+        let colors = [UIColor.raspberry, UIColor.lagoon]
+
+        dataSet.colors = colors
+
+        let data = PieChartData(dataSet: dataSet)
+
+        let pFormatter = NumberFormatter()
+        pFormatter.numberStyle = .none
+        pFormatter.maximumFractionDigits = 1;
+        pFormatter.multiplier = 1
+        let descript = UIFontDescriptor(name: "Fresca-Regular", size: 16)
+        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
+        data.setValueFont(NSUIFont(descriptor:descript, size:16))
+        data.setValueTextColor(UIColor.black)
+        
+        self.data = data;
+        
+    }
 }
 
 

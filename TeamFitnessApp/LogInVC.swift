@@ -13,66 +13,66 @@ import GoogleSignIn
 import FBSDKLoginKit
 
 class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDelegate, GIDSignInUIDelegate, GIDSignInDelegate, FBSDKLoginButtonDelegate {
-    
+
     let logInView = LogInView()
     let healthKitManager = HealthKitManager.sharedInstance
-    
+
     override func loadView() {
         self.view = logInView
-        
+
         logInView.facebookButton.delegate = self
         logInView.emailTextField.delegate = self
         logInView.emailTextField.tag = 0
         logInView.passwordTextField.delegate = self
         logInView.passwordTextField.tag = 1
         logInView.passwordTextField.returnKeyType = .go
-        
-        
+
+
         self.hideKeyboardWhenTappedAround()
-        
+
     }
-    
-    
+
+
     // textbox return changes field form email to password  ++
     // Login button become active once password starting to be entered ****
     // textboxt change value of return key to next / Login ++
     // failed log in attempt warning ++ / forgot password?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().clientID = FIRApp.defaultApp()?.options.clientID
         GIDSignIn.sharedInstance().delegate = self
-        
+
         logInView.delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if let nextField = logInView.emailTextField.superview?.viewWithTag(logInView.emailTextField.tag + 1) as? UITextField {
-            
-            nextField.becomeFirstResponder()
-          
 
-            
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+        if let nextField = logInView.emailTextField.superview?.viewWithTag(logInView.emailTextField.tag + 1) as? UITextField {
+
+            nextField.becomeFirstResponder()
+
+
+
         } else {
-            
+
             logInView.resignFirstResponder()
 
         }
 
-      if textField == logInView.passwordTextField {
-        pressLogin()
+        if textField == logInView.passwordTextField {
+            pressLogin()
 
-      }
+        }
         return false
     }
-    
+
     //    func textFieldShouldClear(_ textField: UITextField) -> Bool {
     //        textField.resignFirstResponder()
     //        return true
     //    }
-    
+
     func pressNewUser() {
         FirebaseManager.logoutUser { (response) in
             switch response {
@@ -87,12 +87,12 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             }
         }
     }
-    
+
     func pressLogin() {
-    
+
         let password = logInView.passwordTextField.text!
         if let email = logInView.emailTextField.text {
-            
+
             FirebaseManager.loginUser(withEmail: email, andPassword: password) { (response) in
                 switch response {
                 case let .successfulLogin(user):
@@ -106,11 +106,11 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                             self.navigationController?.pushViewController(vc, animated: true)
                         }
                     })
-                    
+
                 case let .failure(failString):
                     print(failString)
                     self.alert(message: failString)
-                    
+
                 default:
                     print("Firebase login failure")
                 }
@@ -118,7 +118,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
         } else {
             alert(message: "email required")
         }
-        
+
     }
     //MARK: Google login
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error?) {
@@ -166,13 +166,13 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             }
         }
     }
-    
+
     //MARK: Facebook login delegate
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        
+
         guard !result.isCancelled else { return }
         //print(error.localizedDescription)
-        
+
         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
         FIRAuth.auth()?.signIn(with: credential, completion: { (firUser, error) in
             guard let firUser = firUser else {return}// TODO: handle failed facebook login
@@ -193,7 +193,7 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
             return
         }
     }
-    
+
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         FirebaseManager.logoutUser { (response) in
             switch response {
@@ -205,9 +205,9 @@ class LogInViewController: UIViewController, LoginViewDelegate, UITextFieldDeleg
                 print("Invalid firebase response")
             }
         }
-        
+
     }
-    
+
     func loginButtonWillLogin(_ loginButton: FBSDKLoginButton!) -> Bool {
         
         return true

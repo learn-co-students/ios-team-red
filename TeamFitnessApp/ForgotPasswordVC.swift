@@ -21,7 +21,6 @@ class ForgotPasswordVC: UIViewController {
 
         self.view.backgroundColor = UIColor.whitewash
 
-
         emailField = FitnessField()
         self.view.addSubview(emailField)
         emailField.setPlaceholder(text: "enter email")
@@ -36,8 +35,6 @@ class ForgotPasswordVC: UIViewController {
         resetButton.addTarget(self, action: #selector(resetPressed(_:)), for: .touchUpInside)
 
         setConstraints()
-
-
 
     }
 
@@ -74,10 +71,10 @@ class ForgotPasswordVC: UIViewController {
             })
         }
     }
-
-
+    
+    
     func onCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
 }

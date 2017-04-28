@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-    
+
     let titleLabel = TitleLabel()
     var user: User?
     var userID = FIRAuth.auth()?.currentUser?.uid
@@ -22,7 +22,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.navigationItem.setTitle(text: "create team")
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel(_:)))
 
@@ -45,19 +45,19 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         titleLabel.set(text: "new team")
         titleLabel.changeFontSize(to: 23)
     }
-    
+
     func setUpTextFields() {
         self.view.addSubview(teamNameField)
         teamNameField.constrainVertically(belowView: titleLabel, widthMultiplier: 0.8, heightMultiplier: 0.05)
         teamNameField.setPlaceholder(text: "enter team name")
     }
-    
+
     func setupButtons() {
-        
+
         self.view.addSubview(submitButton)
         submitButton.setConstraints(toView: self.view, andViewConroller: self)
         submitButton.addTarget(self, action: #selector(createTeamButtonPressed), for: .touchUpInside)
-        
+
         self.view.addSubview(imageButton)
         imageButton.translatesAutoresizingMaskIntoConstraints = false
         imageButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -74,7 +74,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         teamImage.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
         teamImage.heightAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.5).isActive = true
     }
-    
+
     func createTeamButtonPressed() {
         createNewTeam {
             DispatchQueue.main.async {
@@ -83,7 +83,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             }
         }
     }
-    
+
     func createNewTeam(completion: () -> Void) {
         if let userID = userID {
             guard teamNameField.text != "" else {
@@ -101,18 +101,18 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
                     }
                 })
 
-                
-                
+
+
                 guard let teamID = team.id, let chosenImage = chosenImage else {return} //TODO: - handle this error better
-                    FirebaseStoreageManager.upload(teamImage: chosenImage, withTeamID: teamID, completion: { (response) in
-                        switch response {
-                        case let .failure(failString):
-                            print(failString)
-                        case let .succesfulUpload(successString):
-                            print(successString)
-                        default:
-                            print("Invalid reponse returned from Firebase storage")
-                        }
+                FirebaseStoreageManager.upload(teamImage: chosenImage, withTeamID: teamID, completion: { (response) in
+                    switch response {
+                    case let .failure(failString):
+                        print(failString)
+                    case let .succesfulUpload(successString):
+                        print(successString)
+                    default:
+                        print("Invalid reponse returned from Firebase storage")
+                    }
                 })
             }
         } else {
@@ -121,7 +121,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
             }
         }
     }
-    
+
     func getTeamImage() {
         let imagePicker  = UIImagePickerController()
         imagePicker.delegate = self
@@ -138,7 +138,7 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
         teamImage.image = chosenImage
         navigationController?.dismiss(animated: true, completion: nil)
     }
-    
+
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         navigationController?.dismiss(animated: true, completion: nil)
     }
@@ -146,5 +146,5 @@ class CreateTeamVC: UIViewController, UIImagePickerControllerDelegate, UINavigat
     func onCancel(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
 }

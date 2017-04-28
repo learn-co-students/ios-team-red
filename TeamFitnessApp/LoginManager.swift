@@ -13,14 +13,14 @@ import Firebase
 class LoginManager: NSObject {
 
 
-//TODO: Google and FB login
+    //TODO: Google and FB login
 
-  func emailPasswordLogin() {
+    func emailPasswordLogin() {
+        
+    }
     
-  }
-
-
-
+    
+    
 }
 
 

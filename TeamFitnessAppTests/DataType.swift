@@ -9,7 +9,7 @@
 import Foundation
 
 enum DataType: String {
-    
+
     case challenges, users, teams, team
-    
+
 }

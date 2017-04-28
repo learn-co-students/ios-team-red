@@ -9,7 +9,7 @@
 import UIKit
 
 class ReportButton: FitnessButton {
-    
+
     enum isMonitoring {
         case team, user
     }
@@ -23,15 +23,15 @@ class ReportButton: FitnessButton {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     override func commonInit() {
         self.set(text: "Report image")
         self.changeFontSize(to: 18)
-//        self.reverseColors()
+        //        self.reverseColors()
         self.addTarget(self, action: #selector(reportOffense), for: .touchUpInside)
-        
+
     }
-    
+
     func reportOffense () {
         print("Hey! That's offensive!")
     }
